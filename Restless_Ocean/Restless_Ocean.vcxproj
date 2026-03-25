@@ -123,11 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameLogger.cpp" />
     <ClCompile Include="IMonster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameLogger.h" />
     <ClInclude Include="IMonster.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
