@@ -24,7 +24,11 @@
     <ClCompile Include="IMonster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="GameManager.cpp">
+=======
+    <ClCompile Include="GameLogger.cpp">
+>>>>>>> 6e9e35ff8a9d91d11fd369233949a5c91733ac5d
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +39,11 @@
     <ClInclude Include="IMonster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="GameManager.h">
+=======
+    <ClInclude Include="GameLogger.h">
+>>>>>>> 6e9e35ff8a9d91d11fd369233949a5c91733ac5d
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
