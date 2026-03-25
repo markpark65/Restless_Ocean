@@ -123,10 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IMonster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IMonster.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
