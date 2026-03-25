@@ -9,7 +9,7 @@ private:
 public:
 	Slime(int level);
 
-	std::string getName() const override;
+	std::string getName() const	override;
 	int getHealth() const		override;
 	int getAttack() const		override;
 	bool isAlive() const		override;

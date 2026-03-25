@@ -21,6 +21,7 @@ public:
 	virtual	int getAttack() const = 0;
 	virtual bool isAlive() const = 0;
 
+	// 입력 받은 damage만큼 health 감소
 	virtual void takeDamage(int damage) = 0;
 };
 
