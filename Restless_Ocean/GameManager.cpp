@@ -10,8 +10,8 @@ using namespace std;
 void GameManager::battle(Player* player) {
 
 	MonsterFactory monsterFactory;
-	Monster* monster = monsterFactory.GenerateMonster();
-
+	Monster* monster = monsterFactory.GenerateMonster(player->getLevel());
+	
 	while (player->getHp() > 0 && monster->getHealth() > 0) {
 
 		cout << "=============================" << endl;
@@ -29,7 +29,26 @@ void GameManager::battle(Player* player) {
 		
 
 	}
-	
+
+	// ÇÃ·¹ÀÌ¾î°¡ ÀÌ°åÀ» ¶§ º¸»ó È¹µæ
+
+	if (player->getHp() > 0) { //½Â¸®ÇßÀ» ¶§
+		
+		//º¸»ó È¹µæ
+		player->gainExp(50); 
+		//if (player->getExp() > 100) {
+		//	player->levelUp();
+		//}
+
+		// °ñµå 10~20 ¹üÀ§¿¡¼­ ·£´ı È¹µæ
+		random_device rd;
+		mt19937 gen(rd());
+		uniform_int_distribution<int> dis(10, 20);
+		int gold = dis(gen);
+		player->addGold(gold);
+
+		//¾ÆÀÌÅÛ È¹µæ
+	}
 
 }
 
@@ -38,5 +57,10 @@ void GameManager::battle(Player* player) {
 //}
 
 void GameManager::startBattleSequence(Player* player) {
+
+
+
 	battle(player);
+
+	//»óÁ¡ °¡´Â ±â´É
 }
