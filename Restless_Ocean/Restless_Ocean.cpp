@@ -2,12 +2,26 @@
 //
 
 #include <iostream>
-
-#include "Manager.h"
+#include "Monster.h"
+#include "MonsterFactory.h"
+#include "Player.h"
+#include "GameManager.h"
 
 int main()
 {
-	Manager::getInstance().run();
+    std::cout << "Hello World!\n";
+
+    MonsterFactory m;
+    for (int i = 0; i < 10; ++i)
+    {
+        Monster* monster = m.GenerateMonster(1);
+        monster->showStat();
+    }
+
+    // Battle System 테스트용
+    //GameManager gm;
+    //Player* player = new Player("나영");
+    //gm.startBattleSequence(player);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
