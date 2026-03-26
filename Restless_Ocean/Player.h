@@ -26,14 +26,17 @@ private:
 public:
 	Player(std::string n);
 
-	//»óÅÂ Ãâ·Â
+	//ìƒíƒœ ì¶œë ¥
 	void showStatus() const;
-	//°æÇèÄ¡, ·¹º§¾÷
+	//ê²½í—˜ì¹˜, ë ˆë²¨ì—…
 	void gainExp(int amount);
 	void levelUp();
-	//¾ÆÀÌÅÛ
+	//ì•„ì´í…œ
 	void addAttack(int amout);
-	//ÀüÅõ °á°ú
+	void addTempAttack(int amount);
+	void resetTempStats();
+
+	//ì „íˆ¬ ê²°ê³¼
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
 	void useOxygen(int amount);
@@ -44,11 +47,11 @@ public:
 	void debuffSpeed(int reduction);
 	void resetSpeed();
 	void useItem(std::string itemName);
-	//Á¤º¸ ÂüÁ¶
+	//ì •ë³´ ì°¸ì¡°
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHp() const { return hp; }
-	int getAttack() const { return attack; }
+	int getAttack() const { return attack+tempAttack; }
 	int getGold() const { return gold; }
 	int getArtifactCount() const { return artifactCount; }
 	int getOxygen() const { return oxygen; }

@@ -13,7 +13,7 @@ HealthPotion::HealthPotion(string name, int price, int heal)
 
 void HealthPotion::use(Player* character) {
     if (!character) return;
-    cout << "체력 포션 사용! 체력 +" << healthRestore << endl;
+    cout << "체력 포션 사용! 체력 +" << healthRestore <<endl;
     character->recoverDamage(healthRestore);
 }
 
@@ -23,6 +23,6 @@ AttackBoost::AttackBoost(string name, int price, int attack)
 
 void AttackBoost::use(Player* character) {
     if (!character) return;
-    cout << "공격력 증가! 공격력 +" << attackIncrease << endl;
-    character->addAttack(attackIncrease);
+    cout << "공격력 증가! +" << attackIncrease<<endl;
+    character->addTempAttack(attackIncrease);
 }

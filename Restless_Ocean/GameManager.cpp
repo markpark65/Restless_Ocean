@@ -1,11 +1,66 @@
 #include "GameManager.h"
+#include "Player.h"
+#include "MonsterFactory.h"
+using namespace std;
 
-//êµ¬í˜„ ì „
-
-//Monster* GameManager::generateMonster(int level) {}
-//void GameManager::battle(Player* player) {
-//
+//Monster* GameManager::generateMonster(int level) {
+//	 
 //}
+
+void GameManager::battle(Player* player) {
+
+	MonsterFactory monsterFactory;
+	Monster* monster = monsterFactory.GenerateMonster(player->getLevel());
+	
+	while (player->getHp() > 0 && monster->getHealth() > 0) {
+
+		cout << "=============================" << endl;
+		cout << "ÇÃ·¹ÀÌ¾îÀÇ ÅÏÀÔ´Ï´Ù!" << endl;
+		// ÇÃ·¹ÀÌ¾îÀÇ °ø°İ
+		cout << monster->getAttack() << "ÀÇ ÇÇÇØ¸¦ " << monster->getName() << "¿¡°Ô ÀÔÈü´Ï´Ù!" << endl;
+		monster->takeDamage(player->getAttack());
+
+
+		cout << "=============================" << endl;
+		cout << "¸ó½ºÅÍÀÇ ÅÏÀÔ´Ï´Ù!" << endl;
+		// ¸ó½ºÅÍÀÇ °ø°İ
+		cout << monster->getName() << "ÀÌ(°¡) " << player->getName() << " ´ë¿øÀ» °ø°İÇÕ´Ï´Ù!" << endl;
+		player->takeDamage(monster->getAttack());
+		
+
+	}
+
+	// ÇÃ·¹ÀÌ¾î°¡ ÀÌ°åÀ» ¶§ º¸»ó È¹µæ
+
+	if (player->getHp() > 0) { //½Â¸®ÇßÀ» ¶§
+		
+		//º¸»ó È¹µæ
+		player->gainExp(50); 
+		//if (player->getExp() > 100) {
+		//	player->levelUp();
+		//}
+
+		// °ñµå 10~20 ¹üÀ§¿¡¼­ ·£´ı È¹µæ
+		random_device rd;
+		mt19937 gen(rd());
+		uniform_int_distribution<int> dis(10, 20);
+		int gold = dis(gen);
+		player->addGold(gold);
+
+		//¾ÆÀÌÅÛ È¹µæ
+	}
+
+}
+
 //void GameManager::displayInventory(Player* player) {
 //
 //}
+
+void GameManager::startBattleSequence(Player* player) {
+
+
+
+	battle(player);
+
+	//»óÁ¡ °¡´Â ±â´É
+}

@@ -4,8 +4,10 @@ class Monster;
 class Player;
 class GameManager
 {
-	Monster* generateMonster(int level = 1);
+public:
 	void battle(Player* player);
-	void displayInventory(Player* player);
+	//void displayInventory(Player* player);
+
+	void startBattleSequence(Player* player);
 };
 
