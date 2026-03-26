@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Monster.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -40,6 +41,11 @@ int Monster::getGold() const
     return monsterReward.gold;
 }
 
+Item* Monster::getItem() const
+{
+    return monsterReward.item;
+}
+
 void Monster::takeDamage(int damage)
 {
     if (damage < 0)
@@ -63,5 +69,6 @@ void Monster::showStat() const
     cout << "ATK     :" << getAttack() << '\n';
     cout << "EXP     :" << getExp() << '\n';
     cout << "GOLD    :" << getGold() << " G" << '\n';
+    cout << "º¸»ó    :" << getItem()->getName() << '\n';
     cout << "===============================" << '\n';
 }

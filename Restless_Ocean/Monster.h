@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-//class Item;
+class Item;
 
 enum class MonsterType
 {
@@ -24,7 +24,7 @@ struct MonsterReward
 {
 	int		exp = 50;
 	int		gold = 50;
-	//Item	item;
+	Item*	item;
 };
 
 class Monster
@@ -46,6 +46,7 @@ public:
 	// Get Monster Reward
 	int getExp() const;
 	int getGold() const;
+	Item* getItem() const;
 
 	// 입력 받은 damage만큼 health 감소
 	void takeDamage(int damage);
