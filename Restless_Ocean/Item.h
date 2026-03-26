@@ -21,6 +21,7 @@ protected:
     int price;
 };
 
+
 class HealthPotion : public Item {
 public:
     HealthPotion(string name, int price, int heal);
