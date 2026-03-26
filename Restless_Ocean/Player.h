@@ -12,6 +12,7 @@ private:
 	int hp;
 	int maxHp;
 	int attack;
+	int tempAttack;
 	int exp;
 	int maxExp;
 	int gold;
@@ -30,6 +31,9 @@ public:
 	void levelUp();
 	//아이템
 	void addAttack(int amout);
+	void addTempAttack(int amount);
+	void resetTempStats();
+
 	//전투 결과
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
@@ -43,7 +47,7 @@ public:
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHp() const { return hp; }
-	int getAttack() const { return attack; }
+	int getAttack() const { return attack+tempAttack; }
 	int getGold() const { return gold; }
 	int getArtifactCount() const { return artifactCount; }
 	int getOxygen() const { return oxygen; }
