@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Monster.h"
 #include "MonsterFactory.h"
+#include "Player.h"
+#include "GameManager.h"
 
 int main()
 {
@@ -15,6 +17,12 @@ int main()
         Monster* monster = m.GenerateMonster(1);
         monster->showStat();
     }
+
+    // Battle System 테스트용
+    //GameManager gm;
+    //Player* player = new Player("나영");
+    //gm.startBattleSequence(player);
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
