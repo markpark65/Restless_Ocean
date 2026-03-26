@@ -3,17 +3,29 @@
 #include <iostream>
 #include <string>
 
+//class Item;
+
+struct MonsterStat
+{
+	std::string	name;
+	int		health;
+	int		attack;
+};
+
+struct MonsterReward
+{
+	int		exp;
+	int		gold;
+	//Item	item;
+};
+
 class Monster
 {
 protected:
-	std::string		name;
-	int				health;
-	int				attack;
+	MonsterStat		monsterStat;
+	MonsterReward	monsterReward;
 
 public:
-	Monster(const std::string& name, const int health, const int attack)
-		: name(name), health(health), attack(attack) { }
-
 	virtual ~Monster() = default;
 
 	virtual std::string getName() const = 0;

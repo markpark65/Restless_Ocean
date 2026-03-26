@@ -127,6 +127,7 @@
     <ClCompile Include="GameLogger.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="MonsterFactory.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="Slime.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Item.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Slime.h" />
   </ItemGroup>
