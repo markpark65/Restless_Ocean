@@ -1,4 +1,5 @@
 #include "MonsterFactory.h"
+#include "Item.h"
 
 int MonsterFactory::getRandomValue(int min, int max)
 {
@@ -11,12 +12,13 @@ int MonsterFactory::getRandomValue(int min, int max)
 }
 
 // 플레이어 레벨에 따라 랜덤으로 몬스터의 스탯 조정
-Monster* MonsterFactory::GenerateMonster(int level = 1)
+Monster* MonsterFactory::GenerateMonster(int level)
 {
 	MonsterStat stat;
-	MonsterReward reward = { 50, 50 };
+	Item* item;
 
 	int randomType = getRandomValue(0, 2);
+	int randomItem = getRandomValue(0, 1);
 
 	switch (randomType)
 	{
@@ -24,7 +26,7 @@ Monster* MonsterFactory::GenerateMonster(int level = 1)
 		stat.name = "초롱 아귀";
 		stat.health = getRandomValue(20, 30) * level;
 		stat.attack = getRandomValue(5, 10) * level;
-		stat.type = MonsterType::Hidden;
+		stat.type = MonsterType::Luminous;
 		break;
 	case 1:
 		stat.name = "바이퍼 피쉬";
@@ -36,12 +38,27 @@ Monster* MonsterFactory::GenerateMonster(int level = 1)
 		stat.name = "대형 오징어";
 		stat.health = getRandomValue(20, 30) * level;
 		stat.attack = getRandomValue(5, 10) * level;
-		stat.type = MonsterType::Hidden;
+		stat.type = MonsterType::Giant;
 		break;
 	default:
 		return nullptr;
 		break;
 	}
+
+	switch (randomItem)
+	{
+	case 0:
+		item = new HealthPotion();
+		break;
+	case 1:
+		item = new AttackBoost();
+		break;
+	default:
+		return nullptr;
+		break;
+	}
+
+	MonsterReward reward = { 50, 50, item};
 
 	return new Monster(stat, reward);
 }

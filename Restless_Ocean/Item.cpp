@@ -24,5 +24,5 @@ AttackBoost::AttackBoost(string name, int price, int attack)
 void AttackBoost::use(Player* character) {
     if (!character) return;
     cout << "공격력 증가! 공격력 +" << attackIncrease << endl;
-    character->add(attackIncrease);
+    character->addAttack(attackIncrease);
 }

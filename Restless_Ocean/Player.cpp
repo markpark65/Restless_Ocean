@@ -1,5 +1,6 @@
 #include "Player.h"
 
+using namespace std;
 
 Player::Player(string n)
 	: name(n)
@@ -48,14 +49,16 @@ void Player::recoverDamage(int amount) {
 	int heal = amount;
 	if (hp + amount > maxHp) heal = maxHp - hp;
 	hp += heal;
-	cout << name << " 대원의 체력이 " << heal << "만큼 회복 됐습니다. (현재 HP: " << hp << endl;
+	cout << name << " 대원의 체력이 " << heal << "만큼 회복 됐습니다. (현재 HP: " << hp << " / " << maxHp << ")" << endl;
 }
 
 //산소 소모
 void Player::useOxygen(int amount) {
 	oxygen -= amount;
-	if (oxygen >= 5) cout << "산소가 부족합니다. 산소회복 혹은 지상으로 복귀하십쇼" << endl;
 	if (oxygen < 0) oxygen = 0;
+
+	if (oxygen > 0 && oxygen <= 10) cout << "산소가 부족합니다. 산소회복 혹은 지상으로 복귀하십쇼" << endl;
+	
 	cout << "산소를 " << amount << " % 소모했습니다. (남은 산소: " << oxygen << " %)" << endl;
 
 	if (oxygen <= 0) {
@@ -96,13 +99,36 @@ void Player::addArtifact() {
 }
 //레벨 로직
 void Player::gainExp(int amount) {
-
+	if (level >= 10) return;
+	exp += amount;
+	cout << amount << "의 경험치를 획득했습니다. (현재: " << exp << "/" << maxExp << ")" << endl;
+	while (exp >= maxExp && level < 10) {
+		levelUp();
+	}
 }
 void Player::levelUp() {
+	level++;
+	int hpBonus = level * 20;
+	int atkBonus = level * 5;
 
+	maxHp += hpBonus;
+	attack += atkBonus;
+	hp = maxHp;
+	exp -= maxExp;
+	if (exp < 0) exp = 0;
+	
+	cout << "=============================" << endl;
+	cout << "Level UP!!! 현재 레벨: " << level << endl;
+	cout << "최대 체력 " << hpBonus << " 증가 / 공격력 " << atkBonus << " 증가" << endl;
+	cout << "=============================" << endl;
 }
 //아이템 사용
 void Player::useItem(string itemName) {
 	cout << itemName << "을(를) 사용합니다." << endl;
 	//아이템별 로직
+}
+//공격력 상승
+void Player::addAttack(int amount) {
+	attack += amount;
+	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << attack << ")" << endl;
 }
