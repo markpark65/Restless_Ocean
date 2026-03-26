@@ -99,10 +99,28 @@ void Player::addArtifact() {
 }
 //레벨 로직
 void Player::gainExp(int amount) {
-
+	if (level >= 10) return;
+	exp += amount;
+	cout << amount << "의 경험치를 획득했습니다. (현재: " << exp << "/" << maxExp << ")" << endl;
+	while (exp >= maxExp && level < 10) {
+		levelUp();
+	}
 }
 void Player::levelUp() {
+	level++;
+	int hpBonus = level * 20;
+	int atkBonus = level * 5;
 
+	maxHp += hpBonus;
+	attack += atkBonus;
+	hp = maxHp;
+	exp -= maxExp;
+	if (exp < 0) exp = 0;
+	
+	cout << "=============================" << endl;
+	cout << "Level UP!!! 현재 레벨: " << level << endl;
+	cout << "최대 체력 " << hpBonus << " 증가 / 공격력 " << atkBonus << " 증가" << endl;
+	cout << "=============================" << endl;
 }
 //아이템 사용
 void Player::useItem(string itemName) {
