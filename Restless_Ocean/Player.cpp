@@ -1,5 +1,6 @@
 #include "Player.h"
 
+using namespace std;
 
 Player::Player(string n)
 	: name(n)
@@ -48,14 +49,16 @@ void Player::recoverDamage(int amount) {
 	int heal = amount;
 	if (hp + amount > maxHp) heal = maxHp - hp;
 	hp += heal;
-	cout << name << " 대원의 체력이 " << heal << "만큼 회복 됐습니다. (현재 HP: " << hp << endl;
+	cout << name << " 대원의 체력이 " << heal << "만큼 회복 됐습니다. (현재 HP: " << hp << " / " << maxHp << ")" << endl;
 }
 
 //산소 소모
 void Player::useOxygen(int amount) {
 	oxygen -= amount;
-	if (oxygen >= 5) cout << "산소가 부족합니다. 산소회복 혹은 지상으로 복귀하십쇼" << endl;
 	if (oxygen < 0) oxygen = 0;
+
+	if (oxygen > 0 && oxygen <= 10) cout << "산소가 부족합니다. 산소회복 혹은 지상으로 복귀하십쇼" << endl;
+	
 	cout << "산소를 " << amount << " % 소모했습니다. (남은 산소: " << oxygen << " %)" << endl;
 
 	if (oxygen <= 0) {
@@ -105,4 +108,9 @@ void Player::levelUp() {
 void Player::useItem(string itemName) {
 	cout << itemName << "을(를) 사용합니다." << endl;
 	//아이템별 로직
+}
+//공격력 상승
+void Player::addattack(int amount) {
+	attack += amount;
+	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << attack << ")" << endl;
 }
