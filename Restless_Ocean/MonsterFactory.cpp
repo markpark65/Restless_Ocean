@@ -1,5 +1,6 @@
 #include "MonsterFactory.h"
 #include "Item.h"
+#include "DataType.h"
 
 int MonsterFactory::getRandomValue(int min, int max)
 {
@@ -26,19 +27,22 @@ Monster* MonsterFactory::GenerateMonster(int level)
 		stat.name = "ÃÊ·Õ ¾Æ±Í";
 		stat.health = getRandomValue(20, 30) * level;
 		stat.attack = getRandomValue(5, 10) * level;
-		stat.type = MonsterType::Luminous;
+		stat.speed = getRandomValue(80, 120);
+		stat.type = AttributeType::Luminous;
 		break;
 	case 1:
 		stat.name = "¹ÙÀÌÆÛ ÇÇ½¬";
 		stat.health = getRandomValue(20, 30) * level;
 		stat.attack = getRandomValue(5, 10) * level;
-		stat.type = MonsterType::Hidden;
+		stat.speed = getRandomValue(80, 120);
+		stat.type = AttributeType::Hidden;
 		break;
 	case 2:
 		stat.name = "´ëÇü ¿ÀÂ¡¾î";
 		stat.health = getRandomValue(20, 30) * level;
 		stat.attack = getRandomValue(5, 10) * level;
-		stat.type = MonsterType::Giant;
+		stat.speed = getRandomValue(80, 120);
+		stat.type = AttributeType::Giant;
 		break;
 	default:
 		return nullptr;
