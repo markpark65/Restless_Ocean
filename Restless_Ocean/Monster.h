@@ -5,17 +5,25 @@
 
 //class Item;
 
+enum class MonsterType
+{
+	Hidden,		// 은닉형
+	Luminous,	// 발광형
+	Giant,		// 거대형
+};
+
 struct MonsterStat
 {
 	std::string	name;
-	int		health;
-	int		attack;
+	int			health;
+	int			attack;
+	MonsterType	type;
 };
 
 struct MonsterReward
 {
-	int		exp;
-	int		gold;
+	int		exp = 50;
+	int		gold = 50;
 	//Item	item;
 };
 
@@ -26,14 +34,23 @@ protected:
 	MonsterReward	monsterReward;
 
 public:
+	Monster(const MonsterStat& monsterStat, const MonsterReward& monsterReward);
 	virtual ~Monster() = default;
 
-	virtual std::string getName() const = 0;
-	virtual	int getHealth() const = 0;
-	virtual	int getAttack() const = 0;
-	virtual bool isAlive() const = 0;
+	// Get Monster Stat
+	const std::string& getName() const;
+	int getHealth() const;
+	int getAttack() const;
+	bool isAlive() const;
+
+	// Get Monster Reward
+	int getExp() const;
+	int getGold() const;
 
 	// 입력 받은 damage만큼 health 감소
-	virtual void takeDamage(int damage) = 0;
+	void takeDamage(int damage);
+
+	// 몬스터 스탯 출력
+	void showStat() const;
 };
 
