@@ -2,7 +2,7 @@
 
 #include "Lobby.h"
 #include "Dungeon.h"
-#include "GameManager.h"
+#include "BattleSystem.h"
 #include "Manager.h"
 #include "Player.h"
 

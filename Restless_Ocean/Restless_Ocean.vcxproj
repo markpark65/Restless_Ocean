@@ -123,8 +123,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Dungeon.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameLogger.cpp" />
     <ClCompile Include="GiantSquid.cpp" />
     <ClCompile Include="Lobby.cpp" />
@@ -132,6 +134,7 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="ViperFish.cpp" />
@@ -140,8 +143,8 @@
     <ClCompile Include="FootballFish.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="Dungeon.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameLogger.h" />
     <ClInclude Include="GiantSquid.h" />
     <ClInclude Include="Inventory.h" />
@@ -152,6 +155,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="MonsterFactory.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="ViperFish.h" />
