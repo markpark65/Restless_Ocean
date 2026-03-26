@@ -14,6 +14,7 @@ Player::Player(string n)
 	, oxygen(100)
 	, pressure(0)
 	, battery(100)
+	, tempAttack(0)
 	, artifactCount(0) {
 	cout << "심해 탐사대원: " << name << " 이(가) 등록되었습니다!" << endl;
 }
