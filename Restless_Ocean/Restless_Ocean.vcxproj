@@ -123,19 +123,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="BattleSystem.cpp" />
     <ClCompile Include="GameLogger.cpp" />
     <ClCompile Include="GiantSquid.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="ViperFish.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="FootballFish.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="GameLogger.h" />
     <ClInclude Include="GiantSquid.h" />
     <ClInclude Include="Monster.h" />
@@ -143,6 +144,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="MonsterFactory.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="ViperFish.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="FootballFish.h" />

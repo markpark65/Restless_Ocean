@@ -5,7 +5,7 @@
 #include "Monster.h"
 #include "MonsterFactory.h"
 #include "Player.h"
-#include "GameManager.h"
+#include "BattleSystem.h"
 
 int main()
 {
@@ -19,7 +19,7 @@ int main()
     }
 
     // Battle System 테스트용
-    //GameManager gm;
+    //BattleSystem bs;
     //Player* player = new Player("나영");
     //gm.startBattleSequence(player);
 
