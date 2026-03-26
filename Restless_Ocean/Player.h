@@ -12,6 +12,9 @@ private:
 	int hp;
 	int maxHp;
 	int attack;
+	int tempAttack;
+	int speed;
+	int baseSpeed;
 	int exp;
 	int maxExp;
 	int gold;
@@ -38,6 +41,8 @@ public:
 	void spendBattery(int amount);
 	void addGold(int amount);
 	void takePressure(int amount);
+	void debuffSpeed(int reduction);
+	void resetSpeed();
 	void useItem(std::string itemName);
 	//정보 참조
 	std::string getName() const { return name; }
@@ -50,5 +55,6 @@ public:
 	int getPressure() const { return pressure; }
 	int getBattery() const { return battery; }
 	int getMaxHp() const { return maxHp; }
+	int getSpeed() const { return speed; }
 };
 

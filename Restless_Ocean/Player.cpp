@@ -12,6 +12,8 @@ Player::Player(string n)
 	, maxExp(100)
 	, gold(0)
 	, oxygen(100)
+	, speed(100)
+	, baseSpeed(100)
 	, pressure(0)
 	, battery(100)
 	, tempAttack(0)
@@ -80,8 +82,19 @@ void Player::takePressure(int amount) {
 	cout << "압력이 " << amount << " % 증가했습니다. (현재 압력 " << pressure << " %)" << endl;
 	if (pressure >= 100) {
 		cout << "압력이 너무 셉니다. 체력이 감소합니다." << endl;
-		takeDamage(20);
+		//takeDamage(20);
+		debuffSpeed(50);
 	}
+}
+//압력 증가로 속도 디버프
+void Player::debuffSpeed(int reduction) {
+	speed -= reduction;
+	if (speed < 10) speed = 10;
+	cout << "[디버프] 과도한 수압으로 몸이 무거워집니다! (현재 속도: " << speed << ")" << endl;
+}
+void Player::resetSpeed() {
+	speed = baseSpeed;
+	cout << "수압이 해소되어 몸이 가벼워졌습니다!" << endl;
 }
 //골드 획드
 void Player::addGold(int amount) {
@@ -93,7 +106,7 @@ void Player::addGold(int amount) {
 void Player::addArtifact() {
 	artifactCount++;
 	cout << "고대 유적을 발견했습니다. (현재 유적 개수: " << artifactCount << "개)" << endl;
-	if (artifactCount >= 5) {
+	if (artifactCount >= 3) {
 		cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
 		cout << "(대충왕국과 심해어들의 비밀)" << endl;
 	}
