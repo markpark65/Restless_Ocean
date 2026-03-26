@@ -6,7 +6,7 @@
 using namespace std;
 
 Monster::Monster(const MonsterStat& monsterStat, const MonsterReward& monsterReward)
-    : monsterStat(), monsterReward()
+    : monsterStat(monsterStat), monsterReward(monsterReward)
 {
 }
 

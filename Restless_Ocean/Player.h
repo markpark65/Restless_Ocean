@@ -3,12 +3,11 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
 
 class Player
 {
 private:
-	string name;
+	std::string name;
 	int level;
 	int hp;
 	int maxHp;
@@ -22,13 +21,15 @@ private:
 	int artifactCount;
 
 public:
-	Player(string n);
+	Player(std::string n);
 
 	//상태 출력
 	void showStatus() const;
 	//경험치, 레벨업
 	void gainExp(int amount);
 	void levelUp();
+	//아이템
+	void addAttack(int amout);
 	//전투 결과
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
@@ -37,14 +38,17 @@ public:
 	void spendBattery(int amount);
 	void addGold(int amount);
 	void takePressure(int amount);
-	void useItem(string itemName);
+	void useItem(std::string itemName);
 	//정보 참조
-	string getName() const { return name; }
+	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHp() const { return hp; }
 	int getAttack() const { return attack; }
 	int getGold() const { return gold; }
 	int getArtifactCount() const { return artifactCount; }
-
+	int getOxygen() const { return oxygen; }
+	int getPressure() const { return pressure; }
+	int getBattery() const { return battery; }
+	int getMaxHp() const { return maxHp; }
 };
 
