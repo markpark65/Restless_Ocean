@@ -55,6 +55,18 @@ void Player::recoverDamage(int amount) {
 	cout << name << " 대원의 체력이 " << heal << "만큼 회복 됐습니다. (현재 HP: " << hp << " / " << maxHp << ")" << endl;
 }
 
+//산소 회복
+void Player::recoverOxygen(int amount) {
+	int heal = amount;
+	if (oxygen > 100) 
+	{	cout << "산소가 충분합니다." << endl;
+		return;
+	}
+	if (oxygen + amount > 100) { heal = 100 - oxygen; }
+	oxygen += heal;
+	cout << name << " 대원의 산소가 " << heal << "만큼 회복 됐습니다. (현재 산소량: " << oxygen << " / 100 )" << endl;
+}
+
 //산소 소모
 void Player::useOxygen(int amount) {
 	oxygen -= amount;
@@ -74,6 +86,13 @@ void Player::spendBattery(int amount) {
 	battery -= amount;
 	if (battery < 0) battery = 0;
 	cout << "배터리 " << amount << " % 소모했습니다. (현재 배터리: " << battery << " %)" << endl;
+}
+
+//압력 감소
+void Player::recoverPressure(int amount) {
+	pressure -= amount;
+	cout << "압력이 " << amount << "% 감소했습니다. (현재 압력 " << pressure << " %)" << endl;
+	
 }
 //압력 증가
 void Player::takePressure(int amount) {

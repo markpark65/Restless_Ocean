@@ -26,3 +26,26 @@ void AttackBoost::use(Player* character) {
     cout << "공격력 증가! +" << attackIncrease<<endl;
     character->addTempAttack(attackIncrease);
 }
+
+OxygenPotion::OxygenPotion(string name, int price, int oxygen) 
+:Item(name, price), oxygenIncrease(oxygen) {
+}
+void OxygenPotion::use(Player* character) {
+    if (!character) return;
+    cout << "산소 포션 사용! 산소 +" << oxygenIncrease << endl;
+    character->recoverOxygen(oxygenIncrease);
+}
+
+PressurePotion::PressurePotion(string name, int price, int pressure) 
+:Item(name, price), pressurePotion(pressure) {}
+    
+void PressurePotion::use(Player * character) {
+    if (!character) return;
+    cout << "압력 포션 사용! 압력 -" << pressurePotion << endl;
+    character->recoverPressure(pressurePotion);
+
+}
+
+
+
+
