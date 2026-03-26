@@ -147,6 +147,7 @@
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="GameLogger.h" />
     <ClInclude Include="GiantSquid.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Monster.h" />
