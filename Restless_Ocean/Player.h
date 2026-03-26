@@ -36,6 +36,8 @@ public:
 	void addArtifact();
 	void spendBattery(int amount);
 	void addGold(int amount);
+	void takePressure(int amount);
+	void useItem(string itemName);
 	//정보 참조
 	string getName() const { return name; }
 	int getLevel() const { return level; }
