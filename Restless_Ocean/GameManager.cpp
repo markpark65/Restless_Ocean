@@ -11,6 +11,11 @@ void GameManager::battle(Player* player) {
 
 	while (player->getHp() > 0 && monster->getHealth() > 0) {
 		
+		// 몬스터의 공격
+		player->takeDamage(monster->getAttack());
+		
+		// 플레이어의 공격
+		monster->takeDamage(player->getAttack());
 
 	}
 }
