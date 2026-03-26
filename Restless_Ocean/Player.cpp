@@ -132,3 +132,15 @@ void Player::addAttack(int amount) {
 	attack += amount;
 	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << attack << ")" << endl;
 }
+
+//해당 전투에만 공격력 상승
+void Player::addTempAttack(int amount) {
+	tempAttack += amount;
+	cout << "임시 공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: "
+		<< getAttack() << ")" << endl;
+}
+
+//전투 종료시 tempAttack 초기화
+void Player::resetTempStats() {
+tempAttack = 0;
+}
