@@ -11,7 +11,7 @@ int MonsterFactory::getRandomValue(int min, int max)
 }
 
 // 플레이어 레벨에 따라 랜덤으로 몬스터의 스탯 조정
-Monster* MonsterFactory::GenerateMonster(int level = 1)
+Monster* MonsterFactory::GenerateMonster(int level)
 {
 	MonsterStat stat;
 	MonsterReward reward = { 50, 50 };
