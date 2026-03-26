@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <memory>
 #include "Player.h"
 using namespace std;
 
@@ -39,28 +40,29 @@ private:
     int attackIncrease;
 };
 
+template<typename T>
 struct InventorySlot {
-    Item* item;
-    int quantity;
+    T* item = nullptr;
+    int quantity = 1;
 };
 
 template<typename T>
 class Inventory {
 public:
-    Inventory(int capacity = 10) : capacity_(capacity > 0 ? capacity : 1), size_(0) {
-        slots_ = new InventorySlot[capacity_];
-        for (int i = 0; i < capacity_; i++) {
-            slots_[i].item = nullptr;
-            slots_[i].quantity = 0;
-        }
+    Inventory(int capacity = 10)
+        : capacity_(capacity > 0 ? capacity : 1), size_(0)
+    {
+        slots_ = new InventorySlot<T>[capacity_]();
     }
 
     ~Inventory() {
-        for (int i = 0; i < size_; i++) delete slots_[i].item;
+        for (int i = 0; i < size_; i++) {
+            delete slots_[i].item;
+        }
         delete[] slots_;
     }
 
-    void addItem(T item, int quantity = 1) {
+    void addItem(T* item, int quantity = 1) {
         if (!item || quantity <= 0) return;
 
         for (int i = 0; i < size_; i++) {
@@ -83,18 +85,23 @@ public:
     }
 
     void useItem(int index, Player* character) {
+
         if (index < 0 || index >= size_) {
             cout << "잘못된 번호입니다." << endl;
             return;
         }
-
         slots_[index].item->use(character);
         slots_[index].quantity--;
-        if (slots_[index].quantity == 0) removeItem(index);
+
+        if (slots_[index].quantity <= 0)
+            remove(index);
     }
 
-    void printAllItems() const {
-        if (size_ == 0) { cout << "인벤토리가 비어있습니다." << endl; return; }
+    void printAll() const {
+        if (size_ == 0) {
+            cout << "인벤토리가 비어있습니다." << endl;
+            return;
+        }
         for (int i = 0; i < size_; i++) {
             cout << i << "번: ";
             slots_[i].item->printInfo();
@@ -102,16 +109,18 @@ public:
         }
     }
 
-private:
-    InventorySlot* slots_;
-    int capacity_;
-    int size_;
-
-    void removeItem(int index) {
+    void remove(int index) {
+        if (index < 0 || index >= size_) return;
         delete slots_[index].item;
-        for (int i = index; i < size_ - 1; i++) slots_[i] = slots_[i + 1];
+        for (int i = index; i < size_ - 1; i++)
+            slots_[i] = slots_[i + 1];
         slots_[size_ - 1].item = nullptr;
         slots_[size_ - 1].quantity = 0;
         size_--;
     }
+
+private:
+    InventorySlot<T>* slots_;
+    int capacity_;
+    int size_;
 };
