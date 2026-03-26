@@ -29,7 +29,7 @@ public:
 	void gainExp(int amount);
 	void levelUp();
 	//아이템
-	void addattack(int amout);
+	void addAttack(int amout);
 	//전투 결과
 	void takeDamage(int damage);
 	void recoverDamage(int amount);

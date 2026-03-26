@@ -110,7 +110,7 @@ void Player::useItem(string itemName) {
 	//아이템별 로직
 }
 //공격력 상승
-void Player::addattack(int amount) {
+void Player::addAttack(int amount) {
 	attack += amount;
 	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << attack << ")" << endl;
 }
