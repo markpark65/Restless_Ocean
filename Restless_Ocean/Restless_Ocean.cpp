@@ -22,6 +22,7 @@ int main()
     //GameManager gm;
     //Player* player = new Player("나영");
     //gm.startBattleSequence(player);
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

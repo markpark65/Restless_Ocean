@@ -14,6 +14,7 @@ Player::Player(string n)
 	, oxygen(100)
 	, pressure(0)
 	, battery(100)
+	, tempAttack(0)
 	, artifactCount(0) {
 	cout << "심해 탐사대원: " << name << " 이(가) 등록되었습니다!" << endl;
 }
@@ -99,10 +100,28 @@ void Player::addArtifact() {
 }
 //레벨 로직
 void Player::gainExp(int amount) {
-
+	if (level >= 10) return;
+	exp += amount;
+	cout << amount << "의 경험치를 획득했습니다. (현재: " << exp << "/" << maxExp << ")" << endl;
+	while (exp >= maxExp && level < 10) {
+		levelUp();
+	}
 }
 void Player::levelUp() {
+	level++;
+	int hpBonus = level * 20;
+	int atkBonus = level * 5;
 
+	maxHp += hpBonus;
+	attack += atkBonus;
+	hp = maxHp;
+	exp -= maxExp;
+	if (exp < 0) exp = 0;
+	
+	cout << "=============================" << endl;
+	cout << "Level UP!!! 현재 레벨: " << level << endl;
+	cout << "최대 체력 " << hpBonus << " 증가 / 공격력 " << atkBonus << " 증가" << endl;
+	cout << "=============================" << endl;
 }
 //아이템 사용
 void Player::useItem(string itemName) {
@@ -113,4 +132,16 @@ void Player::useItem(string itemName) {
 void Player::addAttack(int amount) {
 	attack += amount;
 	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << attack << ")" << endl;
+}
+
+//해당 전투에만 공격력 상승
+void Player::addTempAttack(int amount) {
+	tempAttack += amount;
+	cout << "임시 공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: "
+		<< getAttack() << ")" << endl;
+}
+
+//전투 종료시 tempAttack 초기화
+void Player::resetTempStats() {
+tempAttack = 0;
 }
