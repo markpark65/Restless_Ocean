@@ -1,11 +1,11 @@
-#include "Item.h"
+ï»¿#include "Item.h"
 
 Item::Item(string name, int price) : name(name), price(price) {}
 Item::~Item() {}
 string Item::getName() const { return name; }
 int Item::getPrice() const { return price; }
 void Item::clear() { name = ""; price = 0; }
-void Item::printInfo() const { cout << "[ÀÌ¸§: " << name << ", °¡°Ý: " << price << "G]" << endl; }
+void Item::printInfo() const { cout << "[ì´ë¦„: " << name << ", ê°€ê²©: " << price << "G]" << endl; }
 
 HealthPotion::HealthPotion(string name, int price, int heal)
     : Item(name, price), healthRestore(heal) {
@@ -13,7 +13,7 @@ HealthPotion::HealthPotion(string name, int price, int heal)
 
 void HealthPotion::use(Player* character) {
     if (!character) return;
-    cout << "Ã¼·Â Æ÷¼Ç »ç¿ë! Ã¼·Â +" << healthRestore <<endl;
+    cout << "ì²´ë ¥ í¬ì…˜ ì‚¬ìš©! ì²´ë ¥ +" << healthRestore <<endl;
     character->recoverDamage(healthRestore);
 }
 
@@ -23,7 +23,7 @@ AttackBoost::AttackBoost(string name, int price, int attack)
 
 void AttackBoost::use(Player* character) {
     if (!character) return;
-    cout << "°ø°Ý·Â Áõ°¡! +" << attackIncrease<<endl;
+    cout << "ê³µê²©ë ¥ ì¦ê°€! +" << attackIncrease<<endl;
     character->addTempAttack(attackIncrease);
 }
 
@@ -32,7 +32,7 @@ OxygenPotion::OxygenPotion(string name, int price, int oxygen)
 }
 void OxygenPotion::use(Player* character) {
     if (!character) return;
-    cout << "»ê¼Ò Æ÷¼Ç »ç¿ë! »ê¼Ò +" << oxygenIncrease << endl;
+    cout << "ì‚°ì†Œ í¬ì…˜ ì‚¬ìš©! ì‚°ì†Œ +" << oxygenIncrease << endl;
     character->recoverOxygen(oxygenIncrease);
 }
 
@@ -41,7 +41,7 @@ PressurePotion::PressurePotion(string name, int price, int pressure)
     
 void PressurePotion::use(Player * character) {
     if (!character) return;
-    cout << "¾Ð·Â Æ÷¼Ç »ç¿ë! ¾Ð·Â -" << pressurePotion << endl;
+    cout << "ì••ë ¥ í¬ì…˜ ì‚¬ìš©! ì••ë ¥ -" << pressurePotion << endl;
     character->recoverPressure(pressurePotion);
 
 }

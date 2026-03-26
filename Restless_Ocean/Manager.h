@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <iostream>
 
@@ -23,7 +23,7 @@ public:
 
 	std::string createPlayer()
 	{
-		std::cout << "ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä." << '\n';
+		std::cout << "ì´ë¦„ì„ ìž…ë ¥í•˜ì„¸ìš”." << '\n';
 		std::cout << "> ";
 		std::string name;
 		std::cin >> name;

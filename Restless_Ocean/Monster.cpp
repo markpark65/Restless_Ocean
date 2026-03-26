@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 
 #include "Monster.h"
 #include "Item.h"
@@ -69,12 +69,12 @@ void Monster::takeDamage(int damage)
 void Monster::showStat() const
 {
     cout << "===============================" << '\n';
-    cout << "¸ó½ºÅÍ ÀÌ¸§: " << getName() << '\n';
+    cout << "ëª¬ìŠ¤í„° ì´ë¦„: " << getName() << '\n';
     cout << "HP      :" << getHealth() << '\n';
     cout << "ATK     :" << getAttack() << '\n';
     cout << "SPEED   :" << getSpeed() << '\n';
     cout << "EXP     :" << getExp() << '\n';
     cout << "GOLD    :" << getGold() << " G" << '\n';
-    cout << "º¸»ó    :" << getItem()->getName() << '\n';
+    cout << "ë³´ìƒ    :" << getItem()->getName() << '\n';
     cout << "===============================" << '\n';
 }

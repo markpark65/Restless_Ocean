@@ -1,0 +1,41 @@
+# .editorconfig - Project coding style and file encoding
+# Root .editorconfig for Restless_Ocean project
+root = true
+
+[*]
+# Ensure files are saved with BOM (UTF-8 with signature) to avoid C4819 in MSVC
+charset = utf-8-bom
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 4
+tab_width = 4
+max_line_length = 120
+
+[*.{cpp,cxx,c,cc,h,hpp,hh}]
+# C/C++ specific overrides
+charset = utf-8-bom
+indent_style = tab
+indent_size = 4
+tab_width = 4
+trim_trailing_whitespace = true
+end_of_line = crlf
+
+[*.{cs,csproj,sln}]
+charset = utf-8-bom
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+end_of_line = crlf
+
+[*.{md,txt,json,xml,yml,yaml}]
+charset = utf-8-bom
+trim_trailing_whitespace = false
+insert_final_newline = true
+end_of_line = crlf
+
+[*.{png,jpg,jpeg,gif,ico,zip,exe}]
+# Binary files - don't touch whitespace rules
+trim_trailing_whitespace = false
+insert_final_newline = false
