@@ -1,4 +1,5 @@
 #include "MonsterFactory.h"
+#include "Item.h"
 
 int MonsterFactory::getRandomValue(int min, int max)
 {
@@ -14,9 +15,10 @@ int MonsterFactory::getRandomValue(int min, int max)
 Monster* MonsterFactory::GenerateMonster(int level = 1)
 {
 	MonsterStat stat;
-	MonsterReward reward = { 50, 50 };
+	Item* item;
 
 	int randomType = getRandomValue(0, 2);
+	int randomItem = getRandomValue(0, 1);
 
 	switch (randomType)
 	{
@@ -24,7 +26,7 @@ Monster* MonsterFactory::GenerateMonster(int level = 1)
 		stat.name = "ÃÊ·Õ ¾Æ±Í";
 		stat.health = getRandomValue(20, 30) * level;
 		stat.attack = getRandomValue(5, 10) * level;
-		stat.type = MonsterType::Hidden;
+		stat.type = MonsterType::Luminous;
 		break;
 	case 1:
 		stat.name = "¹ÙÀÌÆÛ ÇÇ½¬";
@@ -36,12 +38,27 @@ Monster* MonsterFactory::GenerateMonster(int level = 1)
 		stat.name = "´ëÇü ¿ÀÂ¡¾î";
 		stat.health = getRandomValue(20, 30) * level;
 		stat.attack = getRandomValue(5, 10) * level;
-		stat.type = MonsterType::Hidden;
+		stat.type = MonsterType::Giant;
 		break;
 	default:
 		return nullptr;
 		break;
 	}
+
+	switch (randomItem)
+	{
+	case 0:
+		item = new HealthPotion();
+		break;
+	case 1:
+		item = new AttackBoost();
+		break;
+	default:
+		return nullptr;
+		break;
+	}
+
+	MonsterReward reward = { 50, 50, item};
 
 	return new Monster(stat, reward);
 }

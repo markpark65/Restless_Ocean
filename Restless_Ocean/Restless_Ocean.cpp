@@ -2,10 +2,19 @@
 //
 
 #include <iostream>
+#include "Monster.h"
+#include "MonsterFactory.h"
 
 int main()
 {
     std::cout << "Hello World!\n";
+
+    MonsterFactory m;
+    for (int i = 0; i < 10; ++i)
+    {
+        Monster* monster = m.GenerateMonster(1);
+        monster->showStat();
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
