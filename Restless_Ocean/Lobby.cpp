@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 
 #include "Lobby.h"
 #include "Player.h"
@@ -10,18 +10,18 @@ void Lobby::start()
 	//Player& player = Manager::getInstance().getPlayer();
 
 	
-	std::cout << "\n·Îºñ·Î ¿Ô½À´Ï´Ù." << '\n';
+	std::cout << "\në¡œë¹„ë¡œ ì™”ìŠµë‹ˆë‹¤." << '\n';
 }
 
 void Lobby::update()
 {
 	while (true)
 	{
-		std::cout << "\n¾È³çÇÏ¼¼¿ä. " << Manager::getInstance().getPlayer().getName() << "´Ô," << '\n';
-		std::cout << "¹«¾ùÀ» ÇÏ½Ã°Ú½À´Ï±î?\n";
-		std::cout << "1. ´øÀü ÀÔÀå\n";
-		std::cout << "2. »óÁ¡ ÀÌ¿ë\n";
-		std::cout << "3. °ÔÀÓ Á¾·á\n";
+		std::cout << "\nì•ˆë…•í•˜ì„¸ìš”. " << Manager::getInstance().getPlayer().getName() << "ë‹˜," << '\n';
+		std::cout << "ë¬´ì—‡ì„ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?\n";
+		std::cout << "1. ë˜ì „ ìž…ìž¥\n";
+		std::cout << "2. ìƒì  ì´ìš©\n";
+		std::cout << "3. ê²Œìž„ ì¢…ë£Œ\n";
 		std::cout << "> ";
 	
 		int input = 0;
@@ -39,11 +39,11 @@ void Lobby::update()
 			break;
 		case 3:
 			Manager::getInstance().changeStage(nullptr);
-			std::cout << "°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù.\n";
+			std::cout << "ê²Œìž„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.\n";
 			return;
 			break;
 		default:
-			std::cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.\n";
+			std::cout << "ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤.\n";
 			continue;
 		}
 
@@ -52,5 +52,5 @@ void Lobby::update()
 
 void Lobby::exit()
 {
-	std::cout << "·Îºñ¸¦ ¶°³³´Ï´Ù." << '\n';
+	std::cout << "ë¡œë¹„ë¥¼ ë– ë‚©ë‹ˆë‹¤." << '\n';
 }

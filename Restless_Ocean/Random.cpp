@@ -1,4 +1,4 @@
-#include <random>
+﻿#include <random>
 #include "Random.h"
 
 int Random::getRandomValue(int min, int max)

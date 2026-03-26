@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <random>
 
 #include "Monster.h"
@@ -6,9 +6,9 @@
 class MonsterFactory
 {
 public:
-	// min ~ max ¹üÀ§ÀÇ int °ª Ãâ·Â
+	// min ~ max ë²”ìœ„ì˜ int ê°’ ì¶œë ¥
 	int getRandomValue(int min, int max);
-	// ·£´ı ¸ó½ºÅÍ »ı¼º
+	// ëœë¤ ëª¬ìŠ¤í„° ìƒì„±
 	Monster* GenerateMonster(int level = 1);
 };
 
