@@ -13,6 +13,8 @@ private:
 	int maxHp;
 	int attack;
 	int tempAttack;
+	int speed;
+	int baseSpeed;
 	int exp;
 	int maxExp;
 	int gold;
@@ -24,17 +26,17 @@ private:
 public:
 	Player(std::string n);
 
-	//»óÅÂ Ãâ·Â
+	//ìƒíƒœ ì¶œë ¥
 	void showStatus() const;
-	//°æÇèÄ¡, ·¹º§¾÷
+	//ê²½í—˜ì¹˜, ë ˆë²¨ì—…
 	void gainExp(int amount);
 	void levelUp();
-	//¾ÆÀÌÅÛ
+	//ì•„ì´í…œ
 	void addAttack(int amout);
 	void addTempAttack(int amount);
 	void resetTempStats();
 
-	//ÀüÅõ °á°ú
+	//ì „íˆ¬ ê²°ê³¼
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
 	void useOxygen(int amount);
@@ -42,8 +44,10 @@ public:
 	void spendBattery(int amount);
 	void addGold(int amount);
 	void takePressure(int amount);
+	void debuffSpeed(int reduction);
+	void resetSpeed();
 	void useItem(std::string itemName);
-	//Á¤º¸ ÂüÁ¶
+	//ì •ë³´ ì°¸ì¡°
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHp() const { return hp; }
@@ -54,5 +58,6 @@ public:
 	int getPressure() const { return pressure; }
 	int getBattery() const { return battery; }
 	int getMaxHp() const { return maxHp; }
+	int getSpeed() const { return speed; }
 };
 

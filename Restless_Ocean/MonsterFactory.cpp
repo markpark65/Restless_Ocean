@@ -48,10 +48,10 @@ Monster* MonsterFactory::GenerateMonster(int level)
 	switch (randomItem)
 	{
 	case 0:
-		item = new HealthPotion();
+		item = new HealthPotion("포션", 50, 50);
 		break;
 	case 1:
-		item = new AttackBoost();
+		item = new AttackBoost("부스트", 50, 50);
 		break;
 	default:
 		return nullptr;

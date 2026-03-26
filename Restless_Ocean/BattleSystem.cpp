@@ -34,9 +34,6 @@ void BattleSystem::battle(Player* player) {
 
 }
 
-//void GameManager::displayInventory(Player* player) {
-//
-//}
 
 void BattleSystem::playerAction(Player* player, Monster* monster) {
 	cout << "=============================" << endl;
@@ -70,7 +67,7 @@ void BattleSystem::playerAction(Player* player, Monster* monster) {
 
 }
 
-void monsterAction(Player* player, Monster* monster) {
+void BattleSystem::monsterAction(Player* player, Monster* monster) {
 
 	cout << "=============================" << endl;
 	cout << "몬스터의 턴입니다!" << endl;
