@@ -26,6 +26,11 @@ int Monster::getAttack() const
     return monsterStat.attack;
 }
 
+int Monster::getSpeed() const
+{
+    return speed;
+}
+
 bool Monster::isAlive() const
 {
     return monsterStat.health > 0;
@@ -67,6 +72,7 @@ void Monster::showStat() const
     cout << "몬스터 이름: " << getName() << '\n';
     cout << "HP      :" << getHealth() << '\n';
     cout << "ATK     :" << getAttack() << '\n';
+    cout << "SPEED   :" << getSpeed() << '\n';
     cout << "EXP     :" << getExp() << '\n';
     cout << "GOLD    :" << getGold() << " G" << '\n';
     cout << "보상    :" << getItem()->getName() << '\n';

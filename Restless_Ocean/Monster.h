@@ -2,22 +2,17 @@
 
 #include <iostream>
 #include <string>
+#include "DataType.h"
 
 class Item;
 
-enum class MonsterType
-{
-	Hidden,		// 은닉형
-	Luminous,	// 발광형
-	Giant,		// 거대형
-};
-
 struct MonsterStat
 {
-	std::string	name;
-	int			health;
-	int			attack;
-	MonsterType	type;
+	std::string		name;
+	int				health;
+	int				attack;
+	int				speed;
+	AttributeType	type;
 };
 
 struct MonsterReward
@@ -41,6 +36,7 @@ public:
 	const std::string& getName() const;
 	int getHealth() const;
 	int getAttack() const;
+	int getSpeed()	const;
 	bool isAlive() const;
 
 	// Get Monster Reward
