@@ -28,7 +28,7 @@ int Monster::getAttack() const
 
 int Monster::getSpeed() const
 {
-    return speed;
+    return monsterStat.speed;
 }
 
 bool Monster::isAlive() const
