@@ -39,10 +39,12 @@ public:
 	//전투 결과
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
+	void recoverOxygen(int amount);
 	void useOxygen(int amount);
 	void addArtifact();
 	void spendBattery(int amount);
 	void addGold(int amount);
+	void recoverPressure(int amount);
 	void takePressure(int amount);
 	void debuffSpeed(int reduction);
 	void resetSpeed();

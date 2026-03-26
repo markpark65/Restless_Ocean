@@ -31,6 +31,24 @@ private:
     int healthRestore;
 };
 
+class OxygenPotion : public Item {
+public:
+    OxygenPotion(string name, int price, int oxygen);
+    void use(Player* character) override;
+
+private:
+    int oxygenIncrease;
+};
+
+class PressurePotion : public Item {
+public:
+    PressurePotion(string name, int price, int pressure);
+    void use(Player* character) override;
+
+private:
+    int pressurePotion;
+};
+
 class AttackBoost : public Item {
 public:
     AttackBoost(string name, int price, int attack);
