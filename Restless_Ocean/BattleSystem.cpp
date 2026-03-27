@@ -7,10 +7,8 @@
 #include "Random.h"
 #include "InputSystem.h"
 #include "ItemFactory.h"
+#include "WeaponManager.h"
 using namespace std;
-
-GameLogger& logger = GameLogger::getInstance(); // 모든 로그 나중에 GameLogger 활용 로직으로 변경 예정
-Random random;
 
 BattleSystem::BattleSystem()
 {
@@ -20,7 +18,9 @@ BattleSystem::BattleSystem()
 void BattleSystem::startBattleSequence(Player* player)
 {
 
-
+	// 무기 선택
+	player->setWeapon(weaponManager.selectWeapon());
+	cout << '\n';
 	
 	// 일반 전투
 	for (int i = 0; i < 7; ++i)
@@ -241,7 +241,6 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 	cout << monster->getName() << "이(가) " << player->getName() << " 대원을 공격합니다!" << '\n';
 	player->takeDamage(monster->getAttack());
 
-	
 	//int randValue = Random::getRandomValue(0, 99);
 
 	//if (randValue < 50)
@@ -272,6 +271,8 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 
 void BattleSystem::prize(Player* player)
 {
+	Random random;
+
 	//보상 획득
 	player->gainExp(50);
 	this_thread::sleep_for(chrono::seconds(1));
