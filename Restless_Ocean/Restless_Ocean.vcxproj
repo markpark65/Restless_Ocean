@@ -144,6 +144,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SeaCaveMap.cpp" />
     <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="ShopSystem.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="ShopSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="Stage.h" />
