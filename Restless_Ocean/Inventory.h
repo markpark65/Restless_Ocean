@@ -46,7 +46,7 @@ public:
             size_++;
         }
         else {
-            std::cout << "가빙이 꽉 찼습니다!\n" ;
+            std::cout << "장비함이 꽉 찼습니다!\n" ;
             delete item;
         }
     }
@@ -54,7 +54,7 @@ public:
 	//아이템 선택
 	int selectItem() const {
 		if (size_ == 0) {
-			std::cout << "가방이 비어있습니다.\n";
+			std::cout << "장비함이 비어있습니다.\n";
 			return -1;
 		}
 		printAll();
@@ -85,7 +85,7 @@ public:
 	//목록 출력
     void printAll() const {
         if (size_ == 0) {
-            std::cout << "가방이 비어있습니다.\n" ;
+            std::cout << "장비함이 비어있습니다.\n" ;
             return;
         }
         for (int i = 0; i < size_; i++) {
