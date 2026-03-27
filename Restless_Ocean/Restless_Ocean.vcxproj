@@ -137,8 +137,10 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="ViperFish.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
@@ -163,6 +165,7 @@
     </ClInclude>
     <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="Shop.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="ViperFish.h" />

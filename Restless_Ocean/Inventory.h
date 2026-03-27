@@ -47,13 +47,13 @@ public:
         }
     }
 
-    void useItem(int index, Player* character) {
+    void useItem(int index, Player* player) {
 
         if (index < 0 || index >= size_) {
             std::cout << "잘못된 번호입니다.\n" ;
             return;
         }
-        slots_[index].item->use(character);
+        slots_[index].item->use(player);
         slots_[index].quantity--;
 
         if (slots_[index].quantity <= 0)
@@ -71,6 +71,11 @@ public:
 			std::cout << "  수량: " << slots_[i].quantity << "\n";
         }
     }
+
+	T* getItem(int index) const {
+		if (index < 0 || index >= size_) return nullptr;
+		return slots_[index].item;
+	}
 
     void remove(int index) {
         if (index < 0 || index >= size_) return;
