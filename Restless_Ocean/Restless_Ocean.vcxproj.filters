@@ -56,6 +56,12 @@
     <ClCompile Include="Shop.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
+    <ClCompile Include="BuildingMap.cpp" />
+    <ClCompile Include="BuildingMap.h" />
+    <ClCompile Include="CollapsedShipMap.cpp" />
+    <ClCompile Include="IMap.cpp" />
+    <ClCompile Include="SeaCaveMap.cpp" />
+    <ClCompile Include="Skill.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataType.h" />
@@ -117,6 +123,10 @@
     <ClInclude Include="Stage.h">
       <Filter>Stage</Filter>
     </ClInclude>
+    <ClInclude Include="CollapsedShipMap.h" />
+    <ClInclude Include="IMap.h" />
+    <ClInclude Include="SeaCaveMap.h" />
+    <ClInclude Include="Skill.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Stage">

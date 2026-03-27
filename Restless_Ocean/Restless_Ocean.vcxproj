@@ -137,7 +137,6 @@
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="MapUtils.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
@@ -168,8 +167,6 @@
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IMap.h" />
-    <ClInclude Include="MapType.h" />
-    <ClInclude Include="MapUtils.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Item.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
