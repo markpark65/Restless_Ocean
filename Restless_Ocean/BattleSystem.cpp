@@ -16,13 +16,13 @@ void BattleSystem::startBattleSequence(Player* player)
 {
 
 	
-	// 일반 전투
+	// 일반 전투 -> Todo: loop 오류 해결
 	for (int i = 0; i < 7; ++i)
 	{
 		BattleResult battleResult;
 		battleResult = battle(player);
 
-		// 전투 끝
+		// 전투 끝 로직 -> Todo: 클래스로 분리
 		cout << "==========================================================" << '\n';
 		cout << "전투가 끝났습니다." << '\n';
 		player->useOxygen(10); // 전투 후 산소 10 소모
@@ -42,12 +42,10 @@ void BattleSystem::startBattleSequence(Player* player)
 			cout << "대원이 쓰러졌습니다." << '\n';
 			break;
 		}
-		
 	}
 	cout << "==========================================================" << '\n';
 
 	// 보스전
-
 
 }
 
