@@ -18,6 +18,12 @@ public:
 
 	void playerAction(Player* player, Monster* monster, BattleResult& battleResult); // 플레이어 행동 함수
 	void monsterAction(Player* player, Monster* monster); // 몬스터 행동 함수
+
+	void playerAttack(Player* player, Monster* monster); // 플레이어 일반 공격 함수
+	void playerUseSkill(Player* player, Monster* monster); // 플레이어 스킬 사용 함수
+	void playerUseItem(Player* player); // 플레이어 아이템 사용 함수
+	void playerRunAway(BattleResult& battleResult); // 플레이어 도망 함수
+
 	BattleResult checkBattleResult(int playerHp, int monsterHp); // 배틀이 끝났는지 확인하는 함수
 
 	void prize(Player* player); // 전투 승리 시 보상 지급 함수
