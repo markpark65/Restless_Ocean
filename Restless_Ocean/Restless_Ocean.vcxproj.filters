@@ -56,24 +56,6 @@
     <ClCompile Include="Shop.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
-    <ClCompile Include="IMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BuildingMap.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BuildingMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SeaCaveMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CollapsedShipMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MapUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataType.h" />
@@ -134,21 +116,6 @@
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="IMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SeaCaveMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CollapsedShipMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MapType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MapUtils.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

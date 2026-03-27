@@ -12,8 +12,6 @@ public:
 	ShopSystem();
 	~ShopSystem() = default;
 
-	void openShop(Player& player);
-
 private:
 	std::vector<std::unique_ptr<Item>> items_;
 
