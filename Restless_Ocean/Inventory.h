@@ -25,6 +25,8 @@ public:
         delete[] slots_;
     }
 
+	int getSize() { return size_; }
+
     void addItem(T* item, int quantity = 1) {
         if (!item || quantity <= 0) return;
 
