@@ -69,7 +69,14 @@
     <ClCompile Include="GameStatistics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+   <ItemGroup>
     <ClCompile Include="Weapon.cpp">
+		<Filter>Source Files</Filter>
+	</ClCompile>
+	<ClCompile Include="Shop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,6 +142,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
+		<Filter>Header Files</Filter>
+	</ClInclude>
+    <ClInclude Include="Shop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

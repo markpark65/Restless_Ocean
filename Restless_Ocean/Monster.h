@@ -29,6 +29,7 @@ public:
 	int getHealth() const;
 	int getAttack() const;
 	int getSpeed()	const;
+	AttributeType getMonsterType() const;
 	bool isAlive() const;
 
 	// 입력 받은 damage만큼 health 감소
@@ -36,5 +37,8 @@ public:
 
 	// 몬스터 스탯 출력
 	void showStat() const;
+
+	// 몬스터 타입 string으로 변경
+	std::string typeToString(AttributeType type) const;
 };
 
