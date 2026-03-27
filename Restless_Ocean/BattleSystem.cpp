@@ -19,6 +19,7 @@ void BattleSystem::startBattleSequence(Player* player)
 	// 일반 전투 -> Todo: loop 오류 해결
 	for (int i = 0; i < 7; ++i)
 	{
+		cout << i + 1 << "번째 전투" << '\n';
 		BattleResult battleResult;
 		battleResult = battle(player);
 
