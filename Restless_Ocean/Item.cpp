@@ -16,6 +16,9 @@ void HealthPotion::use(Player* character) {
     cout << "체력 포션 사용! \n";
     character->recoverDamage(healthRestore);
 }
+Item* HealthPotion::clone() const {
+	return new HealthPotion(*this);
+}
 
 
 //체력 최대량 Up
@@ -27,6 +30,10 @@ void MaxHpUp::use(Player* character) {
 	cout << "방수가 잘 되어있는 초코과자 사용! \n" ;
 	character->increaseMaxHp(maxHpIncrease);
 }
+Item* MaxHpUp::clone() const {
+	return new MaxHpUp(*this);
+}
+
 
 
 //산소 회복
@@ -37,6 +44,9 @@ void OxygenPotion::use(Player* character) {
     if (!character) return;
     cout << "산소 포션 사용! \n";
     character->recoverOxygen(oxygenIncrease);
+}
+Item* OxygenPotion::clone() const {
+	return new OxygenPotion(*this);
 }
 
 
@@ -49,6 +59,10 @@ void MaxOxygenUp::use(Player* character){
 	cout << "1000년 전의 스노클 사용!\n" ;
 	character->IncreaseOxygen(maxIncrease);
 }
+Item* MaxOxygenUp::clone() const {
+	return new MaxOxygenUp(*this);
+}
+
 
 
 //압력 해소
@@ -60,6 +74,9 @@ void PressurePotion::use(Player * character) {
     cout << "압력 포션 사용!\n";
     character->recoverPressure(pressurePotion);
 
+}
+Item* PressurePotion::clone() const {
+	return new PressurePotion(*this);
 }
 
 
@@ -73,6 +90,9 @@ void MaxPressureUp::use(Player* character) {
 	character->IncreasePressure(maxIncrease);
 
 }
+Item* MaxPressureUp::clone() const {
+	return new MaxPressureUp(*this);
+}
 
 
 //공격력 Up
@@ -84,15 +104,10 @@ void AttackBoost::use(Player* character) {
 	cout << "깨진 조개껍데기 목걸이 사용!\n";
 	character->addTempAttack(attackIncrease);
 }
-
-
-//클리어 아이템
-Artifact ::Artifact(string name)
-	: Item(name, 0) {
+<<<<<<< HEAD
+Item* AttackBoost::clone() const {
+	return new AttackBoost(*this);
 }
+=======
 
-void Artifact::use(Player* character){
-		cout << "유적 아이템은 사용할 수 없습니다.\n" ;
-	}
-
-
+>>>>>>> 7b715515977b046d1b55f3b0a05e0302209a8c38
