@@ -44,6 +44,16 @@ AttributeType Monster::getMonsterType() const
 	return monsterStat.type;
 }
 
+const std::string& Monster::getDescription() const
+{
+	return monsterStat.description;
+}
+
+Map Monster::getMap() const
+{
+	return monsterStat.map;
+}
+
 bool Monster::isAlive() const
 {
     return monsterStat.health > 0;
@@ -79,13 +89,31 @@ std::string Monster::typeToString(AttributeType type) const
 	}
 }
 
+std::string Monster::mapToString(Map map) const
+{
+	switch (map)
+	{
+	case Map::BuildingMap:
+		return "건물";
+	case Map::SeaCaveMap:
+		return "해저 동굴";
+	case Map::CollapsedShipMap:
+		return "침몰선";
+	default:
+		return "알 수 없음";
+	}
+}
+
 void Monster::showStat() const
 {
-    cout << "===============================" << '\n';
+    cout << "\n===============================" << '\n';
     cout << "몬스터 이름: " << getName() << '\n';
+	cout << "출현지  :" << mapToString(getMap()) << '\n';
+	cout << "등급    :" << getRankName() << '\n';
     cout << "HP      :" << getHealth() << '\n';
     cout << "ATK     :" << getAttack() << '\n';
     cout << "SPEED   :" << getSpeed() << '\n';
 	cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
+	cout << "설명    :" << getDescription() << '\n';
     cout << "===============================" << '\n';
 }
