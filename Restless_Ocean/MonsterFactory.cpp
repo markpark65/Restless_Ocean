@@ -16,32 +16,30 @@ int MonsterFactory::getRandomValue(int min, int max)
 Monster* MonsterFactory::GenerateMonster(int level)
 {
 	MonsterStat stat;
-	Item* item;
 
 	int randomType = getRandomValue(0, 2);
-	int randomItem = getRandomValue(0, 1);
 
 	switch (randomType)
 	{
 	case 0:
 		stat.name = "초롱 아귀";
-		stat.health = getRandomValue(20, 30) * level;
-		stat.attack = getRandomValue(5, 10) * level;
-		stat.speed = getRandomValue(80, 120);
+		stat.health = getRandomValue(22, 28) * level;
+		stat.attack = getRandomValue(6, 9) * level;
+		stat.speed = getRandomValue(95, 105);
 		stat.type = AttributeType::Luminous;
 		break;
 	case 1:
 		stat.name = "바이퍼 피쉬";
-		stat.health = getRandomValue(20, 30) * level;
-		stat.attack = getRandomValue(5, 10) * level;
-		stat.speed = getRandomValue(80, 120);
+		stat.health = getRandomValue(18, 24) * level;
+		stat.attack = getRandomValue(7, 11) * level;
+		stat.speed = getRandomValue(105, 115);
 		stat.type = AttributeType::Hidden;
 		break;
 	case 2:
 		stat.name = "대형 오징어";
-		stat.health = getRandomValue(20, 30) * level;
-		stat.attack = getRandomValue(5, 10) * level;
-		stat.speed = getRandomValue(80, 120);
+		stat.health = getRandomValue(28, 36) * level;
+		stat.attack = getRandomValue(8, 12) * level;
+		stat.speed = getRandomValue(80, 90);
 		stat.type = AttributeType::Giant;
 		break;
 	default:
@@ -49,20 +47,5 @@ Monster* MonsterFactory::GenerateMonster(int level)
 		break;
 	}
 
-	switch (randomItem)
-	{
-	case 0:
-		item = new HealthPotion("포션", 50, 50);
-		break;
-	case 1:
-		item = new AttackBoost("부스트", 50, 50);
-		break;
-	default:
-		return nullptr;
-		break;
-	}
-
-	MonsterReward reward = { 50, 50, item};
-
-	return new Monster(stat, reward);
+	return new Monster(stat);
 }

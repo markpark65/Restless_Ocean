@@ -1,4 +1,6 @@
 ﻿#include "Player.h"
+#include "Weapon.h"
+#include "Monster.h"
 
 using namespace std;
 
@@ -7,7 +9,7 @@ Player::Player(string n)
 	, level(1)
 	, hp(200)
 	, maxHp(200)
-	, attack(30)
+	, baseAttack(30)
 	, exp(0)
 	, maxExp(100)
 	, gold(0)
@@ -37,7 +39,19 @@ void Player::showStatus() const {
 	cout << "Pressure:" << pressure << " %" << endl;
 	cout << "Artifact:" << artifactCount << " / 5" << endl;
 }
+//무기 장착 구현
+void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
+	equippedWeapon = std::move(newWeapon);
+	cout << name << " 대원이 " << equippedWeapon << "무기를 장착했습니다";
+}
+//공격 로직 구현
+int Player::attack(const Monster* target) {
+	if (!equippedWeapon) {
+		return baseAttack + tempAttack;
+	}
+	return equippedWeapon->calculateDamage(baseAttack + tempAttack, target);
 
+}
 //데미지
 void Player::takeDamage(int damage) {
 	hp -= damage;
@@ -176,7 +190,7 @@ void Player::levelUp() {
 	int atkBonus = level * 5;
 
 	maxHp += hpBonus;
-	attack += atkBonus;
+	baseAttack += atkBonus;
 	hp = maxHp;
 	exp -= maxExp;
 	if (exp < 0) exp = 0;
@@ -193,8 +207,8 @@ void Player::useItem(string itemName) {
 }
 //공격력 상승
 void Player::addAttack(int amount) {
-	attack += amount;
-	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << attack << ")" << endl;
+	baseAttack += amount;
+	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << baseAttack << ")" << endl;
 }
 
 //해당 전투에만 공격력 상승

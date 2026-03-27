@@ -128,9 +128,11 @@
     </ClCompile>
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="GameLogger.cpp" />
+    <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="GiantSquid.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Lobby.cpp" />
-    <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
@@ -146,10 +148,13 @@
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="GameLogger.h" />
+    <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="GiantSquid.h" />
+    <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="Lobby.h" />
-    <ClInclude Include="Manager.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Item.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
