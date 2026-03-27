@@ -9,6 +9,35 @@ using namespace std;
 GameLogger& logger = GameLogger::getInstance(); // 모든 출력 나중에 로거로 변경 예정
 Random random;
 
+void BattleSystem::startBattleSequence(Player* player) {
+
+	// 전투 시작
+
+	BattleResult battleResult;
+	battleResult = battle(player);
+
+	// 전투 끝
+
+	cout << "==========================================================" << '\n';
+	cout << "전투가 끝났습니다." << '\n';
+	player->useOxygen(10); // 전투 후 산소 10 소모
+
+	// 플레이어가 이겼을 때 보상 획득
+
+	if (battleResult == BattleResult::PlayerWin) { //승리했을 때
+
+		prize(player);
+	}
+	else if (battleResult == BattleResult::RunAway) {
+		cout << "무사히 도망쳤습니다." << '\n';
+	}
+	else if (battleResult == BattleResult::MonsterWin) {
+		cout << "대원이 쓰러졌습니다." << '\n';
+	}
+
+	cout << "==========================================================" << '\n';
+}
+
 
 
 BattleResult BattleSystem::battle(Player* player) {
@@ -110,44 +139,14 @@ void BattleSystem::monsterAction(Player* player, Monster* monster) {
 
 }
 
-void BattleSystem::startBattleSequence(Player* player) {
 
-	BattleResult battleResult;
-	battleResult = battle(player);
+void BattleSystem::prize(Player* player) {
+	//보상 획득
+	player->gainExp(50);
 
-	// 전투 끝
-	player->useOxygen(10);
+	// 골드 10~20 범위에서 랜덤 획득
+	int gold = random.getRandomValue(10, 20);
+	player->addGold(gold);
 
-	cout << "==========================================================" << '\n';
-	cout << "전투가 끝났습니다." << '\n';
-
-	// 플레이어가 이겼을 때 보상 획득
-
-	if (battleResult == BattleResult::PlayerWin) { //승리했을 때
-
-		//보상 획득
-		player->gainExp(50);
-
-		// 골드 10~20 범위에서 랜덤 획득
-		int gold = random.getRandomValue(10, 20);
-		player->addGold(gold);
-
-		
-			
-
-
-		//아이템 획득
-	}
-	else if(battleResult == BattleResult::RunAway){
-		cout << "무사히 도망쳤습니다." << '\n';
-	}
-	else if(battleResult == BattleResult::MonsterWin){
-		cout << "대원이 쓰러졌습니다." << '\n';
-	}
-
-	cout << "==========================================================" << '\n';
-}
-
-void prize(Player* player) {
-
+	// 30% 확률로 아이템 획득
 }
