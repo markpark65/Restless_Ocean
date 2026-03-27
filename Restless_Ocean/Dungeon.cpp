@@ -2,7 +2,6 @@
 #include "Random.h"
 #include "Lobby.h"
 #include "Dungeon.h"
-#include "Shop.h"
 #include "BattleSystem.h"
 #include "GameManager.h"
 #include "Player.h"
@@ -27,7 +26,7 @@ void Dungeon::update()
 
 		// to do: 배틀 시스템 로직 추가
 		Player& player = GameManager::getInstance().getPlayer();
-		battleSystem.startBattleSequence(&player);
+		battleSystem.battle(&player);
 
 		// 전투 종료 후
 		std::cout << "무엇을 하시겠습니까?\n";
@@ -41,14 +40,13 @@ void Dungeon::update()
 		switch (input)
 		{
 		case 1:
-			std::cout << "\n";
 			continue;
 		case 2:
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 			break;
 		case 3:
-			GameManager::getInstance().changeStage(std::make_unique<Shop>());
+			GameManager::getInstance().changeStage(nullptr);
 			return;
 			break;
 		case 4:
