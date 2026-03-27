@@ -28,6 +28,7 @@ public:
 
 	int getSize() { return size_; }
 
+	//아이템 추가
     void addItem(T* item, int quantity = 1) {
         if (!item || quantity <= 0) return;
 
@@ -45,14 +46,15 @@ public:
             size_++;
         }
         else {
-            std::cout << "인벤토리가 꽉 찼습니다!\n" ;
+            std::cout << "장비함이 꽉 찼습니다!\n" ;
             delete item;
         }
     }
 
+	//아이템 선택
 	int selectItem() const {
 		if (size_ == 0) {
-			std::cout << "인벤토리가 비어있습니다.\n";
+			std::cout << "장비함이 비어있습니다.\n";
 			return -1;
 		}
 		printAll();
@@ -66,6 +68,7 @@ public:
 		return choice;
 	}
 
+	//아이템 사용
     void useItem(int index, Player* player) {
 
         if (index < 0 || index >= size_) {
@@ -79,9 +82,10 @@ public:
             remove(index);
     }
 
+	//목록 출력
     void printAll() const {
         if (size_ == 0) {
-            std::cout << "인벤토리가 비어있습니다.\n" ;
+            std::cout << "장비함이 비어있습니다.\n" ;
             return;
         }
         for (int i = 0; i < size_; i++) {
@@ -91,16 +95,19 @@ public:
         }
     }
 
+	//index 아이템 포인터 반환
 	T* getItem(int index) const {
 		if (index < 0 || index >= size_) return nullptr;
 		return slots_[index].item;
 	}
 
+	//index 아이템의 수량 반환
 	int getItemCount(int index) const {
 		if (index < 0 || index >= size_) return 0;
 		return slots_[index].quantity;
 	}
 
+	//아이템 삭제
     void remove(int index) {
         if (index < 0 || index >= size_) return;
         delete slots_[index].item;
@@ -111,6 +118,7 @@ public:
         size_--;
     }
 
+	//아이템 수량 선택 삭제
 	void removeItem(int index, int quantity) {
 		if (index < 0 || index >= size_ || quantity <= 0) return;
 
