@@ -24,13 +24,13 @@ Player::Player(string n)
 	, artifactCount(0) {
 	cout << "심해 탐사대원: " << name << " 이(가) 등록되었습니다!" << endl;
 }
-
+Player::~Player() {}
 //상태 출력
 void Player::showStatus() const {
 	cout << "===============================" << endl;
 	cout << "대원 정보 이름: " << name << " - level. " << level << endl;
 	cout << "HP      :" << hp << " / " << maxHp << endl;
-	cout << "ATK     :" << attack << endl;
+	cout << "ATK     :" << baseAttack << endl;
 	cout << "EXP     :" << exp << " / " << maxExp << endl;
 	cout << "GOLD    :" << gold << " G" << endl;
 	cout << "===============================" << endl;
@@ -51,7 +51,6 @@ int Player::attack(const Monster* target) {
 		return baseAttack + tempAttack;
 	}
 	return equippedWeapon->calculateDamage(baseAttack + tempAttack, target);
-
 }
 //데미지
 void Player::takeDamage(int damage) {
