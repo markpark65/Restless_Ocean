@@ -12,7 +12,7 @@ protected:
 	int addDamage;
 
 public:
-	Weapon(std::string n, WeaponType t, int d, int bc)
+	Weapon(std::string n, WeaponType t, int d)
 		: name(n)
 		, type(t)
 		, addDamage(d) {
