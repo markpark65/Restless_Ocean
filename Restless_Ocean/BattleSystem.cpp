@@ -12,6 +12,10 @@ using namespace std;
 GameLogger& logger = GameLogger::getInstance(); // 모든 로그 나중에 GameLogger 활용 로직으로 변경 예정
 Random random;
 
+BattleSystem::BattleSystem()
+{
+	
+}
 
 void BattleSystem::startBattleSequence(Player* player)
 {
@@ -45,6 +49,7 @@ BattleResult BattleSystem::battle(Player* player)
 	int turn = 0; // 전투 턴 수
 	MonsterFactory monsterFactory;
 	Monster* monster = monsterFactory.GenerateMonster(player->getLevel());
+	
 
 	this_thread::sleep_for(chrono::seconds(2));
 
@@ -205,14 +210,16 @@ void BattleSystem::playerUseSkill(Player* player, Monster* monster) // 플레이
 
 bool BattleSystem::playerUseItem(Player* player) // 플레이어 아이템 사용 함수
 {
-	cout << "* 아이템을 사용합니다." << '\n';
-	bool use = player->useItem();
-	if (use)
+	cout << "아이템 사용 로직입니다" << '\n';
+	int itemIndex = player->getInventory().selectItem();
+	
+	if (itemIndex != -1) // 올바른 아이템 인덱스
 	{
+		player->getInventory().useItem(itemIndex, player);
 		this_thread::sleep_for(chrono::seconds(2));
 		return true;
 	}
-	else
+	else // 아이템 사용 불가
 	{
 		return false;
 	}
@@ -276,12 +283,13 @@ void BattleSystem::prize(Player* player)
 
 	// 30% 확률로 아이템 획득
 	int itemChance = random.getRandomValue(1, 100);
+	
 	if (itemChance <= 30)
 	{
 		cout << "아이템을 획득했습니다!" << '\n';
 
 		//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
-		
+		player->getInventory().addItem(itemFactory.getRandomItem());
 	}
 	this_thread::sleep_for(chrono::seconds(1));
 

@@ -17,7 +17,6 @@ public:
 		items.push_back(new PressurePotion("압력 포션", 1, 20, 1));
 		items.push_back(new MaxPressureUp("어느 물고기의 부레", 1, 20, 1));
 		items.push_back(new AttackBoost("깨진 조개껍데기 목걸이", 1, 20, 1));
-
 		
 	}
 

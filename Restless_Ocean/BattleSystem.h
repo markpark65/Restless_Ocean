@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "ItemFactory.h"
 
 class Monster;
 class Player;
@@ -13,6 +14,9 @@ enum class BattleResult {
 class BattleSystem
 {
 public:
+
+	BattleSystem();
+
 	void startBattleSequence(Player* player); // 전투 흐름 전체 로직
 	BattleResult battle(Player* player); // 턴제 전투 파트
 	bool processBattleResult(Player* player, BattleResult& battleResult); // 전투 결과 처리 함수
@@ -30,5 +34,10 @@ public:
 
 	void prize(Player* player); // 전투 승리 시 보상 지급 함수
 	//void displayInventory(Player* player);
+private:
+	/*Monster* monster;
+	BattleResult battleResult;
+	Random random;*/
+	ItemFactory itemFactory;
 };
 
