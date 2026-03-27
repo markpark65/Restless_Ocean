@@ -1,20 +1,15 @@
 ﻿#pragma once
-#include <vector>
-#include "Item.h"
-#include "Inventory.h"
+#include "Stage.h"
+#include "ShopSystem.h"
 
-class Player;
-
-class Shop {
-public:
-	Shop();
-	~Shop();
-	void openShop(Player* player, Inventory<Item>& inventory);
-
+class Shop : public Stage
+{
 private:
-	std::vector<Item*> items_;
-	std::vector<int> prices_;
+	ShopSystem shopSystem;
 
-	void buyItem(Player* player, Inventory<Item>& inventory);
-	void sellItem(Player* player, Inventory<Item>& inventory);
+public:
+	void start()	override;
+	void update()	override;
+	void exit()		override;
 };
+

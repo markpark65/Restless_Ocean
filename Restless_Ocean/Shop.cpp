@@ -1,89 +1,65 @@
-﻿#include "Shop.h"
+﻿#include <iostream>
+
+#include "Shop.h"
+#include "Lobby.h"
+#include "Dungeon.h"
+
 #include "Player.h"
-#include <iostream>
-using namespace std;
+#include "Item.h"
+#include "Inventory.h"
 
-Shop::Shop() {
+#include "GameManager.h"
+#include "ShopSystem.h"
+#include "InputSystem.h"
 
-	items_.push_back(new HealthPotion("체력 포션", 100, 50));
-	prices_.push_back(100);
 
-	items_.push_back(new MaxHpUp("방수가 잘 되어있는 초코과자", 200, 10));
-	prices_.push_back(200);
-
-	items_.push_back(new OxygenPotion("산소 포션", 200, 10));
-	prices_.push_back(200);
-
-	items_.push_back(new MaxOxygenUp("1000년 전의 스노클", 200, 10));
-	prices_.push_back(200);
-
-	items_.push_back(new PressurePotion("압력 포션", 200, 10));
-	prices_.push_back(200);
-
-	items_.push_back(new MaxPressureUp("어느 물고기의 부례", 200, 10));
-	prices_.push_back(200);
-
-	items_.push_back(new AttackBoost("깨진 조개껍데기 목걸이", 200, 10));
-	prices_.push_back(200);
-
-}
-Shop::~Shop() {
-	for (auto item : items_) delete item;
+void Shop::start()
+{
+	std::cout << "\n상점으로 왔습니다." << '\n';
 }
 
-void Shop::openShop(Player* player, Inventory<Item>& inventory) {
-	int choice;
+void Shop::update()
+{
+	// 상점 방문
+	//Player& player = GameManager::getInstance().getPlayer();
+	//
+	//ShopSystem shopSystem;
+	//shopSystem.openShop(player, );
+	//
 
-	while (true) {
-		cout << "\n=== 상점 ===\n";
-		cout << "1. 구매\n2. 판매\n0. 나가기\n";
-		cin >> choice;
+	// 
+	while (true)
+	{
+		std::cout << "무엇을 하시겠습니까?\n";
+		std::cout << "1. 로비 이동\n";
+		std::cout << "2. 던전 입장\n";
+		std::cout << "3. 게임 종료\n";
 
-		if (choice == 1) buyItem(player, inventory);
-		else if (choice == 2) sellItem(player, inventory);
-		else break;
+		int input = InputSystem::getInputInt(1, 3);
+
+		switch (input)
+		{
+		case 1:
+			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+			return;
+			break;
+		case 2:
+			GameManager::getInstance().changeStage(std::make_unique<Dungeon>());
+			return;
+			break;
+		case 3:
+			GameManager::getInstance().changeStage(nullptr);
+			std::cout << "게임을 종료합니다.\n";
+			return;
+			break;
+		default:
+			std::cout << "잘못된 입력입니다.\n";
+			continue;
+		}
 	}
 }
 
-void Shop::buyItem(Player* player, Inventory<Item>& inventory) {
-	cout << "\n구매 목록:\n";
-	for (int i = 0; i < items_.size(); i++) {
-		cout << i << ": ";
-		items_[i]->printInfo();
-		cout << " 가격: " << prices_[i] << "G\n";
-	}
-
-	int choice;
-	cin >> choice;
-
-	if (choice < 0 || choice >= items_.size()) return;
-
-	if (player->getGold() < prices_[choice]) {
-		cout << "골드 부족!\n";
-		return;
-	}
-
-	player->addGold(-prices_[choice]);
-
-	inventory.addItem(items_[choice]->clone());
-
-	cout << "구매 완료!\n 남은 골드 : "<<player->getGold()<<"\n";
-}
-
-void Shop::sellItem(Player* player, Inventory<Item>& inventory) {
-	cout << "\n=== 판매 ===\n";
-	inventory.printAll();
-
-	int index;
-	cin >> index;
-
-	Item* item = inventory.getItem(index);
-	if (!item) return;
-
-	int sellPrice = static_cast<int>(item->getPrice() * 0.6);
-	player->addGold(sellPrice);
-
-	inventory.remove(index);
-
-	cout << "판매 완료! +" << sellPrice << " G\n 남은 골드 : "<< player->getGold() << "\n";
+void Shop::exit()
+{
+	std::cout << "상점를 떠납니다." << '\n';
 }
