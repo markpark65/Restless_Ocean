@@ -41,8 +41,9 @@ void Player::showStatus() const {
 }
 //무기 장착 구현
 void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
+	if (!newWeapon) return;
 	equippedWeapon = std::move(newWeapon);
-	cout << name << " 대원이 " << equippedWeapon << "무기를 장착했습니다";
+	cout << name << " 대원이 " << equippedWeapon->getName() << "무기를 장착했습니다";
 }
 //공격 로직 구현
 int Player::attack(const Monster* target) {
