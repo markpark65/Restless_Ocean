@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "GameManager.h"
 #include "Dungeon.h"
+#include "Shop.h"
 #include "InputSystem.h"
 
 void Lobby::start()
@@ -33,7 +34,7 @@ void Lobby::update()
 			return;
 			break;
 		case 2:
-			GameManager::getInstance().changeStage(nullptr);
+			GameManager::getInstance().changeStage(std::make_unique<Shop>());
 			return;
 			break;
 		case 3:
