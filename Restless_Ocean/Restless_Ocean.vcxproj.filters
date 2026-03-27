@@ -1,151 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="BattleSystem.cpp" />
+    <ClCompile Include="Dungeon.cpp" />
+    <ClCompile Include="GameLogger.cpp" />
+    <ClCompile Include="GameStatistics.cpp" />
+    <ClCompile Include="GiantSquid.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="Lobby.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="MonsterFactory.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="ViperFish.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Restless_Ocean.cpp" />
+    <ClCompile Include="FootballFish.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Restless_Ocean.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FootballFish.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MonsterFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ViperFish.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GiantSquid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Singleton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Lobby.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dungeon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStatistics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-   <ItemGroup>
-    <ClCompile Include="Weapon.cpp">
-		<Filter>Source Files</Filter>
-	</ClCompile>
-	<ClCompile Include="Shop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FootballFish.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ViperFish.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GiantSquid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lobby.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStatistics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="json.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-		<Filter>Header Files</Filter>
-	</ClInclude>
-    <ClInclude Include="Shop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="BattleSystem.h" />
+    <ClInclude Include="DataType.h" />
+    <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="GameLogger.h" />
+    <ClInclude Include="GameStatistics.h" />
+    <ClInclude Include="GiantSquid.h" />
+    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="Lobby.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="MonsterFactory.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="Shop.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="ViperFish.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="FootballFish.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
 </Project>

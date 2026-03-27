@@ -140,7 +140,6 @@
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="ViperFish.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />

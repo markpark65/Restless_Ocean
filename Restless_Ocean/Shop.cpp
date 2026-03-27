@@ -80,7 +80,7 @@ void Shop::sellItem(Player* player, Inventory<Item>& inventory) {
 	Item* item = inventory.getItem(index);
 	if (!item) return;
 
-	int sellPrice = item->getPrice() * 0.6; 
+	int sellPrice = static_cast<int>(item->getPrice() * 0.6);
 	player->addGold(sellPrice);
 
 	inventory.remove(index);
