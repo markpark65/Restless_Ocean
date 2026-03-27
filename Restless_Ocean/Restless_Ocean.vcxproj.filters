@@ -13,7 +13,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
     <ClCompile Include="Random.cpp" />
-    <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="ShopSystem.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="ViperFish.cpp" />
@@ -21,6 +21,7 @@
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="FootballFish.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="Shop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleSystem.h" />
@@ -38,12 +39,13 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="Random.h" />
-    <ClInclude Include="Shop.h" />
+    <ClInclude Include="ShopSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="ViperFish.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="FootballFish.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="Shop.h" />
   </ItemGroup>
 </Project>
