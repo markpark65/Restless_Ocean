@@ -60,7 +60,7 @@ public:
 
 	virtual const std::string& GetRewardArtifact() const = 0;
 	virtual std::string getRankName() const = 0;
-	virtual void UseBasicAttack(Player* target)		= 0;
-	virtual void UseSpecialAttack(Player* target)	= 0;
-	virtual void TriggerPassive()					= 0;
+	virtual void useBasicAttack(Player* target)		= 0;
+	virtual void useSpecialAttack(Player* target)	= 0;
+	virtual void activatePassive()					= 0;
 };
