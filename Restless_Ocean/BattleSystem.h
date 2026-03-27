@@ -13,8 +13,8 @@ enum class BattleResult {
 class BattleSystem
 {
 public:
-	void battle(Player* player); // 전투 흐름 전체 로직
-	void startBattleSequence(Player* player, Monster* monster, BattleResult& battleResult); // 턴제 전투 파트 
+	BattleResult battle(Player* player); // 전투 흐름 전체 로직
+	void startBattleSequence(Player* player); // 턴제 전투 파트 
 
 	void playerAction(Player* player, Monster* monster, BattleResult& battleResult); // 플레이어 행동 함수
 	void monsterAction(Player* player, Monster* monster); // 몬스터 행동 함수
