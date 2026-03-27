@@ -12,7 +12,7 @@ std::string GameLogger::getMessage(EventLog& log)
 		message = log.actor + "가 " + log.target + "에게 " + std::to_string(log.value) + "의 데미지를 입힘.";
 		break;
 	case EventType::DamageTaken:
-		message = log.actor + "가 " + log.target + "에게 " + std::to_string(log.value) + "의 데미지를 입힘.";
+		message = log.actor + "는 " + log.target + "에게 " + std::to_string(log.value) + "의 데미지를 받음.";
 		break;
 	case EventType::Death:
 		message = log.actor + "는 " + log.target + "과의 전투에서 사망";
@@ -21,7 +21,7 @@ std::string GameLogger::getMessage(EventLog& log)
 		message = log.actor + "는 " + log.target + "을 처치하였음.";
 		break;
 	case EventType::Move:
-		message = log.actor + "가 구역 " + log.target + "으로 이동.";
+		message = log.actor + "에서 구역 " + log.target + "으로 이동.";
 		break;
 	case EventType::LevelUp:
 		message = log.actor + " 레벨 " + std::to_string(log.value) + "으로 상승.";
@@ -40,26 +40,25 @@ std::string GameLogger::getMessage(EventLog& log)
 }
 
 
-void GameLogger::log(int turn, EventType type, const std::string& actor)
+void GameLogger::log(EventType type, const std::string& actor)
 {
-	log(turn, type, actor, "", 0);
+	log(type, actor, "", 0);
 }
 
-void GameLogger::log(int turn, EventType type, const std::string& actor, int val)
+void GameLogger::log(EventType type, const std::string& actor, int val)
 {
-	log(turn, type, actor, "", val);
+	log(type, actor, "", val);
 }
 
-void GameLogger::log(int turn, EventType type, const std::string& actor, const std::string& target)
+void GameLogger::log(EventType type, const std::string& actor, const std::string& target)
 {
-	log(turn, type, actor, target, 0);
+	log(type, actor, target, 0);
 }
 
 
-void GameLogger::log(int turn, EventType type, const std::string& actor, const std::string& target, int val)
+void GameLogger::log(EventType type, const std::string& actor, const std::string& target, int val)
 {
 	logs.push_back(EventLog{
-		turn,
 		type,
 		actor,
 		target,
