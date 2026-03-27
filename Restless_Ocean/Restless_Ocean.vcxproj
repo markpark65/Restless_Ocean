@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleSystem.h" />
+    <ClInclude Include="DataType.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="GameLogger.h" />
     <ClInclude Include="GameStatistics.h" />
