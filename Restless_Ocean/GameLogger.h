@@ -6,18 +6,9 @@
 //#include <optional>#c++17필요해서 사용불가.
 #include <stdexcept>
 #include <iostream>
+#include "EventType.h"
+#include "GameStatistics.h"
 
-enum class EventType {
-	Start,			//게임시작(플레이어생성)
-	Battle,			//전투(공격/방어)
-	Death,			//사망
-	Kill,			//처치
-	Move,			//지역 이동,actor구역에서 target구역으로 이동
-	LevelUp,		//레벨업
-	ObtainItem,		//actor가 아이템 획득
-	UseItem,		//아이템 사용
-	Return			//육지로 복귀
-};
 
 struct EventLog {
 	int act;//플레이어 입력마다 1씩 증가
@@ -32,6 +23,7 @@ class GameLogger
 private:
 	std::vector<EventLog> logs;
 	std::string getMessage(EventLog& log);
+	GameStatistics &statistic = GameStatistics::getInstance();
 	GameLogger() {}
 public:
 	GameLogger(const GameLogger&) = delete;

@@ -8,8 +8,11 @@ std::string GameLogger::getMessage(EventLog& log)
 	case EventType::Start:
 		message = log.actor + "의 탐험이 시작.";
 		break;
-	case EventType::Battle:
-		message = log.actor + "가 " + log.target +"에게 " + std::to_string(log.value) + "의 데미지를 입힘.";
+	case EventType::DamageDealt:
+		message = log.actor + "가 " + log.target + "에게 " + std::to_string(log.value) + "의 데미지를 입힘.";
+		break;
+	case EventType::DamageTaken:
+		message = log.actor + "가 " + log.target + "에게 " + std::to_string(log.value) + "의 데미지를 입힘.";
 		break;
 	case EventType::Death:
 		message = log.actor + "는 " + log.target + "과의 전투에서 사망";
@@ -62,6 +65,7 @@ void GameLogger::log(int turn, EventType type, const std::string& actor, const s
 		target,
 		val
 	});
+	statistic.LogToStatistic(type, target, val);
 }
 
 void GameLogger::printRecentLog(size_t count)
