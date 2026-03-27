@@ -47,12 +47,12 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 	bool isBossBattle = (battleCount > 7);
 	if (!isBossBattle)
 	{
-		int index = Random::getRandomValue(0, 2);
+		index = Random::getRandomValue(0, 2);
 		monsterTemplate = &normalTemplates[index];
 	}
 	else
 	{
-		int index = Random::getRandomValue(0, 2);
+		index = Random::getRandomValue(0, 2);
 		monsterTemplate = &bossTemplates[index];
 	}
 
