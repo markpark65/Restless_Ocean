@@ -13,27 +13,12 @@ ShopSystem::ShopSystem() {
 	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 200, 10));
 }
 
-void ShopSystem::openShop(Player& player) {
-	InputSystem inputSys;
-	int choice;
-
-	while (true) {
-		std::cout << "\n=== 상점 ===\n";
-		std::cout << "1. 구매\n2. 판매\n0. 나가기\n";
-		choice = inputSys.getInputInt(0, 2);
-
-		if (choice == 1) buyItem(player);
-		else if (choice == 2) sellItem(player);
-		else break;
-	}
-}
 
 void ShopSystem::buyItem(Player& player) {
-	std::cout << "\n구매 목록:\n";
+	std::cout << "\n물품 목록:\n";
 	for (size_t i = 0; i < items_.size(); i++) {
 		std::cout << i << ": ";
 		items_[i]->printInfo();
-		std::cout << " 가격: " << items_[i]->getPrice() << "G\n";
 	}
 
 	InputSystem inputSys;
