@@ -5,15 +5,17 @@
 
 class Player;
 
+class Player;
+
 class Shop {
 public:
 	Shop();
-	~Shop();
+	~Shop() = default;
+
 	void openShop(Player* player, Inventory<Item>& inventory);
 
 private:
-	std::vector<Item*> items_;
-	std::vector<int> prices_;
+	std::vector<std::unique_ptr<Item>> items_;
 
 	void buyItem(Player* player, Inventory<Item>& inventory);
 	void sellItem(Player* player, Inventory<Item>& inventory);
