@@ -8,6 +8,8 @@
 #include "BattleSystem.h"
 #include "GameLogger.h"
 #include "GameManager.h"
+#include "Item.h"
+#include"Inventory.h"
 
 void LoggingTest() {
     std::cout << "===============================" << '\n';
