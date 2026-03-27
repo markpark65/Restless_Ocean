@@ -1,10 +1,11 @@
 ﻿#pragma once
 #include <string>
+#include <memory>
 #include <iostream>
 //#include "Player.h"
 class Player;
 using namespace std;
-
+class Skill;
 class Item {
 public:
     Item(string name, int price);
@@ -100,4 +101,13 @@ public:
 
 private:
     int attackIncrease;
+};
+//스킬북
+class SkillBook : public Item {
+private:
+	std::unique_ptr<Skill> containedSkill;
+public:
+	SkillBook(string name, unique_ptr<Skill> skill);
+	void use(Player* player) override;
+	virtual ~SkillBook() override = default;
 };

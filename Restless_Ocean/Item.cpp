@@ -1,5 +1,6 @@
 ﻿#include "Item.h"
 #include "Player.h"
+#include "Skill.h"
 
 Item::Item(string name, int price) : name(name), price(price) {}
 Item::~Item() {}
@@ -108,4 +109,15 @@ void AttackBoost::use(Player* character) {
 
 Item* AttackBoost::clone() const {
 	return new AttackBoost(*this);
+}
+
+//스킬북 사용
+SkillBook::SkillBook(string name, unique_ptr<Skill> skill)
+	: Item(name, 0)
+	, containedSkill(move(skill))
+{ }
+void SkillBook::use(Player* player) {
+	if (containedSkill) {
+		player->learnSkill(move(containedSkill));
+	}
 }

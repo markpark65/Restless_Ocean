@@ -35,6 +35,9 @@ public:
 	// 입력 받은 damage만큼 health 감소
 	void takeDamage(int damage);
 
+	//속도 감소
+	void setSpeed(int newSpeed);
+
 	// 몬스터 스탯 출력
 	void showStat() const;
 

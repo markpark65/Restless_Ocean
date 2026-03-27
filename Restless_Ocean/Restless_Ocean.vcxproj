@@ -126,20 +126,26 @@
     <ClCompile Include="BattleSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="BuildingMap.cpp" />
+    <ClCompile Include="BuildingMap.h" />
+    <ClCompile Include="CollapsedShipMap.cpp" />
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="GameLogger.cpp" />
     <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="GiantSquid.cpp" />
+    <ClCompile Include="IMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="MapUtils.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="SeaCaveMap.cpp" />
     <ClCompile Include="Shop.cpp" />
-    <ClCompile Include="ShopSystem.cpp" />
     <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="Skill.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="ViperFish.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -149,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleSystem.h" />
+    <ClInclude Include="CollapsedShipMap.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="GameLogger.h" />
@@ -159,15 +166,19 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IMap.h" />
+    <ClInclude Include="MapType.h" />
+    <ClInclude Include="MapUtils.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Item.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Shop.h" />
-    <ClInclude Include="ShopSystem.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Skill.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="ViperFish.h" />
     <ClInclude Include="Player.h" />
