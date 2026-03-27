@@ -27,3 +27,8 @@ public:
 	BindSkill();
 	void execute(Player* player, Monster* target) override;
 };
+class CounterSkill : public Skill {
+public:
+	CounterSkill();
+	void execute(Player* player, Monster* target) override;
+};
