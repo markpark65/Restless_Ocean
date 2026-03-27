@@ -36,13 +36,13 @@ BattleResult BattleSystem::battle(Player* player) {
 			if (battleResult != BattleResult::Continue) break;
 
 			playerAction(player, monster, battleResult);
+			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
 		}
 		
 	}
-
 
 	delete monster;
 	return battleResult;
@@ -59,19 +59,20 @@ BattleResult BattleSystem::checkBattleResult(int playerHp, int monsterHp) {
 }
 
 void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& battleResult) {
-	cout << "==========================================================" << '\n';
+	cout << "*" << '\n';
 	cout << "플레이어의 턴입니다!" << '\n';
 
 	// 플레이어 행동 선택
 	int choice = 0;
-	cout << "1. 공격한다" << '\n';
-	cout << "2. 아이템을 사용한다" << '\n';
-	cout << "3. 도망친다" << '\n';
+	cout << "1. 일반 공격" << '\n';
+	cout << "2. 스킬 사용" << '\n';
+	cout << "3. 아이템 사용" << '\n';
+	cout << "4. 도망치기" << '\n';
 
 
 	InputSystem inputSystem;
 	cout << "행동을 선택하세요: " << '\n';
-	choice = inputSystem.getInputInt(1, 3);
+	choice = inputSystem.getInputInt(1, 4);
 
 	switch (choice) {
 	case 1:
@@ -80,31 +81,32 @@ void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& 
 		monster->takeDamage(player->getAttack());
 		break;
 	case 2:
-		// 아이템 사용
+		// 스킬 사용
+		cout << "스킬을 사용합니다." << '\n';
+		break;
+	case 3:
 		cout << "아이템을 사용합니다." << '\n';
 		// 아이템 사용 로직 추가 (예: 체력 회복, 공격력 증가 등)
 		break;
-	case 3:
+	case 4:
 		// 도망
-		cout << "무사히 도망쳤습니다." << '\n';
+		cout << "도망칩니다." << '\n';
 		battleResult = BattleResult::RunAway;
 		break;
 	default:
 		break;
 	}
 
-	cout << "==========================================================" << '\n';
 
 }
 
 void BattleSystem::monsterAction(Player* player, Monster* monster) {
 
-	cout << "==========================================================" << '\n';
+	cout << "*" << '\n';
 	cout << "몬스터의 턴입니다!" << '\n';
 	// 몬스터의 공격
 	cout << monster->getName() << "이(가) " << player->getName() << " 대원을 공격합니다!" << '\n';
 	player->takeDamage(monster->getAttack());
-	cout << "==========================================================" << '\n';
 
 }
 
@@ -136,8 +138,10 @@ void BattleSystem::startBattleSequence(Player* player) {
 
 		//아이템 획득
 	}
-	else
-	{
+	else if(battleResult == BattleResult::RunAway){
+		cout << "무사히 도망쳤습니다." << '\n';
+	}
+	else if(battleResult == BattleResult::MonsterWin){
 		cout << "대원이 쓰러졌습니다." << '\n';
 	}
 
