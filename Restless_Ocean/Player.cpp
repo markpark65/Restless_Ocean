@@ -188,7 +188,7 @@ void Player::resetSpeed() {
 //골드 획드
 void Player::addGold(int amount) {
 	gold += amount;
-	cout << amount << "G를 획득했습니다. (보유 골드: " << gold << "G)" << endl;
+	cout << amount << "G (보유 골드: " << gold << "G)" << endl;
 
 }
 //유적 발견

@@ -4,48 +4,42 @@
 #include <iostream>
 using namespace std;
 ShopSystem::ShopSystem() {
-	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 100, 50));
-	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 200, 10));
-	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 200, 10));
-	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 200, 10));
-	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 200, 10));
-	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 200, 10));
-	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 200, 10));
+	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50));
+	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 20, 10));
+	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 30, 10));
+	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 20, 10));
+	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 10));
+	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 20, 10));
+	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 20, 10));
 }
 
-void ShopSystem::openShop(Player& player) {
-	InputSystem inputSys;
-	int choice;
-
-	while (true) {
-		std::cout << "\n=== 상점 ===\n";
-		std::cout << "1. 구매\n2. 판매\n0. 나가기\n";
-		choice = inputSys.getInputInt(0, 2);
-
-		if (choice == 1) buyItem(player);
-		else if (choice == 2) sellItem(player);
-		else break;
-	}
-}
 
 void ShopSystem::buyItem(Player& player) {
-	std::cout << "\n구매 목록:\n";
+	std::cout << "\n물품 목록:\n";
 	for (size_t i = 0; i < items_.size(); i++) {
 		std::cout << i << ": ";
 		items_[i]->printInfo();
-		std::cout << " 가격: " << items_[i]->getPrice() << "G\n";
 	}
 
 	InputSystem inputSys;
-	int choice = inputSys.getInputInt(0, static_cast<int>(items_.size() - 1));
+	int index, quantity;
 
-	if (player.getGold() < items_[choice]->getPrice()) {
+	std::cout << "구입 물품 번호";
+	index = inputSys.getInputInt(0, static_cast<int>(items_.size() - 1));
+
+	std::cout << "수량 ";
+	quantity = inputSys.getInputInt(1, 99);
+
+	int totalPrice = items_[index]->getPrice() * quantity;
+	if (player.getGold() < items_[index]->getPrice()) {
 		std::cout << "골드 부족!\n";
 		return;
 	}
 
-	player.addGold(-items_[choice]->getPrice());
-	player.getInventory().addItem(items_[choice]->clone());
+	player.addGold(-totalPrice);
+	for (int i = 0; i < quantity; i++) {
+		player.getInventory().addItem(items_[index]->clone());
+	};
 
 	std::cout << "구매 완료! 남은 골드: " << player.getGold() << "\n";
 }
@@ -60,17 +54,23 @@ void ShopSystem::sellItem(Player& player) {
 	}
 
 	InputSystem inputSys;
-	int index = inputSys.getInputInt(0, player.getInventory().getSize() - 1);
+	int index, quantity;
 
+	std::cout << "판매할 아이템 번호";
+	index = inputSys.getInputInt(0, player.getInventory().getSize() - 1);
+
+	std::cout << "수량 ";
+	quantity = inputSys.getInputInt(1, player.getInventory().getItemCount(index));
 	Item* item = player.getInventory().getItem(index);
+
+	int sellPrice = static_cast<int>(item->getPrice() * 0.6) * quantity;
+	player.addGold(sellPrice);
+
 	if (!item) {
 		std::cout << "잘못된 선택입니다.\n";
 		return;
 	}
-
-	int sellPrice = static_cast<int>(item->getPrice() * 0.6);
-	player.addGold(sellPrice);
-	player.getInventory().remove(index);
+	player.getInventory().removeItem(index, quantity);
 
 	std::cout << "판매 완료! +" << sellPrice << "G\n남은 골드: " << player.getGold() << "\n";
 }

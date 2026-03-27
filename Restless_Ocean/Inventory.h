@@ -70,13 +70,18 @@ public:
         for (int i = 0; i < size_; i++) {
             std::cout << i << "번: ";
             slots_[i].item->printInfo();
-			std::cout << "  수량: " << slots_[i].quantity << "\n";
+			std::cout << "수량: " << slots_[i].quantity << "\n";
         }
     }
 
 	T* getItem(int index) const {
 		if (index < 0 || index >= size_) return nullptr;
 		return slots_[index].item;
+	}
+
+	int getItemCount(int index) const {
+		if (index < 0 || index >= size_) return 0;
+		return slots_[index].quantity;
 	}
 
     void remove(int index) {
@@ -88,6 +93,17 @@ public:
         slots_[size_ - 1].quantity = 0;
         size_--;
     }
+
+	void removeItem(int index, int quantity) {
+		if (index < 0 || index >= size_ || quantity <= 0) return;
+
+		if (slots_[index].quantity > quantity) {
+			slots_[index].quantity -= quantity;
+		}
+		else {
+			remove(index);
+		}
+	}
 
 private:
     InventorySlot<T>* slots_;
