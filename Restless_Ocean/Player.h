@@ -42,10 +42,10 @@ public:
 	~Player();
 	//상태 출력
 	void showStatus() const;
-	//경험치, 레벨업
+	//경험치, 레벨업, 스킬 배우기
 	void gainExp(int amount);
 	void levelUp();
-	//아이템
+	//아이템, 무기, 추가 공격력
 	void addAttack(int amout);
 	void addTempAttack(int amount);
 	void resetTempStats();
@@ -83,6 +83,7 @@ public:
 	int getBattery() const { return battery; }
 	int getMaxHp() const { return maxHp; }
 	int getSpeed() const { return speed; }
+	Skill* getCurrentSkill() const;
 	Inventory<Item>& getInventory() { return inventory; }
 };
 
