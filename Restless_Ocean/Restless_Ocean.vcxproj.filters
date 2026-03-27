@@ -56,6 +56,22 @@
     <ClCompile Include="Shop.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
+    <ClCompile Include="BuildingMap.cpp" />
+    <ClCompile Include="BuildingMap.h" />
+    <ClCompile Include="CollapsedShipMap.cpp" />
+    <ClCompile Include="IMap.cpp" />
+    <ClCompile Include="MapUtils.cpp" />
+    <ClCompile Include="SeaCaveMap.cpp" />
+    <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="NormalMonster.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BossMonster.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Atolla.cpp" />
+    <ClCompile Include="MimicOctopus.cpp" />
+    <ClCompile Include="Leviathan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataType.h" />
@@ -117,6 +133,22 @@
     <ClInclude Include="Stage.h">
       <Filter>Stage</Filter>
     </ClInclude>
+    <ClInclude Include="CollapsedShipMap.h" />
+    <ClInclude Include="EventType.h" />
+    <ClInclude Include="IMap.h" />
+    <ClInclude Include="MapType.h" />
+    <ClInclude Include="MapUtils.h" />
+    <ClInclude Include="SeaCaveMap.h" />
+    <ClInclude Include="Skill.h" />
+    <ClInclude Include="NormalMonster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BossMonster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Atolla.h" />
+    <ClInclude Include="MimicOctopus.h" />
+    <ClInclude Include="Leviathan.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Stage">
