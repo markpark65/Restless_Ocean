@@ -18,4 +18,5 @@ private:
 public:
 	void buyItem(Player& player);
 	void sellItem(Player& player);
+	void gacha(Player& player);
 };

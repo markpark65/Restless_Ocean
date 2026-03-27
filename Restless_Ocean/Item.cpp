@@ -2,16 +2,25 @@
 #include "Item.h"
 #include "Skill.h"
 
-Item::Item(string name, int price) : name(name), price(price) {}
+Item::Item(string name, int price,int unlocklevel)
+	: name(name), price(price),unlocklevel(unlocklevel) {}
 Item::~Item() {}
 string Item::getName() const { return name; }
 int Item::getPrice() const { return price; }
 void Item::clear() { name = ""; price = 0; }
-void Item::printInfo() const { cout << "[이름: " << name << ", 가격: " << price << "G]" << endl; }
+bool Item::isUnlocked(int playerLevel) const {
+	return playerLevel >= unlocklevel;
+}
+
+void Item::printInfo() const {
+	cout << "[이름: " << name
+		<< ", 가격: " << price
+		<< "G, 필요 레벨: " << unlocklevel << "]";
+}
 
 //체력 회복
-HealthPotion::HealthPotion(string name, int price, int heal)
-    : Item(name, price), healthRestore(heal) {
+HealthPotion::HealthPotion(string name, int price, int heal,int unlocklevel)
+	: Item(name, price, unlocklevel), healthRestore(heal) {
 }
 void HealthPotion::use(Player* character) {
     if (!character) return;
@@ -24,8 +33,8 @@ Item* HealthPotion::clone() const {
 
 
 //체력 최대량 Up
-MaxHpUp::MaxHpUp(string name, int price, int heal)
-	: Item(name, price), maxHpIncrease(heal) {
+MaxHpUp::MaxHpUp(string name, int price, int heal,int unlocklevel)
+	: Item(name, price,unlocklevel), maxHpIncrease(heal) {
 }
 void MaxHpUp::use(Player* character) {
 	if (!character) return;
@@ -39,8 +48,8 @@ Item* MaxHpUp::clone() const {
 
 
 //산소 회복
-OxygenPotion::OxygenPotion(string name, int price, int oxygen) 
-:Item(name, price), oxygenIncrease(oxygen) {
+OxygenPotion::OxygenPotion(string name, int price, int oxygen,int unlocklevel) 
+:Item(name, price,unlocklevel), oxygenIncrease(oxygen) {
 }
 void OxygenPotion::use(Player* character) {
     if (!character) return;
@@ -53,8 +62,8 @@ Item* OxygenPotion::clone() const {
 
 
 //산소 최대량 Up
-MaxOxygenUp::MaxOxygenUp(string name, int price, int oxygen)
-: Item(name, price), maxIncrease(oxygen) {
+MaxOxygenUp::MaxOxygenUp(string name, int price, int oxygen,int unlocklevel)
+: Item(name, price,unlocklevel), maxIncrease(oxygen) {
 }
 void MaxOxygenUp::use(Player* character){
 	if (!character) return;
@@ -68,8 +77,8 @@ Item* MaxOxygenUp::clone() const {
 
 
 //압력 해소
-PressurePotion::PressurePotion(string name, int price, int pressure) 
-:Item(name, price), pressurePotion(pressure) {
+PressurePotion::PressurePotion(string name, int price, int pressure,int unlocklevel) 
+:Item(name, price,unlocklevel), pressurePotion(pressure) {
 } 
 void PressurePotion::use(Player * character) {
     if (!character) return;
@@ -83,8 +92,8 @@ Item* PressurePotion::clone() const {
 
 
 //압력의 최대량 Up
-MaxPressureUp::MaxPressureUp(string name, int price, int pressure)
-: Item(name, price), maxIncrease(pressure) {
+MaxPressureUp::MaxPressureUp(string name, int price, int pressure,int unlocklevel)
+: Item(name, price,unlocklevel), maxIncrease(pressure) {
 }
 void MaxPressureUp::use(Player* character) {
 	if (!character) return;
@@ -98,8 +107,8 @@ Item* MaxPressureUp::clone() const {
 
 
 //공격력 Up
-AttackBoost::AttackBoost(string name, int price, int attack)
-	: Item(name, price), attackIncrease(attack) {
+AttackBoost::AttackBoost(string name, int price, int attack,int unlocklevel)
+	: Item(name, price,unlocklevel), attackIncrease(attack) {
 }
 void AttackBoost::use(Player* character) {
 	if (!character) return;
@@ -112,8 +121,8 @@ Item* AttackBoost::clone() const {
 }
 
 //스킬북 사용
-SkillBook::SkillBook(string name, unique_ptr<Skill> skill)
-	: Item(name, 0)
+SkillBook::SkillBook(string name, unique_ptr<Skill> skill, int unlockLevel)
+	: Item(name, 0, unlockLevel)
 	, containedSkill(move(skill))
 { }
 void SkillBook::use(Player* player) {
