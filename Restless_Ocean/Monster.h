@@ -56,6 +56,6 @@ public:
 	std::string typeToString(AttributeType type) const;
 	std::string mapToString(Map map) const;
 
+	virtual const std::string& GetRewardArtifact() const = 0;
 	virtual std::string getRankName() const = 0;
 };
-
