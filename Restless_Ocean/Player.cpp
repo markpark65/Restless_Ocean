@@ -1,6 +1,8 @@
 ﻿#include "Player.h"
 #include "Weapon.h"
 #include "Monster.h"
+#include "Skill.h"
+#include "InputSystem.h"
 
 using namespace std;
 
@@ -21,7 +23,8 @@ Player::Player(string n)
 	, maxPressure(100)
 	, battery(100)
 	, tempAttack(0)
-	, artifactCount(0) {
+	, artifactCount(0)
+	, inventory(10) {
 	cout << "심해 탐사대원: " << name << " 이(가) 등록되었습니다!" << endl;
 }
 Player::~Player() {}
@@ -44,6 +47,36 @@ void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
 	if (!newWeapon) return;
 	equippedWeapon = std::move(newWeapon);
 	cout << name << " 대원이 " << equippedWeapon->getName() << "무기를 장착했습니다";
+}
+//스킬 배우기
+void Player::learnSkill(unique_ptr<Skill> newSkill) {
+	if (!newSkill) return;
+	if (currentSkill) {
+		cout << "이미 스킬[" << currentSkill->getName() << "]을 보유 중입니다." << endl;
+		cout << "새 스킬 [" << newSkill->getName() << "]로 교체하시겠습니까?" << endl;
+		cout << "1. 교체한다  2. 버린다" << endl;
+
+		if (InputSystem::getInputInt(1, 2) == 1) {
+			currentSkill = move(newSkill);
+			cout << "새로운 스킬을 배웠습니다!" << endl;
+		}
+		else {
+			cout << "기존 스킬을 유지합니다." << endl;
+		}
+	}
+	else {
+		currentSkill = move(newSkill);
+		cout << "\n스킬 [" << currentSkill->getName() << "]을 습득했습니다!\n";
+	}
+}
+// 스킬 사용
+void Player::useSkill(Monster* target) {
+	if (currentSkill) {
+		currentSkill->execute(this, target);
+	}
+	else {
+		std::cout << "배운 스킬이 없어 사용할 수 없습니다.\n";
+	}
 }
 //공격 로직 구현
 int Player::attack(const Monster* target) {
@@ -155,7 +188,7 @@ void Player::resetSpeed() {
 //골드 획드
 void Player::addGold(int amount) {
 	gold += amount;
-	cout << amount << "G를 획득했습니다. (보유 골드: " << gold << "G)" << endl;
+	cout << amount << "G (보유 골드: " << gold << "G)" << endl;
 
 }
 //유적 발견

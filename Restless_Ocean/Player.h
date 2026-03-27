@@ -5,8 +5,12 @@
 #include <vector>
 #include <memory>
 
+#include "Inventory.h"
+
 class Weapon;
 class Monster;
+class Skill;
+class Item;
 
 class Player
 {
@@ -30,6 +34,8 @@ private:
 	int artifactCount;
 	std::vector<std::string> artifacts;
 	std::unique_ptr<Weapon> equippedWeapon;
+	std::unique_ptr<Skill> currentSkill;
+	Inventory<Item> inventory;
 
 public:
 	Player(std::string n);
@@ -45,8 +51,10 @@ public:
 	void resetTempStats();
 	void setWeapon(std::unique_ptr<Weapon> newWeapon);
 	int attack(const Monster* target);
-
+	void learnSkill(std::unique_ptr<Skill> newSkill);
+	
 	//전투 결과
+	void useSkill(Monster* target);
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
 	void increaseMaxHp(int amount);
@@ -75,5 +83,6 @@ public:
 	int getBattery() const { return battery; }
 	int getMaxHp() const { return maxHp; }
 	int getSpeed() const { return speed; }
+	Inventory<Item>& getInventory() { return inventory; }
 };
 
