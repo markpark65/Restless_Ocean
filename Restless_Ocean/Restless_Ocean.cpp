@@ -43,7 +43,7 @@ int main()
 	GameManager::getInstance().run();
 
 	//BattleSystem 테스트
-	BattleSystem battleSystem;
+	/*BattleSystem battleSystem;
 	Player* player = new Player("테스터");
-	battleSystem.startBattleSequence(player);
+	battleSystem.startBattleSequence(player);*/
 }
