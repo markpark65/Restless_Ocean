@@ -102,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,9 +124,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Atolla.cpp" />
     <ClCompile Include="BattleSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="BossMonster.cpp" />
     <ClCompile Include="BuildingMap.cpp" />
     <ClCompile Include="BuildingMap.h" />
     <ClCompile Include="CollapsedShipMap.cpp" />
@@ -135,11 +138,13 @@
     <ClCompile Include="GiantSquid.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="Leviathan.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
+    <ClCompile Include="NormalMonster.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SeaCaveMap.cpp" />
     <ClCompile Include="Shop.cpp" />
@@ -154,16 +159,20 @@
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Atolla.h" />
     <ClInclude Include="BattleSystem.h" />
+    <ClInclude Include="BossMonster.h" />
     <ClInclude Include="CollapsedShipMap.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="EventType.h" />
     <ClInclude Include="GameLogger.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="GiantSquid.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="Leviathan.h" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IMap.h" />
@@ -172,6 +181,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="MonsterFactory.h" />
+    <ClInclude Include="NormalMonster.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Shop.h" />

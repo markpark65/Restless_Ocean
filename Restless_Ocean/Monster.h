@@ -6,6 +6,13 @@
 
 class Item;
 
+enum class Map
+{
+	BuildingMap,
+	SeaCaveMap,
+	CollapsedShipMap,
+};
+
 struct MonsterStat
 {
 	std::string		name;
@@ -13,6 +20,8 @@ struct MonsterStat
 	int				attack;
 	int				speed;
 	AttributeType	type;
+	std::string		description;
+	Map				map;
 };
 
 class Monster
@@ -31,6 +40,8 @@ public:
 	int getSpeed()	const;
 	AttributeType getMonsterType() const;
 	bool isAlive() const;
+	const std::string& getDescription() const;
+	Map getMap() const;
 
 	// 입력 받은 damage만큼 health 감소
 	void takeDamage(int damage);
@@ -43,5 +54,8 @@ public:
 
 	// 몬스터 타입 string으로 변경
 	std::string typeToString(AttributeType type) const;
+	std::string mapToString(Map map) const;
+
+	virtual std::string getRankName() const = 0;
 };
 

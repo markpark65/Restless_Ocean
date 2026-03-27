@@ -7,6 +7,7 @@ Skill::~Skill() {}
 
 TripleDamageSkill::TripleDamageSkill() : Skill("파워 스트라이크") {}
 BindSkill::BindSkill() : Skill("그물 속박") {}
+CounterSkill::CounterSkill() :Skill("크로스 카운터") {}
 
 void TripleDamageSkill::execute(Player* player, Monster* target) {
 	if (!player || !target) return;
@@ -28,4 +29,23 @@ void BindSkill::execute(Player* player, Monster* target) {
 	std::cout << "[스킬] " << name << " 발동!!" << std::endl;
 	std::cout << target->getName() << "의 움직임이 둔해졌습니다! (속도: " << currentMonsterSpeed << " -> " << reducedSpeed << ")" << std::endl;
 
+}
+void CounterSkill::execute(Player* player, Monster* target) {
+	if (!player || !target) return;
+
+	if (player->getSpeed() > target->getSpeed()) {
+		int counterDamage = target->getAttack() + player->getAttack();
+
+		std::cout << "[스킬] " << name << " 발동!" << std::endl;
+		std::cout << "적의 공격을 읽고 카운터를 날립니다!" << std::endl;
+		std::cout << "데미지 계산: [적 ATK " << target->getAttack()
+			<< "] + [내 ATK " << player->getAttack() << "]" << std::endl;
+
+		target->takeDamage(counterDamage);
+	}
+	else {
+		std::cout << "적의 속도가 너무 빠릅니다! 카운터에 실패했습니다..... 역습이 허용됐습니다" << std::endl;
+		//실패 시 체력을 깍음
+		player->takeDamage(20);
+	}
 }

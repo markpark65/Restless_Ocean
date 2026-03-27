@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "Monster.h"
+#include "NormalMonster.h"
 
-class GiantSquid : public Monster
+class GiantSquid : public NormalMonster
 {
 public:
 };
