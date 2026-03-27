@@ -1,19 +1,41 @@
 ﻿#include "BattleSystem.h"
 #include "Player.h"
 #include "MonsterFactory.h"
+#include "GameLogger.h"
+#include "Random.h"
 using namespace std;
+
+GameLogger& logger = GameLogger::getInstance(); // 모든 출력 나중에 로거로 변경 예정
+Random random;
+
+
 
 void BattleSystem::battle(Player* player) {
 
 	MonsterFactory monsterFactory;
 	Monster* monster = monsterFactory.GenerateMonster(player->getLevel());
-	
-	while (player->getHp() > 0 && monster->getHealth() > 0) {
 
-		playerAction(player, monster);
+	// 테스트용 Attack 수정
+	//player->setAttack(10);
+
+
+	// 전투 시작
+	BattleResult battleResult = BattleResult::Continue;
+	while (battleResult == BattleResult::Continue) {
+
+		playerAction(player, monster, battleResult);
+
+		if (battleResult != BattleResult::Continue) break;
+
+		battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+		if (battleResult != BattleResult::Continue) break;
+
 		monsterAction(player, monster);
-
+		battleResult = checkBattleResult(player->getHp(), monster->getHealth());
 	}
+
+	// 전투 끝
+	player->useOxygen(10);
 
 	// 플레이어가 이겼을 때 보상 획득
 
@@ -29,24 +51,39 @@ void BattleSystem::battle(Player* player) {
 		int gold = dis(gen);
 		player->addGold(gold);
 
+
 		//아이템 획득
 	}
 
+	delete monster;
+
 }
 
+BattleResult BattleSystem::checkBattleResult(int playerHp, int monsterHp) {
+	if (monsterHp <= 0) {
+		return BattleResult::PlayerWin;
+	}
+	else if(playerHp <= 0) {
+		return BattleResult::MonsterWin;
+	}
+	return BattleResult::Continue;
+}
 
-void BattleSystem::playerAction(Player* player, Monster* monster) {
+void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& battleResult) {
 	cout << "=============================" << endl;
 	cout << "플레이어의 턴입니다!" << endl;
 
 	// 플레이어 행동 선택
 	int choice;
-	cout << "1. 공격한다" << endl;
-	cout << "2. 아이템을 사용한다" << endl;
-	cout << "3. 도망친다" << endl;
+	cout << "1. 공격한다" << '\n';
+	cout << "2. 아이템을 사용한다" << '\n';
+	cout << "3. 도망친다" << '\n';
 
-	cout << "행동을 선택하세요: " << endl;
+	cout << "행동을 선택하세요: " << '\n';
 	cin >> choice;
+
+
+
 
 	switch (choice) {
 	case 1:
@@ -56,10 +93,13 @@ void BattleSystem::playerAction(Player* player, Monster* monster) {
 		break;
 	case 2:
 		// 아이템 사용
+		cout << "아이템을 사용합니다." << '\n';
+		// 아이템 사용 로직 추가 (예: 체력 회복, 공격력 증가 등)
 		break;
 	case 3:
 		// 도망
-		cout << "무사히 도망쳤습니다." << endl;
+		cout << "무사히 도망쳤습니다." << '\n';
+		battleResult = BattleResult::RunAway;
 		break;
 	default:
 		break;
