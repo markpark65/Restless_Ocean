@@ -72,6 +72,7 @@
     <ClCompile Include="Atolla.cpp" />
     <ClCompile Include="MimicOctopus.cpp" />
     <ClCompile Include="Leviathan.cpp" />
+    <ClCompile Include="WeaponSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataType.h" />
@@ -133,6 +134,23 @@
     <ClInclude Include="Stage.h">
       <Filter>Stage</Filter>
     </ClInclude>
+    <ClInclude Include="CollapsedShipMap.h" />
+    <ClInclude Include="EventType.h" />
+    <ClInclude Include="IMap.h" />
+    <ClInclude Include="MapType.h" />
+    <ClInclude Include="MapUtils.h" />
+    <ClInclude Include="SeaCaveMap.h" />
+    <ClInclude Include="Skill.h" />
+    <ClInclude Include="NormalMonster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BossMonster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Atolla.h" />
+    <ClInclude Include="MimicOctopus.h" />
+    <ClInclude Include="Leviathan.h" />
+    <ClInclude Include="WeaponSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Stage">

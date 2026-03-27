@@ -3,6 +3,13 @@
 #include "DataType.h"
 #include "Random.h"
 
+#include "FootballFish.h"
+#include "ViperFish.h"
+#include "GiantSquid.h"
+#include "Atolla.h"
+#include "MimicOctopus.h"
+#include "Leviathan.h"
+
 struct MonsterTemplate
 {
 	std::string name;
@@ -35,6 +42,7 @@ static const MonsterTemplate bossTemplates[] =
 Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 {
 	const MonsterTemplate* monsterTemplate = nullptr;
+	int index = 0;
 
 	bool isBossBattle = (battleCount > 7);
 	if (!isBossBattle)
@@ -58,7 +66,31 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 	stat.map = monsterTemplate->map;
 
 	if (!isBossBattle)
-		return new NormalMonster(stat);
+	{
+		switch (index)
+		{
+		case 0:
+			return new FootballFish(stat);
+		case 1:
+			return new ViperFish(stat);
+		case 2:
+			return new GiantSquid(stat);
+		default:
+			return nullptr;
+		}
+	}
 	else
-		return new BossMonster(stat);
+	{
+		switch (index)
+		{
+		case 0:
+			return new Atolla(stat);
+		case 1:
+			return new MimicOctopus(stat);
+		case 2:
+			return new Leviathan(stat);
+		default:
+			return nullptr;
+		}
+	}
 }

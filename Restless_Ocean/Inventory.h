@@ -80,6 +80,7 @@ public:
 
         if (slots_[index].quantity <= 0)
             remove(index);
+
     }
 
 	//목록 출력

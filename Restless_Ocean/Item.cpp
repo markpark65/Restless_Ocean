@@ -117,7 +117,7 @@ void AttackBoost::use(Player* character) {
 }
 
 Item* AttackBoost::clone() const {
-	return new AttackBoost(*this);
+ 	return new AttackBoost(*this);
 }
 
 //스킬북 사용

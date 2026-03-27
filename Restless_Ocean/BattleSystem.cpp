@@ -17,35 +17,21 @@ void BattleSystem::startBattleSequence(Player* player)
 
 
 	
-	// 일반 전투 -> Todo: loop 오류 해결
+	// 일반 전투
 	for (int i = 0; i < 7; ++i)
 	{
+		cout << "================================" << '\n';
 		cout << i + 1 << "번째 전투" << '\n';
 		BattleResult battleResult;
 		battleResult = battle(player);
 
-		// 전투 끝 로직 -> Todo: 클래스로 분리
-		cout << "==========================================================" << '\n';
-		cout << "전투가 끝났습니다." << '\n';
-		player->useOxygen(10); // 전투 후 산소 10 소모
-
-		if (battleResult == BattleResult::PlayerWin)
-		{ //승리했을 때
-
-			prize(player);
-		}
-		else if (battleResult == BattleResult::RunAway)
-		{ // 도망쳤을 때
-			cout << "무사히 도망쳤습니다." << '\n';
-			break;
-		}
-		else if (battleResult == BattleResult::MonsterWin)
-		{ // 졌을 때
-			cout << "대원이 쓰러졌습니다." << '\n';
+		bool canContinue = processBattleResult(player, battleResult);
+		if (!canContinue)
+		{
 			break;
 		}
 	}
-	cout << "==========================================================" << '\n';
+	cout << "================================" << '\n';
 
 	// 보스전
 
@@ -105,29 +91,29 @@ BattleResult BattleSystem::battle(Player* player)
 }
 
 
-//void processBattleResult(Player* player, BattleResult& battleResult)
-//{
-	//// 전투 끝 로직 
-	//cout << "==========================================================" << '\n';
-	//cout << "전투가 끝났습니다." << '\n';
-	//player->useOxygen(10); // 전투 후 산소 10 소모
+bool BattleSystem::processBattleResult(Player* player, BattleResult& battleResult)
+{
+	// 전투 끝 로직 
+	cout << "==========================================================" << '\n';
+	cout << "전투가 끝났습니다." << '\n';
+	player->useOxygen(10); // 전투 후 산소 10 소모
 
-	//if (battleResult == BattleResult::PlayerWin)
-	//{ //승리했을 때
-
-	//	prize(player);
-	//}
-	//else if (battleResult == BattleResult::RunAway)
-	//{ // 도망쳤을 때
-	//	cout << "무사히 도망쳤습니다." << '\n';
-	//	break;
-	//}
-	//else if (battleResult == BattleResult::MonsterWin)
-	//{ // 졌을 때
-	//	cout << "대원이 쓰러졌습니다." << '\n';
-	//	break;
-	//}
-//}
+	if (battleResult == BattleResult::PlayerWin)
+	{ //승리했을 때
+		prize(player);
+		return true;
+	}
+	else if (battleResult == BattleResult::RunAway)
+	{ // 도망쳤을 때
+		cout << "무사히 도망쳤습니다." << '\n';
+		return false;
+	}
+	else if (battleResult == BattleResult::MonsterWin)
+	{ // 졌을 때
+		cout << "대원이 쓰러졌습니다." << '\n';
+		return false;
+	}
+}
 
 BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)
 {
@@ -149,6 +135,44 @@ void BattleSystem::playerAction(int& turn, Player* player, Monster* monster, Bat
 	player->showStatus(); // 플레이어 상태 출력
 	cout << '\n';
 
+	bool actionCompleted = false;
+
+	while (!actionCompleted)
+	{
+		// 플레이어 행동 선택
+		int choice = selectAction();
+		switch (choice)
+		{
+		case 1:
+			playerAttack(turn, player, monster);
+			actionCompleted = true;
+			break;
+		case 2:
+			playerUseSkill(player, monster);
+			actionCompleted = true;
+			break;
+		case 3:
+			if (playerUseItem(player)) {
+				actionCompleted = true;
+			}
+			
+			break;
+		case 4:
+			// 도망
+			playerRunAway(battleResult);
+			actionCompleted = true;
+			break;
+		default:
+			break;
+		}
+		cout << '\n';
+	}
+
+
+}
+
+int BattleSystem::selectAction()// 행동 선택 함수
+{
 	// 플레이어 행동 선택
 	int choice = 0;
 	cout << "1. 일반 공격" << '\n';
@@ -160,36 +184,14 @@ void BattleSystem::playerAction(int& turn, Player* player, Monster* monster, Bat
 	cout << "행동을 선택하세요: ";
 	choice = inputSystem.getInputInt(1, 4);
 	cout << '\n';
-
-	switch (choice)
-	{
-	case 1:
-		playerAttack(turn, player, monster);
-		break;
-	case 2:
-		playerUseSkill(player, monster);
-		break;
-	case 3:
-		playerUseItem(player);
-		break;
-	case 4:
-		// 도망
-		playerRunAway(battleResult);
-		break;
-	default:
-		break;
-	}
-	cout << '\n';
-
+	return choice;
 }
 
 void BattleSystem::playerAttack(int& turn, Player* player, Monster* monster) // 플레이어 일반 공격 함수
 {
 	cout << "* " << player->getAttack() << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
 
-
 	monster->takeDamage(player->getAttack());
-
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
@@ -200,10 +202,19 @@ void BattleSystem::playerUseSkill(Player* player, Monster* monster) // 플레이
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
-void BattleSystem::playerUseItem(Player* player) // 플레이어 아이템 사용 함수
+bool BattleSystem::playerUseItem(Player* player) // 플레이어 아이템 사용 함수
 {
 	cout << "* 아이템을 사용합니다." << '\n';
-	this_thread::sleep_for(chrono::seconds(2));
+	bool use = player->useItem();
+	if (use)
+	{
+		this_thread::sleep_for(chrono::seconds(2));
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void BattleSystem::playerRunAway(BattleResult& battleResult)
@@ -221,6 +232,30 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 	//몬스터의 공격
 	cout << monster->getName() << "이(가) " << player->getName() << " 대원을 공격합니다!" << '\n';
 	player->takeDamage(monster->getAttack());
+
+	
+	//int randValue = Random::getRandomValue(0, 99);
+
+	//if (randValue < 50)
+	//{
+	//	cout << monster->getName() << "의 패시브가 발동됩니다!" << '\n';
+	//	monster->TriggerPassive();
+	//}
+	//
+	//// 일반 공격 or 특수 공격
+	//int attackType = Random::getRandomValue(0, 9);
+	//
+	//if (attackType < 7)
+	//{
+	//	cout << monster->getName() << "이(가) 일반 공격을 사용합니다!" << '\n';
+	//	monster->UseBasicAttack(player);
+	//}
+	//else
+	//{
+	//	cout << monster->getName() << "이(가) 특수 공격을 사용합니다!" << '\n';
+	//	monster->UseSpecialAttack(player);
+	//}
+	
 
 	cout << '\n';
 	this_thread::sleep_for(chrono::seconds(2));
@@ -243,6 +278,7 @@ void BattleSystem::prize(Player* player)
 	if (itemChance <= 30)
 	{
 		cout << "아이템을 획득했습니다!" << '\n';
+
 		//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
 	}
 	this_thread::sleep_for(chrono::seconds(1));
