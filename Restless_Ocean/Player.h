@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 
 class Player
@@ -19,9 +20,12 @@ private:
 	int maxExp;
 	int gold;
 	int oxygen;
+	int maxOxygen;
 	int pressure;
+	int maxPressure;
 	int battery;
 	int artifactCount;
+	std::vector<std::string> artifacts;
 
 public:
 	Player(std::string n);
@@ -35,16 +39,19 @@ public:
 	void addAttack(int amout);
 	void addTempAttack(int amount);
 	void resetTempStats();
-
 	//전투 결과
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
+	void increaseMaxHp(int amount);
 	void recoverOxygen(int amount);
 	void useOxygen(int amount);
-	void addArtifact();
+	void IncreaseOxygen(int amount);
+	void showArtifacts() const;
+	void addArtifact(std::string name);
 	void spendBattery(int amount);
 	void addGold(int amount);
 	void recoverPressure(int amount);
+	void IncreasePressure(int amount);
 	void takePressure(int amount);
 	void debuffSpeed(int reduction);
 	void resetSpeed();
@@ -55,7 +62,7 @@ public:
 	int getHp() const { return hp; }
 	int getAttack() const { return attack+tempAttack; }
 	int getGold() const { return gold; }
-	int getArtifactCount() const { return artifactCount; }
+	int getArtifactCount() const { return artifacts.size(); }
 	int getOxygen() const { return oxygen; }
 	int getPressure() const { return pressure; }
 	int getBattery() const { return battery; }
