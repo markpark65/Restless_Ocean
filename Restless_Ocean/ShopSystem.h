@@ -12,11 +12,12 @@ public:
 	ShopSystem();
 	~ShopSystem() = default;
 
-	void openShop(Player& player, Inventory<Item>& inventory);
+	void openShop(Player& player);
 
 private:
 	std::vector<std::unique_ptr<Item>> items_;
 
-	void buyItem(Player& player, Inventory<Item>& inventory);
-	void sellItem(Player& player, Inventory<Item>& inventory);
+public:
+	void buyItem(Player& player);
+	void sellItem(Player& player);
 };

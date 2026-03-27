@@ -5,9 +5,12 @@
 #include <vector>
 #include <memory>
 
+#include "Inventory.h"
+
 class Weapon;
 class Monster;
 class Skill;
+class Item;
 
 class Player
 {
@@ -32,6 +35,7 @@ private:
 	std::vector<std::string> artifacts;
 	std::unique_ptr<Weapon> equippedWeapon;
 	std::unique_ptr<Skill> currentSkill;
+	Inventory<Item> inventory;
 
 public:
 	Player(std::string n);
@@ -79,5 +83,6 @@ public:
 	int getBattery() const { return battery; }
 	int getMaxHp() const { return maxHp; }
 	int getSpeed() const { return speed; }
+	Inventory<Item>& getInventory() { return inventory; }
 };
 
