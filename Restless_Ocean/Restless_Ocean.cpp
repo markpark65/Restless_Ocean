@@ -43,7 +43,7 @@ int main()
     //}
 
 
-	//GameManager::getInstance().run();
+	GameManager::getInstance().run();
 
 	// BattleSystem 테스트
 	BattleSystem battleSystem;
