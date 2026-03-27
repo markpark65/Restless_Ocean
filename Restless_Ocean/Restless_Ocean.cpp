@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "BattleSystem.h"
 #include "GameLogger.h"
+#include "GameManager.h"
+
 void LoggingTest() {
     std::cout << "===============================" << '\n';
     std::cout << "로깅 및 출력 테스트." << '\n';
@@ -31,20 +33,21 @@ void LoggingTest() {
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    //std::cout << "Hello World!\n";
 
-    MonsterFactory m;
-    for (int i = 0; i < 10; ++i)
-    {
-        Monster* monster = m.GenerateMonster(1);
-        monster->showStat();
-    }
+    //MonsterFactory m;
+    //for (int i = 0; i < 10; ++i)
+    //{
+    //    Monster* monster = m.GenerateMonster(1);
+    //    monster->showStat();
+    //}
 
     // Battle System 테스트용
     //BattleSystem bs;
     //Player* player = new Player("나영");
     //gm.startBattleSequence(player);
 
+	GameManager::getInstance().run();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

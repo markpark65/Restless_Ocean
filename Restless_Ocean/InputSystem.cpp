@@ -22,7 +22,7 @@ int InputSystem::getInputInt(int min, int max)
 
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-		if (input < min && input > max)
+		if (input < min || input > max)
 		{
 			std::cout << min << "과 " << max << " 사이의 값만 입력해주세요." << '\n';
 			continue;
