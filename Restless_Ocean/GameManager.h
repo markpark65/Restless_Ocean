@@ -4,16 +4,15 @@
 
 #include "Singleton.h"
 #include "Player.h"
-
-class Stage;
+#include "Stage.h"
 
 class GameManager : public Singleton<GameManager>
 {
 friend class Singleton<GameManager>;
 
 private:
-	Player			player;
-	Stage*			currentStage;
+	Player					player;
+	std::unique_ptr<Stage>	currentStage;
 
 public:
 	Player& getPlayer();
@@ -22,7 +21,7 @@ public:
 
 	std::string createPlayer();
 
-	void changeStage(Stage* newStage);
+	void changeStage(std::unique_ptr<Stage> newStage);
 	void run();
 };
 
