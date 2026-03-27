@@ -71,7 +71,7 @@ int main()
 
 	//BattleSystem 테스트
 	//BattleSystem battleSystem;
-	Player* player = new Player("테스터");
+	//Player* player = new Player("테스터");
 	//battleSystem.startBattleSequence(player);
 
 	// 1. 테스트용 플레이어 생성

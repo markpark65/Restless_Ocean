@@ -77,6 +77,7 @@ public:
 
         if (slots_[index].quantity <= 0)
             remove(index);
+
     }
 
     void printAll() const {
