@@ -8,6 +8,6 @@ public:
 	~WeaponSelector();
 	void selectWeapon() const;
 private:
-	//Weapon weapon;
+	Weapon* weapon;
 };
 
