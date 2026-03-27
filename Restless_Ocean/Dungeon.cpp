@@ -9,7 +9,7 @@
 
 void Dungeon::start()
 {
-	std::cout << "\n던전에 입장했습니다.\n" << '\n';
+	std::cout << "\n던전에 입장했습니다." << '\n';
 }
 
 void Dungeon::update()
@@ -20,7 +20,7 @@ void Dungeon::update()
 
 
 		// 전투 종료 후
-		std::cout << "\n무엇을 하시겠습니까?\n";
+		std::cout << "무엇을 하시겠습니까?\n";
 		std::cout << "1. 로비 이동\n";
 		std::cout << "2. 상점 이용\n";
 		std::cout << "3. 게임 종료\n";
@@ -30,7 +30,7 @@ void Dungeon::update()
 		switch (input)
 		{
 		case 1:
-			GameManager::getInstance().changeStage(new Lobby);
+			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 			break;
 		case 2:
@@ -52,6 +52,6 @@ void Dungeon::update()
 
 void Dungeon::exit()
 {
-	std::cout << "\n전투가 종료되었습니다" << '\n';
-	std::cout << "던전을 나갑니다\n" << '\n';
+	std::cout << "전투가 종료되었습니다" << '\n';
+	std::cout << "던전을 나갑니다" << '\n';
 }

@@ -31,6 +31,11 @@ int Monster::getSpeed() const
     return monsterStat.speed;
 }
 
+AttributeType Monster::getMonsterType() const
+{
+	return monsterStat.type;
+}
+
 bool Monster::isAlive() const
 {
     return monsterStat.health > 0;
@@ -51,6 +56,21 @@ void Monster::takeDamage(int damage)
     }
 }
 
+std::string Monster::typeToString(AttributeType type) const
+{
+	switch (type)
+	{
+	case AttributeType::Luminous:
+		return "발광형";
+	case AttributeType::Hidden:
+		return "은닉형";
+	case AttributeType::Giant:
+		return "거대형";
+	default:
+		return "알 수 없음";
+	}
+}
+
 void Monster::showStat() const
 {
     cout << "===============================" << '\n';
@@ -58,5 +78,6 @@ void Monster::showStat() const
     cout << "HP      :" << getHealth() << '\n';
     cout << "ATK     :" << getAttack() << '\n';
     cout << "SPEED   :" << getSpeed() << '\n';
+	cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
     cout << "===============================" << '\n';
 }

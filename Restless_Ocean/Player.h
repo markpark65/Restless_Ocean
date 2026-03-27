@@ -33,7 +33,7 @@ private:
 
 public:
 	Player(std::string n);
-
+	~Player();
 	//상태 출력
 	void showStatus() const;
 	//경험치, 레벨업
@@ -69,7 +69,7 @@ public:
 	int getHp() const { return hp; }
 	int getAttack() const { return baseAttack+tempAttack; }
 	int getGold() const { return gold; }
-	int getArtifactCount() const { return artifacts.size(); }
+	int getArtifactCount() const { return static_cast<int>(artifacts.size()); }
 	int getOxygen() const { return oxygen; }
 	int getPressure() const { return pressure; }
 	int getBattery() const { return battery; }
