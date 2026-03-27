@@ -85,14 +85,3 @@ void AttackBoost::use(Player* character) {
 	character->addTempAttack(attackIncrease);
 }
 
-
-//클리어 아이템
-Artifact ::Artifact(string name)
-	: Item(name, 0) {
-}
-
-void Artifact::use(Player* character){
-		cout << "유적 아이템은 사용할 수 없습니다.\n" ;
-	}
-
-

@@ -91,11 +91,3 @@ public:
 private:
     int attackIncrease;
 };
-
-//유적 아이템
-class Artifact : public Item {
-public:
-	Artifact(string name);
-	void use(Player* character) override;
-};
-
