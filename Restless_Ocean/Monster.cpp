@@ -30,6 +30,14 @@ int Monster::getSpeed() const
 {
     return monsterStat.speed;
 }
+void Monster::setSpeed(int newSpeed) {
+	if (newSpeed < 10) {
+		monsterStat.speed = 10;
+	}
+	else {
+		monsterStat.speed = newSpeed;
+	}
+}
 
 AttributeType Monster::getMonsterType() const
 {
