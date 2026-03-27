@@ -5,6 +5,7 @@
 
 class Dungeon : public Stage
 {
+public:
 	void start()	override;
 	void update()	override;
 	void exit()		override;

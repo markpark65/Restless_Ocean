@@ -20,14 +20,14 @@ std::string GameManager::createPlayer()
 	return name;
 }
 
-void GameManager::changeStage(Stage* newStage)
+void GameManager::changeStage(std::unique_ptr<Stage> newStage)
 {
 	if (currentStage != nullptr)
 	{
 		currentStage->exit();
 	}
 
-	currentStage = newStage;
+	currentStage = std::move(newStage);
 
 	if (currentStage != nullptr)
 	{
@@ -37,7 +37,7 @@ void GameManager::changeStage(Stage* newStage)
 
 void GameManager::run()
 {
-	currentStage = new Lobby;
+	GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 
 	while (currentStage)
 	{

@@ -42,12 +42,13 @@ int main()
     //    monster->showStat();
     //}
 
-    // Battle System 테스트용
-    //BattleSystem bs;
-    //Player* player = new Player("나영");
-    //gm.startBattleSequence(player);
 
-	GameManager::getInstance().run();
+	//GameManager::getInstance().run();
+
+	// BattleSystem 테스트
+	/*BattleSystem battleSystem;
+	Player* player = new Player("테스터");
+	battleSystem.startBattleSequence(player);*/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

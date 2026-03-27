@@ -131,6 +131,7 @@
     <ClCompile Include="CollapsedShipMap.cpp" />
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="GameLogger.cpp" />
+    <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="GiantSquid.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
@@ -142,21 +143,27 @@
     <ClCompile Include="MonsterFactory.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SeaCaveMap.cpp" />
+    <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="ShopSystem.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="ViperFish.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="FootballFish.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="CollapsedShipMap.h" />
+    <ClInclude Include="DataType.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="GameLogger.h" />
+    <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="GiantSquid.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IMap.h" />
@@ -169,11 +176,14 @@
     <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SeaCaveMap.h" />
+    <ClInclude Include="Shop.h" />
+    <ClInclude Include="ShopSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="ViperFish.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="FootballFish.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

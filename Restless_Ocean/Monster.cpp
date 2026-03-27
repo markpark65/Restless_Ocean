@@ -5,8 +5,8 @@
 
 using namespace std;
 
-Monster::Monster(const MonsterStat& monsterStat, const MonsterReward& monsterReward)
-    : monsterStat(monsterStat), monsterReward(monsterReward)
+Monster::Monster(const MonsterStat& monsterStat)
+    : monsterStat(monsterStat)
 {
 }
 
@@ -31,24 +31,14 @@ int Monster::getSpeed() const
     return monsterStat.speed;
 }
 
+AttributeType Monster::getMonsterType() const
+{
+	return monsterStat.type;
+}
+
 bool Monster::isAlive() const
 {
     return monsterStat.health > 0;
-}
-
-int Monster::getExp() const
-{
-    return monsterReward.exp;
-}
-
-int Monster::getGold() const
-{
-    return monsterReward.gold;
-}
-
-Item* Monster::getItem() const
-{
-    return monsterReward.item;
 }
 
 void Monster::takeDamage(int damage)
@@ -66,6 +56,21 @@ void Monster::takeDamage(int damage)
     }
 }
 
+std::string Monster::typeToString(AttributeType type) const
+{
+	switch (type)
+	{
+	case AttributeType::Luminous:
+		return "발광형";
+	case AttributeType::Hidden:
+		return "은닉형";
+	case AttributeType::Giant:
+		return "거대형";
+	default:
+		return "알 수 없음";
+	}
+}
+
 void Monster::showStat() const
 {
     cout << "===============================" << '\n';
@@ -73,8 +78,6 @@ void Monster::showStat() const
     cout << "HP      :" << getHealth() << '\n';
     cout << "ATK     :" << getAttack() << '\n';
     cout << "SPEED   :" << getSpeed() << '\n';
-    cout << "EXP     :" << getExp() << '\n';
-    cout << "GOLD    :" << getGold() << " G" << '\n';
-    cout << "보상    :" << getItem()->getName() << '\n';
+	cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
     cout << "===============================" << '\n';
 }

@@ -1,9 +1,12 @@
 ﻿#pragma once
-
 #include "Stage.h"
+#include "ShopSystem.h"
 
-class Lobby : public Stage
+class Shop : public Stage
 {
+private:
+	ShopSystem shopSystem;
+
 public:
 	void start()	override;
 	void update()	override;

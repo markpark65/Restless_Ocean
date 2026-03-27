@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "GameManager.h"
 #include "Dungeon.h"
+#include "Shop.h"
 #include "InputSystem.h"
 
 void Lobby::start()
@@ -16,7 +17,7 @@ void Lobby::start()
 
 void Lobby::update()
 {
-	std::cout << "\n안녕하세요. " << GameManager::getInstance().getPlayer().getName() << "님," << '\n';
+	std::cout << "안녕하세요. " << GameManager::getInstance().getPlayer().getName() << "님," << '\n';
 	while (true)
 	{
 		std::cout << "무엇을 하시겠습니까?\n";
@@ -29,11 +30,11 @@ void Lobby::update()
 		switch (input)
 		{
 		case 1:
-			GameManager::getInstance().changeStage(new Dungeon);
+			GameManager::getInstance().changeStage(std::make_unique<Dungeon>());
 			return;
 			break;
 		case 2:
-			GameManager::getInstance().changeStage(nullptr);
+			GameManager::getInstance().changeStage(std::make_unique<Shop>());
 			return;
 			break;
 		case 3:
