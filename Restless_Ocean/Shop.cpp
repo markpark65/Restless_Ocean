@@ -26,7 +26,6 @@ Shop::Shop() {
 	items_.push_back(new AttackBoost("깨진 조개껍데기 목걸이", 200, 10));
 	prices_.push_back(200);
 
-
 }
 Shop::~Shop() {
 	for (auto item : items_) delete item;

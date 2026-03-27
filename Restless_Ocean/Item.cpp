@@ -104,6 +104,10 @@ void AttackBoost::use(Player* character) {
 	cout << "깨진 조개껍데기 목걸이 사용!\n";
 	character->addTempAttack(attackIncrease);
 }
+<<<<<<< HEAD
 Item* AttackBoost::clone() const {
 	return new AttackBoost(*this);
 }
+=======
+
+>>>>>>> 7b715515977b046d1b55f3b0a05e0302209a8c38
