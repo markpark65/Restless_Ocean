@@ -233,6 +233,30 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 	cout << monster->getName() << "이(가) " << player->getName() << " 대원을 공격합니다!" << '\n';
 	player->takeDamage(monster->getAttack());
 
+	
+	//int randValue = Random::getRandomValue(0, 99);
+
+	//if (randValue < 50)
+	//{
+	//	cout << monster->getName() << "의 패시브가 발동됩니다!" << '\n';
+	//	monster->TriggerPassive();
+	//}
+	//
+	//// 일반 공격 or 특수 공격
+	//int attackType = Random::getRandomValue(0, 9);
+	//
+	//if (attackType < 7)
+	//{
+	//	cout << monster->getName() << "이(가) 일반 공격을 사용합니다!" << '\n';
+	//	monster->UseBasicAttack(player);
+	//}
+	//else
+	//{
+	//	cout << monster->getName() << "이(가) 특수 공격을 사용합니다!" << '\n';
+	//	monster->UseSpecialAttack(player);
+	//}
+	
+
 	cout << '\n';
 	this_thread::sleep_for(chrono::seconds(2));
 
