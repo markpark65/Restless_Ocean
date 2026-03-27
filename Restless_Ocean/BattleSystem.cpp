@@ -6,6 +6,7 @@
 #include "GameLogger.h"
 #include "Random.h"
 #include "InputSystem.h"
+#include "ItemFactory.h"
 using namespace std;
 
 GameLogger& logger = GameLogger::getInstance(); // 모든 로그 나중에 GameLogger 활용 로직으로 변경 예정
@@ -280,6 +281,7 @@ void BattleSystem::prize(Player* player)
 		cout << "아이템을 획득했습니다!" << '\n';
 
 		//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
+		
 	}
 	this_thread::sleep_for(chrono::seconds(1));
 

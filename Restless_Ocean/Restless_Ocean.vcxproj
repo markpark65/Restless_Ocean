@@ -138,6 +138,7 @@
     <ClCompile Include="GiantSquid.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="Leviathan.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="GiantSquid.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Leviathan.h" />
     <ClInclude Include="Lobby.h" />

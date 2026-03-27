@@ -60,7 +60,6 @@
     <ClCompile Include="BuildingMap.h" />
     <ClCompile Include="CollapsedShipMap.cpp" />
     <ClCompile Include="IMap.cpp" />
-    <ClCompile Include="MapUtils.cpp" />
     <ClCompile Include="SeaCaveMap.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="NormalMonster.cpp">
@@ -73,6 +72,7 @@
     <ClCompile Include="MimicOctopus.cpp" />
     <ClCompile Include="Leviathan.cpp" />
     <ClCompile Include="WeaponSelector.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataType.h" />
@@ -137,8 +137,6 @@
     <ClInclude Include="CollapsedShipMap.h" />
     <ClInclude Include="EventType.h" />
     <ClInclude Include="IMap.h" />
-    <ClInclude Include="MapType.h" />
-    <ClInclude Include="MapUtils.h" />
     <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="NormalMonster.h">
@@ -151,6 +149,7 @@
     <ClInclude Include="MimicOctopus.h" />
     <ClInclude Include="Leviathan.h" />
     <ClInclude Include="WeaponSelector.h" />
+    <ClInclude Include="ItemFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Stage">
