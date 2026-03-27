@@ -1,6 +1,7 @@
 ﻿#include "Player.h"
 #include "Weapon.h"
 #include "Monster.h"
+#include "Random.h"
 #include "Skill.h"
 #include "InputSystem.h"
 
@@ -42,6 +43,55 @@ void Player::showStatus() const {
 	cout << "Pressure:" << pressure << " %" << endl;
 	cout << "Artifact:" << artifactCount << " / 5" << endl;
 }
+//레벨 로직
+void Player::gainExp(int amount) {
+	if (level >= 10) return;
+	exp += amount;
+	cout << amount << "의 경험치를 획득했습니다. (현재: " << exp << "/" << maxExp << ")" << endl;
+	while (exp >= maxExp && level < 10) {
+		levelUp();
+	}
+}
+void Player::levelUp() {
+	level++;
+	int hpBonus = level * 20;
+	int atkBonus = level * 5;
+
+	maxHp += hpBonus;
+	baseAttack += atkBonus;
+	hp = maxHp;
+	exp -= maxExp;
+	if (exp < 0) exp = 0;
+
+	cout << "=============================" << endl;
+	cout << "Level UP!!! 현재 레벨: " << level << endl;
+	cout << "최대 체력 " << hpBonus << " 증가 / 공격력 " << atkBonus << " 증가" << endl;
+	cout << "=============================" << endl;
+
+	if (level == 3 || level == 6 || level == 9) {
+		cout << "특정 레벨 도달! 고대의 기술 중 하나를 연마할 수 있습니다." << endl;
+
+		int skillIdx = Random::getRandomValue(1, 3);
+		unique_ptr<Skill> discoveredSkill;
+
+		switch (skillIdx) {
+		case 1:
+			discoveredSkill = make_unique<TripleDamageSkill>();
+			break;
+
+		case 2:
+			discoveredSkill = make_unique<BindSkill>();
+			break;
+
+		case 3:
+			discoveredSkill = make_unique<CounterSkill>();
+			break;
+		}
+		cout << "새롭게 발견한 기술 : [" << discoveredSkill->getName() << "] " << endl;
+
+		this->learnSkill(move(discoveredSkill));
+	}
+}
 //무기 장착 구현
 void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
 	if (!newWeapon) return;
@@ -52,9 +102,10 @@ void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
 void Player::learnSkill(unique_ptr<Skill> newSkill) {
 	if (!newSkill) return;
 	if (currentSkill) {
+		cout << "---------------------------------------------" << endl;
 		cout << "이미 스킬[" << currentSkill->getName() << "]을 보유 중입니다." << endl;
 		cout << "새 스킬 [" << newSkill->getName() << "]로 교체하시겠습니까?" << endl;
-		cout << "1. 교체한다  2. 버린다" << endl;
+		cout << "1. 교체한다 (기존 기술 삭제)  2. 유지한다 (새 기술 버림)" << endl;
 
 		if (InputSystem::getInputInt(1, 2) == 1) {
 			currentSkill = move(newSkill);
@@ -113,7 +164,7 @@ void Player::increaseMaxHp(int amount) {
 //산소 회복
 void Player::recoverOxygen(int amount) {
 	int heal = amount;
-	if (oxygen > maxOxygen) 
+	if (oxygen >= maxOxygen) 
 	{	cout << "산소가 충분합니다." << endl;
 		return;
 	}
@@ -208,31 +259,7 @@ void Player::showArtifacts() const {
 	}
 	cout << "\n";
 }
-//레벨 로직
-void Player::gainExp(int amount) {
-	if (level >= 10) return;
-	exp += amount;
-	cout << amount << "의 경험치를 획득했습니다. (현재: " << exp << "/" << maxExp << ")" << endl;
-	while (exp >= maxExp && level < 10) {
-		levelUp();
-	}
-}
-void Player::levelUp() {
-	level++;
-	int hpBonus = level * 20;
-	int atkBonus = level * 5;
 
-	maxHp += hpBonus;
-	baseAttack += atkBonus;
-	hp = maxHp;
-	exp -= maxExp;
-	if (exp < 0) exp = 0;
-	
-	cout << "=============================" << endl;
-	cout << "Level UP!!! 현재 레벨: " << level << endl;
-	cout << "최대 체력 " << hpBonus << " 증가 / 공격력 " << atkBonus << " 증가" << endl;
-	cout << "=============================" << endl;
-}
 //아이템 사용
 void Player::useItem(string itemName) {
 	cout << itemName << "을(를) 사용합니다." << endl;
@@ -254,4 +281,8 @@ void Player::addTempAttack(int amount) {
 //전투 종료시 tempAttack 초기화
 void Player::resetTempStats() {
 tempAttack = 0;
+}
+//현재 스킬 받기
+Skill* Player::getCurrentSkill() const {
+	return currentSkill.get();
 }
