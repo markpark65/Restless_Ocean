@@ -3,8 +3,9 @@
 #include "Lobby.h"
 #include "Dungeon.h"
 #include "BattleSystem.h"
-#include "Manager.h"
+#include "GameManager.h"
 #include "Player.h"
+#include "InputSystem.h"
 
 void Dungeon::start()
 {
@@ -23,23 +24,21 @@ void Dungeon::update()
 		std::cout << "1. 로비 이동\n";
 		std::cout << "2. 상점 이용\n";
 		std::cout << "3. 게임 종료\n";
-		std::cout << "> ";
 
-		int input = 0;
-		std::cin >> input;
+		int input = InputSystem::getInputInt(1, 3);
 
 		switch (input)
 		{
 		case 1:
-			Manager::getInstance().changeStage(new Lobby);
+			GameManager::getInstance().changeStage(new Lobby);
 			return;
 			break;
 		case 2:
-			Manager::getInstance().changeStage(nullptr);
+			GameManager::getInstance().changeStage(nullptr);
 			return;
 			break;
 		case 3:
-			Manager::getInstance().changeStage(nullptr);
+			GameManager::getInstance().changeStage(nullptr);
 			std::cout << "게임을 종료합니다.\n";
 			return;
 			break;
