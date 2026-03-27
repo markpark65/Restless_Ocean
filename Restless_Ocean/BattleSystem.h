@@ -15,7 +15,7 @@ class BattleSystem
 public:
 	void startBattleSequence(Player* player); // 전투 흐름 전체 로직
 	BattleResult battle(Player* player); // 턴제 전투 파트
-	void processBattleResult(Player* player, BattleResult& battleResult); // 전투 결과 처리 함수
+	//void processBattleResult(Player* player, BattleResult& battleResult); // 전투 결과 처리 함수
 
 	void playerAction(int& turn, Player* player, Monster* monster, BattleResult& battleResult); // 플레이어 행동 함수
 	void monsterAction(int& turn, Player* player, Monster* monster); // 몬스터 행동 함수
