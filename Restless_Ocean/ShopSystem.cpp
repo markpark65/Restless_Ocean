@@ -13,7 +13,7 @@ ShopSystem::ShopSystem() {
 	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 200, 10));
 }
 
-void ShopSystem::openShop(Player& player, Inventory<Item>& inventory) {
+void ShopSystem::openShop(Player& player) {
 	InputSystem inputSys;
 	int choice;
 
@@ -22,13 +22,13 @@ void ShopSystem::openShop(Player& player, Inventory<Item>& inventory) {
 		std::cout << "1. 구매\n2. 판매\n0. 나가기\n";
 		choice = inputSys.getInputInt(0, 2);
 
-		if (choice == 1) buyItem(player, inventory);
-		else if (choice == 2) sellItem(player, inventory);
+		if (choice == 1) buyItem(player);
+		else if (choice == 2) sellItem(player);
 		else break;
 	}
 }
 
-void ShopSystem::buyItem(Player& player, Inventory<Item>& inventory) {
+void ShopSystem::buyItem(Player& player) {
 	std::cout << "\n구매 목록:\n";
 	for (size_t i = 0; i < items_.size(); i++) {
 		std::cout << i << ": ";
@@ -45,24 +45,24 @@ void ShopSystem::buyItem(Player& player, Inventory<Item>& inventory) {
 	}
 
 	player.addGold(-items_[choice]->getPrice());
-	inventory.addItem(items_[choice]->clone());
+	player.getInventory().addItem(items_[choice]->clone());
 
 	std::cout << "구매 완료! 남은 골드: " << player.getGold() << "\n";
 }
 
-void ShopSystem::sellItem(Player& player, Inventory<Item>& inventory) {
+void ShopSystem::sellItem(Player& player) {
 	std::cout << "\n=== 판매 ===\n";
-	inventory.printAll();
+	player.getInventory().printAll();
 
-	if (inventory.getSize() == 0) {
+	if (player.getInventory().getSize() == 0) {
 		std::cout << "판매할 아이템이 없습니다.\n";
 		return;
 	}
 
 	InputSystem inputSys;
-	int index = inputSys.getInputInt(0, inventory.getSize() - 1);
+	int index = inputSys.getInputInt(0, player.getInventory().getSize() - 1);
 
-	Item* item = inventory.getItem(index);
+	Item* item = player.getInventory().getItem(index);
 	if (!item) {
 		std::cout << "잘못된 선택입니다.\n";
 		return;
@@ -70,7 +70,7 @@ void ShopSystem::sellItem(Player& player, Inventory<Item>& inventory) {
 
 	int sellPrice = static_cast<int>(item->getPrice() * 0.6);
 	player.addGold(sellPrice);
-	inventory.remove(index);
+	player.getInventory().remove(index);
 
 	std::cout << "판매 완료! +" << sellPrice << "G\n남은 골드: " << player.getGold() << "\n";
 }
