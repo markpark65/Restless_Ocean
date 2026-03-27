@@ -14,7 +14,6 @@ Random random;
 
 void BattleSystem::startBattleSequence(Player* player)
 {
-
 	
 	// 일반 전투 -> Todo: loop 오류 해결
 	for (int i = 0; i < 7; ++i)
@@ -54,7 +53,7 @@ void BattleSystem::startBattleSequence(Player* player)
 
 BattleResult BattleSystem::battle(Player* player)
 {
-
+	int turn = 0; // 전투 턴 수
 	MonsterFactory monsterFactory;
 	Monster* monster = monsterFactory.GenerateMonster(player->getLevel());
 
@@ -65,31 +64,32 @@ BattleResult BattleSystem::battle(Player* player)
 	monster->showStat();
 	this_thread::sleep_for(chrono::seconds(2));
 
+
 	// 전투 시작
 	BattleResult battleResult = BattleResult::Continue;
 
 	while (battleResult == BattleResult::Continue)
 	{
-
+		++turn;
 		if (player->getSpeed() >= monster->getSpeed())
 		{
 			// 플레이어가 먼저 행동
-			playerAction(player, monster, battleResult);
+			playerAction(turn, player, monster, battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			monsterAction(player, monster);
+			monsterAction(turn, player, monster);
 			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
 		}
 		else
 		{
 			// 몬스터가 먼저 행동
-			monsterAction(player, monster);
+			monsterAction(turn, player, monster);
 			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			playerAction(player, monster, battleResult);
+			playerAction(turn, player, monster, battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
@@ -115,7 +115,7 @@ BattleResult BattleSystem::checkBattleResult(int playerHp, int monsterHp)
 	return BattleResult::Continue;
 }
 
-void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& battleResult)
+void BattleSystem::playerAction(int& turn, Player* player, Monster* monster, BattleResult& battleResult)
 {
 	cout << "* 플레이어의 턴입니다!" << '\n';
 
@@ -137,7 +137,7 @@ void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& 
 	switch (choice)
 	{
 	case 1:
-		playerAttack(player, monster);
+		playerAttack(turn, player, monster);
 		break;
 	case 2:
 		playerUseSkill(player, monster);
@@ -156,9 +156,12 @@ void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& 
 
 }
 
-void BattleSystem::playerAttack(Player* player, Monster* monster) // 플레이어 일반 공격 함수
+void BattleSystem::playerAttack(int& turn, Player* player, Monster* monster) // 플레이어 일반 공격 함수
 {
-	cout << "* " << player->getAttack() << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
+	//cout << "* " << player->getAttack() << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
+	logger.log(turn, EventType::Battle , player->getName(), monster->getName(), player->getAttack());
+	logger.printRecentLog();
+
 	monster->takeDamage(player->getAttack());
 
 	this_thread::sleep_for(chrono::seconds(2));
@@ -183,7 +186,7 @@ void BattleSystem::playerRunAway(BattleResult& battleResult)
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
-void BattleSystem::monsterAction(Player* player, Monster* monster)
+void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 {
 	cout << "* 몬스터의 턴입니다!" << '\n';
 
