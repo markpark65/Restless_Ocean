@@ -20,36 +20,24 @@ void BattleSystem::battle(Player* player) {
 	BattleResult battleResult = BattleResult::Continue;
 	while (battleResult == BattleResult::Continue) {
 
-		playerAction(player, monster, battleResult);
-
-		if (battleResult != BattleResult::Continue) break;
-		battleResult = checkBattleResult(player->getHp(), monster->getHealth());
-		if (battleResult != BattleResult::Continue) break;
-
-		monsterAction(player, monster);
-		battleResult = checkBattleResult(player->getHp(), monster->getHealth());
-	}
-
-	// 전투 끝
-	player->useOxygen(10);
-
-	// 플레이어가 이겼을 때 보상 획득
-
-	if (battleResult == BattleResult::PlayerWin) { //승리했을 때
+		if (player->getSpeed() >= monster->getSpeed()) {
+			// 플레이어가 먼저 행동
+			playerAction(player, monster, battleResult);
+			if (battleResult != BattleResult::Continue) break;
+			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+			if (battleResult != BattleResult::Continue) break;
+			monsterAction(player, monster);
+			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+		}
+		else {
+			// 몬스터가 먼저 행동
+			monsterAction(player, monster);
+			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+			if (battleResult != BattleResult::Continue) break;
+		}
 		
-		//보상 획득
-		player->gainExp(50); 
-
-		// 골드 10~20 범위에서 랜덤 획득
-		random_device rd;
-		mt19937 gen(rd());
-		uniform_int_distribution<int> dis(10, 20);
-		int gold = dis(gen);
-		player->addGold(gold);
-
-
-		//아이템 획득
 	}
+
 
 	delete monster;
 
@@ -113,9 +101,30 @@ void BattleSystem::monsterAction(Player* player, Monster* monster) {
 
 }
 
-void BattleSystem::startBattleSequence(Player* player) {
+void BattleSystem::startBattleSequence(Player* player, Monster* monster, BattleResult& battleResult) {
+
 
 	battle(player);
 
-	//상점 가는 기능
+	// 전투 끝
+	player->useOxygen(10);
+
+	// 플레이어가 이겼을 때 보상 획득
+
+	if (battleResult == BattleResult::PlayerWin) { //승리했을 때
+
+		//보상 획득
+		player->gainExp(50);
+
+		// 골드 10~20 범위에서 랜덤 획득
+		int gold = random.getRandomValue(10, 20);
+		player->addGold(gold);
+
+		
+			
+
+
+		//아이템 획득
+	}
+
 }
