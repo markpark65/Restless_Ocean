@@ -8,7 +8,7 @@
 #include "InputSystem.h"
 using namespace std;
 
-GameLogger& logger = GameLogger::getInstance(); // 모든 로그 나중에 로거로 변경 예정
+GameLogger& logger = GameLogger::getInstance(); // 모든 로그 나중에 GameLogger 활용 로직으로 변경 예정
 Random random;
 
 
@@ -22,26 +22,26 @@ void BattleSystem::startBattleSequence(Player* player)
 		BattleResult battleResult;
 		battleResult = battle(player);
 
-		// 전투 끝 로직 -> Todo: 클래스로 분리
-		cout << "==========================================================" << '\n';
-		cout << "전투가 끝났습니다." << '\n';
-		player->useOxygen(10); // 전투 후 산소 10 소모
+		//// 전투 끝 로직 -> Todo: 클래스로 분리
+		//cout << "==========================================================" << '\n';
+		//cout << "전투가 끝났습니다." << '\n';
+		//player->useOxygen(10); // 전투 후 산소 10 소모
 
-		if (battleResult == BattleResult::PlayerWin)
-		{ //승리했을 때
+		//if (battleResult == BattleResult::PlayerWin)
+		//{ //승리했을 때
 
-			prize(player);
-		}
-		else if (battleResult == BattleResult::RunAway)
-		{ // 도망쳤을 때
-			cout << "무사히 도망쳤습니다." << '\n';
-			break;
-		}
-		else if (battleResult == BattleResult::MonsterWin)
-		{ // 졌을 때
-			cout << "대원이 쓰러졌습니다." << '\n';
-			break;
-		}
+		//	prize(player);
+		//}
+		//else if (battleResult == BattleResult::RunAway)
+		//{ // 도망쳤을 때
+		//	cout << "무사히 도망쳤습니다." << '\n';
+		//	break;
+		//}
+		//else if (battleResult == BattleResult::MonsterWin)
+		//{ // 졌을 때
+		//	cout << "대원이 쓰러졌습니다." << '\n';
+		//	break;
+		//}
 	}
 	cout << "==========================================================" << '\n';
 
@@ -76,22 +76,22 @@ BattleResult BattleSystem::battle(Player* player)
 			// 플레이어가 먼저 행동
 			playerAction(turn, player, monster, battleResult);
 			if (battleResult != BattleResult::Continue) break;
-			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
 			monsterAction(turn, player, monster);
-			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 		}
 		else
 		{
 			// 몬스터가 먼저 행동
 			monsterAction(turn, player, monster);
-			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
 			playerAction(turn, player, monster, battleResult);
 			if (battleResult != BattleResult::Continue) break;
-			battleResult = checkBattleResult(player->getHp(), monster->getHealth());
+			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
 		}
@@ -102,7 +102,31 @@ BattleResult BattleSystem::battle(Player* player)
 	return battleResult;
 }
 
-BattleResult BattleSystem::checkBattleResult(int playerHp, int monsterHp)
+void processBattleResult(Player* player, BattleResult& battleResult)
+{
+	//// 전투 끝 로직 
+	//cout << "==========================================================" << '\n';
+	//cout << "전투가 끝났습니다." << '\n';
+	//player->useOxygen(10); // 전투 후 산소 10 소모
+
+	//if (battleResult == BattleResult::PlayerWin)
+	//{ //승리했을 때
+
+	//	prize(player);
+	//}
+	//else if (battleResult == BattleResult::RunAway)
+	//{ // 도망쳤을 때
+	//	cout << "무사히 도망쳤습니다." << '\n';
+	//	break;
+	//}
+	//else if (battleResult == BattleResult::MonsterWin)
+	//{ // 졌을 때
+	//	cout << "대원이 쓰러졌습니다." << '\n';
+	//	break;
+	//}
+}
+
+BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)
 {
 	if (monsterHp <= 0)
 	{
@@ -158,8 +182,8 @@ void BattleSystem::playerAction(int& turn, Player* player, Monster* monster, Bat
 
 void BattleSystem::playerAttack(int& turn, Player* player, Monster* monster) // 플레이어 일반 공격 함수
 {
-	//cout << "* " << player->getAttack() << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
-	logger.log(turn, EventType::Battle , player->getName(), monster->getName(), player->getAttack());
+	cout << "* " << player->getAttack() << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
+	//logger.log(turn, EventType::Battle , player->getName(), monster->getName(), player->getAttack());
 	logger.printRecentLog();
 
 	monster->takeDamage(player->getAttack());
