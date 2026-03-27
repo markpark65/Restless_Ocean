@@ -1,6 +1,9 @@
 ﻿#include "MonsterFactory.h"
 #include "Item.h"
 #include "DataType.h"
+#include "BuildingMap.h"
+#include "CollapsedShipMap.h"
+#include "SeaCaveMap.h"
 
 int MonsterFactory::getRandomValue(int min, int max)
 {
@@ -16,6 +19,9 @@ int MonsterFactory::getRandomValue(int min, int max)
 Monster* MonsterFactory::GenerateMonster(int level)
 {
 	MonsterStat stat;
+
+	selectRandomMap();
+	std::cout << "현제 지역은 " << currentMap_->GetName() << " 입니다.\n";
 
 	int randomType = getRandomValue(0, 2);
 
@@ -97,4 +103,23 @@ Monster* MonsterFactory::GenerateBossMonster(int level)
 	}
 
 	return new BossMonster(stat);
+}
+
+void MonsterFactory::selectRandomMap() {
+	int randomMap = getRandomValue(0, 2);
+
+	switch (randomMap)
+	{
+	case 0:
+		currentMap_ = std::make_unique<BuildingMap>();
+		break;
+	case 1:
+		currentMap_ = std::make_unique<CollapsedShipMap>();
+		break;
+	case 2:
+		currentMap_ = std::make_unique<SeaCaveMap>();
+		break;
+	default:
+		break;
+	}
 }
