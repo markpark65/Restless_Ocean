@@ -42,7 +42,7 @@ public:
             size_++;
         }
         else {
-            std::cout << "인벤토리가 꽉 찼습니다!" << endl;
+            std::cout << "인벤토리가 꽉 찼습니다!\n" ;
             delete item;
         }
     }
@@ -50,7 +50,7 @@ public:
     void useItem(int index, Player* character) {
 
         if (index < 0 || index >= size_) {
-            std::cout << "잘못된 번호입니다." << endl;
+            std::cout << "잘못된 번호입니다.\n" ;
             return;
         }
         slots_[index].item->use(character);
@@ -62,13 +62,13 @@ public:
 
     void printAll() const {
         if (size_ == 0) {
-            std::cout << "인벤토리가 비어있습니다." << endl;
+            std::cout << "인벤토리가 비어있습니다.\n" ;
             return;
         }
         for (int i = 0; i < size_; i++) {
             std::cout << i << "번: ";
             slots_[i].item->printInfo();
-            std::cout << "  수량: " << slots_[i].quantity << endl;
+			std::cout << "  수량: " << slots_[i].quantity << "\n";
         }
     }
 
