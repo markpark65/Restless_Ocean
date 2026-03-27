@@ -21,7 +21,7 @@ protected:
     int price;
 };
 
-
+//체력 회복
 class HealthPotion : public Item {
 public:
     HealthPotion(string name, int price, int heal);
@@ -31,6 +31,17 @@ private:
     int healthRestore;
 };
 
+//체력 최대량 Up
+class MaxHpUp: public Item {
+public:
+	MaxHpUp(string name, int price, int heal);
+	void use(Player* character) override;
+
+private:
+	int maxHpIncrease;
+};
+
+//산소 회복
 class OxygenPotion : public Item {
 public:
     OxygenPotion(string name, int price, int oxygen);
@@ -40,6 +51,17 @@ private:
     int oxygenIncrease;
 };
 
+//산소 최대량 Up
+class MaxOxygenUp : public Item {
+public:
+	MaxOxygenUp(string name, int price, int oxygen);
+	void use(Player* character) override;
+
+private:
+	int maxIncrease;
+};
+
+//압력 해소
 class PressurePotion : public Item {
 public:
     PressurePotion(string name, int price, int pressure);
@@ -49,6 +71,18 @@ private:
     int pressurePotion;
 };
 
+//압력 최대량 Up
+class MaxPressureUp: public Item{
+public:
+	MaxPressureUp(string name, int price, int pressure);
+	void use(Player* character) override;
+
+private:
+	int maxIncrease;
+};
+
+
+//공격력 Up
 class AttackBoost : public Item {
 public:
     AttackBoost(string name, int price, int attack);
@@ -56,5 +90,12 @@ public:
 
 private:
     int attackIncrease;
+};
+
+//유적 아이템
+class Artifact : public Item {
+public:
+	Artifact(string name);
+	void use(Player* character) override;
 };
 

@@ -5,8 +5,8 @@
 
 using namespace std;
 
-Monster::Monster(const MonsterStat& monsterStat, const MonsterReward& monsterReward)
-    : monsterStat(monsterStat), monsterReward(monsterReward)
+Monster::Monster(const MonsterStat& monsterStat)
+    : monsterStat(monsterStat)
 {
 }
 
@@ -36,21 +36,6 @@ bool Monster::isAlive() const
     return monsterStat.health > 0;
 }
 
-int Monster::getExp() const
-{
-    return monsterReward.exp;
-}
-
-int Monster::getGold() const
-{
-    return monsterReward.gold;
-}
-
-Item* Monster::getItem() const
-{
-    return monsterReward.item;
-}
-
 void Monster::takeDamage(int damage)
 {
     if (damage < 0)
@@ -73,8 +58,5 @@ void Monster::showStat() const
     cout << "HP      :" << getHealth() << '\n';
     cout << "ATK     :" << getAttack() << '\n';
     cout << "SPEED   :" << getSpeed() << '\n';
-    cout << "EXP     :" << getExp() << '\n';
-    cout << "GOLD    :" << getGold() << " G" << '\n';
-    cout << "보상    :" << getItem()->getName() << '\n';
     cout << "===============================" << '\n';
 }

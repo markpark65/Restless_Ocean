@@ -1,4 +1,6 @@
 ﻿#include "Player.h"
+#include "Weapon.h"
+#include "Monster.h"
 
 using namespace std;
 
@@ -7,14 +9,16 @@ Player::Player(string n)
 	, level(1)
 	, hp(200)
 	, maxHp(200)
-	, attack(30)
+	, baseAttack(30)
 	, exp(0)
 	, maxExp(100)
 	, gold(0)
 	, oxygen(100)
+	, maxOxygen(100)
 	, speed(100)
 	, baseSpeed(100)
 	, pressure(0)
+	, maxPressure(100)
 	, battery(100)
 	, tempAttack(0)
 	, artifactCount(0) {
@@ -35,7 +39,20 @@ void Player::showStatus() const {
 	cout << "Pressure:" << pressure << " %" << endl;
 	cout << "Artifact:" << artifactCount << " / 5" << endl;
 }
+//무기 장착 구현
+void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
+	if (!newWeapon) return;
+	equippedWeapon = std::move(newWeapon);
+	cout << name << " 대원이 " << equippedWeapon->getName() << "무기를 장착했습니다";
+}
+//공격 로직 구현
+int Player::attack(const Monster* target) {
+	if (!equippedWeapon) {
+		return baseAttack + tempAttack;
+	}
+	return equippedWeapon->calculateDamage(baseAttack + tempAttack, target);
 
+}
 //데미지
 void Player::takeDamage(int damage) {
 	hp -= damage;
@@ -47,7 +64,7 @@ void Player::takeDamage(int damage) {
 	}
 }
 
-//채력 회복
+//체력 회복
 void Player::recoverDamage(int amount) {
 	int heal = amount;
 	if (hp + amount > maxHp) heal = maxHp - hp;
@@ -55,16 +72,30 @@ void Player::recoverDamage(int amount) {
 	cout << name << " 대원의 체력이 " << heal << "만큼 회복 됐습니다. (현재 HP: " << hp << " / " << maxHp << ")" << endl;
 }
 
+//체력 최대량 회복
+void Player::increaseMaxHp(int amount) {
+	maxHp += amount;
+	cout << name << " 대원의 체력 최대량이 " << amount << "만큼 증가 됐습니다. (현재 HP: " << hp << " / " << maxHp << ")" << endl;
+}
+
 //산소 회복
 void Player::recoverOxygen(int amount) {
 	int heal = amount;
-	if (oxygen > 100) 
+	if (oxygen > maxOxygen) 
 	{	cout << "산소가 충분합니다." << endl;
 		return;
 	}
-	if (oxygen + amount > 100) { heal = 100 - oxygen; }
+	if (oxygen + amount > maxOxygen) { heal = maxOxygen - oxygen; }
 	oxygen += heal;
 	cout << name << " 대원의 산소가 " << heal << "만큼 회복 됐습니다. (현재 산소량: " << oxygen << " / 100 )" << endl;
+}
+
+//산소 최대량 증가
+void Player::IncreaseOxygen(int amount) {
+	maxOxygen += amount;
+	cout << name << " 대원의 최대 산소량이 "
+		<< amount << " 증가했습니다! (최대 산소: "
+		<< maxOxygen << ")" << endl;
 }
 
 //산소 소모
@@ -94,6 +125,13 @@ void Player::recoverPressure(int amount) {
 	cout << "압력이 " << amount << "% 감소했습니다. (현재 압력 " << pressure << " %)" << endl;
 	
 }
+
+//압력 최대량 증가
+void Player::IncreasePressure(int amount) {
+	maxPressure += amount;
+	cout << "압력 최대량이 " << amount << " % 증가했습니다. (현재 압력 최대량" << maxPressure << " %)" << endl;
+}
+
 //압력 증가
 void Player::takePressure(int amount) {
 	pressure += amount;
@@ -122,13 +160,21 @@ void Player::addGold(int amount) {
 
 }
 //유적 발견
-void Player::addArtifact() {
-	artifactCount++;
-	cout << "고대 유적을 발견했습니다. (현재 유적 개수: " << artifactCount << "개)" << endl;
+void Player::addArtifact(std::string name) {
+	artifacts.push_back(name);
+	cout << name<<"을 발견했습니다. (현재 유적 개수: " << artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
 		cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
 		cout << "(대충왕국과 심해어들의 비밀)" << endl;
 	}
+}
+//유적 확인
+void Player::showArtifacts() const {
+	cout << "===== 보유 유적 =====\n";
+	for (int i = 0; i < artifacts.size(); i++) {
+		cout << "- " << artifacts[i] <<"\n";
+	}
+	cout << "\n";
 }
 //레벨 로직
 void Player::gainExp(int amount) {
@@ -145,7 +191,7 @@ void Player::levelUp() {
 	int atkBonus = level * 5;
 
 	maxHp += hpBonus;
-	attack += atkBonus;
+	baseAttack += atkBonus;
 	hp = maxHp;
 	exp -= maxExp;
 	if (exp < 0) exp = 0;
@@ -162,8 +208,8 @@ void Player::useItem(string itemName) {
 }
 //공격력 상승
 void Player::addAttack(int amount) {
-	attack += amount;
-	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << attack << ")" << endl;
+	baseAttack += amount;
+	cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << baseAttack << ")" << endl;
 }
 
 //해당 전투에만 공격력 상승
