@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include <string>
 #include <iostream>
-#include "Player.h"
+//#include "Player.h"
+class Player;
 using namespace std;
 
 class Item {
