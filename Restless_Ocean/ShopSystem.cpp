@@ -63,7 +63,7 @@ void ShopSystem::sellItem(Player& player) {
 	quantity = inputSys.getInputInt(1, player.getInventory().getItemCount(index));
 	Item* item = player.getInventory().getItem(index);
 
-	int sellPrice = static_cast<int>(item->getPrice() * 0.5) * quantity;
+	int sellPrice = static_cast<int>(item->getPrice() * 0.6) * quantity;
 	player.addGold(sellPrice);
 
 	if (!item) {
