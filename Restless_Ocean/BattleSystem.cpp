@@ -16,10 +16,6 @@ void BattleSystem::battle(Player* player) {
 	MonsterFactory monsterFactory;
 	Monster* monster = monsterFactory.GenerateMonster(player->getLevel());
 
-	// 테스트용 Attack 수정
-	//player->setAttack(10);
-
-
 	// 전투 시작
 	BattleResult battleResult = BattleResult::Continue;
 	while (battleResult == BattleResult::Continue) {
@@ -27,7 +23,6 @@ void BattleSystem::battle(Player* player) {
 		playerAction(player, monster, battleResult);
 
 		if (battleResult != BattleResult::Continue) break;
-
 		battleResult = checkBattleResult(player->getHp(), monster->getHealth());
 		if (battleResult != BattleResult::Continue) break;
 
@@ -40,7 +35,7 @@ void BattleSystem::battle(Player* player) {
 
 	// 플레이어가 이겼을 때 보상 획득
 
-	if (player->getHp() > 0) { //승리했을 때
+	if (battleResult == BattleResult::PlayerWin) { //승리했을 때
 		
 		//보상 획득
 		player->gainExp(50); 
@@ -84,9 +79,6 @@ void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& 
 	InputSystem inputSystem;
 	cout << "행동을 선택하세요: " << '\n';
 	choice = inputSystem.getInputInt(1, 3);
-
-
-
 
 	switch (choice) {
 	case 1:

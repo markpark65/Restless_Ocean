@@ -46,9 +46,9 @@ int main()
 	//GameManager::getInstance().run();
 
 	// BattleSystem 테스트
-	BattleSystem battleSystem;
+	/*BattleSystem battleSystem;
 	Player* player = new Player("테스터");
-	battleSystem.battle(player);
+	battleSystem.battle(player);*/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
