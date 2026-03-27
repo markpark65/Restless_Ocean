@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "Monster.h"
+#include "NormalMonster.h"
 
-class ViperFish : public Monster
+class ViperFish : public NormalMonster
 {
 public:
 

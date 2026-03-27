@@ -5,12 +5,12 @@
 using namespace std;
 ShopSystem::ShopSystem() {
 	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50));
-	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 20, 10));
-	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 30, 10));
-	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 20, 10));
+	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 10));
+	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 10));
+	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 10));
 	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 10));
-	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 20, 10));
-	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 20, 10));
+	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 10));
+	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 10));
 }
 
 

@@ -98,4 +98,7 @@ int main()
 
 	//cout << "\n===== 테스트 종료 =====" << endl;
 	return 0;
+	/*BattleSystem battleSystem;
+	Player* player = new Player("테스터");
+	battleSystem.startBattleSequence(player);*/
 }

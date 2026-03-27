@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <iostream>
+#include"InputSystem.h"
 #include"Item.h"
 class Player;
 
@@ -48,6 +49,22 @@ public:
             delete item;
         }
     }
+
+	int selectItem() const {
+		if (size_ == 0) {
+			std::cout << "인벤토리가 비어있습니다.\n";
+			return -1;
+		}
+		printAll();
+		std::cout << "사용할 아이템 번호 선택 (-1: 취소)\n";
+		int choice = InputSystem::getInputInt(-1, size_ - 1);
+		if (choice == -1) {
+			std::cout << "취소했습니다.\n";
+			return -1;
+		}
+
+		return choice;
+	}
 
     void useItem(int index, Player* player) {
 
