@@ -1,0 +1,19 @@
+{
+    "DamageTakenBy": {
+        "테스터": 5065
+    },
+    "DeathCount": 5,
+    "ExplorationCount": 9,
+    "KillCount": {
+        "몬스터": 5
+    },
+    "ReturnCount": 5,
+    "TotalDamageDealt": 130,
+    "TotalDamageTaken": 5065,
+    "TotalGoldGain": 0,
+    "TotalGoldUse": 0,
+    "TotalItemGain": 5,
+    "TotalItemUse": 5,
+    "TotalKillCount": 5,
+    "TotalLevelUp": 5
+}
