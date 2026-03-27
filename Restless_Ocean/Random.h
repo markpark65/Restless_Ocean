@@ -2,6 +2,6 @@
 class Random
 {
 public:
-	int getRandomValue(int min, int max);
+	static int getRandomValue(int min, int max);
 };
 
