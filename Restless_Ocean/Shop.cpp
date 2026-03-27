@@ -29,11 +29,12 @@ void Shop::update()
 		std::cout << "무엇을 하시겠습니까?" << '\n';
 		std::cout << "1. 구매" << "\n";
 		std::cout << "2. 판매" << "\n";
-		std::cout << "3. 로비 이동" << "\n";
-		std::cout << "4. 던전 입장" << "\n";
-		std::cout << "5. 게임 종료" << "\n";
+		std::cout << "3. 보유 아이템 확인" << "\n";
+		std::cout << "4. 로비 이동" << "\n";
+		std::cout << "5. 던전 입장" << "\n";
+		std::cout << "6. 게임 종료" << "\n";
 
-		int input = InputSystem::getInputInt(1, 5);
+		int input = InputSystem::getInputInt(1, 6);
 
 		switch (input)
 		{
@@ -44,14 +45,17 @@ void Shop::update()
 			shopSystem.sellItem(player);
 			break;
 		case 3:
+			player.getInventory().printAll();
+			break;
+		case 4:
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 			break;
-		case 4:
+		case 5:
 			GameManager::getInstance().changeStage(std::make_unique<Dungeon>());
 			return;
 			break;
-		case 5:
+		case 6:
 			GameManager::getInstance().changeStage(nullptr);
 			std::cout << "게임을 종료합니다.\n";
 			return;
@@ -60,6 +64,8 @@ void Shop::update()
 			std::cout << "잘못된 입력입니다.\n";
 			continue;
 		}
+
+		std::cout << "\n";
 	}
 }
 
