@@ -147,3 +147,7 @@ void BattleSystem::startBattleSequence(Player* player) {
 
 	cout << "==========================================================" << '\n';
 }
+
+void prize(Player* player) {
+
+}
