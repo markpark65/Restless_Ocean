@@ -4,6 +4,7 @@
 #include <string>
 #include "DataType.h"
 
+class Player;
 class Item;
 
 enum class Map

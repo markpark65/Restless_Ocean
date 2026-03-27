@@ -12,4 +12,3 @@ public:
 	void UseSpecialAttack(Player* target) override {}
 	void TriggerPassive() override {}
 };
-
