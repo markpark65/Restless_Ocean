@@ -3,6 +3,7 @@
 #include "MonsterFactory.h"
 #include "GameLogger.h"
 #include "Random.h"
+#include "InputSystem.h"
 using namespace std;
 
 GameLogger& logger = GameLogger::getInstance(); // 모든 출력 나중에 로거로 변경 예정
@@ -74,13 +75,15 @@ void BattleSystem::playerAction(Player* player, Monster* monster, BattleResult& 
 	cout << "플레이어의 턴입니다!" << endl;
 
 	// 플레이어 행동 선택
-	int choice;
+	int choice = 0;
 	cout << "1. 공격한다" << '\n';
 	cout << "2. 아이템을 사용한다" << '\n';
 	cout << "3. 도망친다" << '\n';
 
+
+	InputSystem inputSystem;
 	cout << "행동을 선택하세요: " << '\n';
-	cin >> choice;
+	choice = inputSystem.getInputInt(1, 3);
 
 
 
