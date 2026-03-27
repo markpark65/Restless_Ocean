@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "MonsterFactory.h"
 #include "Player.h"
+#include "Skill.h"
 #include "BattleSystem.h"
 #include "GameLogger.h"
 #include "GameManager.h"
@@ -69,6 +70,34 @@ int main()
 	GameManager::getInstance().run();
 
 	//BattleSystem 테스트
+	//BattleSystem battleSystem;
+	Player* player = new Player("테스터");
+	//battleSystem.startBattleSequence(player);
+
+	// 1. 테스트용 플레이어 생성
+	//Player player("테스트 대원");
+
+	//cout << "===== 레벨업 및 스킬 습득 시스템 테스트 시작 =====" << endl;
+	//cout << "현재 레벨: " << player.getLevel() << endl;
+
+	//// 2. 레벨을 1부터 10까지 강제로 올리며 체크
+	//for (int i = 1; i <= 10; ++i) {
+	//	cout << "\n--- [" << i << "단계 레벨업 시도] ---" << endl;
+
+	//	player.levelUp();
+	//	cout << "[현재 상태] Level: " << player.getLevel();
+	//	if (player.getCurrentSkill() != nullptr) {
+	//		cout << " | 보유 스킬: " << player.getCurrentSkill()->getName() << endl;
+	//	}
+	//	else {
+	//		cout << " | 보유 스킬: 없음" << endl;
+	//	}
+	//	cout << "(엔터를 누르면 다음 레벨업을 진행합니다...)" << endl;
+	//	cin.get();
+	//}
+
+	//cout << "\n===== 테스트 종료 =====" << endl;
+	return 0;
 	/*BattleSystem battleSystem;
 	Player* player = new Player("테스터");
 	battleSystem.startBattleSequence(player);*/

@@ -22,7 +22,7 @@ void Lobby::update()
 	{
 		std::cout << "무엇을 하시겠습니까?\n";
 		std::cout << "1. 던전 입장\n";
-		std::cout << "2. 상점 이용\n";
+		std::cout << "2. 상점 이용\n"; 
 		std::cout << "3. 게임 종료\n";
 	
 		int input = InputSystem::getInputInt(1, 3);
