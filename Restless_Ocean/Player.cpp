@@ -260,20 +260,6 @@ void Player::showArtifacts() const {
 	cout << "\n";
 }
 
-//아이템 사용
-bool Player::useItem() {
-	int itemIndex = inventory.selectItem();
-	//아이템별 로직
-	switch(itemIndex) {
-	case -1:
-		return false;
-	case 0 - 9:
-		inventory.useItem(itemIndex, this);
-		return true;
-	default:
-		return false;
-	}
-}
 //공격력 상승
 void Player::addAttack(int amount) {
 	baseAttack += amount;

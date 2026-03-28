@@ -29,15 +29,18 @@ public:
 };
 class Flashbang : public Weapon {
 public:
+	int calculateDamage(int baseAttack, const Monster* target) const;
 	Flashbang();
 };
 
 class Vantablack : public Weapon {
 public:
+	int calculateDamage(int baseAttack, const Monster* target) const;
 	Vantablack();
 };
 
 class WaterGun : public Weapon {
 public:
+	int calculateDamage(int baseAttack, const Monster* target) const;
 	WaterGun();
 };
