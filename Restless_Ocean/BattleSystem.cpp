@@ -11,7 +11,6 @@
 #include "GameManager.h"
 using namespace std;
 
-int BattleSystem::battleCount = 1;
 
 BattleSystem::BattleSystem()
 {
@@ -38,7 +37,7 @@ void BattleSystem::startBattleSequence(Player* player)
 		{
 			break;
 		}
-		++battleCount;
+		GameManager::getInstance().increaseBattleCount();
 	}
 	cout << "================================" << '\n';
 
@@ -52,7 +51,7 @@ BattleResult BattleSystem::battle(Player* player)
 {
 	int turn = 0; // 전투 턴 수
 	MonsterFactory monsterFactory;
-	Monster* monster = monsterFactory.GenerateMonster(player->getLevel(), battleCount);
+	Monster* monster = monsterFactory.GenerateMonster(player->getLevel(), GameManager::getInstance().getBattleCount());
 	
 
 	this_thread::sleep_for(chrono::seconds(2));
@@ -96,6 +95,7 @@ BattleResult BattleSystem::battle(Player* player)
 		
 	}
 
+	// 유물 획득
 	if (monster->getRank() == BossRank::Boss && battleResult == BattleResult::PlayerWin)
 	{
 		player->addArtifact(monster->getRewardArtifact());
@@ -118,7 +118,8 @@ bool BattleSystem::processBattleResult(Player* player, BattleResult& battleResul
 		// 유적 3곳을 모두 발견했을 때
 		if (player->hasAllArtifacts())
 		{
-			GameManager::getInstance().endGame();
+			GameManager::getInstance().setIsPlayerExit(false);
+			GameManager::getInstance().endGame(GameOverReason::Clear);
 			return false;
 		}
 
@@ -133,7 +134,9 @@ bool BattleSystem::processBattleResult(Player* player, BattleResult& battleResul
 	}
 	else if (battleResult == BattleResult::MonsterWin)
 	{ // 졌을 때
-		cout << "대원이 쓰러졌습니다." << '\n';
+		//cout << "대원이 쓰러졌습니다." << '\n';
+		GameManager::getInstance().setIsPlayerExit(false);
+		GameManager::getInstance().endGame(GameOverReason::Die);
 		return false;
 	}
 }
