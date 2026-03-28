@@ -46,7 +46,7 @@ public:
 	Map getMap() const;
 
 	// 입력 받은 damage만큼 health 감소
-	void takeDamage(int damage);
+	virtual void takeDamage(int damage) = 0;
 
 	//속도 감소
 	void setSpeed(int newSpeed);

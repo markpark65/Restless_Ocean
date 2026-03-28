@@ -59,20 +59,20 @@ bool Monster::isAlive() const
     return monsterStat.health > 0;
 }
 
-void Monster::takeDamage(int damage)
-{
-    if (damage < 0)
-    {
-        damage = 0;
-    }
-
-    monsterStat.health -= damage;
-
-    if (monsterStat.health <= 0)
-    {
-        monsterStat.health = 0;
-    }
-}
+//void Monster::takeDamage(int damage)
+//{
+//    if (damage < 0)
+//    {
+//        damage = 0;
+//    }
+//
+//    monsterStat.health -= damage;
+//
+//    if (monsterStat.health <= 0)
+//    {
+//        monsterStat.health = 0;
+//    }
+//}
 
 std::string Monster::typeToString(AttributeType type) const
 {

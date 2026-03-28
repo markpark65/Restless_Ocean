@@ -33,8 +33,9 @@ public:
 	{
 		int enhancedSpeed = 10;
 		std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-		std::cout << getName() << "는 은신하다 기습 공격을 합니다!" << '\n';
 		std::cout << getName() << "의 스피드가 " << enhancedSpeed << "만큼 빨라집니다." << '\n';
+		std::cout << getName() << "는 은닉 후, 기습 공격을 합니다!" << '\n';
+		setSpeed(getSpeed() + enhancedSpeed);
 	}
 
 	void setSpeed(int speed)
