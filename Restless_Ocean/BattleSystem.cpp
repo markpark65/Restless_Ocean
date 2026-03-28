@@ -16,7 +16,7 @@ using namespace std;
 BattleSystem::BattleSystem()
 {
 	turn = 1;
-	Player* player = &GameManager::getInstance().getPlayer();
+	player = &GameManager::getInstance().getPlayer();
 
 }
 
@@ -54,7 +54,7 @@ BattleResult BattleSystem::battle()
 {
 	// 전투 턴 수
 	MonsterFactory monsterFactory;
-	monster = monsterFactory.GenerateMonster(player->getLevel(), GameManager::getInstance().getBattleCount());
+	monster.reset(monsterFactory.GenerateMonster(player->getLevel(), GameManager::getInstance().getBattleCount()));
 
 	this_thread::sleep_for(chrono::seconds(2));
 
@@ -100,14 +100,7 @@ BattleResult BattleSystem::battle()
 	// 배틀 횟수 카운트 증가
 	GameManager::getInstance().increaseBattleCount();
 
-	//// 유물 획득
-	//if (monster->getRank() == BossRank::Boss && battleResult == BattleResult::PlayerWin)
-	//{
-	//	player->addArtifact(monster->getRewardArtifact());
-	//}
-
-	delete monster;
-	monster = nullptr;
+	
 	return battleResult;
 }
 
@@ -217,11 +210,10 @@ int BattleSystem::selectAction()// 행동 선택 함수
 
 void BattleSystem::playerAttack(int turn) // 플레이어 일반 공격 함수
 {
-
-	int attackDamage = player->attack(monster);
+	int attackDamage = player->attack(monster.get());
+	cout << "* " << attackDamage << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
 	monster->takeDamage(attackDamage);
 
-	cout << "* " << attackDamage << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
@@ -229,7 +221,7 @@ bool BattleSystem::playerUseSkill() // 플레이어 스킬 사용 함수
 {
 	cout << "* 스킬을 사용합니다." << '\n';
 
-	bool skillSuccess = player->useSkill(monster);
+	bool skillSuccess = player->useSkill(monster.get());
 	if (skillSuccess)
 	{
 		this_thread::sleep_for(chrono::seconds(2));
@@ -297,31 +289,37 @@ void BattleSystem::monsterAction(int turn)
 void BattleSystem::prize()
 {
 	Random random;
+	int gold = 0;
 
-	//보상 획득
-	player->gainExp(50);
-	this_thread::sleep_for(chrono::seconds(1));
 
-	// 골드 10~20 범위에서 랜덤 획득
-	int gold = random.getRandomValue(10, 20);
-	player->addGold(gold);
-	this_thread::sleep_for(chrono::seconds(1));
-
-	// 30% 확률로 아이템 획득
-	int itemChance = random.getRandomValue(1, 100);
-	
-	if (itemChance <= 30)
+	if (monster->getRank() == BossRank::Boss) // 보스 몬스터 보상
 	{
-		cout << "아이템을 획득했습니다!" << '\n';
-
-		//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
-		player->getInventory().addItem(itemFactory.getRandomItem());
-	}
-
-	// 유물 획득
-	if (monster->getRank() == BossRank::Boss)
-	{
+		player->gainExp(100);
+		gold = random.getRandomValue(20, 40);
 		player->addArtifact(monster->getRewardArtifact());
+	}
+	else // 일반 몬스터 보상
+	{
+		//보상 획득
+		player->gainExp(50);
+		this_thread::sleep_for(chrono::seconds(1));
+
+		// 골드 10~20 범위에서 랜덤 획득
+		gold = random.getRandomValue(10, 20);
+		player->addGold(gold);
+		this_thread::sleep_for(chrono::seconds(1));
+
+		// 30% 확률로 아이템 획득
+		int itemChance = random.getRandomValue(1, 100);
+
+		if (itemChance <= 30)
+		{
+			cout << "아이템을 획득했습니다!" << '\n';
+
+			//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
+			player->getInventory().addItem(itemFactory.getRandomItem());
+		}
+
 	}
 	this_thread::sleep_for(chrono::seconds(1));
 

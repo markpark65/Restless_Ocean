@@ -1,10 +1,9 @@
 ﻿#pragma once
+#include "Monster.h"
 #include "ItemFactory.h"
 #include "WeaponManager.h"
 
-class Monster;
 class Player;
-
 
 enum class BattleResult {
 	Continue, // 전투 계속
@@ -42,9 +41,8 @@ public:
 	//void displayInventory(Player* player);
 private:
 	int turn;
-	Monster* monster;
+	unique_ptr<Monster> monster;
 	Player* player;
-	//BattleResult battleResult;
 
 	WeaponManager weaponManager;
 	ItemFactory itemFactory;
