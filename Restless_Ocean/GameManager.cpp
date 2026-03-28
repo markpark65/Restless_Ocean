@@ -39,8 +39,27 @@ void GameManager::run()
 {
 	GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 
-	while (currentStage)
+	while (currentStage && !isGameOver)
 	{
 		currentStage->update();
 	}
+}
+
+void GameManager::endGame()
+{
+	isGameOver = true;
+
+	std::cout << "\n================================" << '\n';
+	std::cout << "모든 유적을 모았습니다!" << '\n';
+	std::cout << "심해의 비밀이 드러납니다." << '\n';
+	std::cout << "(대충 왕국과 심해어들의 비밀)" << '\n';
+	std::cout << "게임을 종료합니다." << '\n';
+	std::cout << "================================" << '\n';
+
+	currentStage.reset();
+}
+
+bool GameManager::isGameEnded() const
+{
+	return isGameOver;
 }

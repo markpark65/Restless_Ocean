@@ -85,5 +85,7 @@ public:
 	int getSpeed() const { return speed; }
 	Skill* getCurrentSkill() const;
 	Inventory<Item>& getInventory() { return inventory; }
+
+	bool hasAllArtifacts() const;
 };
 

@@ -20,6 +20,11 @@ void Dungeon::update()
 		Player& player = GameManager::getInstance().getPlayer();
 		battleSystem.startBattleSequence(&player);
 
+		if (GameManager::getInstance().isGameEnded())
+		{
+			return;
+		}
+
 		// 전투 종료 후
 		std::cout << "무엇을 하시겠습니까?\n";
 		std::cout << "1. 계속 탐험\n";

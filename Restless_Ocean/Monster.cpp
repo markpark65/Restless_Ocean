@@ -6,7 +6,7 @@
 using namespace std;
 
 Monster::Monster(const MonsterStat& monsterStat)
-    : monsterStat(monsterStat)
+    : monsterStat(monsterStat), rewardArtifact()
 {
 }
 
@@ -52,6 +52,16 @@ const std::string& Monster::getDescription() const
 Map Monster::getMap() const
 {
 	return monsterStat.map;
+}
+
+BossRank Monster::getRank() const
+{
+	return rank;
+}
+
+const std::string& Monster::getRewardArtifact() const
+{
+	return rewardArtifact;
 }
 
 bool Monster::isAlive() const

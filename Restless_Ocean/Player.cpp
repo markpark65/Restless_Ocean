@@ -244,8 +244,18 @@ void Player::addGold(int amount) {
 }
 //유적 발견
 void Player::addArtifact(std::string name) {
+	// 유적 중복 검사
+	for (auto& artifact : artifacts)
+	{
+		if (artifact == name)
+		{
+			std::cout << name << "은 이미 발견한 유적입니다!" << std::endl;
+			std::cout << "현재 유적의 개수: " << artifactCount << "개" << std::endl;
+			return;
+		}
+	}
 	artifacts.push_back(name);
-	cout << name<<"을 발견했습니다. (현재 유적 개수: " << artifactCount << "개)" << endl;
+	cout << name<<"을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
 		cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
 		cout << "(대충왕국과 심해어들의 비밀)" << endl;
@@ -258,6 +268,12 @@ void Player::showArtifacts() const {
 		cout << "- " << artifacts[i] <<"\n";
 	}
 	cout << "\n";
+}
+
+// 유적 개수 확인
+bool Player::hasAllArtifacts() const
+{
+	return artifacts.size() >= 3;
 }
 
 //공격력 상승

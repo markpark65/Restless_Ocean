@@ -20,14 +20,12 @@ public:
 		{
 			int damage = getAttack() + 30;
 			std::cout << getName() << "가 축적한 빛을 폭발시킵니다!" << '\n';
-			std::cout << getName() << "이 " << target->getName() << "에게" << damage << "의 피해를 입힙니다!" << '\n';
 			target->takeDamage(damage);
 		}
 		else
 		{
 			std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
 			std::cout << getName() << "이 몸통 박치기를 사용합니다!" << '\n';
-			std::cout << getName() << "이 " << target->getName() << "에게" << getAttack() << "의 피해를 입힙니다!" << '\n';
 			target->takeDamage(getAttack());
 		}
 	}
