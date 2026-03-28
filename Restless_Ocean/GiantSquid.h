@@ -20,7 +20,6 @@ public:
 
 		std::cout << getName() << "가 일반 공격을 사용합니다!" << '\n';
 		std::cout << getName() << "는 먹물을 발사합니다!" << '\n';
-		std::cout << getName() << "가 " << target->getName() << "에게" << getAttack() << "의 피해를 입힙니다!" << '\n';
 		target->takeDamage(getAttack());
 	}
 	void useSpecialAttack(Player* target) override
@@ -29,14 +28,13 @@ public:
 			return;
 
 		std::cout << getName() << "가 특수 공격을 사용합니다!" << '\n';
-		std::cout << getName() << "가 " << target->getName() << "에게" << getAttack() << "돌진합니다!" << '\n';
+		std::cout << getName() << "가 " << target->getName() << "에게 돌진합니다!" << '\n';
 
-		int successAttack = Random::getRandomValue(0, 1);
-		if (successAttack)
+		int successAttack = Random::getRandomValue(0, 10);
+		if (successAttack < 5)
 		{
 			int damage = getAttack() * 2;
 
-			std::cout << getName() << "가 " << target->getName() << "에게" << damage << "의 피해를 입힙니다!" << '\n';
 			target->takeDamage(damage);
 		}
 		else

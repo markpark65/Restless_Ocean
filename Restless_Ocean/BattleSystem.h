@@ -16,7 +16,7 @@ enum class BattleResult {
 class BattleSystem
 {
 public:
-
+	static int battleCount;
 	BattleSystem();
 
 	// 전체 흐름 관리 함수

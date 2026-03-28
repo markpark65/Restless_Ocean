@@ -8,6 +8,6 @@
 class MonsterFactory
 {
 public:
-	Monster* GenerateMonster(int level = 1, int count = 0);
+	Monster* GenerateMonster(int level, int count);
 };
 

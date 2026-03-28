@@ -33,9 +33,9 @@ static const MonsterTemplate normalTemplates[] =
 
 static const MonsterTemplate bossTemplates[] =
 {
-	{ "왕관 해파리",	30, 50,  5, 10, 95, 105, AttributeType::Luminous, "왕관 해파리 설명", Map::SeaCaveMap },
-	{ "흉내 문어",		20, 40, 10, 15, 100, 110, AttributeType::Hidden, "흉내 문어 설명", Map::BuildingMap },
-	{ "레비아탄",		50, 70, 10, 20, 90, 100, AttributeType::Giant, "레비아탄 설명", Map::CollapsedShipMap }
+	{ "왕관 해파리",	1, 2,  5, 10, 95, 105, AttributeType::Luminous, "왕관 해파리 설명", Map::SeaCaveMap },
+	{ "흉내 문어",		1, 2, 10, 15, 100, 110, AttributeType::Hidden, "흉내 문어 설명", Map::BuildingMap },
+	{ "레비아탄",		1, 2, 10, 20, 90, 100, AttributeType::Giant, "레비아탄 설명", Map::CollapsedShipMap }
 };
 
 // 플레이어 레벨에 따라 랜덤으로 몬스터의 스탯 조정
@@ -44,11 +44,10 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 	const MonsterTemplate* monsterTemplate = nullptr;
 	int index = 0;
 
-	bool isBossBattle = (battleCount > 7);
+	bool isBossBattle = (battleCount > 3);
 	if (!isBossBattle)
 	{
-		index = Random::getRandomValue(0, 2);
-		monsterTemplate = &normalTemplates[index];
+		index = Random::getRandomValue(0, 2); monsterTemplate = &normalTemplates[index];
 	}
 	else
 	{
@@ -56,41 +55,30 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 		monsterTemplate = &bossTemplates[index];
 	}
 
-	MonsterStat stat;
-	stat.name = monsterTemplate->name;
+	MonsterStat stat; stat.name = monsterTemplate->name;
 	stat.health = Random::getRandomValue(monsterTemplate->minHealth, monsterTemplate->maxHealth) * level;
 	stat.attack = Random::getRandomValue(monsterTemplate->minAttack, monsterTemplate->maxAttack) * level;
 	stat.speed = Random::getRandomValue(monsterTemplate->minSpeed, monsterTemplate->maxSpeed);
-	stat.type = monsterTemplate->type;
-	stat.description = monsterTemplate->description;
-	stat.map = monsterTemplate->map;
+	stat.type = monsterTemplate->type; stat.description = monsterTemplate->description; stat.map = monsterTemplate->map;
 
 	if (!isBossBattle)
 	{
 		switch (index)
 		{
-		case 0:
-			return new FootballFish(stat);
-		case 1:
-			return new ViperFish(stat);
-		case 2:
-			return new GiantSquid(stat);
-		default:
-			return nullptr;
+			case 0: return new FootballFish(stat);
+			case 1: return new ViperFish(stat);
+			case 2: return new GiantSquid(stat);
+			default: return nullptr;
 		}
 	}
 	else
 	{
 		switch (index)
 		{
-		case 0:
-			return new Atolla(stat);
-		case 1:
-			return new MimicOctopus(stat);
-		case 2:
-			return new Leviathan(stat);
-		default:
-			return nullptr;
+			case 0: return new Atolla(stat);
+			case 1: return new MimicOctopus(stat);
+			case 2: return new Leviathan(stat);
+			default: return nullptr;
 		}
 	}
 }

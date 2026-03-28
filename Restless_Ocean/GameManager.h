@@ -13,6 +13,7 @@ friend class Singleton<GameManager>;
 private:
 	Player					player;
 	std::unique_ptr<Stage>	currentStage;
+	bool					isGameOver = false;
 
 public:
 	Player& getPlayer();
@@ -23,5 +24,8 @@ public:
 
 	void changeStage(std::unique_ptr<Stage> newStage);
 	void run();
+
+	void endGame();
+	bool isGameEnded() const;
 };
 

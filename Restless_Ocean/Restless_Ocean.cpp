@@ -59,12 +59,12 @@ int main()
 
 
 	//GameManager::getInstance().run();
-    MonsterFactory m;
-    for (int i = 0; i < 10; ++i)
-    {
-        Monster* monster = m.GenerateMonster(1);
-        monster->showStat();
-    }
+    //MonsterFactory m;
+    //for (int i = 0; i < 10; ++i)
+    //{
+    //    Monster* monster = m.GenerateMonster(1);
+    //    monster->showStat();
+    //}
 
 
 	GameManager::getInstance().run();

@@ -8,11 +8,14 @@
 #include "InputSystem.h"
 #include "ItemFactory.h"
 #include "WeaponManager.h"
+#include "GameManager.h"
 using namespace std;
+
+int BattleSystem::battleCount = 1;
 
 BattleSystem::BattleSystem()
 {
-	
+
 }
 
 void BattleSystem::startBattleSequence(Player* player)
@@ -23,7 +26,7 @@ void BattleSystem::startBattleSequence(Player* player)
 	cout << '\n';
 	
 	// 일반 전투
-	for (int i = 0; i < 7; ++i)
+	for (int i = 0; i < 100; ++i)
 	{
 		cout << "================================" << '\n';
 		cout << i + 1 << "번째 전투" << '\n';
@@ -35,6 +38,7 @@ void BattleSystem::startBattleSequence(Player* player)
 		{
 			break;
 		}
+		++battleCount;
 	}
 	cout << "================================" << '\n';
 
@@ -48,7 +52,7 @@ BattleResult BattleSystem::battle(Player* player)
 {
 	int turn = 0; // 전투 턴 수
 	MonsterFactory monsterFactory;
-	Monster* monster = monsterFactory.GenerateMonster(player->getLevel());
+	Monster* monster = monsterFactory.GenerateMonster(player->getLevel(), battleCount);
 	
 
 	this_thread::sleep_for(chrono::seconds(2));
@@ -92,6 +96,11 @@ BattleResult BattleSystem::battle(Player* player)
 		
 	}
 
+	if (monster->getRank() == BossRank::Boss && battleResult == BattleResult::PlayerWin)
+	{
+		player->addArtifact(monster->getRewardArtifact());
+	}
+
 	delete monster;
 	return battleResult;
 }
@@ -105,7 +114,15 @@ bool BattleSystem::processBattleResult(Player* player, BattleResult& battleResul
 	player->useOxygen(10); // 전투 후 산소 10 소모
 
 	if (battleResult == BattleResult::PlayerWin)
-	{ //승리했을 때
+	{
+		// 유적 3곳을 모두 발견했을 때
+		if (player->hasAllArtifacts())
+		{
+			GameManager::getInstance().endGame();
+			return false;
+		}
+
+		//승리했을 때
 		prize(player);
 		return true;
 	}
@@ -238,30 +255,24 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 	cout << "* 몬스터의 턴입니다!" << '\n';
 
 	//몬스터의 공격
-	cout << monster->getName() << "이(가) " << player->getName() << " 대원을 공격합니다!" << '\n';
-	player->takeDamage(monster->getAttack());
+	//cout << monster->getName() << "이(가) " << player->getName() << " 대원을 공격합니다!" << '\n';
+	//player->takeDamage(monster->getAttack());
+	monster->showStat();
 
-	//int randValue = Random::getRandomValue(0, 99);
+	// 패시브 발동
+	monster->activatePassive();
 
-	//if (randValue < 50)
-	//{
-	//	cout << monster->getName() << "의 패시브가 발동됩니다!" << '\n';
-	//	monster->activatePassive();
-	//}
-	//
-	//// 일반 공격 or 특수 공격
-	//int attackType = Random::getRandomValue(0, 9);
-	//
-	//if (attackType < 7)
-	//{
-	//	cout << monster->getName() << "이(가) 일반 공격을 사용합니다!" << '\n';
-	//	monster->useBasicAttack(player);
-	//}
-	//else
-	//{
-	//	cout << monster->getName() << "이(가) 특수 공격을 사용합니다!" << '\n';
-	//	monster->useSpecialAttack(player);
-	//}
+	// 일반 공격 or 특수 공격
+	int attackType = Random::getRandomValue(0, 100);
+	
+	if (attackType <= 50)
+	{
+		monster->useBasicAttack(player);
+	}
+	else
+	{
+		monster->useSpecialAttack(player);
+	}
 	
 
 	cout << '\n';
