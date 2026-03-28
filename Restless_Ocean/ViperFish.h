@@ -12,7 +12,6 @@ public:
 	{
 		std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
 		std::cout << getName() << "이 물어 뜯기를 사용합니다!" << '\n';
-		std::cout << getName() << "이 " << target->getName() << "에게" << getAttack() << "의 피해를 입힙니다!" << '\n';
 		target->takeDamage(getAttack());
 	}
 
@@ -21,11 +20,8 @@ public:
 		std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
 		std::cout << getName() << "이 연속 물어 뜯기를 사용합니다!" << '\n';
 
-		std::cout << getName() << "이 " << target->getName() << "에게" << getAttack() << "의 피해를 입힙니다!" << '\n';
 		target->takeDamage(getAttack());
-		std::cout << getName() << "이 " << target->getName() << "에게" << getAttack() << "의 피해를 입힙니다!" << '\n';
 		target->takeDamage(getAttack() * 0.5);
-		std::cout << getName() << "이 " << target->getName() << "에게" << getAttack() << "의 피해를 입힙니다!" << '\n';
 		target->takeDamage(getAttack() * 0.25);
 	}
 

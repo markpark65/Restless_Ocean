@@ -30,11 +30,13 @@ void Shop::update()
 		std::cout << "1. 구매" << "\n";
 		std::cout << "2. 판매" << "\n";
 		std::cout << "3. 보유 아이템 확인" << "\n";
-		std::cout << "4. 로비 이동" << "\n";
-		std::cout << "5. 던전 입장" << "\n";
-		std::cout << "6. 게임 종료" << "\n";
+		std::cout << "4. 무기 강화" << "\n";
+		std::cout << "5. 아이템 공방" << "\n";
+		std::cout << "6. 로비 이동" << "\n";
+		std::cout << "7. 던전 입장" << "\n";
+		std::cout << "8. 게임 종료" << "\n";
 
-		int input = InputSystem::getInputInt(1, 6);
+		int input = InputSystem::getInputInt(1, 8);
 
 		switch (input)
 		{
@@ -48,14 +50,20 @@ void Shop::update()
 			player.getInventory().printAll();
 			break;
 		case 4:
+			shopSystem.enhanceWeapon(player);
+			break;
+		case 5:
+			shopSystem.craftItem(player);
+			break;
+		case 6:
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 			break;
-		case 5:
+		case 7:
 			GameManager::getInstance().changeStage(std::make_unique<Dungeon>());
 			return;
 			break;
-		case 6:
+		case 8:
 			GameManager::getInstance().changeStage(nullptr);
 			std::cout << "게임을 종료합니다.\n";
 			return;

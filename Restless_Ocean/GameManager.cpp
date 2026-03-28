@@ -2,15 +2,18 @@
 #include "Stage.h"
 #include "Lobby.h"
 #include "InputSystem.h"
+#include "BattleSystem.h"
 
 Player& GameManager::getPlayer()
 {
-	return player;
+	return *player;
 }
 
 GameManager::GameManager()
-	: player(createPlayer())
-{ }
+	//: player(createPlayer())
+{
+	player = std::make_unique<Player>(createPlayer());
+}
 
 std::string GameManager::createPlayer()
 {
@@ -18,6 +21,11 @@ std::string GameManager::createPlayer()
 
 	std::string name = InputSystem::getInputStr();
 	return name;
+}
+
+void GameManager::setIsPlayerExit(bool playerExit)
+{
+	isPlayerExit = playerExit;
 }
 
 void GameManager::changeStage(std::unique_ptr<Stage> newStage)
@@ -37,10 +45,85 @@ void GameManager::changeStage(std::unique_ptr<Stage> newStage)
 
 void GameManager::run()
 {
-	GameManager::getInstance().changeStage(std::make_unique<Lobby>());
-
-	while (currentStage)
+	while (true)
 	{
-		currentStage->update();
+		isGameOver = false;
+		GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+
+		while (currentStage && !isGameOver)
+		{
+			currentStage->update();
+		}
+
+		if (isPlayerExit)
+		{
+			break;
+		}
+
+		std::cout << '\n';
+		std::cout << "게임을 다시 시작하시겠습니까?" << '\n';
+		std::cout << "1. 처음부터 다시 시작" << '\n';
+		std::cout << "2. 게임 종료" << '\n';
+		std::cout << "> ";
+
+		int input = InputSystem::getInputInt(1, 2);
+
+		if (input == 1)
+		{
+			resetGameState();
+		}
+		else
+		{
+			break;
+		}
 	}
+}
+
+void GameManager::endGame(GameOverReason reason)
+{
+	isGameOver = true;
+
+	if (reason == GameOverReason::Clear)
+	{
+		std::cout << "\n================================" << '\n';
+		std::cout << "모든 유적을 모았습니다!" << '\n';
+		std::cout << "심해의 비밀이 드러납니다." << '\n';
+		std::cout << "(대충 왕국과 심해어들의 비밀)" << '\n';
+		std::cout << "게임을 종료합니다." << '\n';
+		std::cout << "================================" << '\n';
+	}
+	else
+	{
+		std::cout << "\n================================" << '\n';
+		std::cout << "대원이 쓰러졌습니다." << '\n';
+		std::cout << "게임 오버." << '\n';
+		std::cout << "================================" << '\n';
+	}
+
+	currentStage.reset();
+}
+
+bool GameManager::isGameEnded() const
+{
+	return isGameOver;
+}
+
+void GameManager::resetGameState()
+{
+	isPlayerExit = true;
+	isGameOver = false;
+	battleCount = 1;
+	currentStage.reset();
+
+	player = std::make_unique<Player>(createPlayer());
+}
+
+int GameManager::getBattleCount() const
+{
+	return battleCount;
+}
+
+void GameManager::increaseBattleCount()
+{
+	++battleCount;
 }

@@ -14,6 +14,13 @@ enum class Map
 	CollapsedShipMap,
 };
 
+enum class BossRank
+{
+	None,
+	Normal,
+	Boss,
+};
+
 struct MonsterStat
 {
 	std::string		name;
@@ -30,6 +37,8 @@ class Monster
 {
 protected:
 	MonsterStat		monsterStat;
+	BossRank		rank = BossRank::None;
+	std::string		rewardArtifact;
 
 public:
 	Monster(const MonsterStat& monsterStat);
@@ -44,6 +53,8 @@ public:
 	bool isAlive() const;
 	const std::string& getDescription() const;
 	Map getMap() const;
+	BossRank getRank() const;
+	const std::string& getRewardArtifact() const;
 
 	// 입력 받은 damage만큼 health 감소
 	virtual void takeDamage(int damage) = 0;
@@ -52,13 +63,13 @@ public:
 	void setSpeed(int newSpeed);
 
 	// 몬스터 스탯 출력
-	void showStat() const;
+	virtual void showStat() const;
 
 	// 몬스터 타입 string으로 변경
 	std::string typeToString(AttributeType type) const;
 	std::string mapToString(Map map) const;
 
-	virtual const std::string& GetRewardArtifact() const = 0;
+	//virtual const std::string& GetRewardArtifact() const { return; };
 	virtual std::string getRankName() const = 0;
 	virtual void useBasicAttack(Player* target)		= 0;
 	virtual void useSpecialAttack(Player* target)	= 0;

@@ -3,6 +3,11 @@
 #include "GameLogger.h"
 #include <iostream>
 
+void Weapon::increaseDamage(int amount) {
+	addDamage += amount;
+	std::cout << name<<"(이)가 +" << amount << " 만큼 강화되었습니다!\n";
+}
+
 //// 섬광탄 (Flashbang)
 Flashbang::Flashbang() : Weapon("섬광탄", WeaponType::FLASH, 30) {}
 int Flashbang::calculateDamage(int baseAttack, const Monster* target) const {

@@ -9,13 +9,13 @@ using namespace std;
 
 Player::Player(string n)
 	: name(n)
-	, level(1)
+	, level(20)
 	, hp(200)
 	, maxHp(200)
 	, baseAttack(30)
 	, exp(0)
 	, maxExp(100)
-	, gold(0)
+	, gold(1000)
 	, oxygen(100)
 	, maxOxygen(100)
 	, speed(100)
@@ -25,6 +25,7 @@ Player::Player(string n)
 	, battery(100)
 	, tempAttack(0)
 	, artifactCount(0)
+	, gachaCount(0)
 	, inventory(10) {
 	cout << "심해 탐사대원: " << name << " 이(가) 등록되었습니다!" << endl;
 }
@@ -92,12 +93,24 @@ void Player::levelUp() {
 		this->learnSkill(move(discoveredSkill));
 	}
 }
+
 //무기 장착 구현
 void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
 	if (!newWeapon) return;
 	equippedWeapon = std::move(newWeapon);
 	cout << name << " 대원이 " << equippedWeapon->getName() << "무기를 장착했습니다";
 }
+
+//무기 업그레이드
+void Player::upgradeWeapon(int amount) {
+	if (!equippedWeapon) {
+		std::cout << "장착된 무기가 없습니다!\n";
+		return;
+	}
+
+	equippedWeapon->increaseDamage(amount);
+}
+
 //스킬 배우기
 void Player::learnSkill(unique_ptr<Skill> newSkill) {
 	if (!newSkill) return;
@@ -244,8 +257,18 @@ void Player::addGold(int amount) {
 }
 //유적 발견
 void Player::addArtifact(std::string name) {
+	// 유적 중복 검사
+	for (auto& artifact : artifacts)
+	{
+		if (artifact == name)
+		{
+			std::cout << name << "은 이미 발견한 유적입니다!" << std::endl;
+			std::cout << "현재 유적의 개수: " << artifactCount << "개" << std::endl;
+			return;
+		}
+	}
 	artifacts.push_back(name);
-	cout << name<<"을 발견했습니다. (현재 유적 개수: " << artifactCount << "개)" << endl;
+	cout << name<<"을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
 		cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
 		cout << "(대충왕국과 심해어들의 비밀)" << endl;
@@ -258,6 +281,12 @@ void Player::showArtifacts() const {
 		cout << "- " << artifacts[i] <<"\n";
 	}
 	cout << "\n";
+}
+
+// 유적 개수 확인
+bool Player::hasAllArtifacts() const
+{
+	return artifacts.size() >= 3;
 }
 
 //공격력 상승

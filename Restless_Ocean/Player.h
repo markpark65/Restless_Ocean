@@ -32,6 +32,7 @@ private:
 	int maxPressure;
 	int battery;
 	int artifactCount;
+	int gachaCount;
 	std::vector<std::string> artifacts;
 	std::unique_ptr<Weapon> equippedWeapon;
 	std::unique_ptr<Skill> currentSkill;
@@ -50,8 +51,12 @@ public:
 	void addTempAttack(int amount);
 	void resetTempStats();
 	void setWeapon(std::unique_ptr<Weapon> newWeapon);
+	void upgradeWeapon(int amount);
 	int attack(const Monster* target);
 	void learnSkill(std::unique_ptr<Skill> newSkill);
+	int getGachaCount() const { return gachaCount; }
+	void addGachaCount(int n) { gachaCount += n; }
+	
 	
 	//전투 결과
 	void useSkill(Monster* target);
@@ -85,5 +90,7 @@ public:
 	int getSpeed() const { return speed; }
 	Skill* getCurrentSkill() const;
 	Inventory<Item>& getInventory() { return inventory; }
+
+	bool hasAllArtifacts() const;
 };
 
