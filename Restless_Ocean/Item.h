@@ -20,8 +20,9 @@ public:
     void printInfo() const;
 
 	bool isUnlocked(int playerLevel) const;
-
+	int getUnlockLevel() const { return unlocklevel; }
 	virtual Item* clone() const = 0;
+	virtual bool hideInfo() const { return false; }
 
 protected:
     string name;
@@ -51,6 +52,18 @@ private:
 	int maxHpIncrease;
 };
 
+//강화 체력 포션
+class MegaHealthPotion : public Item {
+public:
+	MegaHealthPotion();
+	void use(Player* player) override;
+	Item* clone() const override;
+	bool hideInfo() const;
+private:
+	int healAmount;
+
+};
+
 //산소 회복
 class OxygenPotion : public Item {
 public:
@@ -71,6 +84,18 @@ public:
 
 private:
 	int maxIncrease;
+};
+
+//강화 산소 포션
+class MegaOxygenPotion : public Item {
+public:
+	MegaOxygenPotion();
+	void use(Player* p) override;
+	Item* clone() const override;
+	bool hideInfo() const;
+
+private:
+	int oxygen;
 };
 
 //압력 해소
@@ -95,6 +120,17 @@ private:
 	int maxIncrease;
 };
 
+//강화 압력 포션
+class MegaPressurePotion : public Item {
+public:
+	MegaPressurePotion();
+	void use(Player* p) override;
+	Item* clone() const override;
+	bool hideInfo() const;
+private:
+	int pressure;
+};
+
 
 //공격력 Up
 class AttackBoost : public Item {
@@ -106,6 +142,19 @@ public:
 private:
     int attackIncrease;
 };
+
+//무기 강화 아이템
+class WeaponUpgrade : public Item {
+public:
+	WeaponUpgrade(string name, int price, int atk, int unlocklevel);
+	void use(Player* character) override;
+	Item* clone() const override;
+
+private:
+	int attackIncrease;
+};
+
+
 //스킬북
 class SkillBook : public Item {
 private:
@@ -115,3 +164,5 @@ public:
 	void use(Player* player) override;
 	virtual ~SkillBook() override = default;
 };
+
+
