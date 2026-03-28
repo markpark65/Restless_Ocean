@@ -12,15 +12,18 @@
 using namespace std;
 
 
+
 BattleSystem::BattleSystem()
 {
+	turn = 1;
+	Player* player = &GameManager::getInstance().getPlayer();
 
 }
 
-void BattleSystem::startBattleSequence(Player* player)
+void BattleSystem::startBattleSequence(Player* p)
 {
-
 	// 무기 선택
+	player = p;
 	player->setWeapon(weaponManager.selectWeapon());
 	cout << '\n';
 	
@@ -30,9 +33,10 @@ void BattleSystem::startBattleSequence(Player* player)
 		cout << "================================" << '\n';
 		cout << i + 1 << "번째 전투" << '\n';
 		BattleResult battleResult;
-		battleResult = battle(player);
 
-		bool canContinue = processBattleResult(player, battleResult);
+		battleResult = battle();
+
+		bool canContinue = processBattleResult(battleResult);
 		if (!canContinue)
 		{
 			break;
@@ -41,18 +45,16 @@ void BattleSystem::startBattleSequence(Player* player)
 	}
 	cout << "================================" << '\n';
 
-	// 보스전
 
 }
 
 
 
-BattleResult BattleSystem::battle(Player* player)
+BattleResult BattleSystem::battle()
 {
-	int turn = 0; // 전투 턴 수
+	// 전투 턴 수
 	MonsterFactory monsterFactory;
-	Monster* monster = monsterFactory.GenerateMonster(player->getLevel(), GameManager::getInstance().getBattleCount());
-	
+	monster = monsterFactory.GenerateMonster(player->getLevel(), GameManager::getInstance().getBattleCount());
 
 	this_thread::sleep_for(chrono::seconds(2));
 
@@ -71,22 +73,22 @@ BattleResult BattleSystem::battle(Player* player)
 		if (player->getSpeed() >= monster->getSpeed())
 		{
 			// 플레이어가 먼저 행동
-			playerAction(turn, player, monster, battleResult);
+			playerAction(getTurnCount(), battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			monsterAction(turn, player, monster);
+			monsterAction(turn);
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 		}
 		else
 		{
 			// 몬스터가 먼저 행동
-			monsterAction(turn, player, monster);
+			monsterAction(turn);
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			playerAction(turn, player, monster, battleResult);
+			playerAction(turn, battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
@@ -95,18 +97,22 @@ BattleResult BattleSystem::battle(Player* player)
 		
 	}
 
-	// 유물 획득
-	if (monster->getRank() == BossRank::Boss && battleResult == BattleResult::PlayerWin)
-	{
-		player->addArtifact(monster->getRewardArtifact());
-	}
+	// 배틀 횟수 카운트 증가
+	GameManager::getInstance().increaseBattleCount();
+
+	//// 유물 획득
+	//if (monster->getRank() == BossRank::Boss && battleResult == BattleResult::PlayerWin)
+	//{
+	//	player->addArtifact(monster->getRewardArtifact());
+	//}
 
 	delete monster;
+	monster = nullptr;
 	return battleResult;
 }
 
 
-bool BattleSystem::processBattleResult(Player* player, BattleResult& battleResult)
+bool BattleSystem::processBattleResult(BattleResult& battleResult)
 {
 	// 전투 끝 로직 
 	cout << "==========================================================" << '\n';
@@ -124,7 +130,7 @@ bool BattleSystem::processBattleResult(Player* player, BattleResult& battleResul
 		}
 
 		//승리했을 때
-		prize(player);
+		prize();
 		return true;
 	}
 	else if (battleResult == BattleResult::RunAway)
@@ -154,7 +160,7 @@ BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)
 	return BattleResult::Continue;
 }
 
-void BattleSystem::playerAction(int& turn, Player* player, Monster* monster, BattleResult& battleResult)
+void BattleSystem::playerAction(int turn, BattleResult& battleResult)
 {
 	cout << "* 플레이어의 턴입니다!" << '\n';
 
@@ -170,18 +176,14 @@ void BattleSystem::playerAction(int& turn, Player* player, Monster* monster, Bat
 		switch (choice)
 		{
 		case 1:
-			playerAttack(turn, player, monster);
+			playerAttack(turn);
 			actionCompleted = true;
 			break;
 		case 2:
-			playerUseSkill(player, monster);
-			actionCompleted = true;
+			actionCompleted = playerUseSkill();
 			break;
 		case 3:
-			if (playerUseItem(player)) {
-				actionCompleted = true;
-			}
-			
+			actionCompleted = playerUseItem();
 			break;
 		case 4:
 			// 도망
@@ -213,22 +215,34 @@ int BattleSystem::selectAction()// 행동 선택 함수
 	return choice;
 }
 
-void BattleSystem::playerAttack(int& turn, Player* player, Monster* monster) // 플레이어 일반 공격 함수
+void BattleSystem::playerAttack(int turn) // 플레이어 일반 공격 함수
 {
-	cout << "* " << player->getAttack() << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
 
-	monster->takeDamage(player->getAttack());
+	int attackDamage = player->attack(monster);
+	monster->takeDamage(attackDamage);
+
+	cout << "* " << attackDamage << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
-void BattleSystem::playerUseSkill(Player* player, Monster* monster) // 플레이어 스킬 사용 함수
+bool BattleSystem::playerUseSkill() // 플레이어 스킬 사용 함수
 {
 	cout << "* 스킬을 사용합니다." << '\n';
-	player->useSkill(monster);
-	this_thread::sleep_for(chrono::seconds(2));
+
+	bool skillSuccess = player->useSkill(monster);
+	if (skillSuccess)
+	{
+		this_thread::sleep_for(chrono::seconds(2));
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
 }
 
-bool BattleSystem::playerUseItem(Player* player) // 플레이어 아이템 사용 함수
+bool BattleSystem::playerUseItem() // 플레이어 아이템 사용 함수
 {
 	cout << "아이템을 선택하세요." << '\n';
 	int itemIndex = player->getInventory().selectItem();
@@ -253,13 +267,10 @@ void BattleSystem::playerRunAway(BattleResult& battleResult)
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
-void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
+void BattleSystem::monsterAction(int turn)
 {
 	cout << "* 몬스터의 턴입니다!" << '\n';
 
-	//몬스터의 공격
-	//cout << monster->getName() << "이(가) " << player->getName() << " 대원을 공격합니다!" << '\n';
-	//player->takeDamage(monster->getAttack());
 	monster->showStat();
 
 	// 패시브 발동
@@ -283,7 +294,7 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 
 }
 
-void BattleSystem::prize(Player* player)
+void BattleSystem::prize()
 {
 	Random random;
 
@@ -305,6 +316,12 @@ void BattleSystem::prize(Player* player)
 
 		//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
 		player->getInventory().addItem(itemFactory.getRandomItem());
+	}
+
+	// 유물 획득
+	if (monster->getRank() == BossRank::Boss)
+	{
+		player->addArtifact(monster->getRewardArtifact());
 	}
 	this_thread::sleep_for(chrono::seconds(1));
 

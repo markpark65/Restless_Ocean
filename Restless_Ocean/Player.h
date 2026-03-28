@@ -59,7 +59,7 @@ public:
 	
 	
 	//전투 결과
-	void useSkill(Monster* target);
+	bool useSkill(Monster* target);
 	void takeDamage(int damage);
 	void recoverDamage(int amount);
 	void increaseMaxHp(int amount);
