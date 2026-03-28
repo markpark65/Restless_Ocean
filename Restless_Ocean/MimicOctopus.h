@@ -7,8 +7,8 @@ class MimicOctopus : public BossMonster
 public:
 	MimicOctopus(const MonsterStat& stat) : BossMonster(stat) {}
 
-	void UseBasicAttack(Player* target) override {}
-	void UseSpecialAttack(Player* target) override {}
-	void TriggerPassive() override {}
+	void useBasicAttack(Player* target) override {}
+	void useSpecialAttack(Player* target) override {}
+	void activatePassive() override {}
 };
 

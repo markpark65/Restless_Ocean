@@ -70,7 +70,7 @@ public:
 	void takePressure(int amount);
 	void debuffSpeed(int reduction);
 	void resetSpeed();
-	bool useItem();
+
 	//정보 참조
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }

@@ -138,9 +138,11 @@
     <ClCompile Include="GiantSquid.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="Leviathan.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="MimicOctopus.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
@@ -157,7 +159,7 @@
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="FootballFish.cpp" />
     <ClCompile Include="Weapon.cpp" />
-    <ClCompile Include="WeaponSelector.cpp" />
+    <ClCompile Include="WeaponManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Atolla.h" />
@@ -172,11 +174,13 @@
     <ClInclude Include="GiantSquid.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Leviathan.h" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IMap.h" />
+    <ClInclude Include="MimicOctopus.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Item.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -194,7 +198,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="FootballFish.h" />
     <ClInclude Include="Weapon.h" />
-    <ClInclude Include="WeaponSelector.h" />
+    <ClInclude Include="WeaponManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
