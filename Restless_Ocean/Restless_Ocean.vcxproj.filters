@@ -1,181 +1,203 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GameStatistics.cpp" />
-    <ClCompile Include="Random.cpp" />
-    <ClCompile Include="Restless_Ocean.cpp" />
-    <ClCompile Include="BattleSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="Dungeon.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="FootballFish.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogger.cpp" />
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GiantSquid.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Lobby.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="MonsterFactory.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="Singleton.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ViperFish.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
     <ClCompile Include="BuildingMap.cpp" />
     <ClCompile Include="BuildingMap.h" />
     <ClCompile Include="CollapsedShipMap.cpp" />
-    <ClCompile Include="IMap.cpp" />
+    <ClCompile Include="GameStatistics.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="SeaCaveMap.cpp" />
-    <ClCompile Include="Skill.cpp" />
-    <ClCompile Include="NormalMonster.cpp">
+    <ClCompile Include="Restless_Ocean.cpp" />
+    <ClCompile Include="Atolla.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="BossMonster.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Atolla.cpp" />
-    <ClCompile Include="Leviathan.cpp" />
-    <ClCompile Include="WeaponSelector.cpp" />
-<<<<<<< Updated upstream
-    <ClCompile Include="ItemFactory.cpp" />
-=======
+    <ClCompile Include="FootballFish.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="GiantSquid.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Leviathan.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterFactory.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMonster.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
     <ClCompile Include="MimicOctopus.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
->>>>>>> Stashed changes
+    <ClCompile Include="Item.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IMap.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Lobby.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="ViperFish.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogger.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollapsedShipMap.h" />
     <ClInclude Include="DataType.h" />
+    <ClInclude Include="EventType.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Random.h" />
-    <ClInclude Include="BattleSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="FootballFish.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogger.h" />
-    <ClInclude Include="GameManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="GiantSquid.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Lobby.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterFactory.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Shop.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="ShopSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ViperFish.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="CollapsedShipMap.h" />
-    <ClInclude Include="EventType.h" />
-    <ClInclude Include="IMap.h" />
     <ClInclude Include="SeaCaveMap.h" />
-    <ClInclude Include="Skill.h" />
-    <ClInclude Include="NormalMonster.h">
+    <ClInclude Include="Atolla.h">
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="BossMonster.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Atolla.h" />
-    <ClInclude Include="Leviathan.h" />
-    <ClInclude Include="WeaponSelector.h" />
-<<<<<<< Updated upstream
-    <ClInclude Include="ItemFactory.h" />
-=======
+    <ClInclude Include="FootballFish.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="GiantSquid.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Leviathan.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterFactory.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMonster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
     <ClInclude Include="MimicOctopus.h">
       <Filter>Monster</Filter>
     </ClInclude>
->>>>>>> Stashed changes
+    <ClInclude Include="Item.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IMap.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Lobby.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="ViperFish.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogger.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Stage">
-      <UniqueIdentifier>{2e2edc24-8b73-4e03-bdfc-ed9e8fa415be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System">
-      <UniqueIdentifier>{3362164b-2d61-412a-87f0-17be3fe19f37}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Monster">
-      <UniqueIdentifier>{d5f82c18-fe59-4bc5-9315-b3383c937362}</UniqueIdentifier>
+      <UniqueIdentifier>{b57acee7-46e9-4b75-932f-07c32ec7ec19}</UniqueIdentifier>
     </Filter>
     <Filter Include="Player">
-      <UniqueIdentifier>{b02ca26b-fae2-4ee3-9b3c-d3fc01fe2a27}</UniqueIdentifier>
+      <UniqueIdentifier>{f2f26f00-e9f1-410c-8b29-4fb243b119e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage">
+      <UniqueIdentifier>{39a1c3b8-7483-4ed4-b2f4-e040c6e475e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{dfe4b0c9-357f-4755-aac1-cdfa45a85dcc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager">
-      <UniqueIdentifier>{fa03ea37-fe77-42c0-8ad6-eeb8bf0347ee}</UniqueIdentifier>
+      <UniqueIdentifier>{2a9ae690-4e1c-462a-b037-cadb409336c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
