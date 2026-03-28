@@ -239,7 +239,7 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 	//if (randValue < 50)
 	//{
 	//	cout << monster->getName() << "의 패시브가 발동됩니다!" << '\n';
-	//	monster->TriggerPassive();
+	//	monster->activatePassive();
 	//}
 	//
 	//// 일반 공격 or 특수 공격
@@ -248,12 +248,12 @@ void BattleSystem::monsterAction(int& turn, Player* player, Monster* monster)
 	//if (attackType < 7)
 	//{
 	//	cout << monster->getName() << "이(가) 일반 공격을 사용합니다!" << '\n';
-	//	monster->UseBasicAttack(player);
+	//	monster->useBasicAttack(player);
 	//}
 	//else
 	//{
 	//	cout << monster->getName() << "이(가) 특수 공격을 사용합니다!" << '\n';
-	//	monster->UseSpecialAttack(player);
+	//	monster->useSpecialAttack(player);
 	//}
 	
 
