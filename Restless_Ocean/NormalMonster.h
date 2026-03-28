@@ -11,5 +11,19 @@ public:
 
 	std::string getRankName() const override { return "일반 몬스터"; }
 
+	void takeDamage(int damage) override
+	{
+		if (damage < 0)
+		{
+			damage = 0;
+		}
+
+		monsterStat.health -= damage;
+
+		if (monsterStat.health <= 0)
+		{
+			monsterStat.health = 0;
+		}
+	}
 	const std::string& GetRewardArtifact() const override { return rewardArtifact; }
 };
