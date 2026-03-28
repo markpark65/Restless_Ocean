@@ -44,7 +44,7 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 	const MonsterTemplate* monsterTemplate = nullptr;
 	int index = 0;
 
-	bool isBossBattle = (battleCount > 3);
+	bool isBossBattle = (battleCount > 0);
 	if (!isBossBattle)
 	{
 		index = Random::getRandomValue(0, 2); monsterTemplate = &normalTemplates[index];
