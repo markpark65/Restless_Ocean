@@ -6,10 +6,16 @@
 #include "GameManager.h"
 #include "Player.h"
 #include "InputSystem.h"
+#include "BuildingMap.h"
 
 void Dungeon::start()
 {
 	std::cout << "\n던전에 입장했습니다." << '\n';
+
+	// 현재 던전(맵) 정보를 출력하여 플레이어가 무기 선택 시 참고할 수 있도록 함
+	BuildingMap map;
+	std::cout << "현재 던전: " << map.GetName() << '\n';
+
 }
 
 void Dungeon::update()
