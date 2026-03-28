@@ -16,7 +16,7 @@ WeaponManager::~WeaponManager()
 }
 unique_ptr<Weapon> WeaponManager::selectWeapon() const
 {
-	cout << "무기를 선택하세요:\n";
+	cout << "무기를 선택하세요.\n";
 	printWeapons();
 
 	int choice;

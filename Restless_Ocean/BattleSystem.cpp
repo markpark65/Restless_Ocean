@@ -210,7 +210,7 @@ void BattleSystem::playerUseSkill(Player* player, Monster* monster) // 플레이
 
 bool BattleSystem::playerUseItem(Player* player) // 플레이어 아이템 사용 함수
 {
-	cout << "아이템 사용 로직입니다" << '\n';
+	cout << "아이템을 선택하세요." << '\n';
 	int itemIndex = player->getInventory().selectItem();
 	
 	if (itemIndex != -1) // 올바른 아이템 인덱스
