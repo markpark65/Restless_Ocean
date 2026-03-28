@@ -92,7 +92,7 @@ public:
         for (int i = 0; i < size_; i++) {
             std::cout << i << "번: ";
             slots_[i].item->printInfo();
-			std::cout << "수량: " << slots_[i].quantity << "\n";
+			std::cout << " 수량: " << slots_[i].quantity << "\n";
         }
     }
 

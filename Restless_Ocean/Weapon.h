@@ -21,7 +21,8 @@ public:
 	virtual ~Weapon() {} // 상속 시
 
 	virtual int calculateDamage(int baseAttack, const Monster* target) const = 0;
-	
+	void increaseDamage(int amount); //damage 증가
+
 	// 공통 정보 조회
 	std::string getName() const { return name; }
 	WeaponType getType() const { return type; }
