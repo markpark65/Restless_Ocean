@@ -53,7 +53,6 @@ void Lobby::update()
 			}
 
 			// 3. 생성한 맵을 Dungeon 생성자에 넘겨줍니다.
-			// 이제 Dungeon은 이 맵의 이름과 속성을 사용하여 몬스터를 뽑습니다.
 			GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(selectedMap)));
 			return;
 		}

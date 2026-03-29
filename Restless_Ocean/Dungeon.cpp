@@ -39,9 +39,7 @@ void Dungeon::update()
 		std::cout << "\n[" << currentMap->GetName() << " - " << battleCountInDungeon << " / 8 단계]" << std::endl;
 		std::cout << "================================" << std::endl;
 
-		// [중요] 배틀 시스템에 현재 맵의 속성을 전달해야 몬스터가 맞게 나옵니다.
-		// (BattleSystem의 startBattleSequence나 battle 함수가 AttributeType을 받도록 수정되어야 함)
-		battleSystem.startBattleSequence(&player, mapType);
+		battleSystem.startBattleSequence(&player, currentMap->GetAttributeType());
 
 		if (GameManager::getInstance().isGameEnded()) return;
 
@@ -54,8 +52,6 @@ void Dungeon::update()
 
 			int input = InputSystem::getInputInt(1, 2);
 			if (input == 1) {
-				// 다음 맵 설정 로직 (예: Building -> CollapsedShip)
-				// 실제 구현 시에는 GameManager에서 다음 스테이지를 Dungeon(다음맵)으로 넘겨줘야 합니다.
 				GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::make_unique<CollapsedShipMap>()));
 				return;
 			}
@@ -73,6 +69,6 @@ void Dungeon::update()
 
 void Dungeon::exit()
 {
-	std::cout << "전투가 종료되었습니다" << '\n';
-	std::cout << "던전을 나갑니다" << '\n';
+	std::cout << "전투가 종료되었습니다" << std::endl;
+	std::cout << "던전 탐사를 종료합니다." << std::endl;
 }
