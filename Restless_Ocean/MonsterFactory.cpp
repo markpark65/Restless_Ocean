@@ -44,7 +44,7 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount, AttributeTy
 	const MonsterTemplate* monsterTemplate = nullptr;
 	int index = -1;
 
-	bool isBossBattle = ((battleCount + 1) % 8 == 0);
+	bool isBossBattle = (battleCount > 0 && battleCount % 8 == 0);
 	const auto& templates = isBossBattle ? bossTemplates : normalTemplates;
 	for (int i = 0; i < 3; ++i) {
         if (templates[i].type == mapType) {
@@ -54,8 +54,12 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount, AttributeTy
         }
     }
 
-    // 예외 처리 (찾지 못했을 경우 기본값)
-    if (index == -1) index = 0;
+	if (monsterTemplate == nullptr) {
+		index = 0;
+		monsterTemplate = &templates[0];
+		// 로그 출력 (디버깅용)
+		std::cout << "[경고] 일치하는 맵 속성을 찾지 못해 기본 몬스터를 생성합니다." << std::endl;
+	}
 
 	MonsterStat stat; stat.name = monsterTemplate->name;
 	//출현지 문제 해결

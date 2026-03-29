@@ -220,6 +220,7 @@ void Player::spendBattery(int amount) {
 //압력 감소
 void Player::recoverPressure(int amount) {
 	pressure -= amount;
+	if (pressure < 0) pressure = 0;
 	cout << "압력이 " << amount << "% 감소했습니다. (현재 압력 " << pressure << " %)" << endl;
 	
 }

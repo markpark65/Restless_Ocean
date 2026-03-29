@@ -14,10 +14,21 @@
 void Lobby::start()
 {
 	Player& player = GameManager::getInstance().getPlayer();
-	player.recoverDamage(player.getMaxHp());
-	player.recoverOxygen(100);
-	player.recoverPressure(0);
-	
+	if (player.getHp() < player.getMaxHp()) {
+		player.recoverDamage(player.getMaxHp()); //체력 초기화
+		std::cout << player.getName() << " 대원의 체력이 모두 회복되었습니다." << '\n';
+	}
+
+	if (player.getOxygen() < 100) {
+		player.recoverOxygen(100); // 산소 초기화
+		std::cout << "산소가 재충전되었습니다. (100%)" << '\n';
+	}
+
+	if (player.getPressure() > 0) {
+		player.recoverPressure(0); // 압력 초기화 함수
+		std::cout << "수압 장치가 초기화되었습니다. (0%)" << '\n';
+	}
+
 	std::cout << "\n로비로 왔습니다." << '\n';
 }
 
