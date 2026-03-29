@@ -58,6 +58,11 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount, AttributeTy
     if (index == -1) index = 0;
 
 	MonsterStat stat; stat.name = monsterTemplate->name;
+	//출현지 문제 해결
+	if (mapType == AttributeType::Luminous) stat.map = Map::SeaCaveMap;
+	else if (mapType == AttributeType::Hidden) stat.map = Map::BuildingMap;
+	else if (mapType == AttributeType::Giant) stat.map = Map::CollapsedShipMap;
+
 	stat.health = Random::getRandomValue(monsterTemplate->minHealth, monsterTemplate->maxHealth) * level;
 	stat.attack = Random::getRandomValue(monsterTemplate->minAttack, monsterTemplate->maxAttack) * level;
 	stat.speed = Random::getRandomValue(monsterTemplate->minSpeed, monsterTemplate->maxSpeed);
