@@ -39,21 +39,23 @@ static const MonsterTemplate bossTemplates[] =
 };
 
 // 플레이어 레벨에 따라 랜덤으로 몬스터의 스탯 조정
-Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
+Monster* MonsterFactory::GenerateMonster(int level, int battleCount, AttributeType mapType)
 {
 	const MonsterTemplate* monsterTemplate = nullptr;
-	int index = 0;
+	int index = -1;
 
-	bool isBossBattle = (battleCount > 0);
-	if (!isBossBattle)
-	{
-		index = Random::getRandomValue(0, 2); monsterTemplate = &normalTemplates[index];
-	}
-	else
-	{
-		index = Random::getRandomValue(0, 2);
-		monsterTemplate = &bossTemplates[index];
-	}
+	bool isBossBattle = ((battleCount + 1) % 8 == 0);
+	const auto& templates = isBossBattle ? bossTemplates : normalTemplates;
+	for (int i = 0; i < 3; ++i) {
+        if (templates[i].type == mapType) {
+            index = i;
+            monsterTemplate = &templates[i];
+            break;
+        }
+    }
+
+    // 예외 처리 (찾지 못했을 경우 기본값)
+    if (index == -1) index = 0;
 
 	MonsterStat stat; stat.name = monsterTemplate->name;
 	stat.health = Random::getRandomValue(monsterTemplate->minHealth, monsterTemplate->maxHealth) * level;
@@ -68,7 +70,6 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 			case 0: return new FootballFish(stat);
 			case 1: return new ViperFish(stat);
 			case 2: return new GiantSquid(stat);
-			default: return nullptr;
 		}
 	}
 	else
@@ -78,7 +79,7 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount)
 			case 0: return new Atolla(stat);
 			case 1: return new MimicOctopus(stat);
 			case 2: return new Leviathan(stat);
-			default: return nullptr;
 		}
 	}
+	return nullptr;
 }

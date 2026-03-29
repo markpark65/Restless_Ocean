@@ -8,6 +8,6 @@
 class MonsterFactory
 {
 public:
-	Monster* GenerateMonster(int level, int count);
+	Monster* GenerateMonster(int level, int battleCount, AttributeType mapType);
 };
 
