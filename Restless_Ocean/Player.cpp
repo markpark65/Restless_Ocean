@@ -134,12 +134,14 @@ void Player::learnSkill(unique_ptr<Skill> newSkill) {
 	}
 }
 // 스킬 사용
-void Player::useSkill(Monster* target) {
+bool Player::useSkill(Monster* target) {
 	if (currentSkill) {
 		currentSkill->execute(this, target);
+		return true;
 	}
 	else {
 		std::cout << "배운 스킬이 없어 사용할 수 없습니다.\n";
+		return false;
 	}
 }
 //공격 로직 구현
