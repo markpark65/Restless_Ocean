@@ -20,41 +20,32 @@ BattleSystem::BattleSystem()
 
 }
 
-void BattleSystem::startBattleSequence(Player* p)
+void BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 {
-	// 무기 선택
+	// 1. 무기 선택 (전투 시작 전 한 번만)
 	player = p;
 	player->setWeapon(weaponManager.selectWeapon());
 	cout << '\n';
-	
-	// 일반 전투
-	for (int i = 0; i < 100; ++i)
-	{
-		cout << "================================" << '\n';
-		cout << i + 1 << "번째 전투" << '\n';
-		BattleResult battleResult;
 
-		battleResult = battle();
+	BattleResult battleResult = battle(mapType); // 실제 전투 발생
 
-		bool canContinue = processBattleResult(battleResult);
-		if (!canContinue)
-		{
-			break;
-		}
-		GameManager::getInstance().increaseBattleCount();
-	}
-	cout << "================================" << '\n';
+	// 결과 처리 (승리/패배/도망 등)
+	processBattleResult(battleResult);
 
 
 }
 
 
 
-BattleResult BattleSystem::battle()
+BattleResult BattleSystem::battle(AttributeType mapType)
 {
 	// 전투 턴 수
 	MonsterFactory monsterFactory;
-	monster.reset(monsterFactory.GenerateMonster(player->getLevel(), GameManager::getInstance().getBattleCount()));
+	monster.reset(monsterFactory.GenerateMonster(
+		player->getLevel(),
+		GameManager::getInstance().getBattleCount(),
+		mapType
+	));
 
 	this_thread::sleep_for(chrono::seconds(2));
 
@@ -114,6 +105,9 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 
 	if (battleResult == BattleResult::PlayerWin)
 	{
+		//승리했을 때
+		prize();
+
 		// 유적 3곳을 모두 발견했을 때
 		if (player->hasAllArtifacts())
 		{
@@ -122,8 +116,7 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 			return false;
 		}
 
-		//승리했을 때
-		prize();
+		
 		return true;
 	}
 	else if (battleResult == BattleResult::RunAway)
@@ -138,6 +131,7 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 		GameManager::getInstance().endGame(GameOverReason::Die);
 		return false;
 	}
+	return false;
 }
 
 BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)

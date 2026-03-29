@@ -8,10 +8,10 @@
 class GiantSquid : public NormalMonster
 {
 private:
-	const int maxHealth = monsterStat.health;
+	int maxHealth;
 
 public:
-	GiantSquid(const MonsterStat& stat) : NormalMonster(stat) {}
+	GiantSquid(const MonsterStat& stat) : NormalMonster(stat) { maxHealth = stat.health; }
 
 	void useBasicAttack(Player* target) override
 	{

@@ -21,8 +21,8 @@ public:
 		std::cout << getName() << "이 연속 물어 뜯기를 사용합니다!" << '\n';
 
 		target->takeDamage(getAttack());
-		target->takeDamage(getAttack() * 0.5);
-		target->takeDamage(getAttack() * 0.25);
+		target->takeDamage(static_cast<int>(getAttack() * 0.5));
+		target->takeDamage(static_cast<int>(getAttack() * 0.25));
 	}
 
 	void activatePassive() override

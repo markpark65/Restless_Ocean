@@ -23,13 +23,13 @@ enum class BossRank
 
 struct MonsterStat
 {
-	std::string		name;
-	int				health;
-	int				attack;
-	int				speed;
-	AttributeType	type;
-	std::string		description;
-	Map				map;
+	std::string		name = "";
+	int				health = 0;
+	int				attack = 0;
+	int				speed = 0;
+	AttributeType	type = AttributeType::Hidden;
+	std::string		description = "";
+	Map				map = Map::SeaCaveMap;
 };
 
 class Player;

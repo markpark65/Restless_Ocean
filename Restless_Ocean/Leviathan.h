@@ -53,7 +53,7 @@ public:
 
 		std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
 		std::cout << getName() << "은 거대한 물살로 " << target->getName() << "을 심연으로 끌어들입니다!" << '\n';
-		int damage = getAttack() * 2;
+		int damage = static_cast<int>(getAttack() * 2.0);
 		target->takeDamage(damage);
 		std::cout << getName() << "은 압력으로 " << target->getName() << "을 압력으로 짓누릅니다!" << '\n';
 		target->takePressure(pressure);

@@ -30,7 +30,9 @@ public:
 
 	Item* getRandomItem() {
 		Random random;
-		int randomIndex = random.getRandomValue(0, items.size() - 1);
+		int maxIndex = static_cast<int>(items.size()) - 1;
+		int randomIndex = random.getRandomValue(0, maxIndex);
+
 		Item* selectedItem = items[randomIndex];
 		return selectedItem->clone();
 	}
