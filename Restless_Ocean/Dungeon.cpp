@@ -28,7 +28,7 @@ void Dungeon::update()
 {
 	int battleCountInDungeon = 0;
 	Player& player = GameManager::getInstance().getPlayer();
-
+	AttributeType mapType = currentMap->GetAttributeType();
 	// 8번의 전투를 마칠 때까지 루프
 	while (battleCountInDungeon < 8)
 	{
@@ -36,12 +36,12 @@ void Dungeon::update()
 
 		// [추가] 몇 번째 전투인지 출력 (원래 for문 로직 복구)
 		std::cout << "\n================================" << std::endl;
-		std::cout << "  [ " << battleCountInDungeon << " / 8 ] 단계 탐사 중..." << std::endl;
+		std::cout << "\n[" << currentMap->GetName() << " - " << battleCountInDungeon << " / 8 단계]" << std::endl;
 		std::cout << "================================" << std::endl;
 
 		// [중요] 배틀 시스템에 현재 맵의 속성을 전달해야 몬스터가 맞게 나옵니다.
 		// (BattleSystem의 startBattleSequence나 battle 함수가 AttributeType을 받도록 수정되어야 함)
-		battleSystem.startBattleSequence(&player);
+		battleSystem.startBattleSequence(&player, mapType);
 
 		if (GameManager::getInstance().isGameEnded()) return;
 
