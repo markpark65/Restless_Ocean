@@ -9,13 +9,13 @@ using namespace std;
 
 Player::Player(string n)
 	: name(n)
-	, level(20)
+	, level(1)
 	, hp(200)
 	, maxHp(200)
 	, baseAttack(30)
 	, exp(0)
 	, maxExp(100)
-	, gold(1000)
+	, gold(0)
 	, oxygen(100)
 	, maxOxygen(100)
 	, speed(100)
@@ -42,7 +42,7 @@ void Player::showStatus() const {
 	cout << "O2      :" << oxygen << " %" << endl;
 	cout << "Battery :" << battery << " %" << endl;
 	cout << "Pressure:" << pressure << " %" << endl;
-	cout << "Artifact:" << artifactCount << " / 5" << endl;
+	cout << "Artifact:" << artifactCount << " / 3" << endl;
 }
 //레벨 로직
 void Player::gainExp(int amount) {
@@ -273,7 +273,9 @@ void Player::addArtifact(std::string name) {
 	cout << name<<"을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
 		cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
-		cout << "(대충왕국과 심해어들의 비밀)" << endl;
+		cout << "심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다." << endl
+			<< "축하합니다! 심해의 영웅이시여. 당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다." << endl
+			<< "당신의 이름은 고대 비석에 영원히 기록될 것입니다." << endl;
 	}
 }
 //유적 확인
