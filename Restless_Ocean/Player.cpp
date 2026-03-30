@@ -189,8 +189,9 @@ void Player::increaseMaxHp(int amount) {
 //산소 회복
 void Player::recoverOxygen(int amount) {
 	int heal = amount;
-	if (oxygen >= maxOxygen) 
-	{	cout << "산소가 충분합니다." << endl;
+	if (oxygen >= maxOxygen)
+	{
+		cout << "산소가 충분합니다." << endl;
 		return;
 	}
 	if (oxygen + amount > maxOxygen) { heal = maxOxygen - oxygen; }
@@ -212,7 +213,7 @@ void Player::useOxygen(int amount) {
 	if (oxygen < 0) oxygen = 0;
 
 	if (oxygen > 0 && oxygen <= 10) cout << "산소가 부족합니다. 산소회복 혹은 지상으로 복귀하십쇼" << endl;
-	
+
 	cout << "산소를 " << amount << " % 소모했습니다. (남은 산소: " << oxygen << " %)" << endl;
 
 	if (oxygen <= 0) {
@@ -236,7 +237,7 @@ void Player::recoverPressure(int amount) {
 	pressure -= amount;
 	if (pressure < 0) pressure = 0;
 	cout << "압력이 " << amount << "% 감소했습니다. (현재 압력 " << pressure << " %)" << endl;
-	
+
 }
 
 //압력 최대량 증가
@@ -285,7 +286,7 @@ void Player::addArtifact(std::string name) {
 		}
 	}
 	artifacts.push_back(name);
-	cout << name<<"을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
+	cout << name << "을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
 		cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
 		cout << "심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다." << endl
@@ -297,7 +298,7 @@ void Player::addArtifact(std::string name) {
 void Player::showArtifacts() const {
 	cout << "===== 보유 유적 =====\n";
 	for (int i = 0; i < artifacts.size(); i++) {
-		cout << "- " << artifacts[i] <<"\n";
+		cout << "- " << artifacts[i] << "\n";
 	}
 	cout << "\n";
 }
@@ -323,7 +324,7 @@ void Player::addTempAttack(int amount) {
 
 //전투 종료시 tempAttack 초기화
 void Player::resetTempStats() {
-tempAttack = 0;
+	tempAttack = 0;
 }
 //현재 스킬 받기
 Skill* Player::getCurrentSkill() const {
