@@ -89,6 +89,8 @@ public:
 	int getPressure() const { return pressure; }
 	int getBattery() const { return battery; }
 	int getMaxHp() const { return maxHp; }
+	int getMaxOxygen() const { return maxOxygen; }
+	int getMaxPressure() const { return maxPressure; }
 	int getSpeed() const { return speed; }
 	Skill* getCurrentSkill() const;
 	Inventory<Item>& getInventory() { return inventory; }

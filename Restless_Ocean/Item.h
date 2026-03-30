@@ -9,11 +9,12 @@ using namespace std;
 class Skill;
 class Item {
 public:
-    Item(string name, int price,int unlocklevel);
+    Item(string name = "", int price = 0, int increaseAmount = 0, int unlocklevel = 0);
     virtual ~Item();
 
     string getName() const;
     int getPrice() const;
+	int getIncreaseAmount() const;
 
     virtual void use(Player* character) = 0;
     void clear();
@@ -27,6 +28,7 @@ public:
 protected:
     string name;
     int price;
+	int increaseAmount;
 	int unlocklevel;
 };
 
@@ -39,7 +41,7 @@ public:
 	Item* clone() const override;
 
 private:
-    int healthRestore;
+    int increaseAmount;
 };
 
 //체력 최대량 Up
@@ -49,9 +51,6 @@ public:
 	void printInfo() const override;
 	void use(Player* character) override;
 	Item* clone() const override;
-
-private:
-	int maxHpIncrease;
 };
 
 //강화 체력 포션
@@ -62,9 +61,6 @@ public:
 	void printInfo() const override;
 	Item* clone() const override;
 	bool hideInfo() const;
-private:
-	int healAmount;
-
 };
 
 //산소 회복
@@ -75,8 +71,6 @@ public:
 	void printInfo() const override;
 	Item* clone() const override;
 
-private:
-    int oxygenIncrease;
 };
 
 //산소 최대량 Up
@@ -86,9 +80,6 @@ public:
 	void use(Player* character) override;
 	void printInfo() const override;
 	Item* clone() const override;
-
-private:
-	int maxIncrease;
 };
 
 //강화 산소 포션
@@ -100,8 +91,6 @@ public:
 	Item* clone() const override;
 	bool hideInfo() const;
 
-private:
-	int oxygen;
 };
 
 //압력 해소
@@ -111,9 +100,6 @@ public:
     void use(Player* character) override;
 	void printInfo() const override;
 	Item* clone() const override;
-
-private:
-    int pressurePotion;
 };
 
 //압력 최대량 Up
@@ -123,9 +109,6 @@ public:
 	void use(Player* character) override;
 	void printInfo() const override;
 	Item* clone() const override;
-
-private:
-	int maxIncrease;
 };
 
 //강화 압력 포션
@@ -136,8 +119,6 @@ public:
 	Item* clone() const override;
 	void printInfo() const override;
 	bool hideInfo() const;
-private:
-	int pressure;
 };
 
 
@@ -148,9 +129,6 @@ public:
     void use(Player* character) override;
 	void printInfo() const override;
 	Item* clone() const override;
-
-private:
-    int attackIncrease;
 };
 
 //무기 강화 아이템
@@ -161,8 +139,6 @@ public:
 	void printInfo() const override;
 	Item* clone() const override;
 
-private:
-	int attackIncrease;
 };
 
 
