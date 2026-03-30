@@ -11,10 +11,17 @@
 #include "CollapsedShipMap.h"
 #include "SeaCaveMap.h"
 
-Dungeon::Dungeon() : currentMap(std::make_unique<BuildingMap>()) {}
-
-Dungeon::Dungeon(std::unique_ptr<IMap> map) : currentMap(std::move(map)) {}
-
+Dungeon::Dungeon()
+	: currentMap(GameManager::getInstance().createNextMap())
+{
+	if (!currentMap) {
+		currentMap = std::make_unique<BuildingMap>();
+	}
+}
+Dungeon::Dungeon(std::unique_ptr<IMap> map)
+	: currentMap(std::move(map))
+{
+}
 void Dungeon::start()
 {
 	std::cout << "\n던전에 입장했습니다." << '\n';
@@ -28,7 +35,9 @@ void Dungeon::update()
 {
 	int battleCountInDungeon = 0;
 	Player& player = GameManager::getInstance().getPlayer();
-	AttributeType mapType = currentMap->GetAttributeType();
+
+	player.setWeapon(weaponManager.selectWeapon());
+	cout << '\n';
 	// 5번의 전투를 마칠 때까지 루프
 	while (battleCountInDungeon < 5)
 	{
@@ -48,6 +57,7 @@ void Dungeon::update()
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 		}
+		std::cout << "================================" << std::endl;
 
 		if (GameManager::getInstance().isGameEnded()) return;
 
@@ -55,6 +65,11 @@ void Dungeon::update()
 		if (battleCountInDungeon == 5 && result == BattleResult::PlayerWin)
 		{
 			GameManager::getInstance().addClearMap(currentMap->GetMapType());
+
+			if (player.hasAllArtifacts()) {
+				GameManager::getInstance().endGame(GameOverReason::Clear);
+				return;
+			}
 		}
 
 		// 5번째 보스전이 끝났을 때만 선택지를 줍니다.
@@ -63,21 +78,19 @@ void Dungeon::update()
 			std::cout << "\n[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!" << std::endl;
 			std::cout << "1. 다음 유적지로 이동\n";
 			std::cout << "2. 육지(로비)로 귀환\n";
-
 			int input = InputSystem::getInputInt(1, 2);
 			if (input == 1) {
-				//GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::make_unique<CollapsedShipMap>()));
-				// 빌딩 -> 동굴 -> 탐사선 
-				std::unique_ptr<IMap> nextMap = GameManager::getInstance().createNextMap();
+				// 클리어하지 않은 남은 맵 중에서 랜덤으로 생성
+				auto nextMap = GameManager::getInstance().createNextMap();
 
-				if (nextMap == nullptr)
-				{
-					std::cout << "더 이상 탐험할 수 있는 유적이 없습니다.\n";
-					GameManager::getInstance().changeStage(std::make_unique<Lobby>());
-					return;
+				if (nextMap) {
+					GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(nextMap)));
 				}
-
-				GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(nextMap)));
+				else {
+					// 더 이상 갈 곳이 없다면 엔딩 혹은 로비로
+					std::cout << "더 이상 탐사할 구역이 없습니다." << std::endl;
+					GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+				}
 				return;
 			}
 			else {

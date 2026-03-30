@@ -26,10 +26,17 @@ BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 	//player = p;
 	//player->setWeapon(weaponManager.selectWeapon());
 	//cout << '\n';
+<<<<<<< HEAD
 	std::unique_ptr<Weapon> selectedWeapon = weaponManager.selectWeapon();
 	if (selectedWeapon) {
 		player->setWeapon(std::move(selectedWeapon));
 	}
+=======
+	/*std::unique_ptr<Weapon> selectedWeapon = weaponManager.selectWeapon();
+	if (selectedWeapon) {
+		player->setWeapon(std::move(selectedWeapon));
+	}*/
+>>>>>>> origin/main
 	BattleResult battleResult = battle(mapType); // 실제 전투 발생
 
 	// 결과 처리 (승리/패배/도망 등)
