@@ -41,6 +41,13 @@ void PrintStatisicsTest() {
 	std::cout << "===============================" << '\n';
 }
 
+void ItemTest() {
+	Player* player = new Player("테스터");
+	player->getInventory().addItem(new HealthPotion("체력 포션", 1, 50, 1));
+	int itemindex = player->getInventory().selectItem();
+	player->getInventory().useItem(itemindex, player);
+}
+
 int main()
 {
 	//콘솔 인코딩 UFT-8 with BOM으로 변경하여 깨짐 방지.
@@ -65,6 +72,8 @@ int main()
     //    Monster* monster = m.GenerateMonster(1);
     //    monster->showStat();
     //}
+
+	//ItemTest();
 
 	GameManager::getInstance().run();
 

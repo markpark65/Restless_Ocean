@@ -57,8 +57,8 @@ void Player::gainExp(int amount) {
 }
 void Player::levelUp() {
 	level++;
-	int hpBonus = level * 20;
-	int atkBonus = level * 5;
+	int hpBonus = 30;
+	int atkBonus = 8;
 
 	maxHp += hpBonus;
 	baseAttack += atkBonus;
