@@ -18,7 +18,7 @@ public:
 	BattleSystem();
 
 	// 전체 흐름 관리 함수
-	void startBattleSequence(Player* player, AttributeType mapType); // 전투 흐름 전체 로직
+	BattleResult startBattleSequence(Player* player, AttributeType mapType); // 전투 흐름 전체 로직
 	BattleResult battle(AttributeType mapType); // 턴제 전투 파트
 	bool processBattleResult(BattleResult& battleResult); // 전투 결과 처리 함수
 

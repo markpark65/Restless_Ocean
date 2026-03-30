@@ -3,6 +3,10 @@
 #include "Lobby.h"
 #include "InputSystem.h"
 #include "BattleSystem.h"
+#include "IMap.h"
+#include "BuildingMap.h"
+#include "CollapsedShipMap.h"
+#include "SeaCaveMap.h"
 
 Player& GameManager::getPlayer()
 {
@@ -21,6 +25,50 @@ std::string GameManager::createPlayer()
 
 	std::string name = InputSystem::getInputStr();
 	return name;
+}
+
+void GameManager::resetBattleCount()
+{
+	battleCount = 1;
+}
+
+
+bool GameManager::hasClearMap(MapType mapType) const
+{
+	for (MapType clearedMap : clearMaps)
+	{
+		if (clearedMap == mapType)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void GameManager::addClearMap(MapType mapType)
+{
+	if (!hasClearMap(mapType))
+	{
+		clearMaps.push_back(mapType);
+	}
+}
+
+std::unique_ptr<IMap> GameManager::createNextMap() const
+{
+	if (!hasClearMap(MapType::BuildingMap))
+	{
+		return std::make_unique<BuildingMap>();
+	}
+	if (!hasClearMap(MapType::CollapsedShipMap))
+	{
+		return std::make_unique<CollapsedShipMap>();
+	}
+	if (!hasClearMap(MapType::SeaCaveMap))
+	{
+		return std::make_unique<SeaCaveMap>();
+	}
+
+	return nullptr;
 }
 
 void GameManager::setIsPlayerExit(bool playerExit)
@@ -114,6 +162,8 @@ void GameManager::resetGameState()
 	isGameOver = false;
 	battleCount = 1;
 	currentStage.reset();
+	clearMaps.clear();
+
 
 	player = std::make_unique<Player>(createPlayer());
 }

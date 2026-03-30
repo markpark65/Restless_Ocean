@@ -39,9 +39,23 @@ void Dungeon::update()
 		std::cout << "\n[" << currentMap->GetName() << " - " << battleCountInDungeon << " / 5 단계]" << std::endl;
 		std::cout << "================================" << std::endl;
 
-		battleSystem.startBattleSequence(&player, currentMap->GetAttributeType());
+		BattleResult result = battleSystem.startBattleSequence(&player, currentMap->GetAttributeType());
+
+		// 도망 쳤을 시 battleCount 초기화 및 로비 이동
+		if (result == BattleResult::RunAway)
+		{
+			GameManager::getInstance().resetBattleCount();
+			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+			return;
+		}
 
 		if (GameManager::getInstance().isGameEnded()) return;
+
+		// 5번째 전투 보스전 승리 후, 현재 맵 클리어 기록 저장
+		if (battleCountInDungeon == 5 && result == BattleResult::PlayerWin)
+		{
+			GameManager::getInstance().addClearMap(currentMap->GetMapType());
+		}
 
 		// 5번째 보스전이 끝났을 때만 선택지를 줍니다.
 		if (battleCountInDungeon >= 5)
@@ -52,7 +66,18 @@ void Dungeon::update()
 
 			int input = InputSystem::getInputInt(1, 2);
 			if (input == 1) {
-				GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::make_unique<CollapsedShipMap>()));
+				//GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::make_unique<CollapsedShipMap>()));
+				// 빌딩 -> 동굴 -> 탐사선 
+				std::unique_ptr<IMap> nextMap = GameManager::getInstance().createNextMap();
+
+				if (nextMap == nullptr)
+				{
+					std::cout << "더 이상 탐험할 수 있는 유적이 없습니다.\n";
+					GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+					return;
+				}
+
+				GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(nextMap)));
 				return;
 			}
 			else {

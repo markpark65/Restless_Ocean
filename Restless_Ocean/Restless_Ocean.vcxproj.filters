@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="BuildingMap.cpp" />
-    <ClCompile Include="BuildingMap.h" />
-    <ClCompile Include="CollapsedShipMap.cpp" />
     <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="Random.cpp" />
-    <ClCompile Include="SeaCaveMap.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="Atolla.cpp">
       <Filter>Monster</Filter>
@@ -50,9 +46,6 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="IMap.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
     <ClCompile Include="Lobby.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
@@ -89,15 +82,28 @@
     <ClCompile Include="GameLogger.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="IMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingMap.h">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CollapsedShipMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="SeaCaveMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollapsedShipMap.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="EventType.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Random.h" />
-    <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Atolla.h">
       <Filter>Monster</Filter>
     </ClInclude>
@@ -143,9 +149,6 @@
     <ClInclude Include="Inventory.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="IMap.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Lobby.h">
       <Filter>Stage</Filter>
     </ClInclude>
@@ -182,6 +185,15 @@
     <ClInclude Include="GameLogger.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="IMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CollapsedShipMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="SeaCaveMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Monster">
@@ -198,6 +210,9 @@
     </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{2a9ae690-4e1c-462a-b037-cadb409336c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{c536a1ea-0938-4cfe-a312-841fc5f97563}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
