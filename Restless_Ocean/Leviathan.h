@@ -6,7 +6,7 @@
 class Leviathan : public BossMonster
 {
 private:
-	int _defence = 0;
+	int _defence = 10;
 
 public:
 	Leviathan(const MonsterStat& stat) : BossMonster(stat) { rewardArtifact = "침몰한 선박 유적지"; }
@@ -82,10 +82,10 @@ public:
 	{
 		_defence += defence;
 
-		if (_defence > 30)
+		if (_defence > 50)
 		{
-			_defence = 30;
-			std::cout << getName() << "의 방어력은 " << 30 << "으로 더 이상 올라가지 않습니다!" << '\n';
+			_defence = 50;
+			std::cout << getName() << "의 방어력은 " << 50 << "으로 더 이상 올라가지 않습니다!" << '\n';
 		}
 	}
 
