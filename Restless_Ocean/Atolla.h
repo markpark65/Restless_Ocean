@@ -6,7 +6,7 @@
 class Atolla : public BossMonster
 {
 private:
-	float poisionDamage = 0.1f;
+	float poisionDamage = 0.2f;
 
 public:
 	Atolla(const MonsterStat& stat) : BossMonster(stat) { rewardArtifact = "해저 동굴 유적지"; }
