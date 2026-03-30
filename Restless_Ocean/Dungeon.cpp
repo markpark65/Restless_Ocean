@@ -29,22 +29,22 @@ void Dungeon::update()
 	int battleCountInDungeon = 0;
 	Player& player = GameManager::getInstance().getPlayer();
 	AttributeType mapType = currentMap->GetAttributeType();
-	// 8번의 전투를 마칠 때까지 루프
-	while (battleCountInDungeon < 8)
+	// 5번의 전투를 마칠 때까지 루프
+	while (battleCountInDungeon < 5)
 	{
 		battleCountInDungeon++;
 
 		// [추가] 몇 번째 전투인지 출력 (원래 for문 로직 복구)
 		std::cout << "\n================================" << std::endl;
-		std::cout << "\n[" << currentMap->GetName() << " - " << battleCountInDungeon << " / 8 단계]" << std::endl;
+		std::cout << "\n[" << currentMap->GetName() << " - " << battleCountInDungeon << " / 5 단계]" << std::endl;
 		std::cout << "================================" << std::endl;
 
 		battleSystem.startBattleSequence(&player, currentMap->GetAttributeType());
 
 		if (GameManager::getInstance().isGameEnded()) return;
 
-		// 8번째 보스전이 끝났을 때만 선택지를 줍니다.
-		if (battleCountInDungeon >= 8)
+		// 5번째 보스전이 끝났을 때만 선택지를 줍니다.
+		if (battleCountInDungeon >= 5)
 		{
 			std::cout << "\n[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!" << std::endl;
 			std::cout << "1. 다음 유적지로 이동\n";
@@ -61,7 +61,7 @@ void Dungeon::update()
 			}
 		}
 
-		// 8번이 안 끝났으면 선택지 없이 자동으로 다음 전투 진행
+		// 5번이 안 끝났으면 선택지 없이 자동으로 다음 전투 진행
 		std::cout << "\n[시스템] 심해를 더 깊이 탐사합니다..." << std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}

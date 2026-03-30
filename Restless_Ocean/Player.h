@@ -31,6 +31,7 @@ private:
 	int pressure;
 	int maxPressure;
 	int battery;
+	int maxBattery;
 	int artifactCount;
 	int gachaCount;
 	std::vector<std::string> artifacts;
@@ -68,13 +69,14 @@ public:
 	void IncreaseOxygen(int amount);
 	void showArtifacts() const;
 	void addArtifact(std::string name);
-	void spendBattery(int amount);
+	bool spendBattery(int amount);
 	void addGold(int amount);
 	void recoverPressure(int amount);
 	void IncreasePressure(int amount);
 	void takePressure(int amount);
 	void debuffSpeed(int reduction);
 	void resetSpeed();
+	void rechargeBattery(int amount);
 
 	//정보 참조
 	std::string getName() const { return name; }
