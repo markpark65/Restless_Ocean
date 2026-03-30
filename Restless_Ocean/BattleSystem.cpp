@@ -9,6 +9,7 @@
 #include "ItemFactory.h"
 #include "WeaponManager.h"
 #include "GameManager.h"
+#include "GlobalVal.h"
 using namespace std;
 
 
@@ -39,6 +40,10 @@ BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 
 BattleResult BattleSystem::battle(AttributeType mapType)
 {
+	g_sceneData.description = "탐색중...";
+	g_cliRenderer.render(g_sceneData);
+	this_thread::sleep_for(chrono::seconds(2));
+
 	// 전투 턴 수
 	MonsterFactory monsterFactory;
 	monster.reset(monsterFactory.GenerateMonster(
@@ -46,12 +51,14 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 		GameManager::getInstance().getBattleCount(),
 		mapType
 	));
+	//cout << "===============================" << '\n';
+	//cout << monster->getName() << "이(가) 나타났습니다!" << '\n';
+	g_sceneData.description = monster->getName() + "이(가) 나타났습니다!";
 
-	this_thread::sleep_for(chrono::seconds(2));
-
-	cout << "===============================" << '\n';
-	cout << monster->getName() << "이(가) 나타났습니다!" << '\n';
-	monster->showStat();
+	//uniqueptr.get()을 통해 읽기전용 raw포인터를 가져올 수 있음.
+	g_sceneData.monster = monster.get();
+	g_cliRenderer.render(g_sceneData);
+	//monster->showStat();
 	this_thread::sleep_for(chrono::seconds(2));
 
 
@@ -95,8 +102,10 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 bool BattleSystem::processBattleResult(BattleResult& battleResult)
 {
 	// 전투 끝 로직 
-	cout << "==========================================================" << '\n';
-	cout << "전투가 끝났습니다." << '\n';
+	//cout << "==========================================================" << '\n';
+	//cout << "전투가 끝났습니다." << '\n';
+
+	g_sceneData.description = "전투가 끝났습니다. \n ";
 	player->useOxygen(10); // 전투 후 산소 10 소모
 	player->takePressure(10); // [추가] 전투당 압력 10 증가
 	player->resetTempStats(); // 전투후 추가 공격력 초기화
@@ -120,7 +129,8 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	}
 	else if (battleResult == BattleResult::RunAway)
 	{ // 도망쳤을 때
-		cout << "무사히 도망쳤습니다." << '\n';
+		g_sceneData.description = "무사히 도망쳤습니다. \n ";
+		//cout << "무사히 도망쳤습니다." << '\n';
 		return false;
 	}
 	else if (battleResult == BattleResult::MonsterWin)
@@ -148,30 +158,40 @@ BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)
 
 void BattleSystem::playerAction(int turn, BattleResult& battleResult)
 {
-	cout << "* 플레이어의 턴입니다!" << '\n';
-
-	player->showStatus(); // 플레이어 상태 출력
-	cout << '\n';
+	//cout << "* 플레이어의 턴입니다!" << '\n';
+	g_sceneData.description = "* 플레이어의 턴입니다! \n ";
+	//player->showStatus(); // 플레이어 상태 출력
+	//cout << '\n';
 
 	bool actionCompleted = false;
+	//cout << "1. 일반 공격"	<< '\n';
+	//cout << "2. 스킬 사용"	<< '\n';
+	//cout << "3. 아이템 사용" << '\n';
+	//cout << "4. 도망치기"	<< '\n';
+	g_sceneData.selectedIndex = 0;
+	g_sceneData.options = {
+		"1. 일반 공격",
+		"2. 스킬 사용",
+		"3. 아이템 사용",
+		"4. 도망치기"
+	};
 
 	while (!actionCompleted)
 	{
-		// 플레이어 행동 선택
-		int choice = selectAction();
-		switch (choice)
+		int selectedIndex = g_cliRenderer.OptionSelector(g_sceneData);
+		switch (selectedIndex)
 		{
-		case 1:
+		case 0:
 			playerAttack(turn);
 			actionCompleted = true;
 			break;
-		case 2:
+		case 1:
 			actionCompleted = playerUseSkill();
 			break;
-		case 3:
+		case 2:
 			actionCompleted = playerUseItem();
 			break;
-		case 4:
+		case 3:
 			// 도망
 			playerRunAway(battleResult);
 			actionCompleted = true;
@@ -179,14 +199,12 @@ void BattleSystem::playerAction(int turn, BattleResult& battleResult)
 		default:
 			break;
 		}
-		cout << '\n';
 	}
-
-
 }
 
 int BattleSystem::selectAction()// 행동 선택 함수
 {
+	//UI적용후 미사용
 	// 플레이어 행동 선택
 	int choice = 0;
 	cout << "1. 일반 공격" << '\n';
@@ -204,19 +222,22 @@ int BattleSystem::selectAction()// 행동 선택 함수
 void BattleSystem::playerAttack(int turn) // 플레이어 일반 공격 함수
 {
 	int attackDamage = player->attack(monster.get());
-	cout << "* " << attackDamage << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
+	//cout << "* " << attackDamage << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
+	g_sceneData.description += "* " + std::to_string(attackDamage) + "의 피해를 " + monster->getName() + "에게 입힙니다! \n ";
 	monster->takeDamage(attackDamage);
 
+	g_cliRenderer.render(g_sceneData);
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
 bool BattleSystem::playerUseSkill() // 플레이어 스킬 사용 함수
 {
-	cout << "* 스킬을 사용합니다." << '\n';
-
+	//cout << "* 스킬을 사용합니다." << '\n';
+	g_sceneData.description += "*스킬을 사용합니다. \n ";
 	bool skillSuccess = player->useSkill(monster.get());
 	if (skillSuccess)
 	{
+		g_cliRenderer.render(g_sceneData);
 		this_thread::sleep_for(chrono::seconds(2));
 		return true;
 	}
@@ -229,7 +250,7 @@ bool BattleSystem::playerUseSkill() // 플레이어 스킬 사용 함수
 
 bool BattleSystem::playerUseItem() // 플레이어 아이템 사용 함수
 {
-	cout << "아이템을 선택하세요." << '\n';
+	//cout << "아이템을 선택하세요." << '\n';
 	int itemIndex = player->getInventory().selectItem();
 	
 	if (itemIndex != -1) // 올바른 아이템 인덱스
@@ -247,16 +268,19 @@ bool BattleSystem::playerUseItem() // 플레이어 아이템 사용 함수
 void BattleSystem::playerRunAway(BattleResult& battleResult)
 {
 	battleResult = BattleResult::RunAway;
-	cout << "* 도망칩니다." << '\n';
+	g_sceneData.description += "* 도망칩니다. \n ";
+	//cout << "* 도망칩니다." << '\n';
 
+	g_cliRenderer.render(g_sceneData);
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
 void BattleSystem::monsterAction(int turn)
 {
-	cout << "* 몬스터의 턴입니다!" << '\n';
+	g_sceneData.description = "* 몬스터의 턴입니다! \n ";
+	//cout << "* 몬스터의 턴입니다!" << '\n';
 
-	monster->showStat();
+	//monster->showStat();
 
 	// 패시브 발동
 	monster->activatePassive();
@@ -274,7 +298,8 @@ void BattleSystem::monsterAction(int turn)
 	}
 	
 
-	cout << '\n';
+	//cout << '\n';
+	g_cliRenderer.render(g_sceneData);
 	this_thread::sleep_for(chrono::seconds(2));
 
 }
@@ -295,11 +320,13 @@ void BattleSystem::prize()
 	{
 		//보상 획득
 		player->gainExp(50);
+		g_cliRenderer.render(g_sceneData);
 		this_thread::sleep_for(chrono::seconds(1));
 
 		// 골드 10~20 범위에서 랜덤 획득
 		gold = random.getRandomValue(10, 20);
 		player->addGold(gold);
+		g_cliRenderer.render(g_sceneData);
 		this_thread::sleep_for(chrono::seconds(1));
 
 		// 30% 확률로 아이템 획득
@@ -316,6 +343,7 @@ void BattleSystem::prize()
 		}
 
 	}
+	g_cliRenderer.render(g_sceneData);
 	this_thread::sleep_for(chrono::seconds(1));
 
 }

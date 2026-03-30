@@ -2,6 +2,7 @@
 #include "BossMonster.h"
 #include "Player.h"
 #include "Random.h"
+#include "GlobalVal.h"
 
 class Leviathan : public BossMonster
 {
@@ -20,7 +21,8 @@ public:
 			damage = 0;
 		}
 
-		std::cout << getName() << "는 " << getDefence() << "의 피해를 방어하여 " << damage << "의 피해를 입습니다!" << '\n';
+		g_sceneData.description += getName() + "은 " + std::to_string(getDefence()) + "의 피해를 방어하여 " + std::to_string(damage) + "의 피해를 입습니다! \n ";
+		//std::cout << getName() << "는 " << getDefence() << "의 피해를 방어하여 " << damage << "의 피해를 입습니다!" << '\n';
 
 		monsterStat.health -= damage;
 
@@ -37,10 +39,13 @@ public:
 
 		int pressure = 10;
 
-		std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
-		std::cout << getName() << "이 거대한 턱으로 " << target->getName() << "을 물어뜯습니다!" << '\n';
+		//g_sceneData.description += getName() + "이 일반 공격을 사용했습니다! \n ";
+		g_sceneData.description += getName() + "이 거대한 턱으로 " + target->getName() + "을 물어뜯습니다! \n ";
+		//std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
+		//std::cout << getName() << "이 거대한 턱으로 " << target->getName() << "을 물어뜯습니다!" << '\n';
 		target->takeDamage(getAttack());
-		std::cout << getName() << "은 압력으로 " << target->getName() << "을 압력으로 짓누릅니다!" << '\n';
+		g_sceneData.description += getName() + "은 압력으로 " + target->getName() + "을 압력으로 짓누릅니다! \n ";
+		//std::cout << getName() << "은 압력으로 " << target->getName() << "을 압력으로 짓누릅니다!" << '\n';
 		target->takePressure(pressure);
 	}
 
@@ -51,11 +56,14 @@ public:
 
 		int pressure = 20;
 
-		std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
-		std::cout << getName() << "은 거대한 물살로 " << target->getName() << "을 심연으로 끌어들입니다!" << '\n';
+		//g_sceneData.description += getName() + "이 특수 공격을 사용했습니다! \n ";
+		g_sceneData.description += getName() + "은 거대한 물살로 " + target->getName() + "을 심연으로 끌어들입니다! \n ";
+		//std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
+		//std::cout << getName() << "은 거대한 물살로 " << target->getName() << "을 심연으로 끌어들입니다!" << '\n';
 		int damage = static_cast<int>(getAttack() * 2.0);
 		target->takeDamage(damage);
-		std::cout << getName() << "은 압력으로 " << target->getName() << "을 압력으로 짓누릅니다!" << '\n';
+		g_sceneData.description += getName() + "은 압력으로 " + target->getName() + "을 압력으로 짓누릅니다! \n ";
+		//std::cout << getName() << "은 압력으로 " << target->getName() << "을 압력으로 짓누릅니다!" << '\n';
 		target->takePressure(pressure);
 	}
 
@@ -65,9 +73,12 @@ public:
 
 		if (random <= 50)
 		{
-			std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-			std::cout << getName() << "의 몸이 더 단단해집니다!" << '\n';
-			std::cout << getName() << "의 방어력이 " << 10 << " 증가합니다!" << '\n';
+			g_sceneData.description += getName() + "의 패시브가 발동됩니다! \n ";
+			g_sceneData.description += getName() + "의 몸이 더 단단해집니다! \n ";
+			g_sceneData.description += getName() + "의 방어력이 10 증가합니다! \n ";
+			//std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
+			//std::cout << getName() << "의 몸이 더 단단해집니다!" << '\n';
+			//std::cout << getName() << "의 방어력이 " << 10 << " 증가합니다!" << '\n';
 			int defence = 10;
 			enhancedDefence(defence);
 		}
@@ -85,7 +96,8 @@ public:
 		if (_defence > 30)
 		{
 			_defence = 30;
-			std::cout << getName() << "의 방어력은 " << 30 << "으로 더 이상 올라가지 않습니다!" << '\n';
+			g_sceneData.description += getName() + "의 방어력은 30 으로 더 이상 올라가지 않습니다! \n ";
+			//std::cout << getName() << "의 방어력은 " << 30 << "으로 더 이상 올라가지 않습니다!" << '\n';
 		}
 	}
 

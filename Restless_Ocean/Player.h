@@ -82,13 +82,15 @@ public:
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHp() const { return hp; }
+	int getMaxHp() const { return maxHp; }
+	int getExp() const { return exp; }
+	int getMaxExp() const { return maxExp; }
 	int getAttack() const { return baseAttack+tempAttack; }
 	int getGold() const { return gold; }
 	int getArtifactCount() const { return static_cast<int>(artifacts.size()); }
 	int getOxygen() const { return oxygen; }
 	int getPressure() const { return pressure; }
 	int getBattery() const { return battery; }
-	int getMaxHp() const { return maxHp; }
 	int getMaxOxygen() const { return maxOxygen; }
 	int getMaxPressure() const { return maxPressure; }
 	int getSpeed() const { return speed; }

@@ -102,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,6 +136,7 @@
     <ClCompile Include="GameLogger.cpp" />
     <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="GiantSquid.cpp" />
+    <ClCompile Include="GlobalVal.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
@@ -166,12 +167,14 @@
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="BossMonster.h" />
     <ClInclude Include="CollapsedShipMap.h" />
+    <ClInclude Include="ConsoleRenderer.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="EventType.h" />
     <ClInclude Include="GameLogger.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="GiantSquid.h" />
+    <ClInclude Include="GlobalVal.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="ItemFactory.h" />

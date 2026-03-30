@@ -12,6 +12,8 @@
 #include "ShopSystem.h"
 #include "InputSystem.h"
 
+#include "GlobalVal.h"
+
 
 void Shop::start()
 {

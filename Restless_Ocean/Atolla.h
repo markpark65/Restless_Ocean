@@ -2,6 +2,7 @@
 #include "BossMonster.h"
 #include "Player.h"
 #include "Random.h"
+#include "GlobalVal.h"
 
 class Atolla : public BossMonster
 {
@@ -32,10 +33,17 @@ public:
 		if (!target)
 			return;
 
-		std::cout << getName() << "가 일반 공격을 사용했습니다!" << '\n';
-		std::cout << getName() << "가 촉수로 찌릅니다!" << '\n';
+
+
+		//g_sceneData.description += getName() + "가 일반 공격을 사용했습니다!\n";
+		g_sceneData.description += getName() + "가 촉수로 찌릅니다! \n ";
+
+		g_sceneData.description += getName() + "는 추가로 " + target->getName() + "에게 독 데미지를 입힙니다! \n ";
+
+		//std::cout << getName() << "가 일반 공격을 사용했습니다!" << '\n';
+		//std::cout << getName() << "가 촉수로 찌릅니다!" << '\n';
 		target->takeDamage(getAttack());
-		std::cout << getName() << "는 추가로 " << target->getName() << "에게 독 데미지를 입힙니다!" << '\n';
+		//std::cout << getName() << "는 추가로 " << target->getName() << "에게 독 데미지를 입힙니다!" << '\n';
 		target->takeDamage(getAttack() * poisionDamage);
 	}
 
@@ -44,8 +52,11 @@ public:
 		if (!target)
 			return;
 
-		std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
-		std::cout << getName() << "이 빛을 모아 폭발합니다!" << '\n';
+		//std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
+		//std::cout << getName() << "이 빛을 모아 폭발합니다!" << '\n';
+
+		//g_sceneData.description += getName() + "이 특수 공격을 사용했습니다!\n";
+		g_sceneData.description += getName() + "이 빛을 모아 폭발합니다! \n ";
 
 		target->takeDamage(getAttack() * 2);
 	}
@@ -53,8 +64,11 @@ public:
 	void activatePassive() override
 	{
 		poisionDamage += 0.2f;
-		std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-		std::cout << getName() << "의 독 데미지가 " << 0.2 << " 증가하여 " << poisionDamage <<"가 됩니다!" << '\n';
+		g_sceneData.description += getName() + "의 패시브가 발동됩니다! \n ";
+		g_sceneData.description += getName() + "의 독 데미지가 0.2 증가하여 " + std::to_string(poisionDamage) + "가 됩니다! \n ";
+
+		//std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
+		//std::cout << getName() << "의 독 데미지가 " << 0.2 << " 증가하여 " << poisionDamage <<"가 됩니다!" << '\n';
 	}
 };
 

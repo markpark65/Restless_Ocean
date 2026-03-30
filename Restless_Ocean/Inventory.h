@@ -1,7 +1,9 @@
 ﻿#pragma once
 #include <iostream>
-#include"InputSystem.h"
-#include"Item.h"
+#include "InputSystem.h"
+#include "Item.h"
+
+
 class Player;
 
 template<typename T>
@@ -9,6 +11,7 @@ struct InventorySlot {
     T* item = nullptr;
     int quantity = 1;
 };
+
 
 template<typename T>
 class Inventory {
@@ -46,6 +49,7 @@ public:
             size_++;
         }
         else {
+			//g_sceneData.description = "장비함이 가득차있습니다.";
             std::cout << "장비함이 꽉 찼습니다!\n" ;
             delete item;
         }
@@ -54,6 +58,7 @@ public:
 	//아이템 선택
 	int selectItem() const {
 		if (size_ == 0) {
+			//g_sceneData.description = "장비함이 비어있습니다.";
 			std::cout << "장비함이 비어있습니다.\n";
 			return -1;
 		}
