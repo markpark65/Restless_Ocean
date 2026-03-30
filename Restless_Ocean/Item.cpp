@@ -20,28 +20,7 @@ void Item::printInfo() const {
 		return;
 	}
 	cout << ", 가격: " << price;
-	if (name == "체력 포션"){
-		cout << "G, 체력 회복량: " << getIncreaseAmount();
-	}
-	else if (name == "산소 포션") {
-		cout << "G, 산소 회복량: " << getIncreaseAmount();
-	}
-	else if (name == "압력 포션") {
-		cout << "G, 압력 해소량: " << getIncreaseAmount();
-	}
-	else if (name == "방수가 잘 되어있는 초코과자") {
-		cout << "G, 최대 체력 증가량: " << getIncreaseAmount();
-	}
-	else if (name == "1000년 전의 스노클") {
-		cout << "G, 최대 산소 증가량: " << getIncreaseAmount();
-	}
-	else if (name == "어느 물고기의 부레") {
-		cout << "G, 최대 압력 증가량: " << getIncreaseAmount();
-	}
-	else if (name == "깨진 조개껍데기 목걸이"){
-		cout << "G, 공격력 30% 증가";
-	}
-	cout << ", 필요 레벨: " << unlocklevel << "]";
+	cout << "G, 필요 레벨: " << unlocklevel << "]";
 }
 
 //체력 회복
@@ -56,7 +35,7 @@ void HealthPotion::use(Player* character) {
 void HealthPotion::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 체력 회복량: +" << healthRestore
+		<< ", 체력 회복량: +" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
@@ -77,7 +56,7 @@ void MaxHpUp::use(Player* character) {
 void MaxHpUp::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 최대 체력량 증가: +" << maxHpIncrease
+		<< ", 최대 체력량 증가: +" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
@@ -98,7 +77,7 @@ void MegaHealthPotion::use(Player* player) {
 	}
 void MegaHealthPotion::printInfo() const {
 	std::cout << "[강화 체력 포션"
-		<< ", 체력 회복량: +" << healAmount
+		<< ", 체력 회복량: +" << increaseAmount
 		<< "]";
 }
 Item* MegaHealthPotion:: clone() const {
@@ -121,7 +100,7 @@ void OxygenPotion::use(Player* character) {
 void OxygenPotion::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 산소 회복량: +" << oxygenIncrease
+		<< ", 산소 회복량: +" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
@@ -142,7 +121,7 @@ void MaxOxygenUp::use(Player* character){
 void MaxOxygenUp::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 최대 산소량 증가: +" << maxIncrease
+		<< ", 최대 산소량 증가: +" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
@@ -162,8 +141,8 @@ Item* MegaOxygenPotion::clone() const {
 	return new MegaOxygenPotion(*this);
 }
 void MegaOxygenPotion::printInfo() const {
-	std::cout << "[강화 체력 포션"
-		<< ", 산소 회복량: +" << oxygen
+	std::cout << "[강화 산소 포션"
+		<< ", 산소 회복량: +" << increaseAmount
 		<< "]";
 }
 bool MegaOxygenPotion::hideInfo() const {
@@ -184,7 +163,7 @@ void PressurePotion::use(Player * character) {
 void PressurePotion::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 압력 회복량: -" << pressurePotion
+		<< ", 압력 회복량: -" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
@@ -206,7 +185,7 @@ void MaxPressureUp::use(Player* character) {
 void MaxPressureUp::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 최대 압력량 증가: +" << maxIncrease
+		<< ", 최대 압력량 증가: +" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
@@ -224,8 +203,8 @@ void MegaPressurePotion::use(Player* p) {
 		p->resetSpeed();
 	}
 void MegaPressurePotion::printInfo() const {
-	std::cout << "[강화 체력 포션"
-		<< ", 최대 압력량: +" << pressure
+	std::cout << "[강화 압력 포션"
+		<< ", 최대 압력량: +" << increaseAmount
 		<< "]";
 }
 Item* MegaPressurePotion::clone() const {
@@ -248,7 +227,7 @@ void AttackBoost::use(Player* character) {
 void AttackBoost::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 공격력 증가: +" << attackIncrease
+		<< ", 공격력 증가: +" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
@@ -271,7 +250,7 @@ void WeaponUpgrade::use(Player* player) {
 void WeaponUpgrade::printInfo() const {
 	std::cout << "[이름: " << name
 		<< ", 가격: " << price << "G"
-		<< ", 무기 강화: +" << attackIncrease
+		<< ", 무기 강화: +" << increaseAmount
 		<< ", 필요 레벨: " << unlocklevel
 		<< "]";
 }
