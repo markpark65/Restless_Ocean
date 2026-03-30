@@ -29,6 +29,9 @@ void Dungeon::update()
 	int battleCountInDungeon = 0;
 	Player& player = GameManager::getInstance().getPlayer();
 	AttributeType mapType = currentMap->GetAttributeType();
+
+	player.setWeapon(weaponManager.selectWeapon());
+	cout << '\n';
 	// 5번의 전투를 마칠 때까지 루프
 	while (battleCountInDungeon < 5)
 	{
@@ -63,7 +66,6 @@ void Dungeon::update()
 			std::cout << "\n[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!" << std::endl;
 			std::cout << "1. 다음 유적지로 이동\n";
 			std::cout << "2. 육지(로비)로 귀환\n";
-
 			int input = InputSystem::getInputInt(1, 2);
 			if (input == 1) {
 				//GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::make_unique<CollapsedShipMap>()));
