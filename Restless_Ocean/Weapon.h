@@ -10,6 +10,7 @@ protected:
 	std::string name;
 	WeaponType type;
 	int addDamage;
+	static int addDamagePotion;
 
 public:
 	Weapon(std::string n, WeaponType t, int d)
@@ -22,11 +23,12 @@ public:
 
 	virtual int calculateDamage(int baseAttack, const Monster* target) const = 0;
 	void increaseDamage(int amount); //damage 증가
+	static void increaseGlobalDamage(int amount);
 
 	// 공통 정보 조회
 	std::string getName() const { return name; }
 	WeaponType getType() const { return type; }
-	int getAddDamage() const { return addDamage; } 
+	int getAddDamage() const { return addDamage+addDamagePotion; } 
 };
 class Flashbang : public Weapon {
 public:

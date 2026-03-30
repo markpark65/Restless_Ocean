@@ -40,10 +40,11 @@ unique_ptr<Weapon> WeaponManager::selectWeapon() const
 
 void WeaponManager::printWeapons() const {
 
-	for(int i = 0; i < weapons.size(); ++i) {
+	for (int i = 0; i < weapons.size(); ++i) {
 		cout << i + 1 << ". " << weapons[i]->getName() << '\n';
 		//cout << "타입: " << weapons[i]->getType() << '\n';
 		cout << "추가 대미지: " << weapons[i]->getAddDamage() << "\n";
 	}
 }
+
 
