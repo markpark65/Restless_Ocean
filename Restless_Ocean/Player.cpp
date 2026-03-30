@@ -10,7 +10,7 @@ using namespace std;
 
 Player::Player(string n)
 	: name(n)
-	, level(100)
+	, level(1)
 	, hp(200)
 	, maxHp(200)
 	, baseAttack(30)
