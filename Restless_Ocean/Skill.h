@@ -10,12 +10,14 @@ class Skill
 {
 protected:
 	std::string name;
+	int batteryCost;
 public:
-	Skill(std::string n);
+	Skill(std::string n, int cost);
 	virtual ~Skill();
 
 	virtual void execute(Player* player, Monster* target) = 0;
 	std::string getName() const { return name; }
+	int getCost() const { return batteryCost; }
 };
 class TripleDamageSkill : public Skill {
 public:

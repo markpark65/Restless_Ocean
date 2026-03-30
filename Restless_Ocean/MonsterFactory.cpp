@@ -72,7 +72,7 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount, AttributeTy
 	const MonsterTemplate* monsterTemplate = nullptr;
 	int index = -1;
 
-	bool isBossBattle = (battleCount > 0 && battleCount % 6 == 0);
+	bool isBossBattle = (battleCount > 0 && battleCount % 5 == 0);
 	const auto& templates = isBossBattle ? bossTemplates : normalTemplates;
 	for (int i = 0; i < 3; ++i) {
         if (templates[i].type == mapType) {
