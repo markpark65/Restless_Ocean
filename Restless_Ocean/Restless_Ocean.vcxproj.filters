@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="BuildingMap.cpp" />
+    <ClCompile Include="BuildingMap.h" />
+    <ClCompile Include="CollapsedShipMap.cpp" />
     <ClCompile Include="GameStatistics.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="SeaCaveMap.cpp" />
+>>>>>>> main
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="Atolla.cpp">
       <Filter>Monster</Filter>
@@ -48,6 +56,7 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="BattleSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
@@ -85,6 +94,9 @@
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="Dungeon.cpp">
+=======
+    <ClCompile Include="IMap.cpp">
+>>>>>>> main
       <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Lobby.cpp">
@@ -99,13 +111,25 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="GameLogger.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+>>>>>>> main
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollapsedShipMap.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="EventType.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="json.hpp" />
+<<<<<<< HEAD
     <ClInclude Include="TextUtility.h" />
+=======
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="SeaCaveMap.h" />
+>>>>>>> main
     <ClInclude Include="Atolla.h">
       <Filter>Monster</Filter>
     </ClInclude>
@@ -187,6 +211,9 @@
     <ClInclude Include="Dungeon.h">
       <Filter>Stage</Filter>
     </ClInclude>
+    <ClInclude Include="IMap.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
     <ClInclude Include="Lobby.h">
       <Filter>Stage</Filter>
     </ClInclude>
@@ -199,6 +226,15 @@
     <ClInclude Include="Singleton.h">
       <Filter>Manager</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="GameLogger.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextUtility.h">
+      <Filter>System</Filter>
+    </ClInclude>
+>>>>>>> main
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Monster">
@@ -213,11 +249,14 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{04a595af-4e45-4c05-91ba-d57070206f99}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Map">
       <UniqueIdentifier>{9ab23314-e657-4a83-bdae-f8f5aa2871b6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Stage">
       <UniqueIdentifier>{396cdb3f-99b6-40d3-8ffe-fd5f2cd6eb72}</UniqueIdentifier>
     </Filter>
+=======
+>>>>>>> main
   </ItemGroup>
 </Project>
