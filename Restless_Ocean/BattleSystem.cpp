@@ -103,7 +103,7 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	cout << "전투가 끝났습니다." << '\n';
 	player->useOxygen(10); // 전투 후 산소 10 소모
 	player->takePressure(10); // [추가] 전투당 압력 10 증가
-
+	player->resetTempStats(); // 전투후 추가 공격력 초기화
 	if (battleResult == BattleResult::PlayerWin)
 	{
 		//승리했을 때

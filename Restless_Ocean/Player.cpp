@@ -23,6 +23,7 @@ Player::Player(string n)
 	, pressure(0)
 	, maxPressure(100)
 	, battery(100)
+	, maxBattery(100)
 	, tempAttack(0)
 	, artifactCount(0)
 	, gachaCount(0)
@@ -135,12 +136,20 @@ void Player::learnSkill(unique_ptr<Skill> newSkill) {
 }
 // 스킬 사용
 bool Player::useSkill(Monster* target) {
-	if (currentSkill) {
+	if (!currentSkill) {
+		std::cout << "[알림] 배운 스킬이 없어 사용할 수 없습니다.\n";
+		return false;
+	}
+	int cost = currentSkill->getCost();
+	if (getBattery() >= cost) {
+		spendBattery(cost);
+		std::cout << "[에너지] 스킬 발동을 위해 배터리 " << cost << "%를 소모합니다.\n";
 		currentSkill->execute(this, target);
 		return true;
 	}
 	else {
-		std::cout << "배운 스킬이 없어 사용할 수 없습니다.\n";
+		std::cout << "[경고] 배터리가 부족합니다! (현재: " << getBattery()
+			<< "% / 필요: " << cost << "%)\n";
 		return false;
 	}
 }
@@ -211,10 +220,14 @@ void Player::useOxygen(int amount) {
 	}
 }
 //배터리 소모(무기 사용 시)
-void Player::spendBattery(int amount) {
-	battery -= amount;
-	if (battery < 0) battery = 0;
-	cout << "배터리 " << amount << " % 소모했습니다. (현재 배터리: " << battery << " %)" << endl;
+bool Player::spendBattery(int amount) {
+	if (battery >= amount) {
+		battery -= amount;
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 //압력 감소
@@ -314,4 +327,15 @@ tempAttack = 0;
 //현재 스킬 받기
 Skill* Player::getCurrentSkill() const {
 	return currentSkill.get();
+}
+void Player::rechargeBattery(int amount) {
+	int charge = amount;
+	if (battery >= maxBattery)
+	{
+		cout << "배터리가 충분합니다." << endl;
+		return;
+	}
+	if (battery + amount > maxBattery) { charge = maxBattery - battery; }
+	battery += charge;
+	cout << name << " 대원의 배터리가 " << charge << "만큼 회복 됐습니다. (현재 배터리: " << battery << " / 100 )" << endl;
 }
