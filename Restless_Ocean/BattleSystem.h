@@ -44,7 +44,7 @@ private:
 	unique_ptr<Monster> monster;
 	Player* player;
 
-	WeaponManager weaponManager;
+	//WeaponManager weaponManager;
 	ItemFactory itemFactory;
 
 	

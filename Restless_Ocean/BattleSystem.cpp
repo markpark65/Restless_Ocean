@@ -23,9 +23,9 @@ BattleSystem::BattleSystem()
 BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 {
 	// 1. 무기 선택 (전투 시작 전 한 번만)
-	player = p;
-	player->setWeapon(weaponManager.selectWeapon());
-	cout << '\n';
+	//player = p;
+	//player->setWeapon(weaponManager.selectWeapon());
+	//cout << '\n';
 
 	BattleResult battleResult = battle(mapType); // 실제 전투 발생
 
