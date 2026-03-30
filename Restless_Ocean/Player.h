@@ -90,6 +90,7 @@ public:
 	int getSpeed() const { return speed; }
 	Skill* getCurrentSkill() const;
 	Inventory<Item>& getInventory() { return inventory; }
+	bool hasWeapon() const { return equippedWeapon != nullptr; }
 
 	bool hasAllArtifacts() const;
 };

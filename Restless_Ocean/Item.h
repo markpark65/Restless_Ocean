@@ -17,7 +17,7 @@ public:
 
     virtual void use(Player* character) = 0;
     void clear();
-    void printInfo() const;
+    virtual void printInfo() const;
 
 	bool isUnlocked(int playerLevel) const;
 	int getUnlockLevel() const { return unlocklevel; }
@@ -34,6 +34,7 @@ protected:
 class HealthPotion : public Item {
 public:
     HealthPotion(string name, int price, int heal,int unlocklevel);
+	void printInfo() const override;
     void use(Player* character) override;
 	Item* clone() const override;
 
@@ -45,6 +46,7 @@ private:
 class MaxHpUp: public Item {
 public:
 	MaxHpUp(string name, int price, int heal,int unlocklevel);
+	void printInfo() const override;
 	void use(Player* character) override;
 	Item* clone() const override;
 
@@ -57,6 +59,7 @@ class MegaHealthPotion : public Item {
 public:
 	MegaHealthPotion();
 	void use(Player* player) override;
+	void printInfo() const override;
 	Item* clone() const override;
 	bool hideInfo() const;
 private:
@@ -69,6 +72,7 @@ class OxygenPotion : public Item {
 public:
     OxygenPotion(string name, int price, int oxygen,int unlocklevel);
     void use(Player* character) override;
+	void printInfo() const override;
 	Item* clone() const override;
 
 private:
@@ -80,6 +84,7 @@ class MaxOxygenUp : public Item {
 public:
 	MaxOxygenUp(string name, int price, int oxygen,int unlocklevel);
 	void use(Player* character) override;
+	void printInfo() const override;
 	Item* clone() const override;
 
 private:
@@ -91,6 +96,7 @@ class MegaOxygenPotion : public Item {
 public:
 	MegaOxygenPotion();
 	void use(Player* p) override;
+	void printInfo() const override;
 	Item* clone() const override;
 	bool hideInfo() const;
 
@@ -103,6 +109,7 @@ class PressurePotion : public Item {
 public:
     PressurePotion(string name, int price, int pressure,int unlocklevel);
     void use(Player* character) override;
+	void printInfo() const override;
 	Item* clone() const override;
 
 private:
@@ -114,6 +121,7 @@ class MaxPressureUp: public Item{
 public:
 	MaxPressureUp(string name, int price, int pressure,int unlocklevel);
 	void use(Player* character) override;
+	void printInfo() const override;
 	Item* clone() const override;
 
 private:
@@ -126,6 +134,7 @@ public:
 	MegaPressurePotion();
 	void use(Player* p) override;
 	Item* clone() const override;
+	void printInfo() const override;
 	bool hideInfo() const;
 private:
 	int pressure;
@@ -137,6 +146,7 @@ class AttackBoost : public Item {
 public:
     AttackBoost(string name, int price, int attack,int unlocklevel);
     void use(Player* character) override;
+	void printInfo() const override;
 	Item* clone() const override;
 
 private:
@@ -148,6 +158,7 @@ class WeaponUpgrade : public Item {
 public:
 	WeaponUpgrade(string name, int price, int atk, int unlocklevel);
 	void use(Player* character) override;
+	void printInfo() const override;
 	Item* clone() const override;
 
 private:
