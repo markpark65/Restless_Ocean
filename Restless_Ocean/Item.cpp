@@ -121,7 +121,7 @@ void PressurePotion::use(Player * character) {
     if (!character) return;
     cout << "압력 포션 사용!\n";
     character->recoverPressure(pressurePotion);
-
+	character->resetSpeed();
 }
 Item* PressurePotion::clone() const {
 	return new PressurePotion(*this);
@@ -149,6 +149,7 @@ MegaPressurePotion ::MegaPressurePotion()
 void MegaPressurePotion::use(Player* p) {
 		std::cout << "강화 압력 포션 사용! \n";
 		p->recoverPressure(pressure);
+		p->resetSpeed();
 	}
 
 Item* MegaPressurePotion::clone() const {
