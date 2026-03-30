@@ -55,19 +55,18 @@ void GameManager::addClearMap(MapType mapType)
 
 std::unique_ptr<IMap> GameManager::createNextMap() const
 {
-	std::vector<int> availableIndices;
-	//클리어 안한 맵 인덱스 넣기
-	if (!hasClearMap(MapType::SeaCaveMap))      availableIndices.push_back(0);
-	if (!hasClearMap(MapType::BuildingMap))     availableIndices.push_back(1);
-	if (!hasClearMap(MapType::CollapsedShipMap)) availableIndices.push_back(2);
-	// 모든 유적 모았다면 끝
-	if (availableIndices.empty()) return nullptr;
-	// 후보군 중에서 랜덤으로 하나 선택
-	int randomIndex = availableIndices[Random::getRandomValue(0, (int)availableIndices.size() - 1)];
-
-	if (randomIndex == 0) return std::make_unique<SeaCaveMap>();
-	if (randomIndex == 1) return std::make_unique<BuildingMap>();
-	if (randomIndex == 2) return std::make_unique<CollapsedShipMap>();
+	if (!hasClearMap(MapType::BuildingMap))
+	{
+		return std::make_unique<BuildingMap>();
+	}
+	if (!hasClearMap(MapType::CollapsedShipMap))
+	{
+		return std::make_unique<CollapsedShipMap>();
+	}
+	if (!hasClearMap(MapType::SeaCaveMap))
+	{
+		return std::make_unique<SeaCaveMap>();
+	}
 
 	return nullptr;
 }
