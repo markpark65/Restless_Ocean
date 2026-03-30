@@ -193,6 +193,8 @@
     </ClInclude>
     <ClInclude Include="SeaCaveMap.h">
       <Filter>Map</Filter>
+    <ClInclude Include="TextUtility.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

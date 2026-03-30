@@ -2,11 +2,12 @@
 #include "Item.h"
 #include "Skill.h"
 
-Item::Item(string name, int price,int unlocklevel)
-	: name(name), price(price),unlocklevel(unlocklevel) {}
+Item::Item(string name, int price, int increaseAmount, int unlocklevel)
+	: name(name), price(price), increaseAmount(increaseAmount), unlocklevel(unlocklevel) {}
 Item::~Item() {}
 string Item::getName() const { return name; }
 int Item::getPrice() const { return price; }
+int Item::getIncreaseAmount() const { return increaseAmount; }
 void Item::clear() { name = ""; price = 0; }
 bool Item::isUnlocked(int playerLevel) const {
 	return playerLevel >= unlocklevel;
@@ -18,18 +19,25 @@ void Item::printInfo() const {
 		cout << "]";
 		return;
 	}
-	cout << ", 가격: " << price
-		<< "G, 필요 레벨: " << unlocklevel << "]";
+	cout << ", 가격: " << price;
+	cout << "G, 필요 레벨: " << unlocklevel << "]";
 }
 
 //체력 회복
 HealthPotion::HealthPotion(string name, int price, int heal,int unlocklevel)
-	: Item(name, price, unlocklevel), healthRestore(heal) {
+	: Item(name, price, heal, unlocklevel) {
 }
 void HealthPotion::use(Player* character) {
     if (!character) return;
     cout << "체력 포션 사용! \n";
-    character->recoverDamage(healthRestore);
+    character->recoverDamage(increaseAmount);
+}
+void HealthPotion::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 체력 회복량: +" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
 }
 Item* HealthPotion::clone() const {
 	return new HealthPotion(*this);
@@ -38,12 +46,19 @@ Item* HealthPotion::clone() const {
 
 //체력 최대량 Up
 MaxHpUp::MaxHpUp(string name, int price, int heal,int unlocklevel)
-	: Item(name, price,unlocklevel), maxHpIncrease(heal) {
+	: Item(name, price, heal, unlocklevel) {
 }
 void MaxHpUp::use(Player* character) {
 	if (!character) return;
 	cout << "방수가 잘 되어있는 초코과자 사용! \n" ;
-	character->increaseMaxHp(maxHpIncrease);
+	character->increaseMaxHp(increaseAmount);
+}
+void MaxHpUp::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 최대 체력량 증가: +" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
 }
 Item* MaxHpUp::clone() const {
 	return new MaxHpUp(*this);
@@ -52,15 +67,19 @@ Item* MaxHpUp::clone() const {
 
 //강화 체력 포션
 MegaHealthPotion::MegaHealthPotion()
-		: Item("강화 체력 포션", 0, 1), healAmount(30) {
+		: Item("강화 체력 포션", 0, 100, 1){
 	}
 
 void MegaHealthPotion::use(Player* player) {
 		if (!player) return;
 		std::cout << "강화 체력 포션 사용!\n";
-		player->recoverDamage(healAmount);
+		player->recoverDamage(increaseAmount);
 	}
-
+void MegaHealthPotion::printInfo() const {
+	std::cout << "[강화 체력 포션"
+		<< ", 체력 회복량: +" << increaseAmount
+		<< "]";
+}
 Item* MegaHealthPotion:: clone() const {
 		return new MegaHealthPotion(*this);
 	}
@@ -69,15 +88,21 @@ bool MegaHealthPotion::hideInfo() const {
 }
 
 
-
 //산소 회복
 OxygenPotion::OxygenPotion(string name, int price, int oxygen,int unlocklevel) 
-:Item(name, price,unlocklevel), oxygenIncrease(oxygen) {
+:Item(name, price, oxygen, unlocklevel) {
 }
 void OxygenPotion::use(Player* character) {
     if (!character) return;
     cout << "산소 포션 사용! \n";
-    character->recoverOxygen(oxygenIncrease);
+    character->recoverOxygen(increaseAmount);
+}
+void OxygenPotion::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 산소 회복량: +" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
 }
 Item* OxygenPotion::clone() const {
 	return new OxygenPotion(*this);
@@ -86,12 +111,19 @@ Item* OxygenPotion::clone() const {
 
 //산소 최대량 Up
 MaxOxygenUp::MaxOxygenUp(string name, int price, int oxygen,int unlocklevel)
-: Item(name, price,unlocklevel), maxIncrease(oxygen) {
+: Item(name, price, oxygen, unlocklevel) {
 }
 void MaxOxygenUp::use(Player* character){
 	if (!character) return;
 	cout << "1000년 전의 스노클 사용!\n" ;
-	character->IncreaseOxygen(maxIncrease);
+	character->IncreaseOxygen(increaseAmount);
+}
+void MaxOxygenUp::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 최대 산소량 증가: +" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
 }
 Item* MaxOxygenUp::clone() const {
 	return new MaxOxygenUp(*this);
@@ -99,14 +131,19 @@ Item* MaxOxygenUp::clone() const {
 
 //강화 산소 아이템
 MegaOxygenPotion::MegaOxygenPotion()
-	: Item("강화 산소 포션", 0, 1), oxygen(30) {
+	: Item("강화 산소 포션", 0, 100, 1){
 }
 void MegaOxygenPotion::use(Player* p) {
 	std::cout << "강화 산소 포션 사용!\n";
-	p->recoverOxygen(oxygen);
+	p->recoverOxygen(increaseAmount);
 }
 Item* MegaOxygenPotion::clone() const {
 	return new MegaOxygenPotion(*this);
+}
+void MegaOxygenPotion::printInfo() const {
+	std::cout << "[강화 산소 포션"
+		<< ", 산소 회복량: +" << increaseAmount
+		<< "]";
 }
 bool MegaOxygenPotion::hideInfo() const {
 	return true;
@@ -115,13 +152,20 @@ bool MegaOxygenPotion::hideInfo() const {
 
 //압력 해소
 PressurePotion::PressurePotion(string name, int price, int pressure,int unlocklevel) 
-:Item(name, price,unlocklevel), pressurePotion(pressure) {
+:Item(name, price, pressure, unlocklevel){
 } 
 void PressurePotion::use(Player * character) {
     if (!character) return;
     cout << "압력 포션 사용!\n";
-    character->recoverPressure(pressurePotion);
+    character->recoverPressure(increaseAmount);
 	character->resetSpeed();
+}
+void PressurePotion::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 압력 회복량: -" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
 }
 Item* PressurePotion::clone() const {
 	return new PressurePotion(*this);
@@ -130,13 +174,20 @@ Item* PressurePotion::clone() const {
 
 //압력의 최대량 Up
 MaxPressureUp::MaxPressureUp(string name, int price, int pressure,int unlocklevel)
-: Item(name, price,unlocklevel), maxIncrease(pressure) {
+: Item(name, price, pressure, unlocklevel){
 }
 void MaxPressureUp::use(Player* character) {
 	if (!character) return;
 	cout << "어느 물고기의 부례 사용!\n";
-	character->IncreasePressure(maxIncrease);
+	character->IncreasePressure(increaseAmount);
 
+}
+void MaxPressureUp::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 최대 압력량 증가: +" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
 }
 Item* MaxPressureUp::clone() const {
 	return new MaxPressureUp(*this);
@@ -144,14 +195,18 @@ Item* MaxPressureUp::clone() const {
 
 //강화 압력 포션
 MegaPressurePotion ::MegaPressurePotion()
-	: Item("강화 압력 포션", 0, 1), pressure(30) {}
+	: Item("강화 압력 포션", 0, 100, 1) {}
 
 void MegaPressurePotion::use(Player* p) {
 		std::cout << "강화 압력 포션 사용! \n";
-		p->recoverPressure(pressure);
+		p->recoverPressure(increaseAmount);
 		p->resetSpeed();
 	}
-
+void MegaPressurePotion::printInfo() const {
+	std::cout << "[강화 압력 포션"
+		<< ", 최대 압력량: +" << increaseAmount
+		<< "]";
+}
 Item* MegaPressurePotion::clone() const {
 		return new MegaPressurePotion(*this);
 	}
@@ -162,14 +217,20 @@ bool MegaPressurePotion::hideInfo() const {
 
 //공격력 Up
 AttackBoost::AttackBoost(string name, int price, int attack,int unlocklevel)
-	: Item(name, price,unlocklevel), attackIncrease(attack) {
+	: Item(name, price, attack, unlocklevel) {
 }
 void AttackBoost::use(Player* character) {
 	if (!character) return;
 	cout << "깨진 조개껍데기 목걸이 사용!\n";
-	character->addTempAttack(attackIncrease);
+	character->addTempAttack(increaseAmount);
 }
-
+void AttackBoost::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 공격력 증가: +" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
+}
 Item* AttackBoost::clone() const {
  	return new AttackBoost(*this);
 }
@@ -177,17 +238,22 @@ Item* AttackBoost::clone() const {
 
 //무기 강화
 WeaponUpgrade::WeaponUpgrade(string name, int price, int atk, int unlocklevel)
-	: Item(name, price, unlocklevel), attackIncrease(atk)
+	: Item(name, price, atk, unlocklevel)
 {
 }
-
 void WeaponUpgrade::use(Player* player) {
 	if (!player) return;
 
 	std::cout << "무기 강화 아이템 사용!\n";
-	player->upgradeWeapon(attackIncrease);
+	player->upgradeWeapon(increaseAmount);
 }
-
+void WeaponUpgrade::printInfo() const {
+	std::cout << "[이름: " << name
+		<< ", 가격: " << price << "G"
+		<< ", 무기 강화: +" << increaseAmount
+		<< ", 필요 레벨: " << unlocklevel
+		<< "]";
+}
 Item* WeaponUpgrade::clone() const
 {
 	return new WeaponUpgrade(*this);

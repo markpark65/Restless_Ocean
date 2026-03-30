@@ -307,10 +307,12 @@ void BattleSystem::prize()
 
 		if (itemChance <= 30)
 		{
-			cout << "아이템을 획득했습니다!" << '\n';
+			//cout << "아이템을 획득했습니다!" << '\n';
 
-			//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
-			player->getInventory().addItem(itemFactory.getRandomItem());
+			Item* obtainedItem = itemFactory.getRandomItem();
+			GameLogger::getInstance().log(EventType::ObtainItem, player->getName(), obtainedItem->getName());
+			GameLogger::getInstance().printRecentLog();
+			player->getInventory().addItem(obtainedItem);
 		}
 
 	}
