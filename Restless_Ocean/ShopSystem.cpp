@@ -7,15 +7,15 @@ using namespace std;
 ShopSystem::ShopSystem() {
 
 	//Level 1
-	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50,0));
-	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 50,0));
-	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50,0));
+	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50, 0));
+	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 50, 0));
+	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50, 0));
 
 	//Level 10
-	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 200,10));
-	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 200,10));
-	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 200,10));
-	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200,10));
+	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 200, 10));
+	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 200, 10));
+	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 200, 10));
+	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200, 10));
 
 	// Level 20
 	items_.push_back(std::make_unique<WeaponUpgrade>("심해의 강화석", 100, 100, 20));
@@ -25,10 +25,10 @@ ShopSystem::ShopSystem() {
 void ShopSystem::buyItem(Player& player) {
 	InputSystem inputSys;
 
-	while (true) { 
+	while (true) {
 
 		std::cout << "\n=== 구매 ===\n";
-		std::cout << "보유 골드 :" << player.getGold()<<"G\n";
+		std::cout << "보유 골드 :" << player.getGold() << "G\n";
 		std::cout << "0: [상점으로 돌아가기]\n\n";
 
 		for (int i = 0; i < items_.size(); i++) {
@@ -60,7 +60,7 @@ void ShopSystem::buyItem(Player& player) {
 
 			if (player.getLevel() < 10) {
 				std::cout << "레벨 부족!\n";
-				continue; 
+				continue;
 			}
 
 			if (player.getGachaCount() >= MAX_GACHA) {
@@ -73,7 +73,7 @@ void ShopSystem::buyItem(Player& player) {
 
 			int count = inputSys.getInputInt(0, remaining);
 
-			if (count == 0) continue; 
+			if (count == 0) continue;
 
 			for (int i = 0; i < count; i++) {
 				if (player.getGold() < 5) {
@@ -131,7 +131,7 @@ void ShopSystem::sellItem(Player& player) {
 			std::cout << "판매할 아이템이 없습니다.\n";
 			return;
 		}
-		
+
 		player.getInventory().printAll();
 
 		std::cout << "판매할 아이템 번호 ";
@@ -232,7 +232,7 @@ void ShopSystem::enhanceWeapon(Player& player) {
 		if (input == 0) return;
 
 		int choice = input - 1;
-		
+
 		int realIndex = upgradeIndices[choice];
 		Item* item = player.getInventory().getItem(realIndex);
 

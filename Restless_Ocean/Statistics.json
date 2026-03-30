@@ -1,0 +1,28 @@
+{
+    "DamageDealtTo": {
+        "몬스터더미": 50,
+        "보스더미": 50
+    },
+    "DamageTakenBy": {
+        "몬스터더미": 50,
+        "보스더미": 4995
+    },
+    "DeathByCount": {
+        "몬스터더미": 0,
+        "보스더미": 0
+    },
+    "DeathCount": 5,
+    "ExplorationCount": 5,
+    "KillCount": {
+        "몬스터": 5
+    },
+    "ReturnCount": 5,
+    "TotalDamageDealt": 100,
+    "TotalDamageTaken": 5045,
+    "TotalGoldGain": 0,
+    "TotalGoldUse": 0,
+    "TotalItemGain": 16,
+    "TotalItemUse": 5,
+    "TotalKillCount": 5,
+    "TotalLevelUp": 5
+}

@@ -14,3 +14,4 @@ private:
 	vector<Weapon*> weapons;
 };
 
+

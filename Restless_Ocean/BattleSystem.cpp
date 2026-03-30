@@ -26,10 +26,17 @@ BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 	//player = p;
 	//player->setWeapon(weaponManager.selectWeapon());
 	//cout << '\n';
+<<<<<<< HEAD
+	std::unique_ptr<Weapon> selectedWeapon = weaponManager.selectWeapon();
+	if (selectedWeapon) {
+		player->setWeapon(std::move(selectedWeapon));
+	}
+=======
 	/*std::unique_ptr<Weapon> selectedWeapon = weaponManager.selectWeapon();
 	if (selectedWeapon) {
 		player->setWeapon(std::move(selectedWeapon));
 	}*/
+>>>>>>> origin/main
 	BattleResult battleResult = battle(mapType); // 실제 전투 발생
 
 	// 결과 처리 (승리/패배/도망 등)
@@ -63,7 +70,7 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 
 	while (battleResult == BattleResult::Continue)
 	{
-		
+
 		if (player->getSpeed() >= monster->getSpeed())
 		{
 			// 플레이어가 먼저 행동
@@ -88,7 +95,7 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 			if (battleResult != BattleResult::Continue) break;
 
 		}
-		
+
 	}
 
 	return battleResult;
@@ -118,7 +125,7 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 			return false;
 		}
 
-		
+
 		return true;
 	}
 	else if (battleResult == BattleResult::RunAway)
@@ -142,7 +149,7 @@ BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)
 	{
 		return BattleResult::PlayerWin;
 	}
-	else if(playerHp <= 0)
+	else if (playerHp <= 0)
 	{
 		return BattleResult::MonsterWin;
 	}
@@ -227,14 +234,14 @@ bool BattleSystem::playerUseSkill() // 플레이어 스킬 사용 함수
 	{
 		return false;
 	}
-	
+
 }
 
 bool BattleSystem::playerUseItem() // 플레이어 아이템 사용 함수
 {
 	cout << "아이템을 선택하세요." << '\n';
 	int itemIndex = player->getInventory().selectItem();
-	
+
 	if (itemIndex != -1) // 올바른 아이템 인덱스
 	{
 		player->getInventory().useItem(itemIndex, player);
@@ -266,7 +273,7 @@ void BattleSystem::monsterAction(int turn)
 
 	// 일반 공격 or 특수 공격
 	int attackType = Random::getRandomValue(0, 100);
-	
+
 	if (attackType <= 50)
 	{
 		monster->useBasicAttack(player);
@@ -275,7 +282,7 @@ void BattleSystem::monsterAction(int turn)
 	{
 		monster->useSpecialAttack(player);
 	}
-	
+
 
 	cout << '\n';
 	this_thread::sleep_for(chrono::seconds(2));
