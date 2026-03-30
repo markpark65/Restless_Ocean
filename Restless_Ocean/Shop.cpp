@@ -33,8 +33,7 @@ void Shop::update()
 		std::cout << "4. 무기 강화" << "\n";
 		std::cout << "5. 아이템 공방" << "\n";
 		std::cout << "6. 로비 이동" << "\n";
-		std::cout << "7. 던전 입장" << "\n";
-		std::cout << "8. 게임 종료" << "\n";
+		std::cout << "7. 게임 종료" << "\n";
 
 		int input = InputSystem::getInputInt(1, 8);
 
@@ -60,10 +59,6 @@ void Shop::update()
 			return;
 			break;
 		case 7:
-			GameManager::getInstance().changeStage(std::make_unique<Dungeon>());
-			return;
-			break;
-		case 8:
 			GameManager::getInstance().changeStage(nullptr);
 			std::cout << "게임을 종료합니다.\n";
 			return;
