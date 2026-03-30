@@ -51,8 +51,18 @@ void Dungeon::update()
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 		}
+		std::cout << "================================" << std::endl;
+
+		BattleResult result = battleSystem.startBattleSequence(&player, currentMap->GetAttributeType());
+
 
 		if (GameManager::getInstance().isGameEnded()) return;
+
+		if (result == BattleResult::RunAway)
+		{
+			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+			return;
+		}
 
 		// 5번째 전투 보스전 승리 후, 현재 맵 클리어 기록 저장
 		if (battleCountInDungeon == 5 && result == BattleResult::PlayerWin)
