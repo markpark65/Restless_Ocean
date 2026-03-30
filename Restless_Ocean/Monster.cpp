@@ -124,6 +124,6 @@ void Monster::showStat() const
     cout << "ATK     :" << getAttack() << '\n';
     cout << "SPEED   :" << getSpeed() << '\n';
 	cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
-	cout << "설명    :" << getDescription() << '\n';
+	cout << "기본 능력" << getDescription() << '\n';
     cout << "===============================" << '\n';
 }
