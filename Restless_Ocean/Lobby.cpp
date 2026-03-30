@@ -25,7 +25,8 @@ void Lobby::start()
 	}
 
 	if (player.getPressure() > 0) {
-		player.recoverPressure(0); // 압력 초기화 함수
+		player.recoverPressure(player.getPressure()); // 압력 초기화 함수
+		player.resetSpeed(); //
 		std::cout << "수압 장치가 초기화되었습니다. (0%)" << '\n';
 	}
 
