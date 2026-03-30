@@ -7,3 +7,8 @@ std::string CollapsedShipMap::GetName() const {
 AttributeType CollapsedShipMap::GetAttributeType() const {
 	return AttributeType::Giant;
 }
+
+MapType CollapsedShipMap::GetMapType() const
+{
+	return MapType::CollapsedShipMap;
+}

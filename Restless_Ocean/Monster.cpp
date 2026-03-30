@@ -49,7 +49,7 @@ const std::string& Monster::getDescription() const
 	return monsterStat.description;
 }
 
-Map Monster::getMap() const
+MapType Monster::getMap() const
 {
 	return monsterStat.map;
 }
@@ -99,15 +99,15 @@ std::string Monster::typeToString(AttributeType type) const
 	}
 }
 
-std::string Monster::mapToString(Map map) const
+std::string Monster::mapToString(MapType map) const
 {
 	switch (map)
 	{
-	case Map::BuildingMap:
+	case MapType::BuildingMap:
 		return "건물";
-	case Map::SeaCaveMap:
+	case MapType::SeaCaveMap:
 		return "해저 동굴";
-	case Map::CollapsedShipMap:
+	case MapType::CollapsedShipMap:
 		return "침몰선";
 	default:
 		return "알 수 없음";

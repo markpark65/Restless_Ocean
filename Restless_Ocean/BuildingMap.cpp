@@ -5,5 +5,10 @@ std::string BuildingMap::GetName() const {
 }
 
 AttributeType BuildingMap::GetAttributeType() const {
-	return AttributeType::Giant;
+	return AttributeType::Luminous;
+}
+
+MapType BuildingMap::GetMapType() const
+{
+	return MapType::BuildingMap;
 }

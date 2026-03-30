@@ -52,23 +52,29 @@ void Lobby::update()
 		{
 		case 1:
 		{
-			// 1. 0~2 사이의 랜덤 값을 뽑습니다.
-			int randomMapIdx = Random::getRandomValue(0, 2);
-			std::unique_ptr<IMap> selectedMap;
+			//// 1. 0~2 사이의 랜덤 값을 뽑습니다.
+			//int randomMapIdx = Random::getRandomValue(0, 2);
+			//std::unique_ptr<IMap> selectedMap;
 
-			// 2. 숫자에 따라 실제 맵 객체를 생성합니다.
-			if (randomMapIdx == 0) {
-				selectedMap = std::make_unique<SeaCaveMap>();
-			}
-			else if (randomMapIdx == 1) {
-				selectedMap = std::make_unique<BuildingMap>();
-			}
-			else {
-				selectedMap = std::make_unique<CollapsedShipMap>();
-			}
+			//// 2. 숫자에 따라 실제 맵 객체를 생성합니다.
+			//if (randomMapIdx == 0) {
+			//	selectedMap = std::make_unique<SeaCaveMap>();
+			//}
+			//else if (randomMapIdx == 1) {
+			//	selectedMap = std::make_unique<BuildingMap>();
+			//}
+			//else {
+			//	selectedMap = std::make_unique<CollapsedShipMap>();
+			//}
 
-			// 3. 생성한 맵을 Dungeon 생성자에 넘겨줍니다.
-			GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(selectedMap)));
+			//// 3. 생성한 맵을 Dungeon 생성자에 넘겨줍니다.
+			//GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(selectedMap)));
+			std::unique_ptr<IMap> nextMap = GameManager::getInstance().createNextMap();
+
+			if (nextMap == nullptr)
+				continue;
+
+			GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(nextMap)));
 			return;
 		}
 		break;

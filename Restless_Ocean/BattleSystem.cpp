@@ -20,7 +20,7 @@ BattleSystem::BattleSystem()
 
 }
 
-void BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
+BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 {
 	// 1. 무기 선택 (전투 시작 전 한 번만)
 	player = p;
@@ -32,7 +32,7 @@ void BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 	// 결과 처리 (승리/패배/도망 등)
 	processBattleResult(battleResult);
 
-
+	return battleResult;
 }
 
 
@@ -88,10 +88,6 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 		
 	}
 
-	// 배틀 횟수 카운트 증가
-	GameManager::getInstance().increaseBattleCount();
-
-	
 	return battleResult;
 }
 
@@ -106,6 +102,8 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	player->resetTempStats(); // 전투후 추가 공격력 초기화
 	if (battleResult == BattleResult::PlayerWin)
 	{
+		// 배틀 횟수 증가
+		GameManager::getInstance().increaseBattleCount();
 		//승리했을 때
 		prize();
 
