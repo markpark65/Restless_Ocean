@@ -41,6 +41,32 @@ void PrintStatisicsTest() {
 	std::cout << "===============================" << '\n';
 }
 
+void ItemTest()
+{
+	Player* player = new Player("아이템 테스터");
+
+	vector<Item*> items;
+	/*items.push_back(new HealthPotion("체력 포션", 1, 50, 1));
+	items.push_back(new OxygenPotion("산소 포션", 1, 50, 1));
+	items.push_back(new PressurePotion("압력 포션", 1, 50, 1));*/
+
+	/*items.push_back(new MegaHealthPotion());
+	items.push_back(new MegaOxygenPotion());
+	items.push_back(new MegaPressurePotion());*/
+
+	items.push_back(new MaxHpUp("방수가 잘 되어있는 초코과자", 1, 20, 1));
+	items.push_back(new MaxOxygenUp("1000년 전의 스노클", 1, 20, 1));
+	items.push_back(new MaxPressureUp("어느 물고기의 부레", 1, 20, 1));
+	items.push_back(new AttackBoost("깨진 조개껍데기 목걸이", 1, 0.3 * GameManager::getInstance().getPlayer().getAttack(), 1));
+
+	for(const auto& i : items)
+	{
+		i->printInfo();
+		std::cout << "-------------------\n";
+	}
+	
+}
+
 int main()
 {
 	//콘솔 인코딩 UFT-8 with BOM으로 변경하여 깨짐 방지.
@@ -66,6 +92,7 @@ int main()
     //    monster->showStat();
     //}
 
+	//ItemTest();
 
 	GameManager::getInstance().run();
 

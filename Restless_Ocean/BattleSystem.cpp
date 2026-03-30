@@ -313,6 +313,7 @@ void BattleSystem::prize()
 
 			Item* obtainedItem = itemFactory.getRandomItem();
 			GameLogger::getInstance().log(EventType::ObtainItem, player->getName(), obtainedItem->getName());
+			GameLogger::getInstance().printRecentLog();
 			player->getInventory().addItem(obtainedItem);
 		}
 
