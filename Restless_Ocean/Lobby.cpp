@@ -29,7 +29,10 @@ void Lobby::start()
 		player.resetSpeed(); //
 		std::cout << "수압 장치가 초기화되었습니다. (0%)" << '\n';
 	}
-
+	if (player.getBattery() < 100) {
+		player.rechargeBattery(100); // 100으로 설정하는 함수
+		std::cout << "배터리가 완충되었습니다. (100%)\n";
+	}
 	std::cout << "\n로비로 왔습니다." << '\n';
 }
 
