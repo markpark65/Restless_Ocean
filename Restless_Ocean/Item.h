@@ -9,7 +9,7 @@ using namespace std;
 class Skill;
 class Item {
 public:
-    Item(string name = "", int price = 0, int increaseAmount = 0, int unlocklevel = 0);
+	Item(string name = "", int price = 0, int increaseAmount = 0, int unlocklevel = 0);
     virtual ~Item();
 
     string getName() const;
@@ -40,8 +40,6 @@ public:
     void use(Player* character) override;
 	Item* clone() const override;
 
-private:
-    int increaseAmount;
 };
 
 //체력 최대량 Up
