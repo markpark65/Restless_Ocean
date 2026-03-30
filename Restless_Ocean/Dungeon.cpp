@@ -54,6 +54,14 @@ void Dungeon::update()
 
 		if (GameManager::getInstance().isGameEnded()) return;
 
+		if (player.getPressure() == 0 && battleCountInDungeon < 5)
+		{
+			std::cout << "\n[시스템] 안전한 로비로 긴급 회항합니다..." << std::endl;
+			std::this_thread::sleep_for(std::chrono::seconds(2));
+			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+			return; // 던전 루프 종료 및 로비 이동
+		}
+
 		if (battleCountInDungeon >= 5)
 		{
 			std::cout << "\n[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!" << std::endl;
