@@ -104,7 +104,10 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 		// 배틀 횟수 증가
 		GameManager::getInstance().increaseBattleCount();
 		//승리했을 때
-		GameLogger::getInstance().log(EventType::Kill, player);
+
+		// Kill 로그 출력
+		GameLogger::getInstance().log(EventType::Kill, player->getName(), monster->getName());
+		GameLogger::getInstance().printRecentLog();
 		prize();
 
 		// 유적 3곳을 모두 발견했을 때
@@ -120,12 +123,19 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	}
 	else if (battleResult == BattleResult::RunAway)
 	{ // 도망쳤을 때
-		cout << "무사히 도망쳤습니다." << '\n';
+		// 복귀 로그 출력
+		GameLogger::getInstance().log(EventType::Return, player->getName());
+		GameLogger::getInstance().printRecentLog();
+
+		
 		return false;
 	}
 	else if (battleResult == BattleResult::PlayerLose)
 	{ // 졌을 때
-		//cout << "대원이 쓰러졌습니다." << '\n';
+		// 패배 로그 출력
+		GameLogger::getInstance().log(EventType::Death, player->getName(), monster->getName());
+		GameLogger::getInstance().printRecentLog();
+
 		GameManager::getInstance().setIsPlayerExit(false);
 		GameManager::getInstance().endGame(GameOverReason::Die);
 		return false;
@@ -304,14 +314,15 @@ void BattleSystem::prize()
 
 		// 30% 확률로 아이템 획득
 		int itemChance = random.getRandomValue(1, 100);
-
-		if (itemChance <= 30)
+		if (itemChance <= 50)
 		{
-			//cout << "아이템을 획득했습니다!" << '\n';
-
+			
 			Item* obtainedItem = itemFactory.getRandomItem();
+
+			//아이템 획득 로그 출력
 			GameLogger::getInstance().log(EventType::ObtainItem, player->getName(), obtainedItem->getName());
 			GameLogger::getInstance().printRecentLog();
+
 			player->getInventory().addItem(obtainedItem);
 		}
 
