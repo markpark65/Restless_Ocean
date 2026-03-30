@@ -20,7 +20,7 @@ BattleSystem::BattleSystem()
 
 }
 
-void BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
+BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 {
 	// 1. 무기 선택 (전투 시작 전 한 번만)
 	player = p;
@@ -32,7 +32,7 @@ void BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 	// 결과 처리 (승리/패배/도망 등)
 	processBattleResult(battleResult);
 
-
+	return battleResult;
 }
 
 
@@ -88,10 +88,6 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 		
 	}
 
-	// 배틀 횟수 카운트 증가
-	GameManager::getInstance().increaseBattleCount();
-
-	
 	return battleResult;
 }
 
@@ -106,6 +102,8 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	player->resetTempStats(); // 전투후 추가 공격력 초기화
 	if (battleResult == BattleResult::PlayerWin)
 	{
+		// 배틀 횟수 증가
+		GameManager::getInstance().increaseBattleCount();
 		//승리했을 때
 		prize();
 
@@ -309,10 +307,12 @@ void BattleSystem::prize()
 
 		if (itemChance <= 30)
 		{
-			cout << "아이템을 획득했습니다!" << '\n';
+			//cout << "아이템을 획득했습니다!" << '\n';
 
-			//아이템 획득 로직 추가 (예: 체력 회복 아이템, 공격력 증가 아이템 등)
-			player->getInventory().addItem(itemFactory.getRandomItem());
+			Item* obtainedItem = itemFactory.getRandomItem();
+			GameLogger::getInstance().log(EventType::ObtainItem, player->getName(), obtainedItem->getName());
+			GameLogger::getInstance().printRecentLog();
+			player->getInventory().addItem(obtainedItem);
 		}
 
 	}

@@ -7,3 +7,9 @@ std::string SeaCaveMap::GetName() const {
 AttributeType SeaCaveMap::GetAttributeType() const{
 	return AttributeType::Hidden;
 }
+
+
+MapType SeaCaveMap::GetMapType() const
+{
+	return MapType::SeaCaveMap;
+}

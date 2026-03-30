@@ -7,13 +7,6 @@
 class Player;
 class Item;
 
-enum class Map
-{
-	BuildingMap,
-	SeaCaveMap,
-	CollapsedShipMap,
-};
-
 enum class BossRank
 {
 	None,
@@ -29,7 +22,7 @@ struct MonsterStat
 	int				speed = 0;
 	AttributeType	type = AttributeType::Hidden;
 	std::string		description = "";
-	Map				map = Map::SeaCaveMap;
+	MapType			map = MapType::SeaCaveMap;
 };
 
 class Player;
@@ -52,7 +45,7 @@ public:
 	AttributeType getMonsterType() const;
 	bool isAlive() const;
 	const std::string& getDescription() const;
-	Map getMap() const;
+	MapType getMap() const;
 	BossRank getRank() const;
 	const std::string& getRewardArtifact() const;
 
@@ -67,7 +60,7 @@ public:
 
 	// 몬스터 타입 string으로 변경
 	std::string typeToString(AttributeType type) const;
-	std::string mapToString(Map map) const;
+	std::string mapToString(MapType map) const;
 
 	//virtual const std::string& GetRewardArtifact() const { return; };
 	virtual std::string getRankName() const = 0;
