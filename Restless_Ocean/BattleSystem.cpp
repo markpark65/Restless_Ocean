@@ -15,7 +15,6 @@ using namespace std;
 
 BattleSystem::BattleSystem()
 {
-	turn = 1;
 	player = &GameManager::getInstance().getPlayer();
 
 }
@@ -64,22 +63,22 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 		if (player->getSpeed() >= monster->getSpeed())
 		{
 			// 플레이어가 먼저 행동
-			playerAction(getTurnCount(), battleResult);
+			playerAction(battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			monsterAction(turn);
+			monsterAction();
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 		}
 		else
 		{
 			// 몬스터가 먼저 행동
-			monsterAction(turn);
+			monsterAction();
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			playerAction(turn, battleResult);
+			playerAction(battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
@@ -105,6 +104,7 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 		// 배틀 횟수 증가
 		GameManager::getInstance().increaseBattleCount();
 		//승리했을 때
+		GameLogger::getInstance().log(EventType::Kill, player);
 		prize();
 
 		// 유적 3곳을 모두 발견했을 때
@@ -123,7 +123,7 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 		cout << "무사히 도망쳤습니다." << '\n';
 		return false;
 	}
-	else if (battleResult == BattleResult::MonsterWin)
+	else if (battleResult == BattleResult::PlayerLose)
 	{ // 졌을 때
 		//cout << "대원이 쓰러졌습니다." << '\n';
 		GameManager::getInstance().setIsPlayerExit(false);
@@ -141,12 +141,12 @@ BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)
 	}
 	else if(playerHp <= 0)
 	{
-		return BattleResult::MonsterWin;
+		return BattleResult::PlayerLose;
 	}
 	return BattleResult::Continue;
 }
 
-void BattleSystem::playerAction(int turn, BattleResult& battleResult)
+void BattleSystem::playerAction(BattleResult& battleResult)
 {
 	cout << "* 플레이어의 턴입니다!" << '\n';
 
@@ -162,7 +162,7 @@ void BattleSystem::playerAction(int turn, BattleResult& battleResult)
 		switch (choice)
 		{
 		case 1:
-			playerAttack(turn);
+			playerAttack();
 			actionCompleted = true;
 			break;
 		case 2:
@@ -201,7 +201,7 @@ int BattleSystem::selectAction()// 행동 선택 함수
 	return choice;
 }
 
-void BattleSystem::playerAttack(int turn) // 플레이어 일반 공격 함수
+void BattleSystem::playerAttack() // 플레이어 일반 공격 함수
 {
 	int attackDamage = player->attack(monster.get());
 	cout << "* " << attackDamage << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
@@ -252,7 +252,7 @@ void BattleSystem::playerRunAway(BattleResult& battleResult)
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
-void BattleSystem::monsterAction(int turn)
+void BattleSystem::monsterAction()
 {
 	cout << "* 몬스터의 턴입니다!" << '\n';
 
