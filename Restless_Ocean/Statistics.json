@@ -1,4 +1,4 @@
-{
+﻿{
     "DamageDealtTo": {
         "몬스터더미": 50,
         "보스더미": 50
@@ -25,3 +25,4 @@
     "TotalItemUse": 5,
     "TotalKillCount": 5,
     "TotalLevelUp": 5
+}
