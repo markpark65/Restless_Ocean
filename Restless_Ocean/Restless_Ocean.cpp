@@ -73,9 +73,9 @@ int main()
     //    monster->showStat();
     //}
 
-	GameManager::getInstance().run();
-
 	//ItemTest();
+
+	GameManager::getInstance().run();
 
 	return 0;
 	
