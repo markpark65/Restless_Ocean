@@ -15,7 +15,6 @@ using namespace std;
 
 BattleSystem::BattleSystem()
 {
-	turn = 1;
 	player = &GameManager::getInstance().getPlayer();
 
 }
@@ -26,7 +25,10 @@ BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 	//player = p;
 	//player->setWeapon(weaponManager.selectWeapon());
 	//cout << '\n';
-
+	/*std::unique_ptr<Weapon> selectedWeapon = weaponManager.selectWeapon();
+	if (selectedWeapon) {
+		player->setWeapon(std::move(selectedWeapon));
+	}*/
 	BattleResult battleResult = battle(mapType); // 실제 전투 발생
 
 	// 결과 처리 (승리/패배/도망 등)
@@ -60,32 +62,32 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 
 	while (battleResult == BattleResult::Continue)
 	{
-		
+
 		if (player->getSpeed() >= monster->getSpeed())
 		{
 			// 플레이어가 먼저 행동
-			playerAction(getTurnCount(), battleResult);
+			playerAction(battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			monsterAction(turn);
+			monsterAction();
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 		}
 		else
 		{
 			// 몬스터가 먼저 행동
-			monsterAction(turn);
+			monsterAction();
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
-			playerAction(turn, battleResult);
+			playerAction(battleResult);
 			if (battleResult != BattleResult::Continue) break;
 			battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 			if (battleResult != BattleResult::Continue) break;
 
 		}
-		
+
 	}
 
 	return battleResult;
@@ -105,6 +107,10 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 		// 배틀 횟수 증가
 		GameManager::getInstance().increaseBattleCount();
 		//승리했을 때
+
+		// Kill 로그 출력
+		GameLogger::getInstance().log(EventType::Kill, player->getName(), monster->getName());
+		GameLogger::getInstance().printRecentLog();
 		prize();
 
 		// 유적 3곳을 모두 발견했을 때
@@ -115,17 +121,24 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 			return false;
 		}
 
-		
+
 		return true;
 	}
 	else if (battleResult == BattleResult::RunAway)
 	{ // 도망쳤을 때
-		cout << "무사히 도망쳤습니다." << '\n';
+		// 복귀 로그 출력
+		GameLogger::getInstance().log(EventType::Return, player->getName());
+		GameLogger::getInstance().printRecentLog();
+
+		
 		return false;
 	}
-	else if (battleResult == BattleResult::MonsterWin)
+	else if (battleResult == BattleResult::PlayerLose)
 	{ // 졌을 때
-		//cout << "대원이 쓰러졌습니다." << '\n';
+		// 패배 로그 출력
+		GameLogger::getInstance().log(EventType::Death, player->getName(), monster->getName());
+		GameLogger::getInstance().printRecentLog();
+
 		GameManager::getInstance().setIsPlayerExit(false);
 		GameManager::getInstance().endGame(GameOverReason::Die);
 		return false;
@@ -139,14 +152,14 @@ BattleResult BattleSystem::checkBattleStatus(int playerHp, int monsterHp)
 	{
 		return BattleResult::PlayerWin;
 	}
-	else if(playerHp <= 0)
+	else if (playerHp <= 0)
 	{
-		return BattleResult::MonsterWin;
+		return BattleResult::PlayerLose;
 	}
 	return BattleResult::Continue;
 }
 
-void BattleSystem::playerAction(int turn, BattleResult& battleResult)
+void BattleSystem::playerAction(BattleResult& battleResult)
 {
 	cout << "* 플레이어의 턴입니다!" << '\n';
 
@@ -162,7 +175,7 @@ void BattleSystem::playerAction(int turn, BattleResult& battleResult)
 		switch (choice)
 		{
 		case 1:
-			playerAttack(turn);
+			playerAttack();
 			actionCompleted = true;
 			break;
 		case 2:
@@ -201,7 +214,7 @@ int BattleSystem::selectAction()// 행동 선택 함수
 	return choice;
 }
 
-void BattleSystem::playerAttack(int turn) // 플레이어 일반 공격 함수
+void BattleSystem::playerAttack() // 플레이어 일반 공격 함수
 {
 	int attackDamage = player->attack(monster.get());
 	cout << "* " << attackDamage << "의 피해를 " << monster->getName() << "에게 입힙니다!" << '\n';
@@ -224,14 +237,14 @@ bool BattleSystem::playerUseSkill() // 플레이어 스킬 사용 함수
 	{
 		return false;
 	}
-	
+
 }
 
 bool BattleSystem::playerUseItem() // 플레이어 아이템 사용 함수
 {
 	cout << "아이템을 선택하세요." << '\n';
 	int itemIndex = player->getInventory().selectItem();
-	
+
 	if (itemIndex != -1) // 올바른 아이템 인덱스
 	{
 		player->getInventory().useItem(itemIndex, player);
@@ -252,7 +265,7 @@ void BattleSystem::playerRunAway(BattleResult& battleResult)
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
-void BattleSystem::monsterAction(int turn)
+void BattleSystem::monsterAction()
 {
 	cout << "* 몬스터의 턴입니다!" << '\n';
 
@@ -263,7 +276,7 @@ void BattleSystem::monsterAction(int turn)
 
 	// 일반 공격 or 특수 공격
 	int attackType = Random::getRandomValue(0, 100);
-	
+
 	if (attackType <= 50)
 	{
 		monster->useBasicAttack(player);
@@ -272,7 +285,7 @@ void BattleSystem::monsterAction(int turn)
 	{
 		monster->useSpecialAttack(player);
 	}
-	
+
 
 	cout << '\n';
 	this_thread::sleep_for(chrono::seconds(2));
@@ -304,14 +317,15 @@ void BattleSystem::prize()
 
 		// 30% 확률로 아이템 획득
 		int itemChance = random.getRandomValue(1, 100);
-
-		if (itemChance <= 30)
+		if (itemChance <= 50)
 		{
-			//cout << "아이템을 획득했습니다!" << '\n';
-
+			
 			Item* obtainedItem = itemFactory.getRandomItem();
+
+			//아이템 획득 로그 출력
 			GameLogger::getInstance().log(EventType::ObtainItem, player->getName(), obtainedItem->getName());
 			GameLogger::getInstance().printRecentLog();
+
 			player->getInventory().addItem(obtainedItem);
 		}
 

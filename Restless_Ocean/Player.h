@@ -57,8 +57,8 @@ public:
 	void learnSkill(std::unique_ptr<Skill> newSkill);
 	int getGachaCount() const { return gachaCount; }
 	void addGachaCount(int n) { gachaCount += n; }
-	
-	
+
+
 	//전투 결과
 	bool useSkill(Monster* target);
 	void takeDamage(int damage);
@@ -82,7 +82,7 @@ public:
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHp() const { return hp; }
-	int getAttack() const { return baseAttack+tempAttack; }
+	int getAttack() const { return baseAttack + tempAttack; }
 	int getGold() const { return gold; }
 	int getArtifactCount() const { return static_cast<int>(artifacts.size()); }
 	int getOxygen() const { return oxygen; }

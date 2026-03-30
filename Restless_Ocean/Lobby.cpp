@@ -69,12 +69,15 @@ void Lobby::update()
 
 			//// 3. 생성한 맵을 Dungeon 생성자에 넘겨줍니다.
 			//GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(selectedMap)));
-			std::unique_ptr<IMap> nextMap = GameManager::getInstance().createNextMap();
+			auto selectedMap = GameManager::getInstance().createNextMap();
 
-			if (nextMap == nullptr)
-				continue;
-
-			GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(nextMap)));
+			if (selectedMap) {
+				// 인자가 있는 생성자 Dungeon(std::unique_ptr<IMap> map)를 호출하게 됩니다.
+				GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(selectedMap)));
+			}
+			else {
+				std::cout << "모든 유적을 이미 수집했습니다!\n";
+			}
 			return;
 		}
 		break;

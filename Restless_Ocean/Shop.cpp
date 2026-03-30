@@ -22,7 +22,7 @@ void Shop::update()
 {
 	// 상점 방문
 	Player& player = GameManager::getInstance().getPlayer();
-	
+
 
 	while (true)
 	{
