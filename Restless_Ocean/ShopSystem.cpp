@@ -7,9 +7,9 @@ using namespace std;
 ShopSystem::ShopSystem() {
 
 	//Level 1
-	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50,1));
-	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 50,1));
-	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50,1));
+	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50,0));
+	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 50,0));
+	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50,0));
 
 	//Level 10
 	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 200,10));
@@ -31,7 +31,7 @@ void ShopSystem::buyItem(Player& player) {
 		std::cout << "보유 골드 :" << player.getGold()<<"G\n";
 		std::cout << "0: [상점으로 돌아가기]\n\n";
 
-		for (size_t i = 0; i < items_.size(); i++) {
+		for (int i = 0; i < items_.size(); i++) {
 			std::cout << i + 1 << ": ";
 			items_[i]->printInfo();
 
