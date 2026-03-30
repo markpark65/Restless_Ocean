@@ -4,12 +4,13 @@
 #include "Random.h"
 #include "Skill.h"
 #include "InputSystem.h"
+#include "TextUtility.h"
 
 using namespace std;
 
 Player::Player(string n)
 	: name(n)
-	, level(1)
+	, level(0)
 	, hp(200)
 	, maxHp(200)
 	, baseAttack(30)
@@ -35,15 +36,15 @@ Player::~Player() {}
 void Player::showStatus() const {
 	cout << "===============================" << endl;
 	cout << "대원 정보 이름: " << name << " - level. " << level << endl;
-	cout << "HP      :" << hp << " / " << maxHp << endl;
-	cout << "ATK     :" << baseAttack << endl;
-	cout << "EXP     :" << exp << " / " << maxExp << endl;
-	cout << "GOLD    :" << gold << " G" << endl;
+	cout << "HP      : " << TextUtility::makeBar(hp, maxHp, 15, true) << hp << " / " << maxHp << endl;
+	cout << "ATK     : " << baseAttack << endl;
+	cout << "EXP     : " << TextUtility::makeBar(exp, maxExp, 15) << exp << " / " << maxExp << endl;
+	cout << "GOLD    : " << gold << " G" << endl;
 	cout << "===============================" << endl;
-	cout << "O2      :" << oxygen << " %" << endl;
-	cout << "Battery :" << battery << " %" << endl;
-	cout << "Pressure:" << pressure << " %" << endl;
-	cout << "Artifact:" << artifactCount << " / 3" << endl;
+	cout << "O2      : " << TextUtility::makeBar(oxygen, 100, 15, true) << oxygen << " %" << endl;
+	cout << "Battery : " << TextUtility::makeBar(battery, 100, 15, true) << battery << " %" << endl;
+	cout << "Pressure: " << TextUtility::makeBar(pressure, 100, 15, true, true) << pressure << " %" << endl;
+	cout << "Artifact: " << artifactCount << " / 3" << endl;
 }
 //레벨 로직
 void Player::gainExp(int amount) {

@@ -187,6 +187,7 @@
     </ClInclude>
     <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="NormalMonster.h" />
+    <ClInclude Include="TextUtility.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Shop.h" />
