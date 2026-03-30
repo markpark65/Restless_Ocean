@@ -6,19 +6,13 @@
 class Atolla : public BossMonster
 {
 private:
-	bool isHidden = false;
+	float poisionDamage = 0.1f;
 
 public:
 	Atolla(const MonsterStat& stat) : BossMonster(stat) { rewardArtifact = "해저 동굴 유적지"; }
 
 	void takeDamage(int damage) override
 	{
-		if (isHidden)
-		{
-			std::cout << "하지만 실명으로 인해 << " << getName() << "는 데미지를 입지 않습니다!" << '\n';
-			isHidden = false;
-			return;
-		}
 
 		if (damage < 0)
 		{
@@ -42,7 +36,7 @@ public:
 		std::cout << getName() << "가 촉수로 찌릅니다!" << '\n';
 		target->takeDamage(getAttack());
 		std::cout << getName() << "는 추가로 " << target->getName() << "에게 독 데미지를 입힙니다!" << '\n';
-		target->takeDamage(getAttack() * 0.2);
+		target->takeDamage(getAttack() * poisionDamage);
 	}
 
 	void useSpecialAttack(Player* target) override
@@ -58,19 +52,9 @@ public:
 
 	void activatePassive() override
 	{
-		int randomValue = Random::getRandomValue(0, 100);
-
-		if (randomValue < 95)
-		{
-			std::cout << getName() << "의 패시브는 발동되지 않았습니다!" << '\n';
-		}
-		else
-		{
-			std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-			std::cout << getName() << "의 몸이 강하게 빛나 플레이어를 실명합니다." << '\n';
-			std::cout << getName() << "는 다음 턴 데미지를 입지 않습니다." << '\n';
-			isHidden = true;
-		}
+		poisionDamage += 0.2f;
+		std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
+		std::cout << getName() << "의 독 데미지가 " << 0.2 << " 증가하여 " << poisionDamage <<"가 됩니다!" << '\n';
 	}
 };
 

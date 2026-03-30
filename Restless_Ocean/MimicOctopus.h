@@ -60,11 +60,15 @@ public:
 	{
 		int rand = Random::getRandomValue(0, 100);
 
-		if (rand <= 30)
+		if (rand <= 25)
 		{
 			std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
 			std::cout << getName() << "가 다른 생물을 흉내냅니다.!" << '\n';
 			isMimic = true;
+		}
+		else
+		{
+			std::cout << getName() << "의 패시브가 발동되지 않았습니다!" << '\n';
 		}
 	}
 };
