@@ -11,14 +11,14 @@ ShopSystem::ShopSystem() {
 	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 50, 0));
 	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50, 0));
 
-	//Level 10
-	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 200, 10));
-	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 200, 10));
-	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 200, 10));
-	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200, 10));
+	//Level 5
+	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 200, 5));
+	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 200, 5));
+	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 200, 5));
+	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200, 5));
 
-	// Level 20
-	items_.push_back(std::make_unique<WeaponUpgrade>("심해의 강화석", 100, 100, 20));
+	// Level 10
+	items_.push_back(std::make_unique<WeaponUpgrade>("심해의 강화석", 100, 20, 10));
 }
 
 //구매
@@ -240,10 +240,10 @@ void ShopSystem::enhanceWeapon(Player& player) {
 			std::cout << "아이템 오류\n";
 			continue;
 		}
-		if (!player.hasWeapon()) {
+		/*if (!player.hasWeapon()) {
 			std::cout << "장착된 무기가 없습니다!\n";
 			continue;
-		}
+		}*/
 		item->use(&player);
 		player.getInventory().removeItem(realIndex, 1);
 
