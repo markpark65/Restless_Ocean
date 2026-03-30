@@ -6,7 +6,7 @@
 class Atolla : public BossMonster
 {
 private:
-	float poisionDamage = 0.2f;
+	float poisionDamage = 0.1f;
 
 public:
 	Atolla(const MonsterStat& stat) : BossMonster(stat) { rewardArtifact = "해저 동굴 유적지"; }
@@ -52,9 +52,9 @@ public:
 
 	void activatePassive() override
 	{
-		poisionDamage += 0.2f;
+		poisionDamage += 0.1f;
 		std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-		std::cout << getName() << "의 독 데미지가 " << 0.2 << " 증가하여 " << poisionDamage <<"가 됩니다!" << '\n';
+		std::cout << getName() << "의 독 데미지가 " << 0.1 << "배 증가합니다!" << '\n';
 	}
 };
 
