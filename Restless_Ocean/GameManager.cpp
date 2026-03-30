@@ -59,13 +59,13 @@ std::unique_ptr<IMap> GameManager::createNextMap() const
 	{
 		return std::make_unique<BuildingMap>();
 	}
-	if (!hasClearMap(MapType::CollapsedShipMap))
-	{
-		return std::make_unique<CollapsedShipMap>();
-	}
 	if (!hasClearMap(MapType::SeaCaveMap))
 	{
 		return std::make_unique<SeaCaveMap>();
+	}
+	if (!hasClearMap(MapType::CollapsedShipMap))
+	{
+		return std::make_unique<CollapsedShipMap>();
 	}
 
 	return nullptr;

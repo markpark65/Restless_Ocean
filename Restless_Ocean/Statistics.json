@@ -1,4 +1,4 @@
-﻿{
+{
     "DamageDealtTo": {
         "몬스터더미": 50,
         "보스더미": 50
@@ -21,7 +21,7 @@
     "TotalDamageTaken": 5045,
     "TotalGoldGain": 0,
     "TotalGoldUse": 0,
-    "TotalItemGain": 19,
+    "TotalItemGain": 52,
     "TotalItemUse": 5,
     "TotalKillCount": 5,
     "TotalLevelUp": 5

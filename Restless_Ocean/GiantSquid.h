@@ -29,19 +29,9 @@ public:
 
 		std::cout << getName() << "가 특수 공격을 사용합니다!" << '\n';
 		std::cout << getName() << "가 " << target->getName() << "에게 돌진합니다!" << '\n';
-
-		int successAttack = Random::getRandomValue(0, 10);
-		if (successAttack < 5)
-		{
-			int damage = getAttack() * 2;
-
-			target->takeDamage(damage);
-		}
-		else
-		{
-			std::cout << target->getName() << "는 " << getName() << "의 돌진을 피했습니다!" << '\n';
-		}
+		target->takeDamage(getAttack() * 2);
 	}
+
 	void activatePassive() override
 	{
 		int health = 0;
