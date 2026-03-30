@@ -35,16 +35,19 @@
     <ClCompile Include="Leviathan.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterFactory.cpp">
+    <ClCompile Include="MimicOctopus.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterFactory.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
     <ClCompile Include="NormalMonster.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="MimicOctopus.cpp">
+    <ClCompile Include="ViperFish.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
@@ -62,7 +65,43 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="BattleSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogger.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SeaCaveMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CollapsedShipMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingMap.h">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
     <ClCompile Include="IMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Lobby.cpp">
@@ -74,31 +113,7 @@
     <ClCompile Include="Stage.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Dungeon.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="ViperFish.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopSystem.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Singleton.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogger.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -124,6 +139,7 @@
     <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="NormalMonster.h" />
     <ClInclude Include="TextUtility.h" />
+    <ClInclude Include="TextUtility.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Atolla.h">
@@ -141,19 +157,25 @@
     <ClInclude Include="Leviathan.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="MonsterFactory.h">
+    <ClInclude Include="MimicOctopus.h">
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Monster</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterFactory.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
     <ClInclude Include="NormalMonster.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="MimicOctopus.h">
+    <ClInclude Include="ViperFish.h">
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="ItemFactory.h">
@@ -168,8 +190,38 @@
     <ClInclude Include="Weapon.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Player</Filter>
+    <ClInclude Include="BattleSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogger.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SeaCaveMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CollapsedShipMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="IMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="IMap.h">
       <Filter>Stage</Filter>
@@ -183,52 +235,28 @@
     <ClInclude Include="Stage.h">
       <Filter>Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="ViperFish.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="ShopSystem.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogger.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TextUtility.h">
-      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Monster">
-      <UniqueIdentifier>{b57acee7-46e9-4b75-932f-07c32ec7ec19}</UniqueIdentifier>
+      <UniqueIdentifier>{6db79ebd-c486-4f10-92d8-70f1afb1c26a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Player">
-      <UniqueIdentifier>{f2f26f00-e9f1-410c-8b29-4fb243b119e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Stage">
-      <UniqueIdentifier>{39a1c3b8-7483-4ed4-b2f4-e040c6e475e2}</UniqueIdentifier>
+      <UniqueIdentifier>{4569f28d-6b48-4207-8b24-b75b1e9402a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="System">
-      <UniqueIdentifier>{dfe4b0c9-357f-4755-aac1-cdfa45a85dcc}</UniqueIdentifier>
+      <UniqueIdentifier>{d43acba5-e240-470f-9c4c-d71d58a287f5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager">
-      <UniqueIdentifier>{2a9ae690-4e1c-462a-b037-cadb409336c3}</UniqueIdentifier>
+      <UniqueIdentifier>{04a595af-4e45-4c05-91ba-d57070206f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{9ab23314-e657-4a83-bdae-f8f5aa2871b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage">
+      <UniqueIdentifier>{396cdb3f-99b6-40d3-8ffe-fd5f2cd6eb72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
