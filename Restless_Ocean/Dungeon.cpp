@@ -50,16 +50,13 @@ void Dungeon::update()
 		}
 		std::cout << "================================" << std::endl;
 
-		battleSystem.startBattleSequence(&player, currentMap->GetAttributeType());
-
+		BattleResult result = battleSystem.startBattleSequence(&player, currentMap->GetAttributeType());
 		if (GameManager::getInstance().isGameEnded()) return;
 
-		if (player.getPressure() == 0 && battleCountInDungeon < 5)
+		if (result == BattleResult::RunAway)
 		{
-			std::cout << "\n[시스템] 안전한 로비로 긴급 회항합니다..." << std::endl;
-			std::this_thread::sleep_for(std::chrono::seconds(2));
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
-			return; // 던전 루프 종료 및 로비 이동
+			return;
 		}
 
 		if (battleCountInDungeon >= 5)
