@@ -21,8 +21,8 @@ public:
 		std::cout << "ATK     :" << getAttack() << '\n';
 		std::cout << "SPEED   :" << getSpeed() << '\n';
 		std::cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
-		std::cout << "유물:   :" << getRewardArtifact() + " 유적" << '\n';
-		std::cout << "설명    :" << getDescription() << '\n';
+		std::cout << "유물    :" << getRewardArtifact() + " 유적" << '\n';
+		std::cout << "기본 능력" << getDescription() << '\n';
 		std::cout << "===============================" << '\n';
 	}
 
