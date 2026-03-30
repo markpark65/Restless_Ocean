@@ -32,6 +32,12 @@ std::string GameLogger::getMessage(EventLog& log)
 	case EventType::UseItem:
 		message = log.actor + "가 " + log.target + "을(를) 사용.";
 		break;
+	case EventType::ObtainGold:
+		message = log.actor + "는 " + std::to_string(log.value) + "G를 획득.";
+		break;
+	case EventType::UseGold:
+		message = log.actor + "는 " + std::to_string(log.value) + "G를 사용.";
+		break;
 	case EventType::Return:
 		message = log.actor + "는 육지로 무사히 복귀하였음.";
 		break;
@@ -76,7 +82,7 @@ void GameLogger::printRecentLog(size_t count)
 		std::string message = getMessage(log);
 		std::cout << message << '\n';
 
-		if (count <= currentidx)
+		if (count < currentidx)
 			break;
 		else
 			currentidx++;
