@@ -182,13 +182,13 @@ void ShopSystem::gacha(Player& player) {
 		reward = std::make_unique<HealthPotion>("체력 포션", 10, 50, 1);
 	}
 	else if (roll < 80) {
-		reward = std::make_unique<OxygenPotion>("산소 포션", 10, 10, 1);
+		reward = std::make_unique<OxygenPotion>("산소 포션", 10, 50, 1);
 	}
 	else if (roll < 95) {
-		reward = std::make_unique<PressurePotion>("압력 포션", 10, 10, 1);
+		reward = std::make_unique<PressurePotion>("압력 포션", 10, 50, 1);
 	}
 	else {
-		reward = std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 10, 10);
+		reward = std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200, 5);
 	}
 
 	std::cout << "획득 아이템: ";

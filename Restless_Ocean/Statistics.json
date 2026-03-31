@@ -14,15 +14,17 @@
     "DeathCount": 5,
     "ExplorationCount": 5,
     "KillCount": {
-        "몬스터": 5
+        "대왕 오징어": 4,
+        "몬스터": 5,
+        "초롱 아귀": 4
     },
-    "ReturnCount": 5,
+    "ReturnCount": 8,
     "TotalDamageDealt": 100,
     "TotalDamageTaken": 5045,
     "TotalGoldGain": 0,
     "TotalGoldUse": 0,
-    "TotalItemGain": 16,
+    "TotalItemGain": 18,
     "TotalItemUse": 5,
-    "TotalKillCount": 5,
+    "TotalKillCount": 13,
     "TotalLevelUp": 5
 }
