@@ -74,7 +74,8 @@ void Dungeon::update()
 		// 5번째 보스전이 끝났을 때만 선택지를 줍니다.
 		if (battleCountInDungeon >= 5)
     {
-    g_sceneData.description += "\n[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!\n";
+	g_sceneData.description.clear();
+    g_sceneData.description += "[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!\n";
     g_sceneData.description += "1. 다음 유적지로 이동\n";
     g_sceneData.description += "2. 육지(로비)로 귀환\n";
     
