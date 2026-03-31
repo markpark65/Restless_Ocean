@@ -87,7 +87,8 @@ void Dungeon::update()
 
 				if (nextMap == nullptr)
 				{
-					std::cout << "더 이상 탐험할 수 있는 유적이 없습니다.\n";
+					g_sceneData.description += "더 이상 탐험할 수 있는 유적이 없습니다. \n ";
+					//std::cout << "더 이상 탐험할 수 있는 유적이 없습니다.\n";
 					GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 					return;
 				}

@@ -48,10 +48,10 @@ static KeyInput getInput() {
 
 struct SceneData
 {
-	const Player* player = nullptr;
 	std::string Title;
-	std::vector<std::string> sceneImage;
+	const Player* player = nullptr;
 	const Monster* monster = nullptr;
+	std::vector<std::string> sceneText;
 	std::string description;
 	std::vector<std::string> options;
 	int selectedIndex = 0;
@@ -137,13 +137,17 @@ public:
 
 
 	//void render(const Player* player, const SceneData& scene)
-	void render(const SceneData& scene)
+	void render(SceneData& scene)
 	{
+
+		if (scene.options.size() <= scene.selectedIndex)
+			scene.selectedIndex = scene.options.size() - 1;
+
 		clear();
 		drawScenePanel(0, 0, 70, 18, scene);
-		drawStatusPanel(70, 0, 30, 18, scene.player);
-		drawDescriptionPanel(0, 18, 70, 10, scene.description);
-		drawChoicePanel(70, 18, 30, 10, scene.options, scene.selectedIndex);
+		drawStatusPanel(70, 0, 30, 17, scene.player);
+		drawDescriptionPanel(0, 17, 70, 11, scene.description);
+		drawChoicePanel(70, 16, 30, 12, scene.options, scene.selectedIndex);
 		present();
 	}
 
@@ -350,9 +354,9 @@ private:
 	void drawScenePanel(int x, int y, int w, int h, const SceneData& scene)
 	{
 		drawBox(x, y, w, h);
-		drawText(x + 2, y + 1, scene.Title);
+		drawText(x + 2, y, scene.Title);
 
-		if (scene.monster != nullptr) {
+		if (scene.monster != nullptr and scene.sceneText.size() == 0) {
 /*
 cout << "\n===============================" << '\n';
 cout << "몬스터 이름: " << getName() << '\n';
@@ -378,10 +382,8 @@ cout << "===============================" << '\n';
 			drawParagraph(x + 2, y + 13, w - 4, skillstr);
 		}
 
-
-
-		for (int i = 0; i < scene.sceneImage.size(); i++) {
-			drawText(x + 30, y + i + 2, scene.sceneImage.at(i));
+		for (int i = 0; i < scene.sceneText.size(); i++) {
+			drawText(x + 2, y + 1 + i, scene.sceneText.at(i));
 		}
 	}
 
@@ -390,47 +392,47 @@ cout << "===============================" << '\n';
 		drawBox(x, y, w, h);
 		if (player == nullptr)
 			return;
-		drawText(x + 2, y + 1, "플레이어 상태");
-		drawText(x + 2, y + 2, "Name     :" + player->getName());
+		drawText(x + 2, y, "플레이어 상태");
+		drawText(x + 2, y + 1, "Name     :" + player->getName());
 
-		drawText(x + 2, y + 3, "HP       :");
-		drawText(x + 12, y + 3, std::to_string(player->getHp()));
-		drawText(x + 15, y + 3, "/" + std::to_string(player->getMaxHp()));
-		drawText(x + 2, y + 4, makeBar(player->getHp(), player->getMaxHp(), 20));
+		drawText(x + 2, y + 2, "HP       :");
+		drawText(x + 12, y + 2, std::to_string(player->getHp()));
+		drawText(x + 15, y + 2, "/" + std::to_string(player->getMaxHp()));
+		drawText(x + 2, y + 3, makeBar(player->getHp(), player->getMaxHp(), 20));
 
-		drawText(x + 2, y + 5, "oxygen   :");
-		drawText(x + 12, y + 5, std::to_string(player->getOxygen()));
-		drawText(x + 15, y + 5, "/" + std::to_string(player->getMaxOxygen()));
-		drawText(x + 2, y + 6, makeBar(player->getOxygen(), player->getMaxOxygen(), 20));
+		drawText(x + 2, y + 4, "oxygen   :");
+		drawText(x + 12, y + 4, std::to_string(player->getOxygen()));
+		drawText(x + 15, y + 4, "/" + std::to_string(player->getMaxOxygen()));
+		drawText(x + 2, y + 5, makeBar(player->getOxygen(), player->getMaxOxygen(), 20));
 
-		drawText(x + 2, y + 7, "battery  :");
-		drawText(x + 12, y + 7, std::to_string(player->getBattery()));
-		drawText(x + 15, y + 7, "/100");
-		drawText(x + 2, y + 8, makeBar(player->getBattery(), 100, 20));
+		drawText(x + 2, y + 6, "battery  :");
+		drawText(x + 12, y + 6, std::to_string(player->getBattery()));
+		drawText(x + 15, y + 6, "/100");
+		drawText(x + 2, y + 7, makeBar(player->getBattery(), 100, 20));
 
-		drawText(x + 2, y + 9, "pressure :");
-		drawText(x + 12, y + 9, std::to_string(player->getPressure()));
-		drawText(x + 15, y + 9, "/" + std::to_string(player->getMaxPressure()));
-		drawText(x + 2, y + 10, makeBar(player->getPressure(), player->getMaxPressure(), 20));
+		drawText(x + 2, y + 8, "pressure :");
+		drawText(x + 12, y + 8, std::to_string(player->getPressure()));
+		drawText(x + 15, y + 8, "/" + std::to_string(player->getMaxPressure()));
+		drawText(x + 2, y + 9, makeBar(player->getPressure(), player->getMaxPressure(), 20));
 
 
-		drawText(x + 2, y + 11, "ATK      :" + std::to_string(player->getAttack()));
-		drawText(x + 2, y + 12, "SPEED    :" + std::to_string(player->getSpeed()));
+		drawText(x + 2, y + 10, "ATK      :" + std::to_string(player->getAttack()));
+		drawText(x + 2, y + 11, "SPEED    :" + std::to_string(player->getSpeed()));
 
-		drawText(x + 2, y + 13, "EXP      :");
-		drawText(x + 12, y + 13, std::to_string(player->getExp()));
-		drawText(x + 15, y + 13, "/" + std::to_string(player->getMaxExp()));
-		drawText(x + 2, y + 14, makeBar(player->getExp(), player->getMaxExp(), 20));
+		drawText(x + 2, y + 12, "EXP      :");
+		drawText(x + 12, y + 12, std::to_string(player->getExp()));
+		drawText(x + 15, y + 12, "/" + std::to_string(player->getMaxExp()));
+		drawText(x + 2, y + 13, makeBar(player->getExp(), player->getMaxExp(), 20));
 
-		drawText(x + 2, y + 15, "Gold     :" + std::to_string(player->getGold()));
-		drawText(x + 2, y + 16, "Artifact :" + std::to_string(player->getArtifactCount()) + " / 3");
+		drawText(x + 2, y + 14, "Gold     :" + std::to_string(player->getGold()));
+		drawText(x + 2, y + 15, "Artifact :" + std::to_string(player->getArtifactCount()) + " / 3");
 	}
 
 	void drawDescriptionPanel(int x, int y, int w, int h, const std::string& description)
 	{
 		drawBox(x, y, w, h);
-		drawText(x + 2, y + 1, "Description");
-		drawParagraph(x + 2, y + 2, w - 4, description);
+		drawText(x + 2, y, " Description ");
+		drawParagraph(x + 2, y + 1, w - 4, description);
 	}
 
 	void drawChoicePanel(int x, int y, int w, int h,
@@ -438,7 +440,7 @@ cout << "===============================" << '\n';
 		int selectedIndex)
 	{
 		drawBox(x, y, w, h);
-		drawText(x + 2, y + 1, "선택지");
-		drawMenu(x + 2, y + 2, options, selectedIndex);
+		drawText(x + 2, y, "선택지");
+		drawMenu(x + 2, y+1, options, selectedIndex);
 	}
 };

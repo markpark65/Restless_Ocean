@@ -15,30 +15,31 @@
 void Lobby::start()
 {
 	Player& player = GameManager::getInstance().getPlayer();
-	g_sceneData.description = "로비로 돌아왔습니다. \n";
+	g_sceneData.description = "로비로 돌아왔습니다. \n ";
 	g_sceneData.Title = "Lobby";
+	g_sceneData.sceneText = {};
 	if (player.getHp() < player.getMaxHp()) {
 		player.recoverDamage(player.getMaxHp()); //체력 초기화
 		//std::cout << player.getName() << " 대원의 체력이 모두 회복되었습니다." << '\n';
-		g_sceneData.description += player.getName() + " 대원의 체력이 모두 회복되었습니다. \n";
+		g_sceneData.description += player.getName() + " 대원의 체력이 모두 회복되었습니다. \n ";
 	}
 
 	if (player.getOxygen() < 100) {
 		player.recoverOxygen(100); // 산소 초기화
 		//std::cout << "산소가 재충전되었습니다. (100%)" << '\n';
-		g_sceneData.description += " 산소가 재충전되었습니다. (100%) \n";
+		g_sceneData.description += "산소가 재충전되었습니다. (100%) \n ";
 	}
 
 	if (player.getPressure() > 0) {
 		player.recoverPressure(player.getPressure()); // 압력 초기화 함수
 		player.resetSpeed(); //
 		//std::cout << "수압 장치가 초기화되었습니다. (0%)" << '\n';
-		g_sceneData.description += player.getName() + "수압 장치가 초기화되었습니다. (0%) \n";
+		g_sceneData.description += "수압 장치가 초기화되었습니다. (0%) \n ";
 	}
 	if (player.getBattery() < 100) {
 		player.rechargeBattery(100); // 100으로 설정하는 함수
 		//std::cout << "배터리가 완충되었습니다. (100%)\n";
-		g_sceneData.description += player.getName() + "배터리가 완충되었습니다. (100%) \n";
+		g_sceneData.description += "배터리가 완충되었습니다. (100%) \n ";
 	}
 	//std::cout << "\n로비로 왔습니다." << '\n';
 }

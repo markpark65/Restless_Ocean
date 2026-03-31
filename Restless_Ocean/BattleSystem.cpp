@@ -106,6 +106,7 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	//cout << "전투가 끝났습니다." << '\n';
 
 	g_sceneData.description = "전투가 끝났습니다. \n ";
+	g_sceneData.monster = nullptr;
 	player->useOxygen(10); // 전투 후 산소 10 소모
 	player->takePressure(10); // [추가] 전투당 압력 10 증가
 	player->resetTempStats(); // 전투후 추가 공격력 초기화
@@ -160,6 +161,8 @@ void BattleSystem::playerAction(int turn, BattleResult& battleResult)
 {
 	//cout << "* 플레이어의 턴입니다!" << '\n';
 	g_sceneData.description = "* 플레이어의 턴입니다! \n ";
+
+	g_sceneData.sceneText = {};
 	//player->showStatus(); // 플레이어 상태 출력
 	//cout << '\n';
 
@@ -168,16 +171,18 @@ void BattleSystem::playerAction(int turn, BattleResult& battleResult)
 	//cout << "2. 스킬 사용"	<< '\n';
 	//cout << "3. 아이템 사용" << '\n';
 	//cout << "4. 도망치기"	<< '\n';
-	g_sceneData.selectedIndex = 0;
-	g_sceneData.options = {
-		"1. 일반 공격",
-		"2. 스킬 사용",
-		"3. 아이템 사용",
-		"4. 도망치기"
-	};
+
 
 	while (!actionCompleted)
 	{
+		g_sceneData.sceneText = {};
+		g_sceneData.selectedIndex = 0;
+		g_sceneData.options = {
+			"1. 일반 공격",
+			"2. 스킬 사용",
+			"3. 아이템 사용",
+			"4. 도망치기"
+		};
 		int selectedIndex = g_cliRenderer.OptionSelector(g_sceneData);
 		switch (selectedIndex)
 		{
@@ -250,12 +255,49 @@ bool BattleSystem::playerUseSkill() // 플레이어 스킬 사용 함수
 
 bool BattleSystem::playerUseItem() // 플레이어 아이템 사용 함수
 {
+	g_sceneData.description = "보유중인 아이템 \n ";
+	g_sceneData.sceneText = {};
+	g_sceneData.sceneText.push_back("=== 보유 아이템 목록 === ");
+	g_sceneData.sceneText.push_back("0: [이전으로 돌아가기]");
+	g_sceneData.selectedIndex = 0;
+	g_sceneData.options = { "이전으로 돌아가기" };
+	//std::cout << "\n=== 판매 ===\n";
+	//std::cout << "0: [상점으로 돌아가기]\n\n";
+	int size = player->getInventory().getSize();
+
+	if (player->getInventory().getSize() == 0) {
+		g_sceneData.description = "보유한 아이템이 없습니다. \n ";
+		return false;
+	}
+
+	std::vector<std::string> items = player->getInventory().printAllstr();
+	for (auto& it : items) {
+		g_sceneData.sceneText.push_back(it);
+		//g_sceneData.options.push_back(it);
+	}
+	for (int i = 0; i < player->getInventory().getSize(); i++) {
+		Item* item = player->getInventory().getItem(i);
+		//g_sceneData.sceneText.push_back(item->tostring());
+		std::string name = item->getName();
+
+		//이름이너무길어
+		if (name == "방수가 잘 되어있는 초코과자")
+			name = "초코과자";
+		g_sceneData.options.push_back(name);
+	}
+	g_sceneData.description += "사용할 아이템 선택 \n ";
+	g_cliRenderer.render(g_sceneData);
+	//std::cout << "사용할 아이템 선택 ";
+	int input = g_cliRenderer.OptionSelector(g_sceneData);
+
+
 	//cout << "아이템을 선택하세요." << '\n';
-	int itemIndex = player->getInventory().selectItem();
+	//int itemIndex = player->getInventory().selectItem();
 	
-	if (itemIndex != -1) // 올바른 아이템 인덱스
+	if (input != 0) // 올바른 아이템 인덱스
 	{
-		player->getInventory().useItem(itemIndex, player);
+		player->getInventory().useItem(input-1, player);
+		g_cliRenderer.render(g_sceneData);
 		this_thread::sleep_for(chrono::seconds(2));
 		return true;
 	}
@@ -278,6 +320,7 @@ void BattleSystem::playerRunAway(BattleResult& battleResult)
 void BattleSystem::monsterAction(int turn)
 {
 	g_sceneData.description = "* 몬스터의 턴입니다! \n ";
+	g_sceneData.sceneText = {};
 	//cout << "* 몬스터의 턴입니다!" << '\n';
 
 	//monster->showStat();

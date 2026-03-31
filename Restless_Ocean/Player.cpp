@@ -10,14 +10,35 @@
 using namespace std;
 
 Player::Player(string n)
+	//: name(n)
+	//, level(0)
+	//, hp(200)
+	//, maxHp(200)
+	//, baseAttack(30)
+	//, exp(0)
+	//, maxExp(100)
+	//, gold(0)
+	//, oxygen(100)
+	//, maxOxygen(100)
+	//, speed(100)
+	//, baseSpeed(100)
+	//, pressure(0)
+	//, maxPressure(100)
+	//, battery(100)
+	//, maxBattery(100)
+	//, tempAttack(0)
+	//, artifactCount(0)
+	//, gachaCount(0)
+	//, inventory(10) {
+
 	: name(n)
-	, level(0)
-	, hp(200)
-	, maxHp(200)
-	, baseAttack(30)
+	, level(20)
+	, hp(9999)
+	, maxHp(9999)
+	, baseAttack(500)
 	, exp(0)
 	, maxExp(100)
-	, gold(0)
+	, gold(9999)
 	, oxygen(100)
 	, maxOxygen(100)
 	, speed(100)
@@ -306,7 +327,7 @@ void Player::debuffSpeed(int reduction) {
 }
 void Player::resetSpeed() {
 	speed = baseSpeed;
-	g_sceneData.description += "수압이 해소되어 몸이 가벼워졌습니다!";
+	g_sceneData.description += "수압이 해소되어 몸이 가벼워졌습니다! \n ";
 	//cout << "수압이 해소되어 몸이 가벼워졌습니다!" << endl;
 }
 //골드 획드
