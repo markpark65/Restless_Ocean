@@ -129,8 +129,7 @@ void Player::learnSkill(unique_ptr<Skill> newSkill) {
 		//cout << "이미 스킬[" << currentSkill->getName() << "]을 보유 중입니다." << endl;
 		//cout << "새 스킬 [" << newSkill->getName() << "]로 교체하시겠습니까?" << endl;
 		//cout << "1. 교체한다 (기존 기술 삭제)  2. 유지한다 (새 기술 버림)" << endl;
-		g_sceneData.description += "이미 스킬[" + currentSkill->getName() + "]을 보유 중입니다. \n ";
-		g_sceneData.description += "새 스킬 [" + newSkill->getName() + "]로 교체하시겠습니까? \n ";
+		g_sceneData.description += "이미 스킬[" + currentSkill->getName() + "]을 보유 중입니다.  스킬로 교체하시겠습니까? \n ";
 		g_sceneData.description += "1. 교체한다 (기존 기술 삭제)  2. 유지한다 (새 기술 버림) \n ";
 		g_sceneData.options={
 			"교체하기",
@@ -339,7 +338,8 @@ void Player::addArtifact(std::string name) {
 		g_sceneData.sceneText = {
 			"모든 유적을 모았습니다! 심해의 비밀이 드러납니다.",
 			"심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다.",
-			"축하합니다! 심해의 영웅이시여. 당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다.",
+			"축하합니다! 심해의 영웅이시여. ",
+			"당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다.",
 			"당신의 이름은 고대 비석에 영원히 기록될 것입니다.",
 		};
 		//cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";

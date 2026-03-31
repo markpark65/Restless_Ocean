@@ -70,7 +70,7 @@ void Dungeon::update()
 			//std::cout << "\n[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!" << std::endl;
 			//std::cout << "1. 다음 유적지로 이동\n";
 			//std::cout << "2. 육지(로비)로 귀환\n";
-			g_sceneData.description = "[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!. \n ";
+			g_sceneData.description += "[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!. \n ";
 			g_sceneData.description += "1. 다음 유적지로 이동 \n ";
 			g_sceneData.description += "2. 육지(로비)로 귀환 \n ";
 			g_sceneData.options = {
@@ -103,7 +103,7 @@ void Dungeon::update()
 		}
 
 		// 5번이 안 끝났으면 선택지 없이 자동으로 다음 전투 진행
-		g_sceneData.description = "[시스템] 심해를 더 깊이 탐사합니다...";
+		g_sceneData.description = "[시스템] 심해를 더 깊이 탐사합니다... \n ";
 		//std::cout << "\n[시스템] 심해를 더 깊이 탐사합니다..." << std::endl;
 		g_cliRenderer.render(g_sceneData);
 		std::this_thread::sleep_for(std::chrono::seconds(1));
