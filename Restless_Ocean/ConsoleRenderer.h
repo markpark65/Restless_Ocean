@@ -182,7 +182,7 @@ private:
 	{
 		//std::cout << "\x1b[2J";
 		//콘솔 버퍼 정리
-		std::cout << "\x1b[1J\x1b[H";
+		std::cout << "\x1b[2J\x1b[H";
 
 		for (const auto& row : buffer)
 		{
@@ -321,12 +321,17 @@ private:
 
 		for (char ch : text)
 		{
-			if (ch == ' ' || ch == '\t')
+			if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r')
 			{
 				if (!current.empty())
 				{
 					words.push_back(current);
 					current.clear();
+				}
+
+				if (ch == '\n')
+				{
+					words.push_back("\n");
 				}
 			}
 			else
