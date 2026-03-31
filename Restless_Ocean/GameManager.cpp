@@ -8,6 +8,7 @@
 #include "CollapsedShipMap.h"
 #include "SeaCaveMap.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
 
 Player& GameManager::getPlayer()
 {

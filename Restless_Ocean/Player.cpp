@@ -6,6 +6,8 @@
 #include "InputSystem.h"
 #include "TextUtility.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
+#include "EventType.h"
 
 using namespace std;
 
@@ -71,7 +73,8 @@ void Player::levelUp() {
 	g_sceneData.description.clear();
 	g_sceneData.description += "Level UP!!!현재 레벨 : " + std::to_string(level) + " \n ";
 	g_sceneData.description += "최대 체력 " + std::to_string(hpBonus) + " 증가 / 공격력 " + std::to_string(atkBonus) + " 증가 \n ";
-  
+
+	GameLogger::getInstance().log(EventType::LevelUp, name, 0);
 	if (level == 3 || level == 6 || level == 9) {
 		g_sceneData.description += "특정 레벨 도달! 고대의 기술 중 하나를 연마할 수 있습니다. \n ";
 
@@ -108,7 +111,6 @@ void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
 void Player::upgradeWeapon(int amount) {
 	if (!equippedWeapon) {
 		g_sceneData.description += "장착된 무기가 없습니다! \n ";
-		std::cout << "장착된 무기가 없습니다!\n";
 		return;
 	}
 
@@ -286,7 +288,7 @@ void Player::resetSpeed() {
 void Player::addGold(int amount) {
 	gold += amount;
 	g_sceneData.description += std::to_string(amount) + "G(보유 골드: " + std::to_string(gold) + "G) \n ";
-
+	GameLogger::getInstance().log(EventType::ObtainGold, getName(), amount);
 }
 //유적 발견
 void Player::addArtifact(std::string name) {

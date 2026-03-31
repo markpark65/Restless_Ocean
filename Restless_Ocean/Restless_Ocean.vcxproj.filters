@@ -96,7 +96,10 @@
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="GlobalVal.cpp" />
-    <ClCompile Include="GameStatistics.cpp" />
+    <ClCompile Include="BuildingMap.h" />
+    <ClCompile Include="GameStatistics.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataType.h" />
@@ -183,9 +186,6 @@
     <ClInclude Include="IMap.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="BuildingMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="Dungeon.h">
       <Filter>Stage</Filter>
     </ClInclude>
@@ -201,7 +201,9 @@
     <ClInclude Include="Singleton.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameStatistics.h" />
+    <ClInclude Include="GameStatistics.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Monster">
@@ -222,5 +224,8 @@
     <Filter Include="Stage">
       <UniqueIdentifier>{396cdb3f-99b6-40d3-8ffe-fd5f2cd6eb72}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Statistics.json" />
   </ItemGroup>
 </Project>

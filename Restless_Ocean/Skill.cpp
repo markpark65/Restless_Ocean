@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
 
 Skill::Skill(std::string n, int cost) : name(n), batteryCost(cost) {}
 Skill::~Skill() {}
@@ -16,6 +17,7 @@ void TripleDamageSkill::execute(Player* player, Monster* target) {
 	int enhancedDamage = player->getAttack() * 3;
 	g_sceneData.description += "[스킬] " + name + " 발동!! (배터리 20% 소모) \n ";
 	g_sceneData.description += "강력한 일격이 " + target->getName() + " 에게 " + std::to_string(enhancedDamage) + "의 피해를 입힙니다! \n ";
+	GameLogger::getInstance().log(EventType::DamageDealt, player->getName(), target->getName(), enhancedDamage);
 	target->takeDamage(enhancedDamage);
 
 }
@@ -42,6 +44,7 @@ void CounterSkill::execute(Player* player, Monster* target) {
 
 		g_sceneData.description += "데미지 계산: [적 ATK " + std::to_string(target->getAttack()) + "] + [내 ATK " + std::to_string(player->getAttack()) + "] \n ";
 
+		GameLogger::getInstance().log(EventType::DamageDealt, player->getName(), target->getName(), counterDamage);
 		target->takeDamage(counterDamage);
 	}
 	else {

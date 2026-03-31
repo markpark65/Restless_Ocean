@@ -11,6 +11,8 @@
 #include "CollapsedShipMap.h"
 #include "SeaCaveMap.h"
 #include "GlobalVal.h"
+#include "GameStatistics.h"
+#include "GameLogger.h"
 
 void Lobby::start()
 {
@@ -48,6 +50,7 @@ void Lobby::update()
 	g_sceneData.options = {
 		"던전 입장",
 		"상점 이용",
+		"기록 열람",
 		"게임 종료",
 	};
 
@@ -55,7 +58,7 @@ void Lobby::update()
 	{
 		g_cliRenderer.render(g_sceneData);
 		int selectedIndex = g_cliRenderer.OptionSelector(g_sceneData);
-		switch(selectedIndex)
+		switch (selectedIndex)
 		{
 		case 0:
 		{
@@ -78,6 +81,8 @@ void Lobby::update()
 
 			if (selectedMap) {
 				// 인자가 있는 생성자 Dungeon(std::unique_ptr<IMap> map)를 호출하게 됩니다.
+
+				GameLogger::getInstance().log(EventType::Start, GameManager::getInstance().getPlayer().getName());
 				GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(selectedMap)));
 			}
 			else {
@@ -88,16 +93,37 @@ void Lobby::update()
 		break;
 
 		case 1:
+		{
 			GameManager::getInstance().changeStage(std::make_unique<Shop>());
 			return;
 			break;
-
+		}
 		case 2:
+		{
+			std::vector<std::string> stat = GameStatistics::getInstance().PrintStatistics();
+			g_sceneData.sceneText = stat;
+			g_cliRenderer.render(g_sceneData);
+			g_sceneData.options = {
+				"돌아가기",
+			};
+			g_cliRenderer.OptionSelector(g_sceneData);
+			g_sceneData.sceneText = {};
+			g_sceneData.options = {
+				"던전 입장",
+				"상점 이용",
+				"기록 열람",
+				"게임 종료",
+			};
+			return;
+			break;
+		}
+		case 3:
+		{
 			GameManager::getInstance().changeStage(nullptr);
 			std::cout << "게임을 종료합니다.\n";
 			return;
 			break;
-
+		}
 		default:
 			continue;
 		}

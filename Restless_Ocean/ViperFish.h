@@ -3,6 +3,7 @@
 #include "NormalMonster.h"
 #include "Player.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
 class ViperFish : public NormalMonster
 {
 public:
@@ -11,7 +12,7 @@ public:
 	void useBasicAttack(Player* target) override
 	{
 		g_sceneData.description += getName() + "이 물어 뜯기를 사용합니다! \n ";
-
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 		target->takeDamage(getAttack());
 	}
 
@@ -20,6 +21,9 @@ public:
 		g_sceneData.description += getName() + "이 연속 물어 뜯기를 사용합니다! \n ";
 
 
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), static_cast<int>(getAttack() * 0.5));
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), static_cast<int>(getAttack() * 0.25));
 		target->takeDamage(getAttack());
 		target->takeDamage(static_cast<int>(getAttack() * 0.5));
 		target->takeDamage(static_cast<int>(getAttack() * 0.25));

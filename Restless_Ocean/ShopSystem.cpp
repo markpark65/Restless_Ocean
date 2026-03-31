@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Random.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
 using namespace std;
 ShopSystem::ShopSystem() {
 
@@ -122,6 +123,8 @@ void ShopSystem::buyItem(Player& player) {
 			continue;
 		}
 
+		GameLogger::getInstance().log(EventType::UseGold, player.getName(), totalPrice);
+		GameLogger::getInstance().log(EventType::ObtainItem, player.getName(), totalPrice);
 		player.addGold(-totalPrice);
 
 		for (int i = 0; i < quantity; i++) {
@@ -188,6 +191,7 @@ void ShopSystem::sellItem(Player& player) {
 		int sellPrice = static_cast<int>(item->getPrice() * 0.6) * quantity;
 
 		player.addGold(sellPrice);
+		GameLogger::getInstance().log(EventType::ObtainGold, player.getName(), sellPrice);
 		player.getInventory().removeItem(index, quantity);
 
 		g_sceneData.description = "판매 완료! \n ";
@@ -201,19 +205,17 @@ void ShopSystem::gacha(Player& player) {
 
 	if (player.getLevel() < 10) {
 		g_sceneData.description = "레벨 10 이상부터 이용 가능합니다! \n ";
-		std::cout << "레벨 10 이상부터 이용 가능합니다!\n";
 		return;
 	}
 
 	if (player.getGold() < cost) {
 		g_sceneData.description = "골드가 부족합니다! \n ";
-		std::cout << "골드가 부족합니다!\n";
 		return;
 	}
 
 	player.addGold(-cost);
 
-	std::cout << "[ 뽑기 진행 중... ]\n";
+	g_sceneData.description += "[ 뽑기 진행 중... ] \n ";
 	int roll = Random::getRandomValue(0, 99);
 
 	std::unique_ptr<Item> reward;
@@ -354,7 +356,6 @@ void ShopSystem::craftItem(Player& player) {
 
 		if (!item) {
 			g_sceneData.description += "아이템 오류 \n ";
-			std::cout << "아이템 오류\n";
 			continue;
 		}
 
@@ -362,7 +363,6 @@ void ShopSystem::craftItem(Player& player) {
 
 		if (count < 2) {
 			g_sceneData.description += "2개 이상 필요! \n ";
-			std::cout << "2개 이상 필요!\n";
 			continue;
 		}
 

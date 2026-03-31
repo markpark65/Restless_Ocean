@@ -40,7 +40,7 @@ public:
 			return;
 
 		g_sceneData.description += getName() + "가 먹물을 발사합니다! \n ";
-
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 		target->takeDamage(getAttack());
 		g_sceneData.description += "먹물로 인해 배터리가 감소합니다! \n ";
 
@@ -53,8 +53,8 @@ public:
 			return;
 
 		g_sceneData.description += getName() + "가 " + target->getName() + "의 공격을 모방합니다! \n ";
-
 		int damage = target->getAttack();
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), damage);
 		target->takeDamage(damage);
 	}
 

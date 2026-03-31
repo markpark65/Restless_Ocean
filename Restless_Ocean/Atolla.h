@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Random.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
 
 class Atolla : public BossMonster
 {
@@ -37,11 +38,12 @@ public:
 
 		g_sceneData.description += getName() + "는 추가로 " + target->getName() + "에게 독 데미지를 입힙니다! \n ";
 
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 		target->takeDamage(getAttack());
 
 		cout << fixed;
 		cout.precision(1);
-		std::cout << getName() << "는 추가로 " << target->getName() << "에게 독 데미지를 입힙니다!" << '\n';
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack() * poisionDamage);
 		target->takeDamage(getAttack() * poisionDamage);
 	}
 
@@ -52,6 +54,7 @@ public:
 
 		g_sceneData.description += getName() + "이 빛을 모아 폭발합니다! \n ";
 
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack() * 2);
 		target->takeDamage(getAttack() * 2);
 	}
 

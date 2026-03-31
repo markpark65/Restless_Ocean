@@ -8,11 +8,11 @@ int Weapon::addDamagePotion = 0;
 
 void Weapon::increaseDamage(int amount) {
 	addDamage += amount;
-	std::cout << name << "(이)가 +" << amount << " 만큼 강화되었습니다!\n";
+	g_sceneData.description += name + "(이)가 + " + std::to_string(amount) + " 만큼 강화되었습니다! \n ";
 }
 void Weapon::increaseGlobalDamage(int amount) {
 	addDamagePotion += amount;
-	std::cout << "모든 무기 강화 +" << amount << "\n";
+	g_sceneData.description += "모든 무기 강화 + " + std::to_string(amount) + " \n ";
 }
 
 //// 섬광탄 (Flashbang)

@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Random.h"
 #include "GlobalVal.h"
-
+#include "GameLogger.h"
 class GiantSquid : public NormalMonster
 {
 private:
@@ -20,7 +20,7 @@ public:
 			return;
 
 		g_sceneData.description += getName() + "는 먹물을 발사합니다! \n ";
-
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 		target->takeDamage(getAttack());
 	}
 	void useSpecialAttack(Player* target) override
@@ -35,6 +35,7 @@ public:
 		{
 			int damage = getAttack() * 2;
 
+			GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 			target->takeDamage(damage);
 		}
 		else

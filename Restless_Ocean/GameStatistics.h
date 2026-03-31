@@ -14,9 +14,17 @@ private:
 	const std::string filePath = "Statistics.json";
 	//const std::string folder = "GameLogs";
 	json statisticData;//통계데이터가 담길 json
-
+	std::map<std::string, std::string> dictionaly;
 	void writeJsonFile();
 	GameStatistics() {
+		dictionaly = {
+			{"FootballFish",	"초롱 아귀" },
+			{"ViperFish",		"바이퍼 피쉬" },
+			{"GiantSquid",		"대왕 오징어"},
+			{"Atolla",			"왕관 해파리"},
+			{"MimicOctopus",	"흉내 문어" },
+			{"Leviathan",		"레비아탄"}
+		};
 		std::ifstream f(filePath);
 		if (f.good() && f.peek() != std::ifstream::traits_type::eof()) {
 			try {
@@ -51,6 +59,20 @@ private:
 		};
 		writeJsonFile(); // 초기 구조를 파일로 즉시 저장
 	}
+	std::string KorToEng(std::string name) {
+		for (auto& [k, v] : dictionaly) {
+			if (v == name)
+				return k;
+		}
+		return "NotFound";
+	}
+	std::string EngToKor(std::string name) {
+		for (auto& [k, v] : dictionaly) {
+			if (k == name)
+				return v;
+		}
+		return "NotFound";
+	}
 public:
 	GameStatistics(const GameStatistics&) = delete;
 	GameStatistics& operator=(const GameStatistics&) = delete;
@@ -66,5 +88,5 @@ public:
 		}
 	}
 	void LogToStatistic(EventType type, const std::string& name, int val);
-	void PrintStatistics();
+	std::vector<std::string> PrintStatistics();
 };

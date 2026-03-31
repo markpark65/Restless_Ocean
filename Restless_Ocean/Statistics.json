@@ -1,0 +1,34 @@
+{
+    "DamageDealtTo": {
+        "Atolla": 648,
+        "FootballFish": 1364,
+        "GiantSquid": 640,
+        "ViperFish": 750
+    },
+    "DamageTakenBy": {
+        "Atolla": 210,
+        "FootballFish": 116,
+        "GiantSquid": 31,
+        "ViperFish": 297
+    },
+    "DeathByCount": {
+        "ViperFish": 0
+    },
+    "DeathCount": 1,
+    "ExplorationCount": 8,
+    "KillCount": {
+        "Atolla": 1,
+        "FootballFish": 4,
+        "GiantSquid": 2,
+        "ViperFish": 2
+    },
+    "ReturnCount": 2,
+    "TotalDamageDealt": 3402,
+    "TotalDamageTaken": 654,
+    "TotalGoldGain": 40,
+    "TotalGoldUse": 60,
+    "TotalItemGain": 9,
+    "TotalItemUse": 0,
+    "TotalKillCount": 9,
+    "TotalLevelUp": 3
+}
