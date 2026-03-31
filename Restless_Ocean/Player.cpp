@@ -68,6 +68,7 @@ void Player::levelUp() {
 	exp -= maxExp;
 	if (exp < 0) exp = 0;
 
+	g_sceneData.description.clear();
 	g_sceneData.description += "Level UP!!!현재 레벨 : " + std::to_string(level) + " \n ";
 	g_sceneData.description += "최대 체력 " + std::to_string(hpBonus) + " 증가 / 공격력 " + std::to_string(atkBonus) + " 증가 \n ";
   
@@ -299,7 +300,7 @@ void Player::addArtifact(std::string name) {
 	}
 	artifacts.push_back(name);
 	++artifactCount;
-	g_sceneData.description += name + "을 발견했습니다. (현재 유적 개수: " + std::to_string(artifactCount) + "개) \n ";
+	g_sceneData.description += name + "를 발견했습니다. (현재 유적 개수: " + std::to_string(artifactCount) + "개)\n";
 	//cout << name<<"을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
 		g_sceneData.sceneText = {
