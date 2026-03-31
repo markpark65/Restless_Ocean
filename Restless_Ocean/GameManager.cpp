@@ -116,7 +116,7 @@ void GameManager::run()
 		std::cout << "> ";
 		g_sceneData.monster = nullptr;
 		g_sceneData.Title = "Continue?";
-		g_sceneData.description = "게임을 다시 시작하시겟습니까?";
+		g_sceneData.description += "게임을 다시 시작하시겟습니까?";
 		g_sceneData.options = {
 			"처음부터 다시 시작",
 			"게임 종료"

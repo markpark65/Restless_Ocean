@@ -37,6 +37,7 @@ void Dungeon::update()
 	player.setWeapon(weaponManager.selectWeapon());
 	//cout << '\n';
 	// 5번의 전투를 마칠 때까지 루프
+
 	while (battleCountInDungeon < 5)
 	{
 		battleCountInDungeon++;

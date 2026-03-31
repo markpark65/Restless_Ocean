@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <regex>
 #include <cstdlib>
+#include <sstream>
 #include "Player.h"
 #include "Monster.h"
 enum class KeyInput {
@@ -341,6 +342,18 @@ private:
 	}
 
 private:
+	std::vector<std::string> splitLines(const std::string& input) {
+		std::vector<std::string> lines;
+		std::stringstream ss(input);
+		std::string line;
+
+		// '\n'을 구분자로 사용하여 한 줄씩 읽어 vector에 추가
+		while (std::getline(ss, line)) {
+			lines.push_back(line);
+		}
+
+		return lines;
+	}
 	void drawScenePanel(int x, int y, int w, int h)
 	{
 		drawBox(x, y, w, h);
@@ -385,6 +398,12 @@ cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
 cout << "기본 능력" << getDescription() << '\n';
 cout << "===============================" << '\n';
 */
+			//몬스터 그림 출력
+			std::string asset = scene.monster->getAsset();
+			std::vector<std::string> lines = splitLines(asset);
+			for (int i = 0; i < lines.size(); i++) {
+				drawText(x + 25, y + i, lines.at(i));
+			}
 			//몬스터 정보 출력
 			drawText(x + 2, y + 7,  "몬스터 이름:"+scene.monster->getName());
 			drawText(x + 2, y + 8, "등급       :"+scene.monster->getRankName());
@@ -392,10 +411,10 @@ cout << "===============================" << '\n';
 			drawText(x + 2, y + 10, "ATK        :"+std::to_string(scene.monster->getAttack()));
 			drawText(x + 2, y + 11, "SPEED      :"+std::to_string(scene.monster->getSpeed()));
 			drawText(x + 2, y + 12, "TYPE       :" + scene.monster->typeToString(scene.monster->getMonsterType()));
-			
 			std::string skillstr = scene.monster->getDescription();
 			//skillstr = skillstr.replace(	);//regex_replace(skillstr, regex("\n"), "");
 			drawParagraph(x + 2, y + 13, w - 4, skillstr);
+
 		}
 
 		for (int i = 0; i < scene.sceneText.size(); i++) {
