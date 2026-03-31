@@ -91,9 +91,9 @@ int main()
 	//system("chcp 65001");
 	//system("cls");
   //게임 실행
-	//GameManager::getInstance().run();
+	GameManager::getInstance().run();
 
-	printFootballFish();
+	//printFootballFish();
 
 	return 0;
 	
