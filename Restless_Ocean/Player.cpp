@@ -209,6 +209,7 @@ void Player::recoverOxygen(int amount) {
 void Player::IncreaseOxygen(int amount) {
 	maxOxygen += amount;
 
+	g_sceneData.description.clear();
 	g_sceneData.description += name + " 대원의 최대 산소량이 " + std::to_string(amount) + " 증가했습니다! (최대 산소: " + std::to_string(maxOxygen) + ") \n ";
 }
 
@@ -265,6 +266,7 @@ void Player::takePressure(int amount) {
 	g_sceneData.description += "압력이 " + std::to_string(amount) + " % 증가했습니다. (현재 압력:" + std::to_string(pressure) + " %) \n ";
 	if (pressure >= maxPressure) {
 		//아래 속도 디버프와 중복출력
+		g_sceneData.description.clear();
 		g_sceneData.description += "압력이 너무 강합니다. 속도가 감소합니다.";
 		debuffSpeed(50);
 	}
