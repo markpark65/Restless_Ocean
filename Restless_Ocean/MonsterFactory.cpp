@@ -61,7 +61,7 @@ static const MonsterTemplate normalTemplates[] =
 )"
 	},
 
-	{ "대왕 오징어",	240, 270, 13, 16, 80, 90, AttributeType::Giant, 
+	{ "대왕 오징어",	240, 270, 13, 16, 80, 90, AttributeType::Giant,  
 		R"(- 패시브    : 체력을 회복한다.
 - 일반 공격 : 먹물을 발사해 공격한다.
 - 특수 공격 : 돌진하여 확률적으로 큰 피해를 입힌다.)",
