@@ -27,7 +27,7 @@ void Dungeon::start()
 {
 
 	// 현재 던전(맵) 정보를 출력하여 플레이어가 무기 선택 시 참고할 수 있도록 함
-	g_sceneData.description = "던전에 입장했습니다. \n";
+	g_sceneData.description = "던전에 입장했습니다. \n ";
 	g_sceneData.Title = "현재 던전: " + currentMap->GetName();
 
 
@@ -56,7 +56,7 @@ void Dungeon::update()
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 		}
-		std::cout << "================================" << std::endl;
+		//std::cout << "================================" << std::endl;
 
 		if (GameManager::getInstance().isGameEnded()) return;
 
@@ -73,37 +73,37 @@ void Dungeon::update()
 
 		// 5번째 보스전이 끝났을 때만 선택지를 줍니다.
 		if (battleCountInDungeon >= 5)
-    {
-    g_sceneData.description += "\n[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다!\n";
-    g_sceneData.description += "1. 다음 유적지로 이동\n";
-    g_sceneData.description += "2. 육지(로비)로 귀환\n";
-    
-    g_sceneData.options = { "다음 유적지로 이동", "육지(로비)로 복귀" };
-    g_sceneData.selectedIndex = 0;
+		{
+			g_sceneData.description += "[알림] 이 구역의 모든 위협을 제거하고 유적을 확보했습니다! \n ";
+			g_sceneData.description += "1. 다음 유적지로 이동 \n ";
+			g_sceneData.description += "2. 육지(로비)로 귀환 \n ";
 
-    int input = g_cliRenderer.OptionSelector(g_sceneData);
+			g_sceneData.options = { "다음 유적지로 이동", "육지(로비)로 복귀" };
+			g_sceneData.selectedIndex = 0;
 
-    if (input == 0) // '다음 유적지로 이동' 선택 시
-    {
-        std::unique_ptr<IMap> nextMap = GameManager::getInstance().createNextMap();
+			int input = g_cliRenderer.OptionSelector(g_sceneData);
 
-        if (nextMap != nullptr)
-        {
-            GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(nextMap)));
-        }
-        else
-        {
-            g_sceneData.description += "더 이상 탐험할 수 있는 유적이 없습니다.\n";
-            GameManager::getInstance().changeStage(std::make_unique<Lobby>());
-        }
-        return;
-    }
-    else // '육지(로비)로 복귀' 선택 시
-    {
-        GameManager::getInstance().changeStage(std::make_unique<Lobby>());
-        return;
-    }
-}
+			if (input == 0) // '다음 유적지로 이동' 선택 시
+			{
+				std::unique_ptr<IMap> nextMap = GameManager::getInstance().createNextMap();
+
+				if (nextMap != nullptr)
+				{
+					GameManager::getInstance().changeStage(std::make_unique<Dungeon>(std::move(nextMap)));
+				}
+				else
+				{
+					g_sceneData.description += "더 이상 탐험할 수 있는 유적이 없습니다. \n ";
+					GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+				}
+				return;
+			}
+			else // '육지(로비)로 복귀' 선택 시
+			{
+				GameManager::getInstance().changeStage(std::make_unique<Lobby>());
+				return;
+			}
+		}
 
 		// 5번이 안 끝났으면 선택지 없이 자동으로 다음 전투 진행
 		g_sceneData.description = "[시스템] 심해를 더 깊이 탐사합니다... \n ";
