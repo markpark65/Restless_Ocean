@@ -179,8 +179,9 @@ private:
 
 	void present() const
 	{
-		std::cout << "\x1b[2J";
-		std::cout << "\x1b[H";
+		//std::cout << "\x1b[2J";
+		//콘솔 버퍼 정리
+		std::cout << "\x1b[1J\x1b[H";
 
 		for (const auto& row : buffer)
 		{
