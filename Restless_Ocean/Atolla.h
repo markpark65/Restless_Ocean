@@ -43,7 +43,6 @@ public:
 
 		cout << fixed;
 		cout.precision(1);
-		std::cout << getName() << "는 추가로 " << target->getName() << "에게 독 데미지를 입힙니다!" << '\n';
 		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack() * poisionDamage);
 		target->takeDamage(getAttack() * poisionDamage);
 	}

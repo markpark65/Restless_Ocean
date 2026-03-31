@@ -56,7 +56,6 @@ void Dungeon::update()
 			GameManager::getInstance().changeStage(std::make_unique<Lobby>());
 			return;
 		}
-		std::cout << "================================" << std::endl;
 
 		if (GameManager::getInstance().isGameEnded()) return;
 
