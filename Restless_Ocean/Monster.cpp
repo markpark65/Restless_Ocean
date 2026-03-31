@@ -64,6 +64,11 @@ const std::string& Monster::getRewardArtifact() const
 	return rewardArtifact;
 }
 
+const std::string& Monster::getAsset() const
+{
+	return monsterStat.asset;
+}
+
 bool Monster::isAlive() const
 {
     return monsterStat.health > 0;
@@ -125,5 +130,6 @@ void Monster::showStat() const
     cout << "SPEED   :" << getSpeed() << '\n';
 	cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
 	cout << "기본 능력" << getDescription() << '\n';
+	cout << getAsset() <<'\n';
     cout << "===============================" << '\n';
 }
