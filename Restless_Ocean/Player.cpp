@@ -239,14 +239,19 @@ void Player::useOxygen(int amount) {
 	oxygen -= amount;
 	if (oxygen < 0) oxygen = 0;
 
-	if (oxygen > 0 && oxygen <= 10) {
+
+	if (oxygen > 10) {
+		//10보다 많으면
+		g_sceneData.description += "산소를 " + std::to_string(amount) + " % 소모했습니다. (남은 산소: " + std::to_string(oxygen) + " %) \n ";
+		//cout << "산소를 " << amount << " % 소모했습니다. (남은 산소: " << oxygen << " %)" << endl;
+	}
+	else if (oxygen > 0 && oxygen <= 10) {
+		//10이하(마지막 산소 소모)
 		g_sceneData.description += "산소가 부족합니다. 산소를 회복하거나 지상으로 복귀하십시오. \n ";
 		//cout << "산소가 부족합니다. 산소회복 혹은 지상으로 복귀하십쇼" << endl;
 	}
-	g_sceneData.description += "산소를 " + std::to_string(amount) + " % 소모했습니다. (남은 산소: " + std::to_string(oxygen) + " %) \n ";
-	//cout << "산소를 " << amount << " % 소모했습니다. (남은 산소: " << oxygen << " %)" << endl;
-
-	if (oxygen <= 0) {
+	else if (oxygen <= 0) {
+		//고갈
 		g_sceneData.description += "산소가 고갈됐습니다. 체력이 감소합니다. \n ";
 		//cout << "산소가 고갈됐습니다. 체력이 감소합니다." << endl;
 		takeDamage(20);
@@ -284,12 +289,13 @@ void Player::IncreasePressure(int amount) {
 //압력 증가
 void Player::takePressure(int amount) {
 	pressure += amount;
-	if (pressure > 100)
-		pressure = 100;
+	if (pressure > maxPressure)
+		pressure = maxPressure;
 	g_sceneData.description += "압력이 " + std::to_string(amount) + " % 증가했습니다. (현재 압력:" + std::to_string(pressure) + " %) \n ";
 	//cout << "압력이 " << amount << " % 증가했습니다. (현재 압력 " << pressure << " %)" << endl;
-	if (pressure >= 100) {
-		g_sceneData.description += "압력이 너무 강합니다. 체력이 감소합니다.";
+	if (pressure >= maxPressure) {
+		//아래 속도 디버프와 중복출력
+		//g_sceneData.description += "압력이 너무 강합니다. 체력이 감소합니다.";
 		//cout << "압력이 너무 셉니다. 체력이 감소합니다." << endl;
 		//takeDamage(20);
 		debuffSpeed(50);
@@ -334,7 +340,6 @@ void Player::addArtifact(std::string name) {
 	g_sceneData.description += name + "을 발견했습니다. (현재 유적 개수: " + std::to_string(artifactCount) + "개) \n ";
 	//cout << name<<"을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
-
 		g_sceneData.sceneText = {
 			"모든 유적을 모았습니다! 심해의 비밀이 드러납니다.",
 			"심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다.",
