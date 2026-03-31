@@ -375,7 +375,7 @@ void BattleSystem::prize()
 		// 30% 확률로 아이템 획득
 		int itemChance = random.getRandomValue(1, 100);
 
-		if (itemChance <= 100)
+		if (itemChance <= 30)
 		{
 			Item* obtainedItem = itemFactory.getRandomItem();
 
