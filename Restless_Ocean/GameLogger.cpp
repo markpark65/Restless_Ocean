@@ -75,6 +75,8 @@ void GameLogger::log(EventType type, const std::string& actor, const std::string
 
 void GameLogger::printRecentLog(size_t count)
 {
+	//미사용
+	return;
 	//to-do 최근 count개의 로그를 출력, 이벤트에 맞게 적절한 내용으로.
 	int currentidx = 0;
 	//for (auto& log : std::vector<EventLog>(logs.rbegin(), logs.rend())) {

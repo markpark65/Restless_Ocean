@@ -133,11 +133,14 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	else if (battleResult == BattleResult::RunAway)
 	{ // 도망쳤을 때
 		g_sceneData.description = "무사히 도망쳤습니다. \n ";
+		GameLogger::getInstance().log(EventType::Return, player->getName());
 		return false;
 	}
 	else if (battleResult == BattleResult::PlayerLose)
 	{ // 졌을 때
 		// 패배 로그 출력
+
+		g_sceneData.description = "전투에서 패배하였습니다... \n ";
 		GameLogger::getInstance().log(EventType::Death, player->getName(), monster->getName());
 
 		GameManager::getInstance().setIsPlayerExit(false);

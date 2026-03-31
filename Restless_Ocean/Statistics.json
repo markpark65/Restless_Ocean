@@ -1,0 +1,28 @@
+{
+    "DamageDealtTo": {
+        "GiantSquid": 640,
+        "ViperFish": 750
+    },
+    "DamageTakenBy": {
+        "GiantSquid": 31,
+        "ViperFish": 297
+    },
+    "DeathByCount": {
+        "ViperFish": 0
+    },
+    "DeathCount": 1,
+    "ExplorationCount": 7,
+    "KillCount": {
+        "GiantSquid": 2,
+        "ViperFish": 2
+    },
+    "ReturnCount": 1,
+    "TotalDamageDealt": 1390,
+    "TotalDamageTaken": 328,
+    "TotalGoldGain": 39,
+    "TotalGoldUse": 0,
+    "TotalItemGain": 2,
+    "TotalItemUse": 0,
+    "TotalKillCount": 4,
+    "TotalLevelUp": 0
+}

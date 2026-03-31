@@ -90,6 +90,14 @@ void GameStatistics::LogToStatistic(EventType type, const std::string& name, int
 		statisticData["TotalItemUse"] = statisticData.value("TotalItemUse", 0) + 1;
 		break;
 
+	case EventType::ObtainGold:
+		statisticData["TotalGoldGain"] = statisticData.value("TotalGoldGain", 0) + val;
+		break;
+
+	case EventType::UseGold:
+		statisticData["TotalGoldUse"] = statisticData.value("TotalGoldUse", 0) + val;
+		break;
+
 	case EventType::Return:
 		statisticData["ReturnCount"] = statisticData.value("ReturnCount", 0) + 1;
 		break;
@@ -98,7 +106,24 @@ void GameStatistics::LogToStatistic(EventType type, const std::string& name, int
 	writeJsonFile();
 }
 
-void GameStatistics::PrintStatistics() {
+std::vector<std::string> GameStatistics::PrintStatistics() {
+	std::vector<std::string> stat;
+	stat.push_back("탐사에 나선 횟수 : " +			statisticData["ExplorationCount"].dump());
+	stat.push_back("탐사에서 살아 돌아온 횟수 : " + statisticData["ReturnCount"].dump());
+	stat.push_back("탐사중 사망 횟수 : " +			statisticData["DeathCount"].dump());
+	stat.push_back("탐사중 레벨업 횟수 : " +			statisticData["TotalLevelUp"].dump());
+
+	stat.push_back("처치한 적의 숫자 : " +			statisticData["TotalKillCount"].dump());
+	stat.push_back("적들에게 입힌 피해량 : " +		statisticData["TotalDamageDealt"].dump());
+	stat.push_back("적들의 공격을 버텨낸 량 : " +	statisticData["TotalDamageTaken"].dump());
+
+	stat.push_back("탐사에서 찾은 아이템 수 : " +	statisticData["TotalItemGain"].dump());
+	stat.push_back("탐사중 사용한 아이템 수 : " +	statisticData["TotalItemUse"].dump());
+	stat.push_back("탐사에서 획득한 골드 : " +		statisticData["TotalGoldGain"].dump());
+	stat.push_back("탐사중 사용한 골드 : " +			statisticData["TotalGoldUse"].dump());
+
+	return stat;
+
 
 	std::cout << "탐사에 나선 횟수 : " << statisticData["ExplorationCount"] << '\n';
 	std::cout << "탐사를 성공하고 돌아온 횟수 : " << statisticData["ReturnCount"] << '\n';

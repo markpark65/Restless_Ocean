@@ -88,5 +88,5 @@ public:
 		}
 	}
 	void LogToStatistic(EventType type, const std::string& name, int val);
-	void PrintStatistics();
+	std::vector<std::string> PrintStatistics();
 };
