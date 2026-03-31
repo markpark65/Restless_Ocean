@@ -121,7 +121,6 @@ static const MonsterTemplate bossTemplates[] =
  \`. `.__,' /   /  \   \ `.__,' ,'/
   \o\     ,'  ,'    `.  `.     /o/
    \o`---'  ,'        `.  `---'o/
-    `.____,'	         `.____,'
 )"
 
 	},
@@ -132,7 +131,6 @@ static const MonsterTemplate bossTemplates[] =
 		"\n- 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다.",
 	MapType::CollapsedShipMap,
 		R"(
-          /           /
          /' .,,,,  ./
         /';'     ,/
        / /   ,,//,`'`
