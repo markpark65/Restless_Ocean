@@ -222,19 +222,17 @@ void ShopSystem::gacha(Player& player) {
 
 	if (player.getLevel() < 10) {
 		g_sceneData.description = "레벨 10 이상부터 이용 가능합니다! \n ";
-		std::cout << "레벨 10 이상부터 이용 가능합니다!\n";
 		return;
 	}
 
 	if (player.getGold() < cost) {
 		g_sceneData.description = "골드가 부족합니다! \n ";
-		std::cout << "골드가 부족합니다!\n";
 		return;
 	}
 
 	player.addGold(-cost);
 
-	std::cout << "[ 뽑기 진행 중... ]\n";
+	g_sceneData.description = "[ 뽑기 진행 중... ] \n ";
 	int roll = Random::getRandomValue(0, 99);
 
 	std::unique_ptr<Item> reward;
@@ -254,7 +252,7 @@ void ShopSystem::gacha(Player& player) {
 
 	g_sceneData.description = reward->getName() + "획득! \n ";
 	//std::cout << "획득 아이템: ";
-	reward->printInfo();
+	//reward->printInfo();
 	//std::cout << "\n";
 
 	player.getInventory().addItem(reward.release());
@@ -383,7 +381,6 @@ void ShopSystem::craftItem(Player& player) {
 
 		if (!item) {
 			g_sceneData.description += "아이템 오류 \n ";
-			std::cout << "아이템 오류\n";
 			continue;
 		}
 
@@ -391,7 +388,6 @@ void ShopSystem::craftItem(Player& player) {
 
 		if (count < 2) {
 			g_sceneData.description += "2개 이상 필요! \n ";
-			std::cout << "2개 이상 필요!\n";
 			continue;
 		}
 
