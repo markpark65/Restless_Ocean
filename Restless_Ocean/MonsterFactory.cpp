@@ -22,6 +22,7 @@ struct MonsterTemplate
 	AttributeType type;
 	std::string description;
 	MapType map;
+	std::string asset;
 };
 
 static const MonsterTemplate normalTemplates[] =
@@ -30,40 +31,122 @@ static const MonsterTemplate normalTemplates[] =
 		"\n- 패시브    : 공격력이 지속적으로 증가한다."
 		"\n- 일반 공격 : 몸통 박치기로 공격한다."
 		"\n- 특수 공격 : 빛을 축적해 다음 공격을 강화한다.",
-	MapType::BuildingMap },
+	MapType::BuildingMap,
+			R"(
+   ,_,...   ____             
+,,,.   ,/`''   ''`-..        
+'..|  ,/  (_)       '\.      
+      '...            `_     
+  |--.__/'     _ ''`\ `.--''`.
+   \_           '_  /        |
+    `\_           '`,-"`._ ,J'
+      '-..._____,,-'     '''  
+        )"
+	},
 
 	{ "바이퍼 피쉬",	200, 230, 18, 22, 110, 120, AttributeType::Hidden, 
 		"\n- 패시브    : 속도가 증가하며 기습 공격을 한다."
 		"\n- 일반 공격 : 물어뜯기로 공격한다."
 		"\n- 특수 공격 : 연속 공격으로 추가 피해를 입힌다.",
-	MapType::SeaCaveMap },
+	MapType::SeaCaveMap,
+	R"(
+               __                 
+           ,,/'                 
+         ,','                   
+    _...''/_.............._,.-,/
+   \(_)                  _.  ,' 
+\.__>   ,_____ _____..--''`-.,\ 
+ ''''-'''      \`-.           ''
+                `,'                       
+)"
+	},
 
 	{ "대왕 오징어",	240, 270, 13, 16, 80, 90, AttributeType::Giant, 
 		"\n- 패시브    : 체력을 회복한다."
 		"\n- 일반 공격 : 먹물을 발사해 공격한다."
 		"\n- 특수 공격 : 돌진하여 확률적으로 큰 피해를 입힌다.",
-	MapType::CollapsedShipMap }
+	MapType::CollapsedShipMap,
+	R"(
+    _,..                 .+-------...
+   /'  ,|              __.`--''     .
+   | .''           _,-''           /|
+   , |.           |'             ,'.'
+    \ '"___--__.--'''`\       ,,._ / 
+     '',  ,_,       . |   __,-'   '  
+  ,,Y'',/'' _   , _(■)''-''           
+ /' ,Y' ,,-' ,, ['' '  _,..          
+|,,'',,-',_.''|  '---'''  |          
+''...._--'     `,_     _,-'          
+                 '''''''               
+    )"
+	}
 };
 
 static const MonsterTemplate bossTemplates[] =
 {
-	{ "왕관 해파리",	450, 500, 27, 32, 100, 110, AttributeType::Luminous,
+	{ "왕관 해파리",	400, 450, 27, 32, 100, 110, AttributeType::Luminous,
 		"\n- 패시브    : 일반 공격의 독 피해량이 증가한다."
 		"\n- 일반 공격 : 촉수 공격 후 독 피해를 추가로 입힌다."
 		"\n- 특수 공격 : 빛을 모아 폭발시켜 큰 피해를 입힌다.",
-	MapType::BuildingMap },
+	MapType::BuildingMap,
+		R"(
+        .-~~~~~~~~~~~~-.
+     .-'                '-.
+   .'                      '.
+  /                          \
+  \   __   __   __   __     /
+   '._/ \_/  \_/  \_/ \___.'
+      /     /   /     /
+     /     /   /     /
+    /     /   /     /
+   /     /   /     /
+    )"
+	},
 
-	{ "흉내 문어",		400, 450, 22, 27, 120, 130, AttributeType::Hidden, 
+	{ "흉내 문어",		350, 400, 22, 27, 120, 130, AttributeType::Hidden, 
 		"\n- 패시브    : 다른 생물을 흉내 내어 다음 공격을 무효화한다."
 		"\n- 일반 공격 : 먹물을 발사하고 배터리를 감소시킨다."
 		"\n- 특수 공격 : 상대의 공격을 모방해 큰 피해를 입힌다.",
-	MapType::SeaCaveMap },
+	MapType::SeaCaveMap,
+		R"(
+               _,--._
+             ,'      `.
+     |\     / ,-.  ,-. \     /|
+     )o),/ ( ( o )( o ) ) \.(o(
+    /o/// /|  `-'  `-'  |\ \\\o\
+   / / |\ \(   .    ,   )/ /| \ \
+   | | \o`-/    `\/'    \-'o/ | |
+   \ \  `,'              `.'  / /
+\.  \ `-'  ,'|   /\   |`.  `-' /  ,/
+ \`. `.__,' /   /  \   \ `.__,' ,'/
+  \o\     ,'  ,'    `.  `.     /o/
+   \o`---'  ,'        `.  `---'o/
+    `.____,'	         `.____,'
+)"
 
-	{ "레비아탄",		600, 650, 30, 35, 90, 100, AttributeType::Giant,
-		"\n- 패시브    : 방어력이 증가하여 받는 피해를 줄인다."
-		"\n- 일반 공격 : 물어 뜯기 및 대원의 압력을 감소시킨다."
-		"\n- 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다.",
-	MapType::CollapsedShipMap }
+	},
+	{ "레비아탄",		450, 500, 22, 36, 90, 100, AttributeType::Giant,
+		"- 패시브    : 방어력이 증가하여 받는 피해를 줄인다. "
+		"\n - 일반 공격 : 물어 뜯기 및 대원의 압력을 감소시킨다. "
+		"\n - 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다. ",
+		MapType::CollapsedShipMap ,
+		R"(
+          /           /
+         /' .,,,,  ./
+        /';'     ,/
+       / /   ,,//,`'`
+      ( ,, '_,  ,,,' ``
+      |    /@  ,,, ;" `
+     /    .   ,''/' `,``
+    /   .     ./, `,, ` ;
+ ,./  .   ,-,',` ,,/''\,'
+|   /; ./,,'`,,'' |   |
+|     /   ','    /    |
+ \___/'   '     |     |
+   `,,'  |      /     `\ 
+    )"
+
+	}
 };
 
 
@@ -112,24 +195,27 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount, AttributeTy
 	stat.health = static_cast<int>(Random::getRandomValue(monsterTemplate->minHealth, monsterTemplate->maxHealth) * stageMultiplier * levelHpMultiplier); //hpStat);
 	stat.attack = static_cast<int>(Random::getRandomValue(monsterTemplate->minAttack, monsterTemplate->maxAttack) * stageMultiplier * levelAtkMultiplier);
 	stat.speed = Random::getRandomValue(monsterTemplate->minSpeed, monsterTemplate->maxSpeed);
-	stat.type = monsterTemplate->type; stat.description = monsterTemplate->description; stat.map = monsterTemplate->map;
+	stat.type = monsterTemplate->type;
+	stat.description = monsterTemplate->description;
+	stat.map = monsterTemplate->map;
+	stat.asset = monsterTemplate->asset;
 
 	if (!isBossBattle)
 	{
 		switch (index)
 		{
-			case 0: return new FootballFish(stat);
-			case 1: return new ViperFish(stat);
-			case 2: return new GiantSquid(stat);
+		case 0: return new FootballFish(stat);
+		case 1: return new ViperFish(stat);
+		case 2: return new GiantSquid(stat);
 		}
 	}
 	else
 	{
 		switch (index)
 		{
-			case 0: return new Atolla(stat);
-			case 1: return new MimicOctopus(stat);
-			case 2: return new Leviathan(stat);
+		case 0: return new Atolla(stat);
+		case 1: return new MimicOctopus(stat);
+		case 2: return new Leviathan(stat);
 		}
 	}
 	return nullptr;

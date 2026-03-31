@@ -1,7 +1,11 @@
 ﻿#pragma once
 #include <iostream>
-#include"InputSystem.h"
-#include"Item.h"
+#include <string>
+#include <vector>
+#include "InputSystem.h"
+#include "Item.h"
+
+
 class Player;
 
 template<typename T>
@@ -9,6 +13,7 @@ struct InventorySlot {
     T* item = nullptr;
     int quantity = 1;
 };
+
 
 template<typename T>
 class Inventory {
@@ -46,6 +51,7 @@ public:
             size_++;
         }
         else {
+			//g_sceneData.description = "장비함이 가득차있습니다.";
             std::cout << "장비함이 꽉 찼습니다!\n" ;
             delete item;
         }
@@ -54,6 +60,7 @@ public:
 	//아이템 선택
 	int selectItem() const {
 		if (size_ == 0) {
+			//g_sceneData.description = "장비함이 비어있습니다.";
 			std::cout << "장비함이 비어있습니다.\n";
 			return -1;
 		}
@@ -106,17 +113,36 @@ public:
     }
 
 	//목록 출력
-    void printAll() const {
-        if (size_ == 0) {
-            std::cout << "장비함이 비어있습니다.\n" ;
-            return;
-        }
-        for (int i = 0; i < size_; i++) {
-            std::cout << i +1 << "번: ";
-            slots_[i].item->printInfo();
+	void printAll() const {
+		if (size_ == 0) {
+			std::cout << "장비함이 비어있습니다.\n";
+			return;
+		}
+		for (int i = 0; i < size_; i++) {
+			std::cout << i + 1 << "번: ";
+			slots_[i].item->printInfo();
 			std::cout << " 수량: " << slots_[i].quantity << "\n";
-        }
-    }
+		}
+	}
+	//목록 반환
+	std::vector<std::string> printAllstr() const {
+		std::vector<std::string> result;
+		if (size_ == 0) {
+			result.push_back("장비함이 비어있습니다.");
+			std::cout << "장비함이 비어있습니다.\n";
+			return result;
+		}
+		for (int i = 0; i < size_; i++) {
+			std::string str = "";
+			str += std::to_string(i + 1) + ": ";
+			//std::cout << i + 1 << "번: ";
+			//slots_[i].item->printInfo();
+			str += slots_[i].item->tostring();
+			str += " 수량: " + std::to_string(slots_[i].quantity);
+			result.push_back(str);
+		}
+		return result;
+	}
 
 	//index 아이템 포인터 반환
 	T* getItem(int index) const {
