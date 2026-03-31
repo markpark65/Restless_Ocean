@@ -19,10 +19,8 @@ public:
 		if (!target)
 			return;
 
-		//g_sceneData.description += getName() + "가 일반 공격을 사용합니다! \n ";
 		g_sceneData.description += getName() + "는 먹물을 발사합니다! \n ";
-		//std::cout << getName() << "가 일반 공격을 사용합니다!" << '\n';
-		//std::cout << getName() << "는 먹물을 발사합니다!" << '\n';
+
 		target->takeDamage(getAttack());
 	}
 	void useSpecialAttack(Player* target) override
@@ -30,7 +28,6 @@ public:
 		if (!target)
 			return;
 
-		//g_sceneData.description += getName() + "가 특수 공격을 사용합니다! \n ";
 		g_sceneData.description += getName() + "가 " + target->getName() + "에게 돌진합니다! \n ";
 
 		int successAttack = Random::getRandomValue(0, 10);
@@ -59,8 +56,6 @@ public:
 		}
 		g_sceneData.description += getName() + "의 패시브가 발동됩니다! \n ";
 		g_sceneData.description += getName() + "는 " + std::to_string(health) + "만큼 체력을 회복합니다! \n ";
-		//std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-		//std::cout << getName() << "는 " << health << "만큼 체력을 회복합니다!" << '\n';
 		setHealth(getHealth() + health);
 	}
 

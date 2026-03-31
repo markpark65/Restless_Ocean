@@ -39,7 +39,7 @@ void Dungeon::update()
 	Player& player = GameManager::getInstance().getPlayer();
 
 	player.setWeapon(weaponManager.selectWeapon());
-	//cout << '\n';
+
 	// 5번의 전투를 마칠 때까지 루프
 
 	while (battleCountInDungeon < 5)
@@ -108,7 +108,6 @@ void Dungeon::update()
 
 		// 5번이 안 끝났으면 선택지 없이 자동으로 다음 전투 진행
 		g_sceneData.description = "[시스템] 심해를 더 깊이 탐사합니다... \n ";
-		//std::cout << "\n[시스템] 심해를 더 깊이 탐사합니다..." << std::endl;
 		g_cliRenderer.render(g_sceneData);
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
