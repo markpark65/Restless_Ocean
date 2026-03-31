@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <windows.h>
+#define NOMINMAX
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -7,6 +7,7 @@
 #include <regex>
 #include <cstdlib>
 #include <sstream>
+#include <windows.h>
 #include "Player.h"
 #include "Monster.h"
 enum class KeyInput {
