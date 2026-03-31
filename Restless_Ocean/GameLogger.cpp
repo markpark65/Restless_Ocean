@@ -80,7 +80,7 @@ void GameLogger::printRecentLog(size_t count)
 	//for (auto& log : std::vector<EventLog>(logs.rbegin(), logs.rend())) {
 	for (auto& log : logs) {
 		std::string message = getMessage(log);
-		//std::cout << message << '\n';
+		std::cout << message << '\n';
 
 		if (count < currentidx)
 			break;

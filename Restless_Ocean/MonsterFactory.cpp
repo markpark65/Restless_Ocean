@@ -45,9 +45,9 @@ static const MonsterTemplate normalTemplates[] =
 	},
 
 	{ "바이퍼 피쉬",	200, 230, 18, 22, 110, 120, AttributeType::Hidden, 
-		R"(- 패시브    : 체력을 회복한다.
-- 일반 공격 : 먹물을 발사해 공격한다.
-- 특수 공격 : 돌진하여 확률적으로 큰 피해를 입힌다.)",
+		R"(- 패시브    : 속도가 증가하며 기습 공격을 한다.
+- 일반 공격 : 물어뜯기로 공격한다.
+- 특수 공격 : 연속 공격으로 추가 피해를 입힌다.)",
 	MapType::SeaCaveMap,
 	R"(
                __                 
@@ -85,7 +85,7 @@ static const MonsterTemplate normalTemplates[] =
 static const MonsterTemplate bossTemplates[] =
 {
 	{ "왕관 해파리",	400, 450, 27, 32, 100, 110, AttributeType::Luminous,
-		R"(- 패시브    : 일반 공격의 독 피해량이 증가한다.
+		R"("- 패시브    : 일반 공격의 독 피해량이 증가한다.
 - 일반 공격 : 촉수 공격 후 독 피해를 추가로 입힌다.
 - 특수 공격 : 빛을 모아 폭발시켜 큰 피해를 입힌다.)",
 	MapType::BuildingMap,
@@ -127,8 +127,8 @@ static const MonsterTemplate bossTemplates[] =
 	},
 	{ "레비아탄",		450, 500, 22, 36, 90, 100, AttributeType::Giant,
 		R"(- 패시브    : 방어력이 증가하여 받는 피해를 줄인다.
-- 일반 공격 : 물어뜯기 및 대원의 압력을 감소시킨다.
-- 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다.)",
+- 일반 공격 : 물어 뜯기 및 대원의 압력을 감소시킨다.
+- 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다. )",
 		MapType::CollapsedShipMap ,
 		R"(
           /           /

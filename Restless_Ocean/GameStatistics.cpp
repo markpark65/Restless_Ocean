@@ -6,7 +6,7 @@ void GameStatistics::writeJsonFile() {
 	try {
 		std::ofstream file(filePath);
 		if (!file.is_open()) {
-			//std::cerr << "파일 열기 실패: " << filePath << '\n';
+			std::cerr << "파일 열기 실패: " << filePath << '\n';
 			return;
 		}
 
@@ -14,10 +14,10 @@ void GameStatistics::writeJsonFile() {
 		file.close();
 	}
 	catch (const nlohmann::json::exception& e) {
-		//std::cerr << "JSON 저장 예외: " << e.what() << '\n';
+		std::cerr << "JSON 저장 예외: " << e.what() << '\n';
 	}
 	catch (const std::exception& e) {
-		//std::cerr << "일반 예외: " << e.what() << '\n';
+		std::cerr << "일반 예외: " << e.what() << '\n';
 	}
 }
 
