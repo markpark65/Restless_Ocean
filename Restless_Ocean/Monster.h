@@ -23,6 +23,8 @@ struct MonsterStat
 	AttributeType	type = AttributeType::Hidden;
 	std::string		description = "";
 	MapType			map = MapType::SeaCaveMap;
+
+	std::string		asset = "";
 };
 
 class Player;
@@ -48,6 +50,7 @@ public:
 	MapType getMap() const;
 	BossRank getRank() const;
 	const std::string& getRewardArtifact() const;
+	const std::string& getAsset() const;
 
 	// 입력 받은 damage만큼 health 감소
 	virtual void takeDamage(int damage) = 0;
