@@ -22,15 +22,11 @@ public:
 		{
 			int damage = getAttack() + 30;
 			g_sceneData.description += getName() + "가 축적한 빛을 폭발시킵니다! \n ";
-			GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), damage);
 			target->takeDamage(damage);
 		}
 		else
 		{
-			//g_sceneData.description += getName() + "이 일반 공격을 사용했습니다! \n ";
 			g_sceneData.description += getName() + "이 몸통 박치기를 사용합니다! \n ";
-			//std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
-			//std::cout << getName() << "이 몸통 박치기를 사용합니다!" << '\n';
 			GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 			target->takeDamage(getAttack());
 		}
@@ -40,10 +36,8 @@ public:
 		if (!target)
 			return;
 
-		//g_sceneData.description += getName() + "이 특수 공격을 사용했습니다! \n ";
 		g_sceneData.description += getName() + "가 빛을 모아 폭발을 준비합니다! \n ";
-		//std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
-		//std::cout << getName() << "가 빛을 모아 폭발을 준비합니다!" << '\n';
+	
 		readyExplode = true;
 	}
 
@@ -52,8 +46,7 @@ public:
 		int enhancedAttack = 10;
 		g_sceneData.description += getName() + "의 패시브가 발동됩니다! \n ";
 		g_sceneData.description += getName() + "의 공격력이 " + std::to_string(enhancedAttack)+"만큼 증가합니다 \n ";
-		//std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-		//std::cout << getName() << "의 공격력이 " << enhancedAttack << "만큼 증가합니다" << '\n';
+
 		setAttack(getAttack() + enhancedAttack);
 	}
 

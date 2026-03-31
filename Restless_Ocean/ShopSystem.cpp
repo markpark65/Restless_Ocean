@@ -32,9 +32,6 @@ void ShopSystem::buyItem(Player& player) {
 		g_sceneData.sceneText.push_back("보유 골드 :" + std::to_string(player.getGold())+ "G");
 		g_sceneData.options = { "상점으로 돌아가기" };
 		g_sceneData.sceneText.push_back("0: [상점으로 돌아가기]");
-		//std::cout << "\n=== 구매 ===\n";
-		//std::cout << "보유 골드 :" << player.getGold()<<"G\n";
-		//std::cout << "0: [상점으로 돌아가기]\n\n";
 
 		for (int i = 0; i < items_.size(); i++) {
 			std::string str = std::to_string(i + 1)+ ": " + items_[i]->tostring();
@@ -42,7 +39,6 @@ void ShopSystem::buyItem(Player& player) {
 			//items_[i]->printInfo();
 
 			if (!items_[i]->isUnlocked(player.getLevel())) {
-				//std::cout << " [잠김]";
 				str += " [잠김]";
 			}
 			else {
@@ -55,28 +51,22 @@ void ShopSystem::buyItem(Player& player) {
 			}
 
 			g_sceneData.sceneText.push_back(str);
-			//std::cout << "\n";
 		}
 
 		int gachaIndex = items_.size() + 1;
-		//std::cout << gachaIndex << ": [랜덤 아이템 뽑기 : 5G]";
 		std::string gachaStr = std::to_string(gachaIndex) + ": [랜덤 아이템 뽑기 : 5G]";
 		if (player.getLevel() < 10) {
 			gachaStr += " [잠김: 레벨 부족]";
-			//std::cout << " [잠김: 레벨 부족]";
 		}
 		else if (player.getGachaCount() >= MAX_GACHA) {
 			gachaStr += " [잠김: 횟수 초과]";
-			//std::cout << " [잠김: 횟수 초과]";
 		}
 		else {
 			g_sceneData.options.push_back("랜덤 아이템 뽑기");
 		}
 		g_sceneData.sceneText.push_back(gachaStr);
-		//std::cout << "\n구매할 아이템 번호 ";
 		g_cliRenderer.render(g_sceneData);
 		int input = g_cliRenderer.OptionSelector(g_sceneData);
-		//int input = inputSys.getInputInt(0, gachaIndex);
 
 		if (input == 0) {
 			g_sceneData.description = "상점으로 복귀합니다.";
@@ -87,18 +77,16 @@ void ShopSystem::buyItem(Player& player) {
 
 			if (player.getLevel() < 10) {
 				g_sceneData.description = "레벨 부족 \n ";
-				//std::cout << "레벨 부족!\n";
 				continue; 
 			}
 
 			if (player.getGachaCount() >= MAX_GACHA) {
 				g_sceneData.description = "가챠 횟수 초과! \n ";
-				//std::cout << "가챠 횟수 초과!\n";
+
 				continue;
 			}
 
 			int remaining = MAX_GACHA - player.getGachaCount();
-			//std::cout << "뽑기 횟수 (최대 횟수 : " << remaining << ", 0:취소) ";
 
 			int count = 1;//inputSys.getInputInt(0, remaining);
 
@@ -107,7 +95,6 @@ void ShopSystem::buyItem(Player& player) {
 			for (int i = 0; i < count; i++) {
 				if (player.getGold() < 5) {
 					g_sceneData.description = "골드 부족! \n ";
-					//std::cout << "골드 부족!\n";
 					break;
 				}
 				gacha(player);
@@ -121,11 +108,9 @@ void ShopSystem::buyItem(Player& player) {
 
 		if (!items_[index]->isUnlocked(player.getLevel())) {
 			g_sceneData.description = "레벨 부족! \n ";
-			//std::cout << "레벨 부족!\n";
 			continue;
 		}
 
-		//std::cout << "수량 (0:취소) ";
 		int quantity = 1;// inputSys.getInputInt(0, 99);
 
 		if (quantity == 0) continue;
@@ -134,7 +119,6 @@ void ShopSystem::buyItem(Player& player) {
 
 		if (player.getGold() < totalPrice) {
 			g_sceneData.description = "골드 부족! \n ";
-			//std::cout << "골드 부족!\n";
 			continue;
 		}
 
@@ -145,7 +129,6 @@ void ShopSystem::buyItem(Player& player) {
 		}
 
 		g_sceneData.description = "구매 완료! \n ";
-		//std::cout << "구매 완료!\n";
 
 	}
 }
@@ -161,13 +144,11 @@ void ShopSystem::sellItem(Player& player) {
 		g_sceneData.sceneText.push_back("=== 판매 === ");
 		g_sceneData.sceneText.push_back("0: [상점으로 돌아가기]");
 		g_sceneData.options = { "상점으로 돌아가기" };
-		//std::cout << "\n=== 판매 ===\n";
-		//std::cout << "0: [상점으로 돌아가기]\n\n";
+
 		int size = player.getInventory().getSize();
 
 		if (player.getInventory().getSize() == 0) {
 			g_sceneData.description += "더 판매할 아이템이 없습니다. \n ";
-			//std::cout << "판매할 아이템이 없습니다.\n";
 			return;
 		}
 		
@@ -188,7 +169,6 @@ void ShopSystem::sellItem(Player& player) {
 
 		}
 		g_cliRenderer.render(g_sceneData);
-		//std::cout << "판매할 아이템 번호 ";
 		int input = g_cliRenderer.OptionSelector(g_sceneData);
 		//int input = inputSys.getInputInt(0, player.getInventory().getSize());
 
@@ -201,7 +181,6 @@ void ShopSystem::sellItem(Player& player) {
 
 		Item* item = player.getInventory().getItem(index);
 
-		//std::cout << "수량 (0:취소) ";
 		int quantity = 1;// inputSys.getInputInt(0, player.getInventory().getItemCount(index));
 
 		if (quantity == 0) continue;
@@ -212,7 +191,7 @@ void ShopSystem::sellItem(Player& player) {
 		player.getInventory().removeItem(index, quantity);
 
 		g_sceneData.description = "판매 완료! \n ";
-		//std::cout << "판매 완료! +" << sellPrice << "G\n";
+
 	}
 }
 
@@ -274,9 +253,6 @@ void ShopSystem::enhanceWeapon(Player& player) {
 		g_sceneData.options = { "상점으로 돌아가기", "무기 강화하기"};
 		g_cliRenderer.render(g_sceneData);
 
-		//std::cout << "\n=== 무기 강화 ===\n";
-		//std::cout << "0: 상점으로 돌아가기\n\n";
-
 		std::vector<int> upgradeIndices;
 
 		for (int i = 0; i < player.getInventory().getSize(); i++) {
@@ -298,11 +274,9 @@ void ShopSystem::enhanceWeapon(Player& player) {
 		}
 		if (upgradeIndices.empty()) {
 			g_sceneData.description = "강화 아이템이 없습니다. \n ";
-			//std::cout << "강화 아이템이 없습니다.\n";
 			return;
 		}
 		g_sceneData.description += "강화하시겟습니까? \n ";
-		//std::cout << "사용할 아이템 번호 선택 ";
 		int input = g_cliRenderer.OptionSelector(g_sceneData);
 		//inputSys.getInputInt(0, upgradeIndices.size());
 
@@ -318,13 +292,11 @@ void ShopSystem::enhanceWeapon(Player& player) {
 
 		if (!item) {
 			g_sceneData.description += "아이템 오류 \n ";
-			//std::cout << "아이템 오류\n";
 			continue;
 		}
 		if (!player.hasWeapon()) {
 			g_sceneData.description = "장착된 무기가 없습니다!(던전 입장시 무기 장착) \n ";
 			g_sceneData.description += "상점으로 돌아갑니다. \n ";
-			//std::cout << "장착된 무기가 없습니다!\n";
 			return;
 			continue;
 		}
@@ -332,7 +304,6 @@ void ShopSystem::enhanceWeapon(Player& player) {
 		player.getInventory().removeItem(realIndex, 1);
 
 		g_sceneData.description += "강화 완료! \n ";
-		//std::cout << "강화 완료!\n";
 	}
 }
 

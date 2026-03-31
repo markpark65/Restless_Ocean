@@ -43,7 +43,6 @@ HealthPotion::HealthPotion(string name, int price, int heal, int unlocklevel)
 void HealthPotion::use(Player* character) {
     if (!character) return;
 	g_sceneData.description += "체력 포션 사용! \n ";
-    //cout << "체력 포션 사용! \n";
     character->recoverDamage(increaseAmount);
 }
 void HealthPotion::printInfo() const {
@@ -65,7 +64,6 @@ MaxHpUp::MaxHpUp(string name, int price, int heal, int unlocklevel)
 void MaxHpUp::use(Player* character) {
 	if (!character) return;
 	g_sceneData.description += "방수가 잘 되어있는 초코과자 사용! \n ";
-	//cout << "방수가 잘 되어있는 초코과자 사용! \n" ;
 	character->increaseMaxHp(increaseAmount);
 }
 void MaxHpUp::printInfo() const {
@@ -88,7 +86,6 @@ MegaHealthPotion::MegaHealthPotion()
 void MegaHealthPotion::use(Player* player) {
 		if (!player) return;
 		g_sceneData.description += "강화 체력 포션 사용! \n ";
-		//std::cout << "강화 체력 포션 사용!\n";
 		player->recoverDamage(increaseAmount);
 	}
 void MegaHealthPotion::printInfo() const {
@@ -111,7 +108,6 @@ OxygenPotion::OxygenPotion(string name, int price, int oxygen, int unlocklevel)
 void OxygenPotion::use(Player* character) {
     if (!character) return;
 	g_sceneData.description += "산소 포션 사용! \n ";
-    //cout << "산소 포션 사용! \n";
     character->recoverOxygen(increaseAmount);
 }
 void OxygenPotion::printInfo() const {
@@ -152,7 +148,6 @@ MegaOxygenPotion::MegaOxygenPotion()
 }
 void MegaOxygenPotion::use(Player* p) {
 	g_sceneData.description += "강화 산소 포션 사용! \n ";
-	//std::cout << "강화 산소 포션 사용!\n";
 	p->recoverOxygen(increaseAmount);
 }
 Item* MegaOxygenPotion::clone() const {
@@ -175,7 +170,6 @@ PressurePotion::PressurePotion(string name, int price, int pressure,int unlockle
 void PressurePotion::use(Player * character) {
     if (!character) return;
 	g_sceneData.description += "압력 포션 사용! \n ";
-    //cout << "압력 포션 사용!\n";
     character->recoverPressure(increaseAmount);
 	character->resetSpeed();
 }
@@ -198,7 +192,6 @@ MaxPressureUp::MaxPressureUp(string name, int price, int pressure, int unlocklev
 void MaxPressureUp::use(Player* character) {
 	if (!character) return;
 	g_sceneData.description += "어느 물고기의 부례 사용! \n ";
-	//cout << "어느 물고기의 부례 사용!\n";
 	character->IncreasePressure(increaseAmount);
 
 }
@@ -243,7 +236,6 @@ AttackBoost::AttackBoost(string name, int price, int attack, int unlocklevel)
 void AttackBoost::use(Player* character) {
 	if (!character) return;
 	g_sceneData.description += "깨진 조개껍데기 목걸이 사용! \n ";
-	//cout << "깨진 조개껍데기 목걸이 사용!\n";
 	character->addTempAttack(increaseAmount);
 }
 void AttackBoost::printInfo() const {

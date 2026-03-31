@@ -149,9 +149,9 @@ public:
 			scene.selectedIndex = scene.options.size() - 1;
 
 		clear();
-		drawScenePanel(0, 0, 70, 18, scene);
+		drawScenePanel(0, 0, 70, 17, scene);
 		drawStatusPanel(70, 0, 30, 17, scene.player);
-		drawDescriptionPanel(0, 17, 70, 11, scene.description);
+		drawDescriptionPanel(0, 16, 70, 12, scene.description);
 		drawChoicePanel(70, 16, 30, 12, scene.options, scene.selectedIndex);
 		present();
 		SetCursorVisible(true);

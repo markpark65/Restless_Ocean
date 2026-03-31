@@ -109,13 +109,8 @@ void GameManager::run()
 			break;
 		}
 
-		//std::cout << '\n';
-		//std::cout << "게임을 다시 시작하시겠습니까?" << '\n';
-		//std::cout << "1. 처음부터 다시 시작" << '\n';
-		//std::cout << "2. 게임 종료" << '\n';
-		//std::cout << "> ";
+
 		g_sceneData.monster = nullptr;
-		//g_sceneData.player = nullptr;
 		g_sceneData.Title = "Continue?";
 		g_sceneData.sceneText = {};
 		g_sceneData.description += "게임을 다시 시작하시겟습니까?";
@@ -125,7 +120,6 @@ void GameManager::run()
 			"게임 종료"
 		};
 
-		//int input = InputSystem::getInputInt(1, 2);
 		int input = g_cliRenderer.OptionSelector(g_sceneData);
 		input += 1;
 		if (input == 1)
@@ -169,10 +163,7 @@ void GameManager::endGame(GameOverReason reason)
 			"게임 오버.",
 			"================================",
 		};
-		//std::cout << "\n================================" << '\n';
-		//std::cout << "대원이 쓰러졌습니다." << '\n';
-		//std::cout << "게임 오버." << '\n';
-		//std::cout << "================================" << '\n';
+
 	}
 	g_cliRenderer.render(g_sceneData);
 
