@@ -43,6 +43,7 @@ void Lobby::update()
 {
 	g_sceneData.monster = nullptr;
 	g_sceneData.player = &GameManager::getInstance().getPlayer();
+	g_sceneData.description.clear();
 	g_sceneData.description += "안녕하세요. " + GameManager::getInstance().getPlayer().getName() + "님, 무엇을 하시겟습니까?";
 	g_sceneData.options = {
 		"던전 입장",
