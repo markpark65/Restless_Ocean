@@ -269,7 +269,7 @@ void Player::recoverPressure(int amount) {
 	if (pressure < 0)
 		pressure = 0;
 
-	g_sceneData.description += "압력이 " + std::to_string(amount) + "% 감소했습니다. (현재 압력 " + std::to_string(pressure) + " %) \n ";
+	g_sceneData.description += "압력이 " + std::to_string(amount) + "% 감소했습니다. (현재 압력:" + std::to_string(pressure) + " %) \n ";
 	//cout << "압력이 " << amount << "% 감소했습니다. (현재 압력 " << pressure << " %)" << endl;
 	
 }
@@ -286,7 +286,7 @@ void Player::takePressure(int amount) {
 	pressure += amount;
 	if (pressure > 100)
 		pressure = 100;
-	g_sceneData.description += "압력이 " + std::to_string(amount) + " % 증가했습니다. (현재 압력 " + std::to_string(pressure) + " %) \n ";
+	g_sceneData.description += "압력이 " + std::to_string(amount) + " % 증가했습니다. (현재 압력:" + std::to_string(pressure) + " %) \n ";
 	//cout << "압력이 " << amount << " % 증가했습니다. (현재 압력 " << pressure << " %)" << endl;
 	if (pressure >= 100) {
 		g_sceneData.description += "압력이 너무 강합니다. 체력이 감소합니다.";
@@ -311,7 +311,7 @@ void Player::resetSpeed() {
 //골드 획드
 void Player::addGold(int amount) {
 	gold += amount;
-	g_sceneData.description += std::to_string(amount) + "G(보유 골드 : " + std::to_string(gold) + "G) \n ";
+	g_sceneData.description += std::to_string(amount) + "G(보유 골드: " + std::to_string(gold) + "G) \n ";
 	//cout << amount << "G (보유 골드: " << gold << "G)" << endl;
 
 }
@@ -399,6 +399,6 @@ void Player::rechargeBattery(int amount) {
 	if (battery + amount > maxBattery) { charge = maxBattery - battery; }
 	battery += charge;
 
-	g_sceneData.description += name + " 대원의 배터리가 " + std::to_string(charge) + "만큼 회복 됐습니다. (현재 배터리 : " + std::to_string(battery) + " / 100) \n ";
+	g_sceneData.description += name + " 대원의 배터리가 " + std::to_string(charge) + "만큼 회복 됐습니다. (현재 배터리: " + std::to_string(battery) + " / 100) \n ";
 	//cout << name << " 대원의 배터리가 " << charge << "만큼 회복 됐습니다. (현재 배터리: " << battery << " / 100 )" << endl;
 }

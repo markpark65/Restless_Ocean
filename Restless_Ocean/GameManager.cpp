@@ -109,14 +109,17 @@ void GameManager::run()
 			break;
 		}
 
-		std::cout << '\n';
-		std::cout << "게임을 다시 시작하시겠습니까?" << '\n';
-		std::cout << "1. 처음부터 다시 시작" << '\n';
-		std::cout << "2. 게임 종료" << '\n';
-		std::cout << "> ";
+		//std::cout << '\n';
+		//std::cout << "게임을 다시 시작하시겠습니까?" << '\n';
+		//std::cout << "1. 처음부터 다시 시작" << '\n';
+		//std::cout << "2. 게임 종료" << '\n';
+		//std::cout << "> ";
 		g_sceneData.monster = nullptr;
+		//g_sceneData.player = nullptr;
 		g_sceneData.Title = "Continue?";
+		g_sceneData.sceneText = {};
 		g_sceneData.description += "게임을 다시 시작하시겟습니까?";
+		g_sceneData.selectedIndex = 0;
 		g_sceneData.options = {
 			"처음부터 다시 시작",
 			"게임 종료"
