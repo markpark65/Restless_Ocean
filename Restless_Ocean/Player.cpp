@@ -10,13 +10,17 @@ using namespace std;
 
 Player::Player(string n)
 	: name(n)
+<<<<<<< HEAD
 	, level(20)
+=======
+	, level(1)
+>>>>>>> origin/main
 	, hp(200)
 	, maxHp(200)
 	, baseAttack(30)
 	, exp(0)
 	, maxExp(100)
-	, gold(1000)
+	, gold(0)
 	, oxygen(100)
 	, maxOxygen(100)
 	, speed(100)
