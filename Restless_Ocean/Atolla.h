@@ -59,7 +59,7 @@ public:
 	{
 		poisionDamage += 0.2f;
 		g_sceneData.description += getName() + "의 패시브가 발동됩니다! \n ";
-		g_sceneData.description += getName() + "의 독 데미지가 0.1 증가하여 " + std::to_string(poisionDamage) + "가 됩니다! \n ";
+		g_sceneData.description += getName() + "의 독 데미지가 0.2% 증가합니다! \n ";
 	}
 };
 

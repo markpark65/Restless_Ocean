@@ -27,12 +27,12 @@ struct MonsterTemplate
 
 static const MonsterTemplate normalTemplates[] =
 {
-   { "초롱 아귀",      220, 250, 15, 18, 95, 105, AttributeType::Luminous,
-	  R"(- 패시브    : 공격력이 지속적으로 증가한다.
+	{ "초롱 아귀",		220, 250, 15, 18, 95, 105, AttributeType::Luminous,
+		R"(- 패시브    : 공격력이 지속적으로 증가한다.
 - 일반 공격 : 몸통 박치기로 공격한다.
 - 특수 공격 : 빛을 축적해 다음 공격을 강화한다.)",
-   MapType::BuildingMap,
-		 R"(
+	MapType::BuildingMap,
+			R"(
    ,_,...   ____             
 ,,,.   ,/`''   ''`-..        
 '..|  ,/  (_)       '\.      
@@ -45,9 +45,9 @@ static const MonsterTemplate normalTemplates[] =
    },
 
 	{ "바이퍼 피쉬",	200, 230, 18, 22, 110, 120, AttributeType::Hidden, 
-		R"(- 패시브    : 체력을 회복한다.
-- 일반 공격 : 먹물을 발사해 공격한다.
-- 특수 공격 : 돌진하여 확률적으로 큰 피해를 입힌다.)",
+		R"(- 패시브    : 속도가 증가하며 기습 공격을 한다.
+- 일반 공격 : 물어뜯기로 공격한다.
+- 특수 공격 : 연속 공격으로 추가 피해를 입힌다.)",
 	MapType::SeaCaveMap,
 	R"(
                __                 
@@ -101,7 +101,7 @@ static const MonsterTemplate bossTemplates[] =
     /     /   /     /
    /     /   /     /
     )"
-   },
+	},
 
 	{ "흉내 문어",		350, 400, 22, 27, 120, 130, AttributeType::Hidden, 
 		R"(- 패시브    : 다른 생물을 흉내 내어 다음 공격을 무효화한다.
@@ -121,14 +121,14 @@ static const MonsterTemplate bossTemplates[] =
  \`. `.__,' /   /  \   \ `.__,' ,'/
   \o\     ,'  ,'    `.  `.     /o/
    \o`---'  ,'        `.  `---'o/
-    `.____,'            `.____,'
+    `.____,'	         `.____,'
 )"
 
 	},
 	{ "레비아탄",		450, 500, 22, 36, 90, 100, AttributeType::Giant,
 		R"(- 패시브    : 방어력이 증가하여 받는 피해를 줄인다.
-- 일반 공격 : 물어뜯기 및 대원의 압력을 감소시킨다.
-- 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다.)",
+- 일반 공격 : 물어 뜯기 및 대원의 압력을 감소시킨다.
+- 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다. )",
 		MapType::CollapsedShipMap ,
 		R"(
           /           /
@@ -146,7 +146,7 @@ static const MonsterTemplate bossTemplates[] =
    `,,'  |      /     `\ 
     )"
 
-   }
+	}
 };
 
 
