@@ -42,7 +42,7 @@ static const MonsterTemplate normalTemplates[] =
     `\_           '`,-"`._ ,J'
       '-..._____,,-'     '''  
         )"
-	},
+   },
 
 	{ "바이퍼 피쉬",	200, 230, 18, 22, 110, 120, AttributeType::Hidden, 
 		R"(- 패시브    : 속도가 증가하며 기습 공격을 한다.
@@ -59,9 +59,9 @@ static const MonsterTemplate normalTemplates[] =
  ''''-'''      \`-.           ''
                 `,'                       
 )"
-	},
+   },
 
-	{ "대왕 오징어",	240, 270, 13, 16, 80, 90, AttributeType::Giant,  
+	{ "대왕 오징어",	240, 270, 13, 16, 80, 90, AttributeType::Giant, 
 		R"(- 패시브    : 체력을 회복한다.
 - 일반 공격 : 먹물을 발사해 공격한다.
 - 특수 공격 : 돌진하여 확률적으로 큰 피해를 입힌다.)",
@@ -79,13 +79,13 @@ static const MonsterTemplate normalTemplates[] =
 ''...._--'     `,_     _,-'          
                  '''''''               
     )"
-	}
+   }
 };
 
 static const MonsterTemplate bossTemplates[] =
 {
 	{ "왕관 해파리",	400, 450, 27, 32, 100, 110, AttributeType::Luminous,
-		R"("- 패시브    : 일반 공격의 독 피해량이 증가한다.
+		R"(- 패시브    : 일반 공격의 독 피해량이 증가한다.
 - 일반 공격 : 촉수 공격 후 독 피해를 추가로 입힌다.
 - 특수 공격 : 빛을 모아 폭발시켜 큰 피해를 입힌다.)",
 	MapType::BuildingMap,
