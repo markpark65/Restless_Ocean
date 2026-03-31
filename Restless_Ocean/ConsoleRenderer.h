@@ -151,8 +151,8 @@ public:
 		clear();
 		drawScenePanel(0, 0, 70, 17, scene);
 		drawStatusPanel(70, 0, 30, 17, scene.player);
-		drawDescriptionPanel(0, 17, 70, 11, scene.description);
-		drawChoicePanel(70, 17, 30, 11, scene.options, scene.selectedIndex);
+		drawDescriptionPanel(0, 16, 70, 12, scene.description);
+		drawChoicePanel(70, 16, 30, 12, scene.options, scene.selectedIndex);
 		present();
 		SetCursorVisible(true);
 	}
