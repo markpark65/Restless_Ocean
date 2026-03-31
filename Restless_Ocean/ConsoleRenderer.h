@@ -1,12 +1,13 @@
 ﻿#pragma once
+#include <windows.h>
 #include <vector>
 #include <string>
 #include <algorithm>
 #include <conio.h>
 #include <regex>
+#include <cstdlib>
 #include "Player.h"
 #include "Monster.h"
-
 enum class KeyInput {
 	up,
 	down,
@@ -139,6 +140,8 @@ public:
 	//void render(const Player* player, const SceneData& scene)
 	void render(SceneData& scene)
 	{
+		SetCursorVisible(false);
+		GoToXY(0, 0);
 
 		if (scene.options.size() <= scene.selectedIndex)
 			scene.selectedIndex = scene.options.size() - 1;
@@ -149,10 +152,22 @@ public:
 		drawDescriptionPanel(0, 17, 70, 11, scene.description);
 		drawChoicePanel(70, 16, 30, 12, scene.options, scene.selectedIndex);
 		present();
+		SetCursorVisible(true);
 	}
 
 
 private:
+	void SetCursorVisible(bool visible) {
+		HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+		CONSOLE_CURSOR_INFO cursorInfo;
+		GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+		cursorInfo.bVisible = visible; // true/false
+		SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+	}
+	void GoToXY(int x, int y) {
+		COORD pos = { (SHORT)x, (SHORT)y };
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+	}
 	void clear(char fill = ' ')
 	{
 		for (auto& row : buffer)
@@ -170,6 +185,7 @@ private:
 		{
 			std::cout << row << '\n';
 		}
+		std::cout << "\x1b[0m\n";
 	}
 
 	void putChar(int x, int y, char ch)
@@ -394,35 +410,35 @@ cout << "===============================" << '\n';
 			return;
 		drawText(x + 2, y, "플레이어 상태");
 		drawText(x + 2, y + 1, "Name     :" + player->getName());
+		drawText(x + 2, y + 2, "Level    :" + std::to_string(player->getLevel()));
 
-		drawText(x + 2, y + 2, "HP       :");
-		drawText(x + 12, y + 2, std::to_string(player->getHp()));
-		drawText(x + 15, y + 2, "/" + std::to_string(player->getMaxHp()));
-		drawText(x + 2, y + 3, makeBar(player->getHp(), player->getMaxHp(), 20));
+		drawText(x + 2, y + 3, "HP       :");
+		drawText(x + 12, y + 3, std::to_string(player->getHp()));
+		drawText(x + 15, y + 3, "/" + std::to_string(player->getMaxHp()));
+		drawText(x + 2, y + 4, makeBar(player->getHp(), player->getMaxHp(), 20));
 
-		drawText(x + 2, y + 4, "oxygen   :");
-		drawText(x + 12, y + 4, std::to_string(player->getOxygen()));
-		drawText(x + 15, y + 4, "/" + std::to_string(player->getMaxOxygen()));
-		drawText(x + 2, y + 5, makeBar(player->getOxygen(), player->getMaxOxygen(), 20));
+		drawText(x + 2, y + 5, "oxygen   :");
+		drawText(x + 12, y + 5, std::to_string(player->getOxygen()));
+		drawText(x + 15, y + 5, "/" + std::to_string(player->getMaxOxygen()));
+		drawText(x + 2, y + 6, makeBar(player->getOxygen(), player->getMaxOxygen(), 20));
 
-		drawText(x + 2, y + 6, "battery  :");
-		drawText(x + 12, y + 6, std::to_string(player->getBattery()));
-		drawText(x + 15, y + 6, "/100");
-		drawText(x + 2, y + 7, makeBar(player->getBattery(), 100, 20));
+		drawText(x + 2, y + 7, "battery  :");
+		drawText(x + 12, y + 7, std::to_string(player->getBattery()));
+		drawText(x + 15, y +7, "/100");
+		drawText(x + 2, y + 8, makeBar(player->getBattery(), 100, 20));
 
-		drawText(x + 2, y + 8, "pressure :");
-		drawText(x + 12, y + 8, std::to_string(player->getPressure()));
-		drawText(x + 15, y + 8, "/" + std::to_string(player->getMaxPressure()));
-		drawText(x + 2, y + 9, makeBar(player->getPressure(), player->getMaxPressure(), 20));
+		drawText(x + 2, y + 9, "pressure :");
+		drawText(x + 12, y + 9, std::to_string(player->getPressure()));
+		drawText(x + 15, y + 9, "/" + std::to_string(player->getMaxPressure()));
+		drawText(x + 2, y + 10, makeBar(player->getPressure(), player->getMaxPressure(), 20));
 
 
-		drawText(x + 2, y + 10, "ATK      :" + std::to_string(player->getAttack()));
-		drawText(x + 2, y + 11, "SPEED    :" + std::to_string(player->getSpeed()));
+		drawText(x + 2, y + 11, "ATK      :" + std::to_string(player->getAttack()));
+		drawText(x + 2, y + 12, "SPEED    :" + std::to_string(player->getSpeed()));
 
-		drawText(x + 2, y + 12, "EXP      :");
-		drawText(x + 12, y + 12, std::to_string(player->getExp()));
-		drawText(x + 15, y + 12, "/" + std::to_string(player->getMaxExp()));
-		drawText(x + 2, y + 13, makeBar(player->getExp(), player->getMaxExp(), 20));
+		drawText(x + 2, y + 13, "EXP      :");
+		drawText(x + 12, y + 13, std::to_string(player->getExp()));
+		drawText(x + 15, y + 13, "/" + std::to_string(player->getMaxExp()));
 
 		drawText(x + 2, y + 14, "Gold     :" + std::to_string(player->getGold()));
 		drawText(x + 2, y + 15, "Artifact :" + std::to_string(player->getArtifactCount()) + " / 3");

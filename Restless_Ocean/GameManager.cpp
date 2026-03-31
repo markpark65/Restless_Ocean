@@ -114,9 +114,17 @@ void GameManager::run()
 		std::cout << "1. 처음부터 다시 시작" << '\n';
 		std::cout << "2. 게임 종료" << '\n';
 		std::cout << "> ";
+		g_sceneData.monster = nullptr;
+		g_sceneData.Title = "Continue?";
+		g_sceneData.description = "게임을 다시 시작하시겟습니까?";
+		g_sceneData.options = {
+			"처음부터 다시 시작",
+			"게임 종료"
+		};
 
-		int input = InputSystem::getInputInt(1, 2);
-
+		//int input = InputSystem::getInputInt(1, 2);
+		int input = g_cliRenderer.OptionSelector(g_sceneData);
+		input += 1;
 		if (input == 1)
 		{
 			resetGameState();
@@ -135,7 +143,7 @@ void GameManager::endGame(GameOverReason reason)
 	if (reason == GameOverReason::Clear)
 	{
 		g_sceneData.sceneText = {
-			"\n================================",
+			"================================",
 			"모든 유적을 모았습니다!",
 			"심해의 비밀이 드러납니다.",
 			"(대충 왕국과 심해어들의 비밀)",
@@ -152,7 +160,7 @@ void GameManager::endGame(GameOverReason reason)
 	else
 	{
 		g_sceneData.sceneText = {
-			"\n================================",
+			"================================",
 			"대원이 쓰러졌습니다.",
 			"게임 오버.",
 			"================================",
@@ -162,6 +170,7 @@ void GameManager::endGame(GameOverReason reason)
 		//std::cout << "게임 오버." << '\n';
 		//std::cout << "================================" << '\n';
 	}
+	g_cliRenderer.render(g_sceneData);
 
 	currentStage.reset();
 }

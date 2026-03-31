@@ -10,35 +10,14 @@
 using namespace std;
 
 Player::Player(string n)
-	//: name(n)
-	//, level(0)
-	//, hp(200)
-	//, maxHp(200)
-	//, baseAttack(30)
-	//, exp(0)
-	//, maxExp(100)
-	//, gold(0)
-	//, oxygen(100)
-	//, maxOxygen(100)
-	//, speed(100)
-	//, baseSpeed(100)
-	//, pressure(0)
-	//, maxPressure(100)
-	//, battery(100)
-	//, maxBattery(100)
-	//, tempAttack(0)
-	//, artifactCount(0)
-	//, gachaCount(0)
-	//, inventory(10) {
-
 	: name(n)
-	, level(20)
-	, hp(9999)
-	, maxHp(9999)
-	, baseAttack(500)
+	, level(0)
+	, hp(200)
+	, maxHp(200)
+	, baseAttack(30)
 	, exp(0)
 	, maxExp(100)
-	, gold(9999)
+	, gold(0)
 	, oxygen(100)
 	, maxOxygen(100)
 	, speed(100)
@@ -356,10 +335,17 @@ void Player::addArtifact(std::string name) {
 	g_sceneData.description += name + "을 발견했습니다. (현재 유적 개수: " + std::to_string(artifactCount) + "개) \n ";
 	//cout << name<<"을 발견했습니다. (현재 유적 개수: " << ++artifactCount << "개)" << endl;
 	if (artifactCount >= 3) {
-		cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
-		cout << "심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다." << endl
-			<< "축하합니다! 심해의 영웅이시여. 당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다." << endl
-			<< "당신의 이름은 고대 비석에 영원히 기록될 것입니다." << endl;
+
+		g_sceneData.sceneText = {
+			"모든 유적을 모았습니다! 심해의 비밀이 드러납니다.",
+			"심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다.",
+			"축하합니다! 심해의 영웅이시여. 당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다.",
+			"당신의 이름은 고대 비석에 영원히 기록될 것입니다.",
+		};
+		//cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
+		//cout << "심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다." << endl
+		//	<< "축하합니다! 심해의 영웅이시여. 당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다." << endl
+		//	<< "당신의 이름은 고대 비석에 영원히 기록될 것입니다." << endl;
 	}
 }
 //유적 확인

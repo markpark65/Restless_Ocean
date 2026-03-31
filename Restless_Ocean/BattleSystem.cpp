@@ -40,7 +40,7 @@ BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 
 BattleResult BattleSystem::battle(AttributeType mapType)
 {
-	g_sceneData.description = "탐색중...";
+	g_sceneData.description += "탐색중...";
 	g_cliRenderer.render(g_sceneData);
 	this_thread::sleep_for(chrono::seconds(2));
 
@@ -375,11 +375,13 @@ void BattleSystem::prize()
 		// 30% 확률로 아이템 획득
 		int itemChance = random.getRandomValue(1, 100);
 
-		if (itemChance <= 30)
+		if (itemChance <= 100)
 		{
+			Item* obtainedItem = itemFactory.getRandomItem();
+
+			g_sceneData.description += obtainedItem->getName() + " 아이템을 획득했습니다! \n ";
 			//cout << "아이템을 획득했습니다!" << '\n';
 
-			Item* obtainedItem = itemFactory.getRandomItem();
 			GameLogger::getInstance().log(EventType::ObtainItem, player->getName(), obtainedItem->getName());
 			GameLogger::getInstance().printRecentLog();
 			player->getInventory().addItem(obtainedItem);
