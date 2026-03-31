@@ -12,10 +12,10 @@ ShopSystem::ShopSystem() {
 	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50, 0));
 
 	//Level 5
-	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 200, 5));
-	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 200, 5));
-	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 200, 5));
-	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200, 5));
+	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 100, 5));
+	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 100, 5));
+	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 100, 5));
+	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 100, 5));
 
 	// Level 10
 	items_.push_back(std::make_unique<WeaponUpgrade>("심해의 강화석", 100, 20, 10));
@@ -188,7 +188,7 @@ void ShopSystem::gacha(Player& player) {
 		reward = std::make_unique<PressurePotion>("압력 포션", 10, 50, 1);
 	}
 	else {
-		reward = std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200, 5);
+		reward = std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 100, 5);
 	}
 
 	std::cout << "획득 아이템: ";
