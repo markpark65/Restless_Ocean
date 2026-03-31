@@ -90,27 +90,10 @@ int main()
 	//콘솔 인코딩 UFT-8 with BOM으로 변경하여 깨짐 방지.
 	//system("chcp 65001");
 	//system("cls");
-	//LoggingTest();
-	//PrintStatisicsTest();
-    //std::cout << "Hello World!\n";
-
-    //MonsterFactory m;
-    //for (int i = 0; i < 10; ++i)
-    //{
-    //    Monster* monster = m.GenerateMonster(1);
-    //    monster->showStat();
-    //}
-
-
+  //게임 실행
 	//GameManager::getInstance().run();
-    //MonsterFactory m;
-    //for (int i = 0; i < 10; ++i)
-    //{
-    //    Monster* monster = m.GenerateMonster(1);
-    //    monster->showStat();
-    //}
 
-	GameManager::getInstance().run();
+	printFootballFish();
 
 	return 0;
 	

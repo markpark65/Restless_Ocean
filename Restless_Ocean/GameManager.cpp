@@ -56,20 +56,20 @@ void GameManager::addClearMap(MapType mapType)
 
 std::unique_ptr<IMap> GameManager::createNextMap() const
 {
-	if (!hasClearMap(MapType::BuildingMap))
-	{
-		return std::make_unique<BuildingMap>();
-	}
-	if (!hasClearMap(MapType::CollapsedShipMap))
-	{
-		return std::make_unique<CollapsedShipMap>();
-	}
-	if (!hasClearMap(MapType::SeaCaveMap))
-	{
-		return std::make_unique<SeaCaveMap>();
-	}
+	std::vector<int> availableIndices;
 
-	return nullptr;
+	if (!hasClearMap(MapType::SeaCaveMap))      availableIndices.push_back(0);
+	if (!hasClearMap(MapType::BuildingMap))     availableIndices.push_back(1);
+	if (!hasClearMap(MapType::CollapsedShipMap)) availableIndices.push_back(2);
+
+	if (availableIndices.empty()) return nullptr;
+
+	int randomIndex = availableIndices[Random::getRandomValue(0, (int)availableIndices.size() - 1)];
+
+	if (randomIndex == 0) return std::make_unique<SeaCaveMap>();
+	if (randomIndex == 1) return std::make_unique<BuildingMap>();
+
+	return std::make_unique<CollapsedShipMap>();
 }
 
 void GameManager::setIsPlayerExit(bool playerExit)

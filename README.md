@@ -44,7 +44,7 @@
 
 ---
 
-## 🕹️ 조작 방법 (Controls)
+## 🕹️ 조작 방법 (Controls) //UI 바뀔 시 수정 필요
 
 본 게임은 터미널 기반의 텍스트 메뉴 방식으로 동작하며, 모든 조작은 **숫자 입력**으로 이루어집니다.
 
@@ -65,7 +65,7 @@
 
 ## 🌌 게임 시스템 가이드 (Game System Guide)
 
-성공적인 심해 탐사를 위해 대원 mark의 생존 수치와 주변 환경을 잘 관리해야 합니다.
+성공적인 심해 탐사를 위해 대원의 생존 수치와 주변 환경을 잘 관리해야 합니다.
 
 ### 1. 주요 생존 수치 (Status)
 
@@ -89,5 +89,10 @@
 
 ## 📝 크레딧 (Credits)
 
-* **개발자**: [개발자 이름] ([GitHub 프로필 URL 또는 이메일])
+* **개발자**: [심수민] ([https://github.com/ShimSumin])
+* **개발자**: [이진영] ([https://github.com/zxcv11595])
+* **개발자**: [강대근] ([https://github.com/DaeKuen16])
+* **개발자**: [안나영] ([https://github.com/any0509/])
+* **개발자**: [박지석] ([https://github.com/Zerosik])
+* **개발자**: [박주홍] ([https://github.com/markpark65])
 

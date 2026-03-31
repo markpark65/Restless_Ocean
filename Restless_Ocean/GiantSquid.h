@@ -32,8 +32,6 @@ public:
 
 		//g_sceneData.description += getName() + "가 특수 공격을 사용합니다! \n ";
 		g_sceneData.description += getName() + "가 " + target->getName() + "에게 돌진합니다! \n ";
-		//std::cout << getName() << "가 특수 공격을 사용합니다!" << '\n';
-		//std::cout << getName() << "가 " << target->getName() << "에게 돌진합니다!" << '\n';
 
 		int successAttack = Random::getRandomValue(0, 10);
 		if (successAttack < 5)
@@ -45,9 +43,9 @@ public:
 		else
 		{
 			g_sceneData.description += target->getName() + "는 " + getName() + "의 돌진을 피했습니다! \n ";
-			//std::cout << target->getName() << "는 " << getName() << "의 돌진을 피했습니다!" << '\n';
 		}
 	}
+
 	void activatePassive() override
 	{
 		int health = 0;

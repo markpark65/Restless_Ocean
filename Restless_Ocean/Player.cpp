@@ -11,7 +11,7 @@ using namespace std;
 
 Player::Player(string n)
 	: name(n)
-	, level(0)
+	, level(1)
 	, hp(200)
 	, maxHp(200)
 	, baseAttack(30)
@@ -53,15 +53,14 @@ void Player::gainExp(int amount) {
 	exp += amount;
 
 	g_sceneData.description += std::to_string(amount) + "의 경험치를 획득했습니다. (현재: " + std::to_string(exp) + "/" + std::to_string(maxExp) + ") \n ";
-	//cout << amount << "의 경험치를 획득했습니다. (현재: " << exp << "/" << maxExp << ")" << endl;
 	while (exp >= maxExp && level < 10) {
 		levelUp();
 	}
 }
 void Player::levelUp() {
 	level++;
-	int hpBonus = level * 20;
-	int atkBonus = level * 5;
+	int hpBonus = 30;
+	int atkBonus = 8;
 
 	maxHp += hpBonus;
 	baseAttack += atkBonus;
@@ -69,15 +68,11 @@ void Player::levelUp() {
 	exp -= maxExp;
 	if (exp < 0) exp = 0;
 
-	//cout << "=============================" << endl;
-	//cout << "Level UP!!! 현재 레벨: " << level << endl;
-	//cout << "최대 체력 " << hpBonus << " 증가 / 공격력 " << atkBonus << " 증가" << endl;
-	//cout << "=============================" << endl;
 	g_sceneData.description += "Level UP!!!현재 레벨 : " + std::to_string(level) + " \n ";
 	g_sceneData.description += "최대 체력 " + std::to_string(hpBonus) + " 증가 / 공격력 " + std::to_string(atkBonus) + " 증가 \n ";
+  
 	if (level == 3 || level == 6 || level == 9) {
 		g_sceneData.description += "특정 레벨 도달! 고대의 기술 중 하나를 연마할 수 있습니다. \n ";
-		//cout << "특정 레벨 도달! 고대의 기술 중 하나를 연마할 수 있습니다." << endl;
 
 		int skillIdx = Random::getRandomValue(1, 3);
 		unique_ptr<Skill> discoveredSkill;
@@ -95,7 +90,6 @@ void Player::levelUp() {
 			discoveredSkill = make_unique<CounterSkill>();
 			break;
 		}
-		//cout << "새롭게 발견한 기술 : [" << discoveredSkill->getName() << "] " << endl;
 		g_sceneData.description += "새롭게 발견한 기술 : [" + discoveredSkill->getName() + "] \n ";
 
 		this->learnSkill(move(discoveredSkill));
@@ -107,7 +101,6 @@ void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
 	if (!newWeapon) return;
 	equippedWeapon = std::move(newWeapon);
 	g_sceneData.description += name + " 대원이 " + equippedWeapon->getName() + "무기를 장착했습니다 \n ";
-	//cout << name << " 대원이 " << equippedWeapon->getName() << "무기를 장착했습니다";
 }
 
 //무기 업그레이드
@@ -125,10 +118,6 @@ void Player::upgradeWeapon(int amount) {
 void Player::learnSkill(unique_ptr<Skill> newSkill) {
 	if (!newSkill) return;
 	if (currentSkill) {
-		//cout << "---------------------------------------------" << endl;
-		//cout << "이미 스킬[" << currentSkill->getName() << "]을 보유 중입니다." << endl;
-		//cout << "새 스킬 [" << newSkill->getName() << "]로 교체하시겠습니까?" << endl;
-		//cout << "1. 교체한다 (기존 기술 삭제)  2. 유지한다 (새 기술 버림)" << endl;
 		g_sceneData.description += "이미 스킬[" + currentSkill->getName() + "]을 보유 중입니다.  스킬로 교체하시겠습니까? \n ";
 		g_sceneData.description += "1. 교체한다 (기존 기술 삭제)  2. 유지한다 (새 기술 버림) \n ";
 		g_sceneData.options={
@@ -141,37 +130,31 @@ void Player::learnSkill(unique_ptr<Skill> newSkill) {
 		if (selectedIndex == 0) {
 			currentSkill = move(newSkill);
 			g_sceneData.description = "새로운 스킬을 배웠습니다! \n ";
-			//cout << "새로운 스킬을 배웠습니다!" << endl;
 		}
 		else {
 			g_sceneData.description = "기존 스킬을 유지합니다. \n ";
-			//cout << "기존 스킬을 유지합니다." << endl;
 		}
 	}
 	else {
 		currentSkill = move(newSkill);
 		g_sceneData.description = "스킬 [" + currentSkill->getName() + "]을 습득했습니다! \n ";
-		//cout << "\n스킬 [" << currentSkill->getName() << "]을 습득했습니다!\n";
 	}
 }
 // 스킬 사용
 bool Player::useSkill(Monster* target) {
 	if (!currentSkill) {
 		g_sceneData.description = "[알림] 배운 스킬이 없어 사용할 수 없습니다. \n ";
-		//std::cout << "[알림] 배운 스킬이 없어 사용할 수 없습니다.\n";
 		return false;
 	}
 	int cost = currentSkill->getCost();
 	if (getBattery() >= cost) {
 		spendBattery(cost);
 		g_sceneData.description = "[에너지] 스킬 발동을 위해 배터리 " + std::to_string(cost) + "%를 소모합니다. \n ";
-		//std::cout << "[에너지] 스킬 발동을 위해 배터리 " << cost << "%를 소모합니다.\n";
 		currentSkill->execute(this, target);
 		return true;
 	}
 	else {
 		g_sceneData.description = "[경고] 배터리가 부족합니다! (현재: " + std::to_string(getBattery()) + "% / 필요: "+ std::to_string(cost) + "%) \n ";
-		//std::cout << "[경고] 배터리가 부족합니다! (현재: " << getBattery() << "% / 필요: " << cost << "%)\n";
 		return false;
 	}
 }
@@ -185,13 +168,11 @@ int Player::attack(const Monster* target) {
 //데미지
 void Player::takeDamage(int damage) {
 	hp -= damage;
-	//cout << name << " 대원이 " << damage << " 의 피해를 입었습니다." << endl;
 	g_sceneData.description += name + " 대원이 " + std::to_string(damage) + " 의 피해를 입었습니다. \n ";
 
 	if (hp <= 0) {
 		hp = 0;
 		g_sceneData.description += name + " 대원이 쓰러졌습니다. 게임 오버. \n ";
-		//cout << name << " 대원이 쓰러졌습니다. 게임 오버" << endl;
 	}
 }
 
@@ -201,14 +182,12 @@ void Player::recoverDamage(int amount) {
 	if (hp + amount > maxHp) heal = maxHp - hp;
 	hp += heal;
 	g_sceneData.description += name + " 대원의 체력이 " + std::to_string(heal) + "만큼 회복 됐습니다. (현재 HP: " +std::to_string(hp)+" / " + std::to_string(maxHp)+") \n ";
-	//cout << name << " 대원의 체력이 " << heal << "만큼 회복 됐습니다. (현재 HP: " << hp << " / " << maxHp << ")" << endl;
 }
 
 //체력 최대량 회복
 void Player::increaseMaxHp(int amount) {
 	maxHp += amount;
 	g_sceneData.description += name + " 대원의 체력 최대량이 " + std::to_string(amount) + "만큼 증가 됐습니다. (현재 HP: " + std::to_string(hp) + " / " + std::to_string(maxHp) + ") \n ";
-	//cout << name << " 대원의 체력 최대량이 " << amount << "만큼 증가 됐습니다. (현재 HP: " << hp << " / " << maxHp << ")" << endl;
 }
 
 //산소 회복
@@ -223,7 +202,6 @@ void Player::recoverOxygen(int amount) {
 	if (oxygen + amount > maxOxygen) { heal = maxOxygen - oxygen; }
 	oxygen += heal;
 	g_sceneData.description += name + " 대원의 산소가 " + std::to_string(heal) + "만큼 회복 됐습니다. (현재 산소량: " + std::to_string(oxygen) + " / 100 ) \n ";
-	//cout << name << " 대원의 산소가 " << heal << "만큼 회복 됐습니다. (현재 산소량: " << oxygen << " / 100 )" << endl;
 }
 
 //산소 최대량 증가
@@ -231,29 +209,23 @@ void Player::IncreaseOxygen(int amount) {
 	maxOxygen += amount;
 
 	g_sceneData.description += name + " 대원의 최대 산소량이 " + std::to_string(amount) + " 증가했습니다! (최대 산소: " + std::to_string(maxOxygen) + ") \n ";
-	//cout << name << " 대원의 최대 산소량이 " << amount << " 증가했습니다! (최대 산소: " << maxOxygen << ")" << endl;
 }
 
 //산소 소모
 void Player::useOxygen(int amount) {
 	oxygen -= amount;
 	if (oxygen < 0) oxygen = 0;
-
-
 	if (oxygen > 10) {
 		//10보다 많으면
 		g_sceneData.description += "산소를 " + std::to_string(amount) + " % 소모했습니다. (남은 산소: " + std::to_string(oxygen) + " %) \n ";
-		//cout << "산소를 " << amount << " % 소모했습니다. (남은 산소: " << oxygen << " %)" << endl;
 	}
 	else if (oxygen > 0 && oxygen <= 10) {
 		//10이하(마지막 산소 소모)
 		g_sceneData.description += "산소가 부족합니다. 산소를 회복하거나 지상으로 복귀하십시오. \n ";
-		//cout << "산소가 부족합니다. 산소회복 혹은 지상으로 복귀하십쇼" << endl;
 	}
 	else if (oxygen <= 0) {
 		//고갈
 		g_sceneData.description += "산소가 고갈됐습니다. 체력이 감소합니다. \n ";
-		//cout << "산소가 고갈됐습니다. 체력이 감소합니다." << endl;
 		takeDamage(20);
 	}
 }
@@ -275,7 +247,6 @@ void Player::recoverPressure(int amount) {
 		pressure = 0;
 
 	g_sceneData.description += "압력이 " + std::to_string(amount) + "% 감소했습니다. (현재 압력:" + std::to_string(pressure) + " %) \n ";
-	//cout << "압력이 " << amount << "% 감소했습니다. (현재 압력 " << pressure << " %)" << endl;
 	
 }
 
@@ -283,7 +254,6 @@ void Player::recoverPressure(int amount) {
 void Player::IncreasePressure(int amount) {
 	maxPressure += amount;
 	g_sceneData.description += "압력 최대량이 " + std::to_string(amount) + " % 증가했습니다. (현재 압력 최대량" + std::to_string(maxPressure) + " %) \n ";
-	//cout << "압력 최대량이 " << amount << " % 증가했습니다. (현재 압력 최대량" << maxPressure << " %)" << endl;
 }
 
 //압력 증가
@@ -292,12 +262,9 @@ void Player::takePressure(int amount) {
 	if (pressure > maxPressure)
 		pressure = maxPressure;
 	g_sceneData.description += "압력이 " + std::to_string(amount) + " % 증가했습니다. (현재 압력:" + std::to_string(pressure) + " %) \n ";
-	//cout << "압력이 " << amount << " % 증가했습니다. (현재 압력 " << pressure << " %)" << endl;
 	if (pressure >= maxPressure) {
 		//아래 속도 디버프와 중복출력
-		//g_sceneData.description += "압력이 너무 강합니다. 체력이 감소합니다.";
-		//cout << "압력이 너무 셉니다. 체력이 감소합니다." << endl;
-		//takeDamage(20);
+		g_sceneData.description += "압력이 너무 강합니다. 속도가 감소합니다.";
 		debuffSpeed(50);
 	}
 }
@@ -307,18 +274,15 @@ void Player::debuffSpeed(int reduction) {
 	if (speed < 10)
 		speed = 10;
 	g_sceneData.description += "[디버프] 과도한 수압으로 몸이 무거워집니다! (현재 속도: " + std::to_string(speed)+") \n ";
-	//cout << "[디버프] 과도한 수압으로 몸이 무거워집니다! (현재 속도: " << speed << ")" << endl;
 }
 void Player::resetSpeed() {
 	speed = baseSpeed;
 	g_sceneData.description += "수압이 해소되어 몸이 가벼워졌습니다! \n ";
-	//cout << "수압이 해소되어 몸이 가벼워졌습니다!" << endl;
 }
 //골드 획드
 void Player::addGold(int amount) {
 	gold += amount;
 	g_sceneData.description += std::to_string(amount) + "G(보유 골드: " + std::to_string(gold) + "G) \n ";
-	//cout << amount << "G (보유 골드: " << gold << "G)" << endl;
 
 }
 //유적 발견
@@ -330,8 +294,6 @@ void Player::addArtifact(std::string name) {
 		{
 			g_sceneData.description += name + "은 이미 발견한 유적입니다! \n ";
 			g_sceneData.description += name + "현재 유적의 개수: " + std::to_string(artifactCount) + "개 \n ";
-			//std::cout << name << "은 이미 발견한 유적입니다!" << std::endl;
-			//std::cout << "현재 유적의 개수: " << artifactCount << "개" << std::endl;
 			return;
 		}
 	}
@@ -347,22 +309,18 @@ void Player::addArtifact(std::string name) {
 			"당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다.",
 			"당신의 이름은 고대 비석에 영원히 기록될 것입니다.",
 		};
-		//cout << "모든 유적을 모았습니다! 심해의 비밀이 드러납니다.\n";
-		//cout << "심해의 잊혀진 왕국, '아틀란티스'의 기록을 모두 복원했습니다." << endl
-		//	<< "축하합니다! 심해의 영웅이시여. 당신은 심연의 공포를 이겨내고 인류에게 금지된 지식을 가져왔습니다." << endl
-		//	<< "당신의 이름은 고대 비석에 영원히 기록될 것입니다." << endl;
 	}
 }
 //유적 확인
 void Player::showArtifacts() const {
 
 	g_sceneData.description = name + "===== 보유 유적 ===== \n ";
-	//cout << "===== 보유 유적 =====\n";
+
 	for (int i = 0; i < artifacts.size(); i++) {
 		g_sceneData.description += artifacts[i] + "\n";
-		//cout << "- " << artifacts[i] <<"\n";
+
 	}
-	//cout << "\n";
+
 }
 
 // 유적 개수 확인
@@ -375,19 +333,19 @@ bool Player::hasAllArtifacts() const
 void Player::addAttack(int amount) {
 	baseAttack += amount;
 	g_sceneData.description += "공격력이 " + std::to_string(amount) + "만큼 증가했습니다. (현재 ATK: " + std::to_string(baseAttack) + ") \n ";
-	//cout << "공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << baseAttack << ")" << endl;
+
 }
 
 //해당 전투에만 공격력 상승
 void Player::addTempAttack(int amount) {
 	tempAttack += amount;
 	g_sceneData.description += "공격력이 " + std::to_string(amount) + "만큼 증가했습니다. (현재 ATK: " + std::to_string(baseAttack) + ") \n ";
-	//cout << "임시 공격력이 " << amount << "만큼 증가했습니다. (현재 ATK: " << getAttack() << ")" << endl;
+
 }
 
 //전투 종료시 tempAttack 초기화
 void Player::resetTempStats() {
-tempAttack = 0;
+	tempAttack = 0;
 }
 //현재 스킬 받기
 Skill* Player::getCurrentSkill() const {
@@ -398,12 +356,10 @@ void Player::rechargeBattery(int amount) {
 	if (battery >= maxBattery)
 	{
 		g_sceneData.description += "배터리가 충분합니다. \n ";
-		//cout << "배터리가 충분합니다." << endl;
 		return;
 	}
 	if (battery + amount > maxBattery) { charge = maxBattery - battery; }
 	battery += charge;
 
 	g_sceneData.description += name + " 대원의 배터리가 " + std::to_string(charge) + "만큼 회복 됐습니다. (현재 배터리: " + std::to_string(battery) + " / 100) \n ";
-	//cout << name << " 대원의 배터리가 " << charge << "만큼 회복 됐습니다. (현재 배터리: " << battery << " / 100 )" << endl;
 }

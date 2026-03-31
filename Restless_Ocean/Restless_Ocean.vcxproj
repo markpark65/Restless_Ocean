@@ -204,6 +204,9 @@
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Statistics.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

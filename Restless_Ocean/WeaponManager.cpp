@@ -46,17 +46,6 @@ unique_ptr<Weapon> WeaponManager::selectWeapon() const
 		}
 		break;
 	}
-	//switch (choice)
-	//{
-	//case 1:
-	//	return make_unique<Flashbang>();
-	//case 2:
-	//	return make_unique<Vantablack>();
-	//case 3:
-	//	return make_unique<WaterGun>();
-	//default:
-	//	return nullptr;
-	//}
 
 
 }
@@ -64,12 +53,10 @@ unique_ptr<Weapon> WeaponManager::selectWeapon() const
 void WeaponManager::printWeapons() const {
 
 	for(int i = 0; i < weapons.size(); ++i) {
-		//cout << i + 1 << ". " << weapons[i]->getName() << '\n';
-		//cout << "타입: " << weapons[i]->getType() << '\n';
-		//cout << "추가 대미지: " << weapons[i]->getAddDamage() << "\n";
 
 		g_sceneData.description += weapons[i]->getName();
 		g_sceneData.description += " | 추가 대미지 : " + std::to_string(weapons[i]->getAddDamage())+ " \n ";
 	}
 }
+
 

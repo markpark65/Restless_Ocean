@@ -65,14 +65,36 @@ public:
 			return -1;
 		}
 		printAll();
-		std::cout << "사용할 아이템 번호 선택 (-1: 취소)\n";
-		int choice = InputSystem::getInputInt(-1, size_ - 1);
+		int choice;
+		while (true) {
+			std::cout << "사용할 아이템 번호 선택 (-1: 취소)\n";
+			std::cin >> choice;
+
+			if (std::cin.fail())
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout << "잘못 입력하였습니다.\n";
+				std::cout << "다시 입력해주세요.\n";
+				continue;
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+			if (choice != -1 && choice < 1 || choice > size_) {
+				std::cout << "잘못된 번호입니다. 다시 선택하세요.\n";
+				continue;
+			}
+			else {
+				break;
+			}
+		}
+
 		if (choice == -1) {
 			std::cout << "취소했습니다.\n";
 			return -1;
 		}
 
-		return choice;
+		return choice - 1;
 	}
 
 	//아이템 사용

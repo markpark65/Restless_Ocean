@@ -57,8 +57,8 @@ public:
 	void learnSkill(std::unique_ptr<Skill> newSkill);
 	int getGachaCount() const { return gachaCount; }
 	void addGachaCount(int n) { gachaCount += n; }
-	
-	
+
+
 	//전투 결과
 	bool useSkill(Monster* target);
 	void takeDamage(int damage);

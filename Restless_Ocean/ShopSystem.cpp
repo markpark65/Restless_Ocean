@@ -8,18 +8,18 @@ using namespace std;
 ShopSystem::ShopSystem() {
 
 	//Level 1
-	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50,0));
-	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 50,0));
-	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50,0));
+	items_.push_back(std::make_unique<HealthPotion>("체력 포션", 10, 50, 0));
+	items_.push_back(std::make_unique<OxygenPotion>("산소 포션", 10, 50, 0));
+	items_.push_back(std::make_unique<PressurePotion>("압력 포션", 10, 50, 0));
 
-	//Level 10
-	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 200,10));
-	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 200,10));
-	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 200,10));
-	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 200,10));
+	//Level 5
+	items_.push_back(std::make_unique<MaxHpUp>("방수가 잘 되어있는 초코과자", 30, 100, 5));
+	items_.push_back(std::make_unique<MaxOxygenUp>("1000년 전의 스노클", 30, 100, 5));
+	items_.push_back(std::make_unique<MaxPressureUp>("어느 물고기의 부례", 30, 100, 5));
+	items_.push_back(std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 100, 5));
 
-	// Level 20
-	items_.push_back(std::make_unique<WeaponUpgrade>("심해의 강화석", 100, 100, 20));
+	// Level 10
+	items_.push_back(std::make_unique<WeaponUpgrade>("심해의 강화석", 100, 20, 10));
 }
 
 //구매
@@ -102,7 +102,7 @@ void ShopSystem::buyItem(Player& player) {
 
 			int count = 1;//inputSys.getInputInt(0, remaining);
 
-			if (count == 0) continue; 
+			if (count == 0) continue;
 
 			for (int i = 0; i < count; i++) {
 				if (player.getGold() < 5) {
@@ -243,13 +243,13 @@ void ShopSystem::gacha(Player& player) {
 		reward = std::make_unique<HealthPotion>("체력 포션", 10, 50, 1);
 	}
 	else if (roll < 80) {
-		reward = std::make_unique<OxygenPotion>("산소 포션", 10, 10, 1);
+		reward = std::make_unique<OxygenPotion>("산소 포션", 10, 50, 1);
 	}
 	else if (roll < 95) {
-		reward = std::make_unique<PressurePotion>("압력 포션", 10, 10, 1);
+		reward = std::make_unique<PressurePotion>("압력 포션", 10, 50, 1);
 	}
 	else {
-		reward = std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 10, 10);
+		reward = std::make_unique<AttackBoost>("깨진 조개껍데기 목걸이", 30, 100, 5);
 	}
 
 	g_sceneData.description = reward->getName() + "획득! \n ";
@@ -312,7 +312,7 @@ void ShopSystem::enhanceWeapon(Player& player) {
 		}
 
 		int choice = input - 1;
-		
+
 		int realIndex = upgradeIndices[choice];
 		Item* item = player.getInventory().getItem(realIndex);
 
@@ -349,13 +349,7 @@ void ShopSystem::craftItem(Player& player) {
 		g_sceneData.sceneText.push_back("=== 아이템 공방 === ");
 		g_sceneData.sceneText.push_back("0: [상점으로 돌아가기]");
 		g_sceneData.options = { "상점으로 돌아가기"};
-
-		//std::cout << "\n=== 아이템 공방 ===\n";
-		//std::cout << "0: 상점으로 돌아가기\n\n";
-		//std::cout << "[합성 방법]\n";
-		//std::cout << "- 같은 아이템 2개 필요\n\n";
-
-		//player.getInventory().printAll();
+    
 		std::vector<std::string> items = player.getInventory().printAllstr();
 		for (auto& it : items) {
 			g_sceneData.sceneText.push_back(it);
@@ -373,8 +367,6 @@ void ShopSystem::craftItem(Player& player) {
 
 		}
 		//int size = player.getInventory().getSize();
-
-		//std::cout << "합성할 아이템 번호 선택 ";
 		//int input = inputSys.getInputInt(0, size);
 
 		int input = g_cliRenderer.OptionSelector(g_sceneData);
@@ -404,8 +396,6 @@ void ShopSystem::craftItem(Player& player) {
 		}
 
 		//int maxUsable = (count / 2) * 2;
-
-		//std::cout << "사용 개수 (짝수, 0:취소): ";
 		//int useCount = inputSys.getInputInt(0, maxUsable);
 		int useCount = 2;
 		if (useCount == 0) continue;
@@ -429,7 +419,6 @@ void ShopSystem::craftItem(Player& player) {
 		}
 		else {
 			g_sceneData.description += "합성 불가 아이템! \n ";
-			//std::cout << "합성 불가 아이템!\n";
 			continue;
 		}
 
@@ -443,6 +432,5 @@ void ShopSystem::craftItem(Player& player) {
 
 		g_sceneData.description += "합성 완료! " + itemName + std::to_string(resultCount) + "개 생성! \n ";
 		g_cliRenderer.render(g_sceneData);
-		//std::cout << "합성 완료! " << resultCount << "개 생성!\n";
 	}
 }
