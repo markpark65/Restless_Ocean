@@ -108,15 +108,46 @@ void GameStatistics::LogToStatistic(EventType type, const std::string& name, int
 
 std::vector<std::string> GameStatistics::PrintStatistics() {
 	std::vector<std::string> stat;
+	std::string logstr = "";
+	int temp = 0;
 	stat.push_back("탐사에 나선 횟수 : " +			statisticData["ExplorationCount"].dump());
 	stat.push_back("탐사에서 살아 돌아온 횟수 : " + statisticData["ReturnCount"].dump());
 	stat.push_back("탐사중 사망 횟수 : " +			statisticData["DeathCount"].dump());
 	stat.push_back("탐사중 레벨업 횟수 : " +			statisticData["TotalLevelUp"].dump());
 
 	stat.push_back("처치한 적의 숫자 : " +			statisticData["TotalKillCount"].dump());
+	temp = 0;
+	logstr = "";
+	auto& killLog = statisticData["KillCount"];
+	for (auto& item : killLog.items()) {
+		if (temp < item.value()) {
+			logstr = "가장 많이 처치한 적 : " + EngToKor(item.key()) + ", 처치 횟수 :" + item.value().dump();
+		}
+		//std::cout << "가장 많이 처치한 적 : " << EngToKor(item.key()) << ", 처치 횟수 : " << item.value() << '\n';
+	}
+	stat.push_back(logstr);
 	stat.push_back("적들에게 입힌 피해량 : " +		statisticData["TotalDamageDealt"].dump());
+	temp = 0;
+	logstr = "";
+	auto& dealingLog = statisticData["DamageDealtTo"];
+	for (auto& item : dealingLog.items()) {
+		if (temp < item.value()) {
+			logstr = "가장 많은 피해를 받은 적 : " + EngToKor(item.key()) + ", 피해량 :" + item.value().dump();
+		}
+		//std::cout << '\t' << EngToKor(item.key()) << "를 대상으로 준 피해 :" << item.value() << '\n';
+	}
+	stat.push_back(logstr);
 	stat.push_back("적들의 공격을 버텨낸 량 : " +	statisticData["TotalDamageTaken"].dump());
-
+	temp = 0;
+	logstr = "";
+	auto& damagedLog = statisticData["DamageTakenBy"];
+	for (auto& item : damagedLog.items()) {
+		if (temp < item.value()) {
+			logstr = "가장 많은 피해를 입힌 적 : " + EngToKor(item.key()) + ", 피해량 :" + item.value().dump();
+		}
+		//std::cout << '\t' << EngToKor(item.key()) << "로부터 받은 피해 :" << item.value() << '\n';
+	}
+	stat.push_back(logstr);
 	stat.push_back("탐사에서 찾은 아이템 수 : " +	statisticData["TotalItemGain"].dump());
 	stat.push_back("탐사중 사용한 아이템 수 : " +	statisticData["TotalItemUse"].dump());
 	stat.push_back("탐사에서 획득한 골드 : " +		statisticData["TotalGoldGain"].dump());
@@ -125,34 +156,52 @@ std::vector<std::string> GameStatistics::PrintStatistics() {
 	return stat;
 
 
-	std::cout << "탐사에 나선 횟수 : " << statisticData["ExplorationCount"] << '\n';
-	std::cout << "탐사를 성공하고 돌아온 횟수 : " << statisticData["ReturnCount"] << '\n';
-	std::cout << "탐사 실패한 횟수 : " << statisticData["DeathCount"] << '\n';
-	std::cout << "탐사중 레벨업 횟수 : " << statisticData["TotalLevelUp"] << '\n';
+	//std::cout << "탐사에 나선 횟수 : " << statisticData["ExplorationCount"] << '\n';
+	//std::cout << "탐사를 성공하고 돌아온 횟수 : " << statisticData["ReturnCount"] << '\n';
+	//std::cout << "탐사 실패한 횟수 : " << statisticData["DeathCount"] << '\n';
+	//std::cout << "탐사중 레벨업 횟수 : " << statisticData["TotalLevelUp"] << '\n';
 
-	//처치횟수
-	std::cout << "처치한 적의 숫자 : " << statisticData["TotalKillCount"] << '\n';
-	auto& killLog = statisticData["KillCount"];
-	for (auto& item : killLog.items()) {
-		std::cout << '\t' << EngToKor(item.key()) << " 처치 횟수 :" << item.value() << '\n';
-	}
+	////처치횟수
+	//std::cout << "처치한 적의 숫자 : " << statisticData["TotalKillCount"] << '\n';
 
-	//입힌 피해
-	std::cout << "적들에게 입힌 피해량 : " << statisticData["TotalDamageDealt"] << '\n';
-	auto& dealingLog = statisticData["DamageDealtTo"];
-	for (auto& item : dealingLog.items()) {
-		std::cout << '\t' << EngToKor(item.key()) << "를 대상으로 준 피해 :" << item.value() << '\n';
-	}
+	//temp = 0;
+	//logstr = "";
+	//auto& killLog = statisticData["KillCount"];
+	//for (auto& item : killLog.items()) {
+	//	if (temp < item.value()) {
+	//		logstr = "가장 많이 처치한 적 : " + EngToKor(item.key()) + "처치 횟수 :" + item.value().dump();
+	//	}
+	//	//std::cout << "가장 많이 처치한 적 : " << EngToKor(item.key()) << ", 처치 횟수 : " << item.value() << '\n';
+	//}
 
-	//받은 피해
-	std::cout << "적들의 공격을 버텨낸 량 : " << statisticData["TotalDamageTaken"] << '\n';
-	auto& damagedLog = statisticData["DamageTakenBy"];
-	for (auto& item : damagedLog.items()) {
-		std::cout << '\t' << EngToKor(item.key()) << "로부터 받은 피해 :" << item.value() << '\n';
-	}
+	////입힌 피해
+	//std::cout << "적들에게 입힌 피해량 : " << statisticData["TotalDamageDealt"] << '\n';
 
-	std::cout << "탐사에서 찾은 아이템 수 : " << statisticData["TotalItemGain"] << '\n';
-	std::cout << "탐사중 사용한 아이템 수 : " << statisticData["TotalItemUse"] << '\n';
-	std::cout << "탐사에서 획득한 골드 : " << statisticData["TotalGoldGain"] << '\n';
-	std::cout << "탐사중 사용한 골드 : " << statisticData["TotalGoldUse"] << '\n';
+	//temp = 0;
+	//logstr = "";
+	//auto& dealingLog = statisticData["DamageDealtTo"];
+	//for (auto& item : dealingLog.items()) {
+	//	if (temp < item.value()) {
+	//		logstr = "가장 많은 피해를 받은 적 : " + EngToKor(item.key()) + ", 피해량 :" + item.value().dump();
+	//	}
+	//	//std::cout << '\t' << EngToKor(item.key()) << "를 대상으로 준 피해 :" << item.value() << '\n';
+	//}
+
+	////받은 피해
+	//std::cout << "적들의 공격을 버텨낸 량 : " << statisticData["TotalDamageTaken"] << '\n';
+
+	//temp = 0;
+	//logstr = "";
+	//auto& damagedLog = statisticData["DamageTakenBy"];
+	//for (auto& item : damagedLog.items()) {
+	//	if (temp < item.value()) {
+	//		logstr = "가장 많은 피해를 준 적 : " + EngToKor(item.key()) + ", 피해량 :" + item.value().dump();
+	//	}
+	//	//std::cout << '\t' << EngToKor(item.key()) << "로부터 받은 피해 :" << item.value() << '\n';
+	//}
+
+	//std::cout << "탐사에서 찾은 아이템 수 : " << statisticData["TotalItemGain"] << '\n';
+	//std::cout << "탐사중 사용한 아이템 수 : " << statisticData["TotalItemUse"] << '\n';
+	//std::cout << "탐사에서 획득한 골드 : " << statisticData["TotalGoldGain"] << '\n';
+	//std::cout << "탐사중 사용한 골드 : " << statisticData["TotalGoldUse"] << '\n';
 }
