@@ -41,7 +41,6 @@ BattleResult BattleSystem::startBattleSequence(Player* p, AttributeType mapType)
 
 BattleResult BattleSystem::battle(AttributeType mapType)
 {
-	// 전투 턴 수
 	MonsterFactory monsterFactory;
 	monster.reset(monsterFactory.GenerateMonster(
 		player->getLevel(),
