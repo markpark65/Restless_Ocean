@@ -17,13 +17,9 @@ WeaponManager::~WeaponManager()
 }
 unique_ptr<Weapon> WeaponManager::selectWeapon() const
 {
-	//cout << "무기를 선택하세요.\n";
 	g_sceneData.description = "무기를 선택하세요. \n ";
 	printWeapons();
 
-	//int choice;
-	//InputSystem inputSystem;
-	//choice = inputSystem.getInputInt(1, weapons.size());
 	g_sceneData.selectedIndex = 0;
 	g_sceneData.options = {
 		"섬광탄",
