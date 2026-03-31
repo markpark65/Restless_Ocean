@@ -35,6 +35,9 @@ public:
 		std::cout << getName() << "가 일반 공격을 사용했습니다!" << '\n';
 		std::cout << getName() << "가 촉수로 찌릅니다!" << '\n';
 		target->takeDamage(getAttack());
+
+		cout << fixed;
+		cout.precision(1);
 		std::cout << getName() << "는 추가로 " << target->getName() << "에게 독 데미지를 입힙니다!" << '\n';
 		target->takeDamage(getAttack() * poisionDamage);
 	}
