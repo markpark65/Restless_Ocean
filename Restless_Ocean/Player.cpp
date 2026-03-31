@@ -107,6 +107,7 @@ void Player::setWeapon(std::unique_ptr<Weapon> newWeapon) {
 void Player::upgradeWeapon(int amount) {
 	if (!equippedWeapon) {
 		g_sceneData.description += "장착된 무기가 없습니다! \n ";
+		std::cout << "장착된 무기가 없습니다!\n";
 		return;
 	}
 

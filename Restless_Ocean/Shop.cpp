@@ -52,7 +52,17 @@ void Shop::update()
 			 "게임 종료"
 
 		};
+		//std::cout << "무엇을 하시겠습니까?"		<< '\n';
+		//std::cout << "1. 구매"					 << "\n";
+		//std::cout << "2. 판매"					 << "\n";
+		//std::cout << "3. 보유 아이템 확인"		 << "\n";
+		//std::cout << "4. 무기 강화"				 << "\n";
+		//std::cout << "5. 아이템 공방"			<< "\n";
+		//std::cout << "6. 로비 이동"				 << "\n";
+		//std::cout << "7. 게임 종료"				 << "\n";
+
 		int input = g_cliRenderer.OptionSelector(g_sceneData);
+		//int input = InputSystem::getInputInt(1, 8);
 		input += 1;
 		switch (input)
 		{
@@ -84,6 +94,7 @@ void Shop::update()
 				//g_sceneData.options.push_back(it);
 			}
 			g_cliRenderer.render(g_sceneData);
+			std::cout << "판매할 아이템 번호 ";
 			int input = g_cliRenderer.OptionSelector(g_sceneData);
 			g_sceneData.description = "상점으로 돌아갑니다.";
 			//player.getInventory().printAll();
@@ -109,6 +120,8 @@ void Shop::update()
 			//std::cout << "잘못된 입력입니다.\n";
 			continue;
 		}
+
+		std::cout << "\n";
 	}
 }
 
