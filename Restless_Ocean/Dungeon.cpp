@@ -11,6 +11,7 @@
 #include "CollapsedShipMap.h"
 #include "SeaCaveMap.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
 
 Dungeon::Dungeon()
 	: currentMap(GameManager::getInstance().createNextMap())
@@ -100,6 +101,7 @@ void Dungeon::update()
     }
     else // '육지(로비)로 복귀' 선택 시
     {
+		GameLogger::getInstance().log(EventType::Return, GameManager::getInstance().getPlayer().getName());
         GameManager::getInstance().changeStage(std::make_unique<Lobby>());
         return;
     }
