@@ -187,7 +187,7 @@ void BattleSystem::playerAction(BattleResult& battleResult)
 		switch (selectedIndex)
 		{
 		case 0:
-			playerAttack(turn);
+			playerAttack();
 			actionCompleted = true;
 			break;
 		case 1:
