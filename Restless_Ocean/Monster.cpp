@@ -1,34 +1,33 @@
 ﻿#include <iostream>
-
 #include "Monster.h"
 #include "Item.h"
 
 using namespace std;
 
 Monster::Monster(const MonsterStat& monsterStat)
-    : monsterStat(monsterStat), rewardArtifact()
+	: monsterStat(monsterStat), rewardArtifact()
 {
 }
 
 
 const std::string& Monster::getName() const
 {
-    return monsterStat.name;
+	return monsterStat.name;
 }
 
 int Monster::getHealth() const
 {
-    return monsterStat.health;
+	return monsterStat.health;
 }
 
 int Monster::getAttack() const
 {
-    return monsterStat.attack;
+	return monsterStat.attack;
 }
 
 int Monster::getSpeed() const
 {
-    return monsterStat.speed;
+	return monsterStat.speed;
 }
 void Monster::setSpeed(int newSpeed) {
 	if (newSpeed < 10) {
@@ -71,7 +70,7 @@ const std::string& Monster::getAsset() const
 
 bool Monster::isAlive() const
 {
-    return monsterStat.health > 0;
+	return monsterStat.health > 0;
 }
 
 //void Monster::takeDamage(int damage)
@@ -121,15 +120,15 @@ std::string Monster::mapToString(MapType map) const
 
 void Monster::showStat() const
 {
-    cout << "\n===============================" << '\n';
-    cout << "몬스터 이름: " << getName() << '\n';
+	cout << "\n===============================" << '\n';
+	cout << "몬스터 이름: " << getName() << '\n';
 	cout << "출현지  :" << mapToString(getMap()) << '\n';
 	cout << "등급    :" << getRankName() << '\n';
-    cout << "HP      :" << getHealth() << '\n';
-    cout << "ATK     :" << getAttack() << '\n';
-    cout << "SPEED   :" << getSpeed() << '\n';
+	cout << "HP      :" << getHealth() << '\n';
+	cout << "ATK     :" << getAttack() << '\n';
+	cout << "SPEED   :" << getSpeed() << '\n';
 	cout << "TYPE    :" << typeToString(getMonsterType()) << '\n';
 	cout << "기본 능력" << getDescription() << '\n';
-	cout << getAsset() <<'\n';
-    cout << "===============================" << '\n';
+	cout << getAsset() << '\n';
+	cout << "===============================" << '\n';
 }

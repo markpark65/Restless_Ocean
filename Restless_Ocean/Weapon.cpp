@@ -1,6 +1,7 @@
 ﻿#include "Weapon.h"
 #include "Monster.h"
 #include "GameLogger.h"
+#include "GlobalVal.h"
 #include <iostream>
 
 int Weapon::addDamagePotion = 0;
@@ -20,7 +21,8 @@ int Flashbang::calculateDamage(int baseAttack, const Monster* target) const {
 	int total = baseAttack + addDamage+ addDamagePotion;
 	// MonsterStat의 type이 Hidden(은닉형)이면 2배 데미지
 	if (target && target->getMonsterType() == AttributeType::Hidden) {
-		std::cout << "\n 섬광이 은닉한 적을 밝혀냅니다! (데미지 2배)" << std::endl;
+		g_sceneData.description += "섬광이 은닉한 적을 밝혀냅니다!(데미지 2배) \n ";
+		//std::cout << "\n 섬광이 은닉한 적을 밝혀냅니다! (데미지 2배)" << std::endl;
 		return total * 2;
 	}
 	return total;
@@ -32,7 +34,8 @@ int Vantablack::calculateDamage(int baseAttack, const Monster* target) const {
 	int total = baseAttack + addDamage+ addDamagePotion;
 	// Luminous(발광형)에게 2배
 	if (target && target->getMonsterType() == AttributeType::Luminous) {
-		std::cout << "\n 반타블랙이 적의 빛을 흡수합니다! (데미지 2배)" << std::endl;
+		g_sceneData.description += "반타블랙이 적의 빛을 흡수합니다! (데미지 2배) \n ";
+		//std::cout << "\n 반타블랙이 적의 빛을 흡수합니다! (데미지 2배)" << std::endl;
 		return total * 2;
 	}
 	return total;
@@ -44,7 +47,8 @@ int WaterGun::calculateDamage(int baseAttack, const Monster* target) const {
 	int total = baseAttack + addDamage+ addDamagePotion;
 	// Giant(거대형)에게 2배
 	if (target && target->getMonsterType() == AttributeType::Giant) {
-		std::cout << "\n 압축 폭발이 거대한 외피를 뚫습니다! (데미지 2배)" << std::endl;
+		g_sceneData.description += "압축 폭발이 거대한 외피를 뚫습니다! (데미지 2배) \n ";
+		//std::cout << "\n 압축 폭발이 거대한 외피를 뚫습니다! (데미지 2배)" << std::endl;
 		return total * 2;
 	}
 	return total;

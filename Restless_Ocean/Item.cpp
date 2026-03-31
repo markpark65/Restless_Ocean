@@ -1,6 +1,7 @@
 ﻿#include "Player.h"
 #include "Item.h"
 #include "Skill.h"
+#include "GlobalVal.h"
 #include "Weapon.h"
 
 Item::Item(string name, int price, int increaseAmount, int unlocklevel)
@@ -25,14 +26,25 @@ void Item::printInfo() const {
 	cout << "G, 필요 레벨: " << unlocklevel << "]";
 }
 
+std::string Item::tostring() const {
+	std::string str = "[" + name;
+	if (hideInfo()) {
+		str += "]";
+		return str;
+	}else
+		str += ", 가격" + std::to_string(price) + "G, 필요 레벨 : " + std::to_string(unlocklevel) + "]";
+	return str;
+}
+
 //체력 회복
 HealthPotion::HealthPotion(string name, int price, int heal, int unlocklevel)
 	: Item(name, price, heal, unlocklevel) {
 }
 void HealthPotion::use(Player* character) {
-	if (!character) return;
-	cout << "체력 포션 사용! \n";
-	character->recoverDamage(increaseAmount);
+    if (!character) return;
+	g_sceneData.description += "체력 포션 사용! \n ";
+    //cout << "체력 포션 사용! \n";
+    character->recoverDamage(increaseAmount);
 }
 void HealthPotion::printInfo() const {
 	std::cout << "[이름: " << name
@@ -52,7 +64,8 @@ MaxHpUp::MaxHpUp(string name, int price, int heal, int unlocklevel)
 }
 void MaxHpUp::use(Player* character) {
 	if (!character) return;
-	cout << "방수가 잘 되어있는 초코과자 사용! \n";
+	g_sceneData.description += "방수가 잘 되어있는 초코과자 사용! \n ";
+	//cout << "방수가 잘 되어있는 초코과자 사용! \n" ;
 	character->increaseMaxHp(increaseAmount);
 }
 void MaxHpUp::printInfo() const {
@@ -73,10 +86,11 @@ MegaHealthPotion::MegaHealthPotion()
 }
 
 void MegaHealthPotion::use(Player* player) {
-	if (!player) return;
-	std::cout << "강화 체력 포션 사용!\n";
-	player->recoverDamage(increaseAmount);
-}
+		if (!player) return;
+		g_sceneData.description += "강화 체력 포션 사용! \n ";
+		//std::cout << "강화 체력 포션 사용!\n";
+		player->recoverDamage(increaseAmount);
+	}
 void MegaHealthPotion::printInfo() const {
 	std::cout << "[강화 체력 포션"
 		<< ", 체력 회복량: +" << increaseAmount
@@ -95,9 +109,10 @@ OxygenPotion::OxygenPotion(string name, int price, int oxygen, int unlocklevel)
 	:Item(name, price, oxygen, unlocklevel) {
 }
 void OxygenPotion::use(Player* character) {
-	if (!character) return;
-	cout << "산소 포션 사용! \n";
-	character->recoverOxygen(increaseAmount);
+    if (!character) return;
+	g_sceneData.description += "산소 포션 사용! \n ";
+    //cout << "산소 포션 사용! \n";
+    character->recoverOxygen(increaseAmount);
 }
 void OxygenPotion::printInfo() const {
 	std::cout << "[이름: " << name
@@ -117,7 +132,7 @@ MaxOxygenUp::MaxOxygenUp(string name, int price, int oxygen, int unlocklevel)
 }
 void MaxOxygenUp::use(Player* character) {
 	if (!character) return;
-	cout << "1000년 전의 스노클 사용!\n";
+	g_sceneData.description += "1000년 전의 스노클 사용! \n ";
 	character->IncreaseOxygen(increaseAmount);
 }
 void MaxOxygenUp::printInfo() const {
@@ -136,7 +151,8 @@ MegaOxygenPotion::MegaOxygenPotion()
 	: Item("강화 산소 포션", 0, 100, 1) {
 }
 void MegaOxygenPotion::use(Player* p) {
-	std::cout << "강화 산소 포션 사용!\n";
+	g_sceneData.description += "강화 산소 포션 사용! \n ";
+	//std::cout << "강화 산소 포션 사용!\n";
 	p->recoverOxygen(increaseAmount);
 }
 Item* MegaOxygenPotion::clone() const {
@@ -153,13 +169,14 @@ bool MegaOxygenPotion::hideInfo() const {
 
 
 //압력 해소
-PressurePotion::PressurePotion(string name, int price, int pressure, int unlocklevel)
-	:Item(name, price, pressure, unlocklevel) {
-}
-void PressurePotion::use(Player* character) {
-	if (!character) return;
-	cout << "압력 포션 사용!\n";
-	character->recoverPressure(increaseAmount);
+PressurePotion::PressurePotion(string name, int price, int pressure,int unlocklevel) 
+:Item(name, price, pressure, unlocklevel){
+} 
+void PressurePotion::use(Player * character) {
+    if (!character) return;
+	g_sceneData.description += "압력 포션 사용! \n ";
+    //cout << "압력 포션 사용!\n";
+    character->recoverPressure(increaseAmount);
 	character->resetSpeed();
 }
 void PressurePotion::printInfo() const {
@@ -180,7 +197,8 @@ MaxPressureUp::MaxPressureUp(string name, int price, int pressure, int unlocklev
 }
 void MaxPressureUp::use(Player* character) {
 	if (!character) return;
-	cout << "어느 물고기의 부례 사용!\n";
+	g_sceneData.description += "어느 물고기의 부례 사용! \n ";
+	//cout << "어느 물고기의 부례 사용!\n";
 	character->IncreasePressure(increaseAmount);
 
 }
@@ -201,10 +219,10 @@ MegaPressurePotion::MegaPressurePotion()
 }
 
 void MegaPressurePotion::use(Player* p) {
-	std::cout << "강화 압력 포션 사용! \n";
-	p->recoverPressure(increaseAmount);
-	p->resetSpeed();
-}
+	g_sceneData.description += "강화 압력 포션 사용! \n ";
+		p->recoverPressure(increaseAmount);
+		p->resetSpeed();
+	}
 void MegaPressurePotion::printInfo() const {
 	std::cout << "[강화 압력 포션"
 		<< ", 최대 압력량: +" << increaseAmount
@@ -224,7 +242,8 @@ AttackBoost::AttackBoost(string name, int price, int attack, int unlocklevel)
 }
 void AttackBoost::use(Player* character) {
 	if (!character) return;
-	cout << "깨진 조개껍데기 목걸이 사용!\n";
+	g_sceneData.description += "깨진 조개껍데기 목걸이 사용! \n ";
+	//cout << "깨진 조개껍데기 목걸이 사용!\n";
 	character->addTempAttack(increaseAmount);
 }
 void AttackBoost::printInfo() const {
@@ -247,8 +266,8 @@ WeaponUpgrade::WeaponUpgrade(string name, int price, int atk, int unlocklevel)
 void WeaponUpgrade::use(Player* player) {
 	if (!player) return;
 
-	std::cout << "무기 강화 아이템 사용!\n";
-	Weapon::increaseGlobalDamage(increaseAmount);
+	g_sceneData.description += "무기 강화 아이템 사용! \n ";
+	player->upgradeWeapon(increaseAmount);
 }
 void WeaponUpgrade::printInfo() const {
 	std::cout << "[이름: " << name

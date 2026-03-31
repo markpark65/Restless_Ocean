@@ -1,24 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="BuildingMap.cpp" />
-    <ClCompile Include="BuildingMap.h" />
-    <ClCompile Include="CollapsedShipMap.cpp" />
-    <ClCompile Include="GameStatistics.cpp" />
-    <ClCompile Include="GiantSquid.cpp" />
-    <ClCompile Include="IMap.cpp" />
-    <ClCompile Include="InputSystem.cpp" />
-    <ClCompile Include="ItemFactory.cpp" />
-    <ClCompile Include="Leviathan.cpp" />
-    <ClCompile Include="Lobby.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="MimicOctopus.cpp" />
-    <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="Item.cpp" />
-    <ClCompile Include="MonsterFactory.cpp" />
-    <ClCompile Include="NormalMonster.cpp" />
-    <ClCompile Include="Random.cpp" />
-    <ClCompile Include="SeaCaveMap.cpp" />
     <ClCompile Include="Restless_Ocean.cpp" />
     <ClCompile Include="Atolla.cpp">
       <Filter>Monster</Filter>
@@ -92,9 +74,6 @@
     <ClCompile Include="CollapsedShipMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="BuildingMap.h">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="BuildingMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
@@ -116,32 +95,16 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="GlobalVal.cpp" />
+    <ClCompile Include="GameStatistics.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollapsedShipMap.h" />
     <ClInclude Include="DataType.h" />
-    <ClInclude Include="Dungeon.h" />
     <ClInclude Include="EventType.h" />
-    <ClInclude Include="GameLogger.h" />
-    <ClInclude Include="GameStatistics.h" />
-    <ClInclude Include="GiantSquid.h" />
-    <ClInclude Include="InputSystem.h" />
-    <ClInclude Include="Inventory.h" />
-    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="json.hpp" />
-    <ClInclude Include="Leviathan.h" />
-    <ClInclude Include="Lobby.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="IMap.h" />
-    <ClInclude Include="MimicOctopus.h" />
-    <ClInclude Include="Monster.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="MonsterFactory.h" />
-    <ClInclude Include="NormalMonster.h" />
+    <ClInclude Include="ConsoleRenderer.h" />
+    <ClInclude Include="GlobalVal.h" />
     <ClInclude Include="TextUtility.h" />
-    <ClInclude Include="TextUtility.h" />
-    <ClInclude Include="Random.h" />
-    <ClInclude Include="SeaCaveMap.h" />
     <ClInclude Include="Atolla.h">
       <Filter>Monster</Filter>
     </ClInclude>
@@ -220,10 +183,10 @@
     <ClInclude Include="IMap.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>Stage</Filter>
+    <ClInclude Include="BuildingMap.h">
+      <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="IMap.h">
+    <ClInclude Include="Dungeon.h">
       <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Lobby.h">
@@ -238,6 +201,7 @@
     <ClInclude Include="Singleton.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="GameStatistics.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Monster">

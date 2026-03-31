@@ -16,9 +16,11 @@ public:
 	int getPrice() const;
 	int getIncreaseAmount() const;
 
-	virtual void use(Player* character) = 0;
-	void clear();
-	virtual void printInfo() const;
+  virtual void use(Player* character) = 0;
+  void clear();
+  virtual void printInfo() const;
+	std::string tostring() const;
+
 
 	bool isUnlocked(int playerLevel) const;
 	int getUnlockLevel() const { return unlocklevel; }

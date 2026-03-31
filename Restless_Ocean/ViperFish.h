@@ -2,7 +2,7 @@
 
 #include "NormalMonster.h"
 #include "Player.h"
-
+#include "GlobalVal.h"
 class ViperFish : public NormalMonster
 {
 public:
@@ -10,15 +10,19 @@ public:
 
 	void useBasicAttack(Player* target) override
 	{
-		std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
-		std::cout << getName() << "이 물어 뜯기를 사용합니다!" << '\n';
+		//g_sceneData.description += getName() + "이 일반 공격을 사용했습니다! \n ";
+		g_sceneData.description += getName() + "이 물어 뜯기를 사용합니다! \n ";
+		//std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
+		//std::cout << getName() << "이 물어 뜯기를 사용합니다!" << '\n';
 		target->takeDamage(getAttack());
 	}
 
 	void useSpecialAttack(Player* target) override
 	{
-		std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
-		std::cout << getName() << "이 연속 물어 뜯기를 사용합니다!" << '\n';
+		//g_sceneData.description += getName() + "이 특수 공격을 사용했습니다! \n ";
+		g_sceneData.description += getName() + "이 연속 물어 뜯기를 사용합니다! \n ";
+		//std::cout << getName() << "이 특수 공격을 사용했습니다!" << '\n';
+		//std::cout << getName() << "이 연속 물어 뜯기를 사용합니다!" << '\n';
 
 		target->takeDamage(getAttack());
 		target->takeDamage(static_cast<int>(getAttack() * 0.5));
@@ -28,9 +32,12 @@ public:
 	void activatePassive() override
 	{
 		int enhancedSpeed = 10;
-		std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
-		std::cout << getName() << "의 스피드가 " << enhancedSpeed << "만큼 빨라집니다." << '\n';
-		std::cout << getName() << "는 은닉 후, 기습 공격을 합니다!" << '\n';
+		g_sceneData.description += getName() + "의 패시브가 발동됩니다! \n ";
+		g_sceneData.description += getName() + "의 스피드가 " + std::to_string(enhancedSpeed) + "만큼 빨라집니다! \n ";
+		g_sceneData.description += getName() + "는 은닉 후, 기습 공격을 합니다! \n ";
+		//std::cout << getName() << "의 패시브가 발동됩니다!" << '\n';
+		//std::cout << getName() << "의 스피드가 " << enhancedSpeed << "만큼 빨라집니다." << '\n';
+		//std::cout << getName() << "는 은닉 후, 기습 공격을 합니다!" << '\n';
 		setSpeed(getSpeed() + enhancedSpeed);
 	}
 

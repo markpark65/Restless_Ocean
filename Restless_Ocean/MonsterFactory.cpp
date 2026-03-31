@@ -73,7 +73,7 @@ static const MonsterTemplate normalTemplates[] =
    , |.           |'             ,'.'
     \ '"___--__.--'''`\       ,,._ / 
      '',  ,_,       . |   __,-'   '  
-  ,,Y'',/'' _   , _(ㅁ)''-''          
+  ,,Y'',/'' _   , _(■)''-''           
  /' ,Y' ,,-' ,, ['' '  _,..          
 |,,'',,-',_.''|  '---'''  |          
 ''...._--'     `,_     _,-'          
@@ -121,16 +121,17 @@ static const MonsterTemplate bossTemplates[] =
  \`. `.__,' /   /  \   \ `.__,' ,'/
   \o\     ,'  ,'    `.  `.     /o/
    \o`---'  ,'        `.  `---'o/
+    `.____,'	         `.____,'
 )"
 
 	},
-
-	{ "레비아탄",		500, 550, 30, 35, 90, 100, AttributeType::Giant,
-		"\n- 패시브    : 방어력이 증가하여 받는 피해를 줄인다."
-		"\n- 일반 공격 : 물어 뜯기 및 대원의 압력을 감소시킨다."
-		"\n- 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다.",
-	MapType::CollapsedShipMap,
+	{ "레비아탄",		450, 500, 22, 36, 90, 100, AttributeType::Giant,
+		"- 패시브    : 방어력이 증가하여 받는 피해를 줄인다. "
+		"\n - 일반 공격 : 물어 뜯기 및 대원의 압력을 감소시킨다. "
+		"\n - 특수 공격 : 거대한 물살로 끌어들여 큰 피해 및 대원의 압력을 감소시킨다. ",
+		MapType::CollapsedShipMap ,
 		R"(
+          /           /
          /' .,,,,  ./
         /';'     ,/
        / /   ,,//,`'`
@@ -203,18 +204,18 @@ Monster* MonsterFactory::GenerateMonster(int level, int battleCount, AttributeTy
 	{
 		switch (index)
 		{
-			case 0: return new FootballFish(stat);
-			case 1: return new ViperFish(stat);
-			case 2: return new GiantSquid(stat);
+		case 0: return new FootballFish(stat);
+		case 1: return new ViperFish(stat);
+		case 2: return new GiantSquid(stat);
 		}
 	}
 	else
 	{
 		switch (index)
 		{
-			case 0: return new Atolla(stat);
-			case 1: return new MimicOctopus(stat);
-			case 2: return new Leviathan(stat);
+		case 0: return new Atolla(stat);
+		case 1: return new MimicOctopus(stat);
+		case 2: return new Leviathan(stat);
 		}
 	}
 	return nullptr;
