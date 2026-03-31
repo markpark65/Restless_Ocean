@@ -1,34 +1,34 @@
-{
-    "DamageDealtTo": {
-        "몬스터더미": 50,
-        "보스더미": 50
-    },
-    "DamageTakenBy": {
-        "몬스터더미": 50,
-        "보스더미": 4995
-    },
-    "DeathByCount": {
-        "몬스터더미": 0,
-        "보스더미": 0
-    },
-    "DeathCount": 5,
-    "ExplorationCount": 5,
-    "KillCount": {
-        "대왕 오징어": 4,
-        "레비아탄": 1,
-        "몬스터": 5,
-        "바이퍼 피쉬": 5,
-        "왕관 해파리": 1,
-        "초롱 아귀": 4,
-        "흉내 문어": 1
-    },
-    "ReturnCount": 6,
-    "TotalDamageDealt": 100,
-    "TotalDamageTaken": 5045,
-    "TotalGoldGain": 0,
-    "TotalGoldUse": 0,
-    "TotalItemGain": 21,
-    "TotalItemUse": 5,
-    "TotalKillCount": 21,
-    "TotalLevelUp": 5
+﻿{
+	"DamageDealtTo": {
+		"몬스터더미": 50,
+		"보스더미": 50
+	},
+	"DamageTakenBy": {
+		"몬스터더미": 50,
+		"보스더미": 4995
+	},
+	"DeathByCount": {
+		"몬스터더미": 0,
+		"보스더미": 0
+	},
+	"DeathCount": 5,
+	"ExplorationCount": 5,
+	"KillCount": {
+		"대왕 오징어": 4,
+		"레비아탄": 1,
+		"몬스터": 5,
+		"바이퍼 피쉬": 5,
+		"왕관 해파리": 1,
+		"초롱 아귀": 4,
+		"흉내 문어": 1
+	},
+	"ReturnCount": 6,
+	"TotalDamageDealt": 100,
+	"TotalDamageTaken": 5045,
+	"TotalGoldGain": 0,
+	"TotalGoldUse": 0,
+	"TotalItemGain": 21,
+	"TotalItemUse": 5,
+	"TotalKillCount": 21,
+	"TotalLevelUp": 5
 }
