@@ -3,6 +3,7 @@
 #include "NormalMonster.h"
 #include "Player.h"
 #include "GlobalVal.h"
+#include "GameLogger.h"
 
 class FootballFish : public NormalMonster
 {
@@ -21,7 +22,7 @@ public:
 		{
 			int damage = getAttack() + 30;
 			g_sceneData.description += getName() + "가 축적한 빛을 폭발시킵니다! \n ";
-			//std::cout << getName() << "가 축적한 빛을 폭발시킵니다!" << '\n';
+			GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), damage);
 			target->takeDamage(damage);
 		}
 		else
@@ -30,6 +31,7 @@ public:
 			g_sceneData.description += getName() + "이 몸통 박치기를 사용합니다! \n ";
 			//std::cout << getName() << "이 일반 공격을 사용했습니다!" << '\n';
 			//std::cout << getName() << "이 몸통 박치기를 사용합니다!" << '\n';
+			GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 			target->takeDamage(getAttack());
 		}
 	}

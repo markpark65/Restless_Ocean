@@ -40,6 +40,7 @@ public:
 
 		g_sceneData.description += getName() + "이 거대한 턱으로 " + target->getName() + "을 물어뜯습니다! \n ";
 
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), getAttack());
 		target->takeDamage(getAttack());
 		g_sceneData.description += getName() + "은 압력으로 " + target->getName() + "을 압력으로 짓누릅니다! \n ";
 		target->takePressure(pressure);
@@ -54,6 +55,7 @@ public:
 
 		g_sceneData.description += getName() + "은 거대한 물살로 " + target->getName() + "을 심연으로 끌어들입니다! \n ";
 		int damage = static_cast<int>(getAttack() * 2.0);
+		GameLogger::getInstance().log(EventType::DamageTaken, target->getName(), getName(), damage);
 		target->takeDamage(damage);
 		g_sceneData.description += getName() + "은 압력으로 " + target->getName() + "을 압력으로 짓누릅니다! \n ";
 		target->takePressure(pressure);

@@ -117,7 +117,6 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 
 		// Kill 로그 출력
 		GameLogger::getInstance().log(EventType::Kill, player->getName(), monster->getName());
-		GameLogger::getInstance().printRecentLog();
 		prize();
 
 		// 유적 3곳을 모두 발견했을 때
@@ -140,7 +139,6 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 	{ // 졌을 때
 		// 패배 로그 출력
 		GameLogger::getInstance().log(EventType::Death, player->getName(), monster->getName());
-		GameLogger::getInstance().printRecentLog();
 
 		GameManager::getInstance().setIsPlayerExit(false);
 		GameManager::getInstance().endGame(GameOverReason::Die);
@@ -231,6 +229,8 @@ void BattleSystem::playerAttack() // 플레이어 일반 공격 함수
 	monster->takeDamage(attackDamage);
 
 	g_cliRenderer.render(g_sceneData);
+
+	GameLogger::getInstance().log(EventType::DamageDealt, player->getName(), monster->getName(), attackDamage);
 	this_thread::sleep_for(chrono::seconds(2));
 }
 
@@ -376,7 +376,6 @@ void BattleSystem::prize()
 			g_sceneData.description += obtainedItem->getName() + " 아이템을 획득했습니다! \n ";
 
 			GameLogger::getInstance().log(EventType::ObtainItem, player->getName(), obtainedItem->getName());
-			GameLogger::getInstance().printRecentLog();
 
 			player->getInventory().addItem(obtainedItem);
 		}
