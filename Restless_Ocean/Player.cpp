@@ -114,7 +114,7 @@ void Player::upgradeWeapon(int amount) {
 		return;
 	}
 
-	equippedWeapon->increaseDamage(amount);
+	equippedWeapon->increaseGlobalDamage(amount);
 }
 
 //스킬 배우기
