@@ -94,6 +94,8 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 
 		}
 		player->checkCondition();
+		g_cliRenderer.render(g_sceneData);
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 		battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 	}
 
@@ -107,8 +109,8 @@ bool BattleSystem::processBattleResult(BattleResult& battleResult)
 
 	g_sceneData.description = "전투가 끝났습니다. \n ";
 	g_sceneData.monster = nullptr;
-	player->useOxygen(10); // 전투 후 산소 10 소모
-	player->takePressure(10); // [추가] 전투당 압력 10 증가
+	player->useOxygen(20); // 전투 후 산소 10 소모
+	player->takePressure(20); // [추가] 전투당 압력 10 증가
 	player->resetTempStats(); // 전투후 추가 공격력 초기화
 	if (battleResult == BattleResult::PlayerWin)
 	{

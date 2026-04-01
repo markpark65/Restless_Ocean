@@ -370,7 +370,7 @@ void Player::rechargeBattery(int amount) {
 }
 void Player::checkCondition() {
 	if (oxygen <= 0) {
-		g_sceneData.description += "산소 없음! 추가 피해 발생! \n";
+		g_sceneData.description += "산소 없음! 20의 피해 발생! \n";
 		takeDamage(20);
 	}
 }
