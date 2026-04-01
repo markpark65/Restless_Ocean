@@ -77,6 +77,7 @@ public:
 	void debuffSpeed(int reduction);
 	void resetSpeed();
 	void rechargeBattery(int amount);
+	void checkCondition();
 
 	//정보 참조
 	std::string getName() const { return name; }

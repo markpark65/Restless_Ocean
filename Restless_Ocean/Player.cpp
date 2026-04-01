@@ -227,9 +227,9 @@ void Player::useOxygen(int amount) {
 		//10이하(마지막 산소 소모)
 		g_sceneData.description += "산소가 부족합니다. 산소를 회복하거나 지상으로 복귀하십시오. \n ";
 	}
-	else if (oxygen <= 0) {
+
+	if (oxygen <= 10) {
 		//고갈
-		g_sceneData.description += "산소가 고갈됐습니다. 체력이 감소합니다. \n ";
 		takeDamage(20);
 	}
 }
@@ -367,4 +367,10 @@ void Player::rechargeBattery(int amount) {
 	battery += charge;
 
 	g_sceneData.description += name + " 대원의 배터리가 " + std::to_string(charge) + "만큼 회복 됐습니다. (현재 배터리: " + std::to_string(battery) + " / 100) \n ";
+}
+void Player::checkCondition() {
+	if (oxygen <= 0) {
+		g_sceneData.description += "산소 없음! 추가 피해 발생! \n";
+		takeDamage(20);
+	}
 }

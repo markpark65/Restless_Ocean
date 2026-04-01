@@ -93,7 +93,8 @@ BattleResult BattleSystem::battle(AttributeType mapType)
 			if (battleResult != BattleResult::Continue) break;
 
 		}
-
+		player->checkCondition();
+		battleResult = checkBattleStatus(player->getHp(), monster->getHealth());
 	}
 
 	return battleResult;
