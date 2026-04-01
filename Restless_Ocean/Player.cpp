@@ -10,11 +10,7 @@ using namespace std;
 
 Player::Player(string n)
 	: name(n)
-<<<<<<< HEAD
-	, level(20)
-=======
 	, level(1)
->>>>>>> origin/main
 	, hp(200)
 	, maxHp(200)
 	, baseAttack(30)
@@ -114,7 +110,7 @@ void Player::upgradeWeapon(int amount) {
 		return;
 	}
 
-	equippedWeapon->increaseDamage(amount);
+	equippedWeapon->increaseGlobalDamage(amount);
 }
 
 //스킬 배우기
